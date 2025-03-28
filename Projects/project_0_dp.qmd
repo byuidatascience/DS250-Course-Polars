@@ -1,0 +1,85 @@
+---
+title: "Project 0: Introduction"
+date: 2020-05-01T11:02:05+06:00
+lastmod: 2020-09-15T10:42:26+06:00
+weight: 1
+draft: false
+# search related keywords
+keywords: [""]
+---
+
+
+### Background
+
+Each assignment will have a Background section that provides context for the project. Make sure you read the background carefully to see the big picture needs and purpose of the project.
+
+Python and VS Code are tools commonly used in the field of data science. During our first two days of class we will get VS Code prepped for data science programming. Completing Project 0 will set you up for success the rest of the semester. Since this project is strictly about software installation, there is no contextual background for this project.
+
+### Data
+
+This project will use the Palmer Penguins data set. This dataset is embedded in a library we will load, so there is no need to read it in from the link below. But in future assignments, data for the assignment can be found in this section.
+
+__URL:__ [penguins data](https://aeturrell.github.io/python4DS/data-visualise.html#the-penguins-data-frame)   
+
+
+### Readings
+
+Please do the assigned **before coming to class**!
+
+Many people different levels of experience with Python, VS Code, and programming in general. That is why there are so many and why skimming may be a good strategy for some students, but not for others. 
+
+- [Course Setup](../setup.qmd) (Do)
+- [Learn about our Book Python for Data Science](../Course%20Materials/python.qmd) (Skim)
+- [PY4DS: First Steps](https://aeturrell.github.io/python4DS/introduction.html) (Skim)
+- [PY4DS: CH1 Whole Game](https://aeturrell.github.io/python4DS/whole-game.html) (Skim)
+- [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html) (Read)
+- [P4DS: CH30 Markdown](https://aeturrell.github.io/python4DS/markdown.html) (Read)
+- [P4DS: CH31 Quarto](https://aeturrell.github.io/python4DS/quarto.html) (Skim)
+- [Quarto Instructional Template for DS](../Templates/ds250_project_template.qmd) (Read)
+
+
+#### Optional References
+- [Learn about VS Code](../Course%20Materials/vs_code.qmd)
+- [VS Code user interface](https://code.visualstudio.com/docs/getstarted/userinterface) 
+- [Reading Technical Documentation](https://byui-cse.github.io/cse450-course/course/reading-technical-documentation.html)
+
+
+### Questions and Tasks
+
+1. __Download this [Project0 Template](../Templates/P0_template.qmd) template as has working code for the Penguine data set. You need to finish the project by updating its markdown so that it is a report by completing the following tasks:__
+    1. __Include the tables created from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html) used to create the above chart__  
+    2. __Recreate the example charts from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html) of the textbook.__  
+    3. __Follow the instructions in the submission section below to submit your work__
+
+
+### Submission:
+
+When you have completed the report, you will need to follow this process to submit your work:
+
+1. Have the `P0_template` open in VS Code and nothing else
+1. Click `Preview Button` in VS Code in the top right of the screen
+    a. This will render the project but also entire course work portfolio into `HTML` files for review
+    b. Confirm everything displays as you would like it to
+    c. How you see it will be how it is viewed for grading
+    d. If there is an error in any cell of the quarto files, the rendering will stop and you will need to fix the error before rendering again (if you get stuck post your error in Slack #tutoring_lab channel)
+1. Once the report is confirmed close the preview and open a VS Code `Terminal`
+    a. click `Terminal` in the top menu bar and then `New Terminal`
+1. Type the following in the terminal `quarto render `
+    a. Then drag and drop `P0_template.qmd` into the terminal this will add the file path to the terminal command
+    a. Press Enter
+1. This will render the project into a `HTML` file in the same location as the `.qmd` file
+1. To locate the file in VS Code
+    a. Right click on the file in the file explorer menu on the left side bar of VS Code and select `Reveal in File Explorer`(Win) or `Reveal in Finder`(Mac)
+1. Upload `HTML` file into Canvas
+
+
+
+### Deliverables:
+
+_Use this [P0_template](../Templates/P0_template.qmd) to submit your Client Report._
+ 
+1. _The template should include answers to the tasks. Each should include a written description of your results, code cells with comments, charts and/or tables._  
+
+::: {.callout-note collapse="false"}
+_Your report should be written in quarto markdown files and rendered to an HTML File. Upload the HTML file in Canvas. (Do not submit the `.qmd` file)_  
+:::
