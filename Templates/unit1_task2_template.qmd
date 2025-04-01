@@ -1,0 +1,71 @@
+---
+title: "Client Report - What's in a Name?"
+subtitle: "Unit 1 Task 2"
+author: "[STUDENT NAME]"
+format:
+  html:
+    self-contained: true
+    page-layout: full
+    title-block-banner: true
+    toc: true
+    toc-depth: 3
+    toc-location: body
+    number-sections: false
+    html-math-method: katex
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-copy: hover
+    code-tools:
+        source: false
+        toggle: true
+        caption: See code
+execute: 
+  warning: false
+    
+---
+
+```{python}
+import pandas as pd
+import numpy as np
+from lets_plot import *
+
+LetsPlot.setup_html(isolated_frame=True)
+```
+
+```{python}
+# Learn morea about Code Cells: https://quarto.org/docs/reference/cells/cells-jupyter.html
+
+# Include and execute your code here
+df = pd.read_csv("https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv")
+```
+
+## QUESTION|TASK 1
+
+<!-- Make sure at least one of your charts includes reference marks!! -->
+
+__How does your name at your birth year compare to its use historically? Your must provide a chart. The years labels on your charts should not include a comma.__ 
+
+_type your results and analysis here_
+
+```{python}
+# Q1
+
+
+```
+
+
+## QUESTION|TASK 2
+
+__If you talked to someone named Brittany on the phone, what is your guess of his or her age? What ages would you not guess? Try to justify your answer with whatever statistics knowledge you have. You must provide a chart. The years labels on your charts should not include a comma.__  
+
+_type your results and analysis here_
+
+```{python}
+# Q2
+
+
+```
+
+
+<!-- Make sure at least one of your charts includes reference marks!! -->
