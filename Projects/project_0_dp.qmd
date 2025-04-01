@@ -13,7 +13,7 @@ keywords: [""]
 
 Each assignment will have a Background section that provides context for the project. Make sure you read the background carefully to see the big picture needs and purpose of the project.
 
-Python and VS Code are tools commonly used in the field of data science. During our first two days of class we will get VS Code prepped for data science programming. Completing Project 0 will set you up for success the rest of the semester. Since this project is strictly about software installation, there is no contextual background for this project.
+Python and VS Code are tools commonly used in the field of data science. During our first two days of class we will primarily be installing software, libraries, extensions, etc. Completing Project 0 will set you up for success the rest of the semester. Since this project is strictly about software installation, there is no contextual background for this project.
 
 ### Data
 
@@ -26,7 +26,7 @@ __URL:__ [penguins data](https://aeturrell.github.io/python4DS/data-visualise.ht
 
 Please do the assigned **before coming to class**!
 
-Many people different levels of experience with Python, VS Code, and programming in general. That is why there are so many and why skimming may be a good strategy for some students, but not for others. 
+Many people have different levels of experience with Python, VS Code, and programming in general. That is why there are so many and why skimming may be a good strategy for some students, but not for others. 
 
 - [Course Setup](../setup.qmd) (Do)
 - [Learn about our Book Python for Data Science](../Course%20Materials/python.qmd) (Skim)
