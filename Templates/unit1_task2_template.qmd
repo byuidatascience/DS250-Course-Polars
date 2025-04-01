@@ -1,6 +1,6 @@
 ---
-title: "Client Report - Exploring Names"
-subtitle: "Unit 1 Task 1"
+title: "Client Report - What's in a Name?"
+subtitle: "Unit 1 Task 2"
 author: "[STUDENT NAME]"
 format:
   html:
@@ -42,7 +42,9 @@ df = pd.read_csv("https://github.com/byuidatascience/data4names/raw/master/data-
 
 ## QUESTION|TASK 1
 
-__What was the earliest year that the name ‘Felisha’ was used?__
+<!-- Make sure at least one of your charts includes reference marks!! -->
+
+__How does your name at your birth year compare to its use historically? Your must provide a chart. The years labels on your charts should not include a comma.__ 
 
 _type your results and analysis here_
 
@@ -55,7 +57,7 @@ _type your results and analysis here_
 
 ## QUESTION|TASK 2
 
-__What year had the most babies named 'David'? How many babies were named 'David' that year?__
+__If you talked to someone named Brittany on the phone, what is your guess of his or her age? What ages would you not guess? Try to justify your answer with whatever statistics knowledge you have. You must provide a chart. The years labels on your charts should not include a comma.__  
 
 _type your results and analysis here_
 
@@ -66,44 +68,4 @@ _type your results and analysis here_
 ```
 
 
-## QUESTION|TASK 3
-
-__What year did your name hit its peak? How many babies were named your name in that year?__
-
-_type your results and analysis here_
-
-```{python}
-# Q3
-
-```
-
-
-
-## QUESTION|TASK 4
-
-__How many babies are named ‘Oliver’ in the state of Utah for all years?__  
-
-_type your results and analysis here_
-
-```{python}
-# Q4
-
-
-```
-
----
-
-## QUESTION|TASK 5
-
-__In the most recent year of data, what was the most common female name in Utah?__ 
-
-_type your results and analysis here_
-
-```{python}
-# Q5
-
-
-```
-
-
----
+<!-- Make sure at least one of your charts includes reference marks!! -->

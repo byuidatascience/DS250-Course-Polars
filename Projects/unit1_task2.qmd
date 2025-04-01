@@ -1,7 +1,7 @@
 ---
-title: "Unit 1 Task 1: Exploring Names"
-date: 2025-03-31T11:02:05+06:00
-lastmod: 2025-03-31T11:02:05+06:00
+title: "Unit 1 Task 2: You and Brittany"
+date: 2025-03-31
+lastmod: 2025-03-31
 weight: 2
 draft: false
 # search related keywords
@@ -39,27 +39,29 @@ Complete these readings before we cover the material in class. This will help yo
 In other words, if an assignment is due on Wednesday, we will cover the material needed to complete the assignment on Tuesday. Therefore, you should complete the readings on Monday (or anytime before class on Tuesday).
 :::
 
-- [Pandas Tutorial 1: What kind of data does pandas handle?](https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/01_table_oriented.html)
-- [Pandas Tutorial 2: How do I read and write tabular data?](https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/02_read_write.html)
-- [Pandas Tutorial  3: How do I select a subset of a DataFrame?](https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/03_subset_data.html)
-- [P4DS: Chapter 4.3 Manipulating rows in data frames](https://aeturrell.github.io/python4DS/data-transform.html#manipulating-rows-in-data-frames)
+- [P4DS: Chapter 11 Visualisation](https://aeturrell.github.io/python4DS/visualise.html)
+- [P4DS: Chapter 12.1 - 12.3 Layers: Aesthetic mappings and geometries](https://aeturrell.github.io/python4DS/vis-layers.html#introduction)
+- [P4DS: Chapter 14.2 - 14.3 Labels, titles, contextual info, annotations](https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/01_table_oriented.html)
+
+__Optional Readings:__
+
+- [P4DS: Rest of Chapter 12](https://aeturrell.github.io/python4DS/vis-layers.html#introduction)
+- [P4DS: Rest of Chapter 14](https://aeturrell.github.io/python4DS/communicate-plots.html#scales)
 
 
 ### Questions and Tasks (Core)
 
-__Download this [Unit 1 Task 1](../Templates/unit1_task1_template.qmd) template. The answer to each question should include code and an answer written in a full sentence.__  
+__Download this [Unit 1 Task 2 Template](../Templates/unit1_task2_template.qmd) template. The answer to each question should include a chart **and** a written response. The years labels on your charts should not include a comma. At least **one** of your charts must include reference marks.__    
 
-1. __What was the earliest year that the name ‘Felisha’ was used?__  
-1. __What year had the most babies named 'David'? How many babies were named 'David' that year?__  
-1. __What year did your name hit its peak? How many babies were named your name in that year?__
-1. __How many babies are named ‘Oliver’ in the state of Utah for all years?__
-1. __In the most recent year of data, what was the most common female name in Utah?__   
+1. __How does your name at your birth year compare to its use historically?__  
+1. __If you talked to someone named Brittany on the phone, what is your guess of his or her age? What ages would you not guess?__  
 
 ### Submission:
+
 ::: {.callout-note collapse="false"}
 When you have completed the report, you will need to follow this process to submit your work:
 
-1. Have the `Unit1_Task1` template open in VS Code and nothing else
+1. Have the `Unit1_Task2` template open in VS Code and nothing else
 1. Click `Preview Button` in VS Code in the top right of the screen
     a. This will render the file but also the entire course work portfolio into `HTML` files for review
     b. Confirm everything displays as you would like it to
@@ -68,7 +70,7 @@ When you have completed the report, you will need to follow this process to subm
 1. Once the report is confirmed close the preview and open a VS Code `Terminal`
     a. click `Terminal` in the top menu bar and then `New Terminal`
 1. Type the following in the terminal `quarto render `
-    a. Then drag and drop `unit1_task1.qmd` into the terminal, this will add the file path to the terminal command
+    a. Then drag and drop `unit1_task2.qmd` into the terminal, this will add the file path to the terminal command
     a. Press Enter
 1. This will render the project into a `HTML` file in the same location as the `.qmd` file
 1. To locate the file in VS Code
@@ -83,7 +85,7 @@ When you have completed the report, you will need to follow this process to subm
 Deliverables are “the quantifiable goods or services that must be provided upon the completion of a project”. In this class the deliverable for each project is a .html file report created using Quarto files. This final section will be the same for each project. 
 :::
 
-_Use this [Unit1_Task1 template](../Templates/unit1_task1_template.qmd) to submit your Client Report._
+_Use this [Unit1_Task2 template](../Templates/unit1_task2_template.qmd) to submit your Client Report._
  
 1. _Answers to the questions | tasks. Each should include a written description of your results, code cells with comments, and any charts and/or tables._  
 
