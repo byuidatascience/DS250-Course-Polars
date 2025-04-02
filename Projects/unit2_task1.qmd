@@ -1,0 +1,122 @@
+---
+title: "Unit 1 Task 1: Batting Averages"
+date: 2025-04-02T11:02:05+06:00
+lastmod: 2025-04-02T10:42:26+06:00
+weight: 4
+draft: false
+# search related keywords
+keywords: [""]
+---
+
+
+### Setup
+[SQL](/Setup/sql_setup.qmd) setup and test
+
+
+### Background
+
+When you hear the word “relationship” what is the first thing that comes to mind? Probably not baseball. But a relationship is simply a way to describe how two or more objects are connected. There are many relationships in baseball such as those between teams and managers, players and salaries, even stadiums and concession prices. 
+
+The graphs on [Data Visualizations from Best Tickets](https://web.archive.org/web/20200804101201/http://www.besttickets.com/blog/mlb-players-census/) show many other relationships that exist in baseball.
+
+
+### Client Request
+
+For this project, the Client wants SQL queries that they can use to retrieve data for use on their website without needing Python. They would also like to see the results in Lets-Plot charts.
+
+
+### Data
+
+::: {.callout-note collapse="false"}
+Every data science project should start with data, and our class projects are no different. Each project will have __'URL'__ and __'Information'__ links like the ones below. Project 3 will use the Lahman Baseball Database. You will need to download the database and set it up on your computer to complete the project. Place it inside the DS250 folder (hopefully you have a folder dedicated to this class) next to the .qmd file you will be using for this assignment. Note: Right click the __'Download'__ link and select "Save Link As" to download the data to your computer.
+:::
+
+__Download:__ [lahmansbaseballdb](/Data/lahmansbaseballdb.sqlite)  
+__Information:__ [Lahman Data Dictionary](/Data/readme2014.txt)  
+__Setup Instructions:__ [See SQL Setup](/Setup/sql_setup.qmd)
+
+
+### Readings
+
+::: {.callout-note collapse="true"}
+Complete these readings before we cover the material in class. This will help you retain the material and make the class period more engaging - not less. 
+
+In other words, if an assignment is due on Wednesday, we will cover the material needed to complete the assignment on Tuesday. Therefore, you should complete the readings on Monday (or anytime before class on Tuesday).
+:::
+
+Review the set-up instructions in preparation for class.
+
+[SQLite](/Setup/sql_setup.qmd) 
+
+
+There are many [flavors of SQL](https://en.wikipedia.org/wiki/Database#Database_management_system) but most flavors have the same base commands. SQL queries are typed in the following pattern;
+
+```SQL
+SELECT -- <columns> and <column calculations>
+FROM -- <table name>
+  JOIN -- <table name>
+  ON -- <columns to join>
+WHERE -- <filter condition on rows>
+GROUP BY -- <subsets for column calculations>
+HAVING -- <filter conditions on groups>
+ORDER BY -- <how the output is returned in sequence>
+LIMIT -- <number of rows to return>
+```
+
+The reading for this task are from this excellent [SQL Guide](https://docs.data.world/documentation/sql/concepts/basic/intro.html). Read the following for this task:
+
+- All the categories in the ["Basic" group](https://en.wikipedia.org/wiki/Database#Database_management_system)  (topics are grouped in the menu on the left side of the page).
+- And, the following sections in the Intermediate group:
+    
+    - [Aggregations](https://docs.data.world/documentation/sql/concepts/intermediate/aggregations.html)
+    - [GROUP BY and FILTER](https://docs.data.world/documentation/sql/concepts/intermediate/GROUP_BY.html)
+    - [HAVING](https://docs.data.world/documentation/sql/concepts/intermediate/HAVING.html)
+
+#### Optional References
+
+- [Why SQL is beating NoSQL, and what this means for the future of data](https://blog.timescale.com/blog/why-sql-beating-nosql-what-this-means-for-future-of-data-time-series-database-348b777b847a/)  
+
+
+### Questions and Tasks
+
+Download the [Unit 2 Task 1 Template](../Templates/unit2_task1_template.qmd). Note: batting average is number of hits divided by the number of at-bats. It is a number between 0 and 1 that represents what % of the time a player gets a hit (as opposed to getting out, for example).
+
+1. __Write an SQL query that provides playerID, yearID, and batting average for players with at least 1 at bat that year. Sort the table from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.__
+
+1. __Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.__  
+
+1. __Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats over their entire career, and print the top 5 results.__
+
+
+### Submission:
+::: {.callout-note collapse="true"}
+When you have completed the report, you will need to follow this process to submit your work:
+
+1. Have the `unit2_task1_template` open in VS Code and nothing else
+1. Click `Preview Button` in VS Code in the top right of the screen
+    a. This will render the project but also entire course work portfolio into `HTML` files for review
+    b. Confirm everything displas as you would like it to
+    c. How you see it will be how it is viewed for grading
+    d. If there is an error in any cell of the quarto files, the rendering will stop and you will need to fix the error before rendering again (if you get stuck post your error in Slack)
+1. Once the report is confirmed close the preview and open a VS Code `Terminal`
+    a. click `Terminal` in the top menu bar and then `New Terminal`
+1. Type the following in the terminal `quarto render `
+    a. Then drag and drop `unit2_task1_template.qmd` into the terminal this will add the file path to the terminal command
+    a. Press Enter
+1. This will render the project into a `HTML` file in the same location as the `.qmd` file
+1. To locate the file in VS Code
+    a. Right click on the file in the file explorer and select `Reveal in File Explorer`(Win) or `Reveal in Finder`(Mac)
+1. Upload `HTML` file into Canvas
+:::
+
+
+### Deliverables:
+
+_Use this [unit2_task1_template](../Templates/unit2_task1_template.qmd) to submit your Client Report._
+
+Answers to the questions | tasks. Each should include a written description of your results, code cells with comments, charts and/or tables.
+
+
+::: {.callout-note collapse="false"}
+_Your report should be written in quarto markdown files and rendered to an HTML File. Upload the HTML file in Canvas. (Do not submit the `.qmd` file)_  
+:::

@@ -51,17 +51,20 @@ __Optional Readings:__
 
 ### Questions and Tasks
 
-__Download this [Unit 1 Task 3 Template](../Templates/unit1_task3_template.qmd) template. The answer to each question should include a chart **and** a written response. The years labels on your charts should not include a comma. At least **one** of your charts must include reference marks.__    
+Here is an example Stretch question(s) for this project. You can may propose your own idea for a stretch task that you are interested in that would take a similar level of effort and practice a similar set of skills. If you propose a different task, be sure to get it approved by your instructor first. 
 
-1. __Mary, Martha, Peter, and Paul are all Christian names. From 1920 - 2000, compare the name usage of each of the four names in a single chart. What trends do you notice?__  
-1. __Think of a unique name from a famous movie. Plot the usage of that name and see how changes line up with the movie release. Does it look like the movie had an effect on usage?__  
+1. __Reproduce the chart Elliot using the data from the `names_year.csv` file. If, after a couple of hours, you can get the chart close, but not exactly the same, that is okay. You will learn more to the degree you push yourself.__
+
+    ![](/Images/elliot_chart.png)
+
+Note: There is no template for this task. You will have to create a new file from scratch as part of this stretch.
 
 ### Submission:
 
 ::: {.callout-note collapse="false"}
 When you have completed the report, you will need to follow this process to submit your work:
 
-1. Have the `Unit1_Task3` template open in VS Code and nothing else
+1. Have the assignment open in VS Code and nothing else
 1. Click `Preview Button` in VS Code in the top right of the screen
     a. This will render the file but also the entire course work portfolio into `HTML` files for review
     b. Confirm everything displays as you would like it to
@@ -70,7 +73,7 @@ When you have completed the report, you will need to follow this process to subm
 1. Once the report is confirmed close the preview and open a VS Code `Terminal`
     a. click `Terminal` in the top menu bar and then `New Terminal`
 1. Type the following in the terminal `quarto render `
-    a. Then drag and drop `unit1_task3.qmd` into the terminal, this will add the file path to the terminal command
+    a. Then drag and drop the assignment into the terminal, this will add the file path to the terminal command
     a. Press Enter
 1. This will render the project into a `HTML` file in the same location as the `.qmd` file
 1. To locate the file in VS Code
@@ -85,9 +88,9 @@ When you have completed the report, you will need to follow this process to subm
 Deliverables are “the quantifiable goods or services that must be provided upon the completion of a project”. In this class the deliverable for each project is a .html file report created using Quarto files. This final section will be the same for each project. 
 :::
 
-_Use this [Unit1_Task3 template](../Templates/unit1_task3_template.qmd) to submit your Client Report._
+No template is provided. Create a new quarto file for this assignment. It is part of stretching yourself.
  
-1. _Answers to the questions | tasks. Each should include a written description of your results, code cells with comments, and any charts and/or tables._  
+1. _Answers to the questions | tasks._  
 
 ::: {.callout-note collapse="false"}
 _Your report should be written in quarto markdown files and rendered to an HTML File. Upload the HTML file in Canvas. (Do not submit the `.qmd` file)_  

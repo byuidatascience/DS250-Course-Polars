@@ -40,7 +40,7 @@ LetsPlot.setup_html(isolated_frame=True)
 df = pd.read_csv("https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv")
 ```
 
-## QUESTION|TASK 1
+## QUESTION 1
 
 <!-- Make sure at least one of your charts includes reference marks!! -->
 
@@ -55,7 +55,7 @@ _type your results and analysis here_
 ```
 
 
-## QUESTION|TASK 2
+## QUESTION 2
 
 __If you talked to someone named Brittany on the phone, what is your guess of his or her age? What ages would you not guess? Try to justify your answer with whatever statistics knowledge you have. You must provide a chart. The years labels on your charts should not include a comma.__  
 

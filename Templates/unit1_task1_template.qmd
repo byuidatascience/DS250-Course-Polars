@@ -40,7 +40,7 @@ LetsPlot.setup_html(isolated_frame=True)
 df = pd.read_csv("https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv")
 ```
 
-## QUESTION|TASK 1
+## QUESTION 1
 
 __What was the earliest year that the name ‘Felisha’ was used?__
 
@@ -53,7 +53,7 @@ _type your results and analysis here_
 ```
 
 
-## QUESTION|TASK 2
+## QUESTION 2
 
 __What year had the most babies named 'David'? How many babies were named 'David' that year?__
 
@@ -66,7 +66,7 @@ _type your results and analysis here_
 ```
 
 
-## QUESTION|TASK 3
+## QUESTION 3
 
 __What year did your name hit its peak? How many babies were named your name in that year?__
 
@@ -79,7 +79,7 @@ _type your results and analysis here_
 
 
 
-## QUESTION|TASK 4
+## QUESTION 4
 
 __How many babies are named ‘Oliver’ in the state of Utah for all years?__  
 
@@ -93,9 +93,9 @@ _type your results and analysis here_
 
 ---
 
-## QUESTION|TASK 5
+## QUESTION 5
 
-__In the most recent year of data, what was the most common female name in Utah?__ 
+__In the most recent year, what was the most common female name in Utah?__ 
 
 _type your results and analysis here_
 
