@@ -1,0 +1,92 @@
+---
+title: "Project 3: Weather Delays"
+date: 2020-05-01T11:02:05+06:00
+lastmod: 2020-09-15T10:42:26+06:00
+weight: 3
+draft: false
+# search related keywords
+keywords: [""]
+---
+
+### Background
+
+Delayed flights are not something most people look forward to. In the best case scenario you may only wait a few extra minutes for the plane to be cleaned. However, those few minutes can stretch into hours if a mechanical issue is discovered or a storm develops. Arriving hours late may result in you missing a connecting flight, job interview, or your best friend’s wedding.
+
+In 2003 the Bureau of Transportation Statistics (BTS) began collecting data on the causes of delayed flights. The categories they use are Air Carrier, National Aviation System, Weather, Late-Arriving Aircraft, and Security. You can visit the [BTS website](https://www.bts.gov/topics/airlines-and-airports/understanding-reporting-causes-flight-delays-and-cancellations) to read definitions of these categories.
+
+
+### Client Request
+
+The JSON file for this project contains information on delays at 7 airports over 10 years. Your task is to clean the data, search for insights about flight delays, and communicate your results to the Client. The Client is a CEO of a flight booking app who is interested in the causes of flight delays and wants to know which airports have the worst delays. They also want to know the best month to fly if you want to avoid delays of any length.
+
+
+### Data
+::: {.callout-note collapse="true"}
+Every data science project should start with data, and our class projects are no different. Each project will have __'URL'__ and __'Information'__ links like the ones below. Right click the __'URL'__ link and select "Copy Link" to use it to import the data into your project. This is the preferred method to get data into your report as you will be publishing your report to GitHub. If you choose to download the data file to your computer you will need to save it in the same folder as your `.qmd` file for it to work correclty in GitHub. 
+:::
+
+__URL:__ [JSON File](https://github.com/byuidatascience/data4missing/raw/master/data-raw/flights_missing/flights_missing.json)   
+__Information:__ [Data Description](https://github.com/byuidatascience/data4missing/blob/master/data.md)  
+__Subject Matter:__ [Types of Delay](https://aspm.faa.gov/aspmhelp/index/Types_of_Delay.html)  
+
+
+### Readings
+
+- [P4DS: CH4 Data Transformation](https://byuidatascience.github.io/python4ds/transform.html) 
+- [P4DS: CH13 Exploratory Data Analysis](https://byuidatascience.github.io/python4ds/exploratory-data-analysis.html) 
+
+#### Optional References
+
+Recommended!
+- [BYUI DS Programming CH5.5](https://byuidatascience.github.io/python4ds/transform.html#add-new-variables-with-.assign)
+- [Lambda Function](https://realpython.com/python-lambda/)
+
+
+### Questions
+
+1. __Which airport has the worst delays?__ Describe the metric you chose, and why you chose it to determine the “worst” airport. Your answer should include a summary table that lists (for each airport) the total number of flights, total number of delayed flights, proportion of delayed flights, and average delay time in hours. 
+
+1. According to the BTS website, the “Weather” category only accounts for severe weather delays. Mild weather delays are not counted in the “Weather” category, but are actually included in both the “NAS” and “Late-Arriving Aircraft” categories. __Your job is to create a new column that calculates the total number of flights delayed by weather (both severe and mild).__ You will need to replace all the missing values in the Late Aircraft variable with the mean. Show your work by printing the first 5 rows of data in a table. Use these three rules for your calculations:  
+
+    a. 100% of delayed flights in the Weather category are due to weather  
+    a. 30% of all delayed flights in the Late-Arriving category are due to weather  
+    a. From April to August, 40% of delayed flights in the NAS category are due to weather. The rest of the months, the proportion rises to 65%  
+
+1. __Using the new weather variable calculated above, create a barplot showing the proportion of all flights that are delayed by weather at each airport. Describe what you learn from this graph.__  
+
+
+### Submission / Deliverables:
+
+_Use this [unit3_task2_template](../Templates/unit3_task2_template.qmd) to create your Client Report. Answer the questions. Each answer should include a written description of your results, code cells with comments, charts and/or tables._  
+
+::: {.callout-note collapse="true"}
+Your instructor will advise you, or it will be evident in Canvas, whether to submit an rendered .html file, or a link to the rendered file on GitHub on gh-pages. (Do not submit the URL to the GitHub `.qmd` file)  
+:::
+
+Here are some reminder instructions if you are using GitHub:
+
+::: {.callout-note collapse="true"}
+When you have completed the report and are ready to submit it, you will need to render the project into HTML files and publish it to GitHub pages. Follow these steps:
+
+1. Have this assignment's template/quarto file open in VS Code and nothing else
+1. Click `Preview Button` in VS Code in the top right of the screen
+    a. This will render the project but also entire course work portfolio into `HTML` files for review
+    b. Confirm everything displas as you would like it to
+    c. How you see it will be how it is viewed for grading
+    d. If there is an error in any cell of the quarto files, the rendering will stop and you will need to fix the error before rendering again (if you get stuck post your error in Slack)
+1. Once the report is confirmed close the preview and open the `GitHub Desktop` application
+1. Confirm you are in the correct repository in the top left corner of the screen
+1. Confirm you are on the correct branch `Main` in the top left corner of the screen (Never change off the `Main` branch)
+1. Type a summary of the changes in the `Summary` box
+1. Click `Commit to main` blue button in the bottom left corner
+1. Click `Push origin` blue button in the middle right of the screen
+    a. This will push all your changes in the project .qmd file to GitHub
+    b. The publish.yml file will kick off an automated process to render the project into HTML files
+    c. The HTML files will be published to GitHub pages in the gh-pages branch
+    d. The URL to the published project will be in the deployment section in GitHub
+        1. In `GitHub Desktop` click `Open in GitHub` to navigete to the repository
+        2. Click on the `Actions` tab and make sure there were no errors in the rendering process
+        3. Click on the `deployment` section of the main page of the repository to find the URL
+        4. Navigate to the URL and confirm it displays as you intended
+        5. Copy the URL and submit it in Canvas
+:::
