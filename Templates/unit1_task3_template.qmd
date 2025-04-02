@@ -42,7 +42,7 @@ df = pd.read_csv("https://github.com/byuidatascience/data4names/raw/master/data-
 
 
 
-## QUESTION|TASK 1
+## QUESTION 1
 
 <!-- Make sure at least one of your charts includes reference marks!! -->
 
@@ -57,7 +57,7 @@ _type your results and analysis here_
 ```
 
 
-## QUESTION|TASK 2
+## QUESTION 2
 
 1. __Think of a unique name from a famous movie. Plot the usage of that name and see how changes line up with the movie release. Does it look like the movie had an effect on usage? You must provide a chart. The years labels on your charts should not include a comma.__  
 
