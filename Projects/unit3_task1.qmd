@@ -50,7 +50,7 @@ __Subject Matter:__ [Types of Delay](https://aspm.faa.gov/aspmhelp/index/Types_o
 
 ### Questions
 
-__Fix all of the varied missing data types in the data to be consistent: use np.nan to represent missing value.__ In your report include one record example (one row) from your clean data, in the raw JSON format. Your example should display at least one missing value so that we can verify it was done correctly. (Note: JSON will convert NaN's to "null"). Describe your process for finding values that needed to be changed, and how you changed them.__  
+__Fix all of the varied missing data types in the data to be consistent: use np.nan to represent missing value.__ In your report include one record example (one row) from your clean data, in the raw JSON format. Your example should display at least one missing value so that we can verify it was done correctly. (Note: JSON will convert NaN's to null). Describe your process for finding values that needed to be changed, and how you changed them.__  
 
 
 ### Submission / Deliverables:

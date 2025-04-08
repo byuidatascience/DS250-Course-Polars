@@ -1,0 +1,88 @@
+---
+title: "Project 5: Recoding Range Variables"
+date: 2025-04-08T11:02:05+06:00
+lastmod: 2025-04-08T10:42:26+06:00
+weight: 5
+draft: false
+# search related keywords
+keywords: [""]
+---
+
+### Background
+
+Survey data is notoriously difficult to munge.  Even when the data is recorded cleanly the options for ‘write in questions’, ‘choose from multiple answers’, ‘pick all that are right’, and ‘multiple choice questions’ makes storing the data in a tidy format difficult.
+
+In 2014, FiveThirtyEight surveyed over 1000 people to write the article titled, [America’s Favorite ‘Star Wars’ Movies (And Least Favorite Characters)](https://fivethirtyeight.com/features/americas-favorite-star-wars-movies-and-least-favorite-characters/). They have provided the data on [GitHub](https://github.com/fivethirtyeight/data/tree/master/star-wars-survey). 
+
+For this project, your client would like to use the Star Wars survey data to figure out if they can predict an interviewing job candidate’s current income based on a few responses about Star Wars movies.  
+
+
+### Client Request
+
+The Client is who performed the survey but outsourced the analitics to a 3rd party. They want you to clean up the data so you can: 
+    a. Validate the data provided on GitHub lines up with the article by recreating 2 of the visuals from the article
+    a. Predict if a person from the survey makes at least $50k
+
+### Data
+
+__URL:__ [StarWars.csv](https://github.com/fivethirtyeight/data/raw/master/star-wars-survey/StarWars.csv)   
+__Information:__ [Article](https://fivethirtyeight.com/features/americas-favorite-star-wars-movies-and-least-favorite-characters/)
+
+
+### Readings
+
+No new readings. Review previous readings as needed:
+
+- [BYUI DS Programming: CH12 Tidy Data](https://byuidatascience.github.io/python4ds/tidy-data.html)
+- [P4DS: CH16 Numbers](https://aeturrell.github.io/python4DS/numbers.html) 
+- [Video on regular expression](https://www.youtube.com/watch?v=nxjwB8up2gI)
+- [P4DS: CH17 Strings and Text](https://aeturrell.github.io/python4DS/strings.html)
+- [P4DS: Ch18 Regular Expressions](https://aeturrell.github.io/python4DS/regex.html)
+
+
+### Questions
+
+1. __Clean and format the data so that it can be used in a machine learning model.__ As you format the data, you should complete each item listed below. In your final report provide an excerpt of the reformatted data with a short description of the changes made.  
+
+    a. Create a new column that converts the age ranges to a single number. Drop the age range categorical column  
+    a. Create a new column that converts the education groupings to a single number. Drop the school categorical column  
+    a. Create a new column that converts the income ranges to a single number. Drop the income range categorical column  
+    a. Create your target (also known as “y” or “label”) column based on the new income range column  
+    a. Encode favorability ratings as a number. Remove the favorability categorical columns.
+
+
+### Submission / Deliverables:
+
+_Use this [unit5_task2_template](../Templates/unit5_task2_template.qmd) to create your Client Report. Answer the questions. Each answer should include a written description of your results, code cells with comments, charts and/or tables._  
+
+::: {.callout-note collapse="true"}
+Your instructor will advise you, or it will be evident in Canvas, whether to submit an rendered .html file, or a link to the rendered file on GitHub on gh-pages. (Do not submit the URL to the GitHub `.qmd` file)  
+:::
+
+Here are some reminder instructions if you are using GitHub:
+
+::: {.callout-note collapse="true"}
+When you have completed the report and are ready to submit it, you will need to render the project into HTML files and publish it to GitHub pages. Follow these steps:
+
+1. Have this assignment's template/quarto file open in VS Code and nothing else
+1. Click `Preview Button` in VS Code in the top right of the screen
+    a. This will render the project but also entire course work portfolio into `HTML` files for review
+    b. Confirm everything displas as you would like it to
+    c. How you see it will be how it is viewed for grading
+    d. If there is an error in any cell of the quarto files, the rendering will stop and you will need to fix the error before rendering again (if you get stuck post your error in Slack)
+1. Once the report is confirmed close the preview and open the `GitHub Desktop` application
+1. Confirm you are in the correct repository in the top left corner of the screen
+1. Confirm you are on the correct branch `Main` in the top left corner of the screen (Never change off the `Main` branch)
+1. Type a summary of the changes in the `Summary` box
+1. Click `Commit to main` blue button in the bottom left corner
+1. Click `Push origin` blue button in the middle right of the screen
+    a. This will push all your changes in the project .qmd file to GitHub
+    b. The publish.yml file will kick off an automated process to render the project into HTML files
+    c. The HTML files will be published to GitHub pages in the gh-pages branch
+    d. The URL to the published project will be in the deployment section in GitHub
+        1. In `GitHub Desktop` click `Open in GitHub` to navigete to the repository
+        2. Click on the `Actions` tab and make sure there were no errors in the rendering process
+        3. Click on the `deployment` section of the main page of the repository to find the URL
+        4. Navigate to the URL and confirm it displays as you intended
+        5. Copy the URL and submit it in Canvas
+:::
