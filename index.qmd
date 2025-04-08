@@ -1,41 +1,16 @@
 ---
 title: "DS 250: Data Science Programming"
-subtitle: "Using pandas, plotly, scikit-learn, and NumPy to Program with Data"
+subtitle: "Using pandas, lets-plot, scikit-learn, and NumPy to Program with Data"
 ---
 
 ## How to navigate this course?
 
-1. Use the top menue to navigate to the main sections of the course
-1. Once in a main section switch to navigating using the left side bar
+Use the top menue to navigate to specific assignments, or use the Setup menu to get your computer ready for the course
 
-### [Setup](setup.qmd)
+## [Setup](setup.qmd)
 
 This section contains all the needed info to get your computer setup for the course
 
-### [Projects](projects.qmd)
-
-Projects contains all the course projects for the semester
-
-### [Materials](materials.qmd)
-
-Additional information on specific topics can be found here and usesd as a resourse. This can expand upon the initial setup for the course and build on that
-
-### [Workbooks](workbooks.qmd)
-
-These are under development. A workbook is designed to mirror the code in the reading from each project with links back to the book. If you learn from a more hands on approach starting with the workbook coudl be a good approach
-
-### [Book Time](contact.qmd)
-
-You can find your professor, see their calendar, and book time to meet one-on-one
-
-### [Syllabus](syllabus.qmd)
-
-The syllabus and course competencies are located here. Take time to review them as they contain all the info to help you get the grade you want out of the course
-
-### [Skill Builders](skill_builders.qmd)
-
-Professors may use these as group coding activities in class
-
-### [FAQ](faq.qmd)
+## [FAQ](faq.qmd)
 
 Look here for common questions on the course

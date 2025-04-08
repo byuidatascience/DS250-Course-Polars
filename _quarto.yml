@@ -32,31 +32,70 @@ website:
     background: primary
     search: true   
     right:
-      - text: "Home"
-        file: index.qmd
+      # - text: "Home"
+      #   file: index.qmd
       - text: "Setup"
         file: setup.qmd
-      - text: "Unit 1"
+      - text: "Unit 1 Graphing"
         menu:
           - text: "Task 1"
-            file: /Projects/unit1_task1.qmd
+            file: Projects/unit1_task1.qmd
           - text: "Task 2"
             file: Projects/unit1_task2.qmd
           - text: "Task 3"
-            file: /Projects/unit1_task3.qmd
+            file: Projects/unit1_task3.qmd
           - text: "Task 4"
-            file: /Projects/unit1_task4.qmd
-        # file: projects.qmd
-      - text: "Materials"
-        file: materials.qmd
-      - text: "Workbooks"
-        file: workbooks.qmd
-      - text: "Book Time with Us"
-        file: contact.qmd
-      - text: "Syllabus"
-        file: Syllabus/syllabus.qmd
-      - text: "Skill Builders"
-        file: skill_builders.qmd
+            file: Projects/unit1_task4.qmd
+      - text: "Unit 2 SQLite"
+        menu:
+          - text: "Task 1"
+            file: Projects/unit2_task1.qmd
+          - text: "Task 2"
+            file: Projects/unit2_task2.qmd
+          - text: "Task 3"
+            file: Projects/unit2_task3.qmd
+          - text: "Task 4"
+            file: Projects/unit2_task4.qmd
+      - text: "Unit 3 Wrangling"
+        menu:
+          - text: "Task 1"
+            file: Projects/unit3_task1.qmd
+          - text: "Task 2"
+            file: Projects/unit3_task2.qmd
+          - text: "Task 3"
+            file: Projects/unit3_task3.qmd
+          - text: "Task 4"
+            file: Projects/unit3_task4.qmd
+      - text: "Unit 4 ML"
+        menu:
+          - text: "Task 1"
+            file: Projects/unit4_task1.qmd
+          - text: "Task 2"
+            file: Projects/unit4_task2.qmd
+          - text: "Task 3"
+            file: Projects/unit4_task3.qmd
+          - text: "Task 4"
+            file: Projects/unit4_task4.qmd
+      - text: "Unit 5 ML Prep"
+        menu:
+          - text: "Task 1"
+            file: Projects/unit5_task1.qmd
+          - text: "Task 2"
+            file: Projects/unit5_task2.qmd
+          - text: "Task 3"
+            file: Projects/unit5_task3.qmd
+          - text: "Task 4"
+            file: Projects/unit5_task4.qmd
+      - text: "Unit 6 GitHub"
+        file: Projects/unit6.qmd
+      # - text: "Workbooks"
+      #   file: workbooks.qmd
+      # - text: "Book Time with Us"
+      #   file: contact.qmd
+      # - text: "Syllabus"
+      #   file: Syllabus/syllabus.qmd
+      # - text: "Skill Builders"
+      #   file: skill_builders.qmd
       - text: "FAQ"
         file: faq.qmd
       

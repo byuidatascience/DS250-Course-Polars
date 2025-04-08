@@ -29,7 +29,7 @@ You will be comfortable with interactive programming and have an introduction to
 ---
 
 ### "What programming languages do we use in this course?"
-The course is done using Python.  We focus on the pandas and Altair packages.
+The course is done using Python.  We focus on the pandas and the lets-plot plotting packages (this plotting package is modeled after ggplot2 in R).
 
 ---
 
@@ -44,11 +44,13 @@ The computer science and software engineering programs at BYU-I use Python as th
 ---
 
 ### "What is pandas?"
-[pandas](https://pandas.pydata.org/docs/getting_started/index.html) is the foundational data science package in Python. If you are using tabular data you will be in pandas.
+[pandas](https://pandas.pydata.org/docs/getting_started/index.html) is the foundational data science package in Python. If you are using tabular data you will be in pandas. Polars is growing in popularity, but there isn't as much help for it yet.
 
 ---
 
-### "Why are we using Altair instead of Seaborn or Matplotlib?"
-Matplotlib was the first visualization package to gain a following in Python.  Seaborn is built on top of Matplotlib.  Many data scientists use both in their work—neither leverage the [grammar of graphics](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448) as developed by Leland Wilkinson. Altair is built on Vega-Lite, which uses the Vega visualization grammar. It is declarative and actively developed.  We expect that it will become the predominant visualization package in Python <https://youtu.be/FytuB8nFHPQ> and <https://youtu.be/vTingdk_pVM>.
+### "Why are we using lets-plot instead of Seaborn or Matplotlib or Altair?"
+Matplotlib was the first visualization package to gain a following in Python.  Seaborn is built on top of Matplotlib. Seaborn is easy to pick-up and understand, but much less flexible. Many data scientists use both in their work—neither leverage the [grammar of graphics](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448) as developed by Leland Wilkinson. Altair is built on Vega-Lite, which uses the Vega visualization grammar. It is declarative and actively developed.  
+
+Lets-plot has the advantage of being similar to ggplot2 in R and also uses a grammar of graphics. Using this plotting package should help students transition between the two so they can more quickly move between R and Python. It is intuitive and relatively easy to use. There are other plotting packages as well, but none of them are an obvious choice or a dominant choice of the others.
 
 ---
