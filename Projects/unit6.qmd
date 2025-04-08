@@ -1,0 +1,268 @@
+---
+title: "Project 6: Git Your DS Portfolio Online"
+date: 2020-05-01T11:02:05+06:00
+lastmod: 2020-09-15T10:42:26+06:00
+weight: 6
+draft: false
+# search related keywords
+keywords: [""]
+---
+
+### Background
+
+GitHub is an online platform where data scientists and developers can communicate and share work. It has also morphed into a tool to house all your work in a portfolio. Think about an Art student and how they have to develop their portfolio of various skills they have across the art classes. Similarly you will want to showcase you skillset across the Data Science skillsets.
+
+As students, you will want to curate your creative work on GitHub using a program called Git. GitHub is the place to share your original work, **not your homework assignments**. The reading assignments will dive deaper into what to include in your portfolio and what not to include.
+
+Many people store their personal websites, blogs, and project websites on GitHub. Our textbook and course are hosted on GitHub, and you can see [J. Hathaway's](http://jhathaway.io/) or [Ryan Hafen's](https://ryanhafen.com/) personal Data Science websites that are hosted on GitHub as well.
+
+For this project, you will be making a public website that is a data science portfolio that will be hosted on GitHub. Your Resume will be one section of your portfolio/website. You should also post Data Science Society projects, personal projects, and any other data science related work you have done outside of class. Do not post any of the DS250 course work in this portfolio.
+
+### Data
+
+**Portfolio:** [BYUI Data Science Portfolio](https://github.com/byuidatascience/datascience_portfolio)
+
+### Readings
+
+-   [New to Git and GitHub? This Essential Beginners Guide is for you](https://www.analyticsvidhya.com/blog/2020/05/git-github-essential-guide-beginners/)
+-   [Git vs. GitHub: What is the difference between them?](https://www.theserverside.com/video/Git-vs-GitHub-What-is-the-difference-between-them#:~:text=The%20key%20difference%20between%20Git,and%20upload%20or%20download%20resources.)
+-   [Git in Visual Studio Code video](https://www.youtube.com/watch?v=wMqukSKYcvU)
+-   [Setting up a website using Quarto documents](https://quarto.org/docs/publishing/github-pages.html#:~:text=There%20are%20three%20ways%20to,publish%20from%20the%20docs%20directory.)
+
+#### Optional
+
+-   [Git and GitHub for DS](../Setup/git_github_setup.qmd)
+-   [Pull and Merge Forks on GitHub](../Course%20Materials/git_pull_merge.qmd)
+-   [Using Version Control in VS Code](https://code.visualstudio.com/docs/editor/versioncontrol)
+
+##### Portfolio Resources
+
+-   [How to Modify a Quarto Website](https://quarto.org/docs/websites/website-tools.html)
+-   [How to Create a Compelling GitHub Portfolio](https://towardsdatascience.com/how-to-create-a-compelling-github-portfolio-a229e7472a92)
+-   [How to Create a Professional Portfolio on GitHub](https://towardsdatascience.com/how-to-create-a-professional-portfolio-on-github-that-will-help-land-your-first-job-in-data-science-e1fc8bd7a797)
+-   [Data Science Portfolios That Will Get You the Job](https://www.dataquest.io/blog/build-a-data-science-portfolio/)
+-   [4 Data Science Portfolio Projects You Need to Create](https://builtin.com/data-science/data-science-portfolio-projects)
+-   [Example 1 - Data Science Portfolio](https://github.com/rodrigo-arenas/portfolio)
+-   [Example 2 - Data Science Portfolio](https://github.com/topics/portfolio-website)
+
+### Questions and Tasks
+
+There are multiple ways to set-up a website using quarto documents. A succinct synopsis of the [3 ways is found here](https://quarto.org/docs/publishing/github-pages.html#:~:text=There%20are%20three%20ways%20to,publish%20from%20the%20docs%20directory.). We will walk through the first and 3rd ways.
+
+The first option is to “Render sites on your local machine to the `docs` directory, check the rendered site into GitHub, and then configure your GitHub repo to publish from the `docs` directory. This is referred to as Method 1 below. We will show how to do this using a starting template, or from scratch. The 3rd option (also called Method 3) is to “Use a GitHub Action to automatically render your files and publish the resulting content whenever you push a source code (e.g. quarto file) change to your repository”. This will be illustrated using a template file as a starting point.
+
+Choose 1 of the 3 tabs below and follow those instructions for publishing a portfolio website hosted through your own personal GitHub repository.
+
+::: panel-tabset
+       
+## Method 1: Use a template, publish from docs
+
+1.  Navigate to the [Data Science Portfolio2](https://github.com/byuidatascience/ds_portfolio_dp) repo in GitHub
+
+2.  Click the green button ‘Use this template’ and select 'Create a new repository'
+
+    a\. Select yourself as owner
+
+    b\. Pick a professional name (potential employers will be seeing this)
+
+    c\. Choose 'public'
+
+    d\. Click 'create repository'
+
+3.  Copy the url of the GitHub repo. You’ll need this when we return to VS Code
+
+4.  Modify 'Pages' Setting for build and deployment from \\docs folder
+
+    a\. Click the Settings tab
+
+    b\. Scroll down to the Pages section on the left hand menu
+
+    c\. Change the branch option from “none” to “main”, and change the folder next to it from “/(root)” to “/docs”.  **Don’t forget to click 'Save'!**
+
+    d\. Wait a couple of minutes and refresh your page. There should now be a url address to the website and a link that says “Visit Site”. This is the url address to your home page! You will want to come click on that later to access the website at the end of this process.
+
+    **Now go to VS Code**
+
+5.  Clone the GitHub repository to your local machine
+
+    a\. On the main page there is an option to 'Clone Git Repository'
+
+    ![](/Images/from_docs_template/step5_clone.png){width="507"}
+
+    b\. You are prompted to paste the url to the GitHub repository at the top of your VS Code screen
+
+    -   You will then be asked where to store it. Create a new folder that does not reside within any other projects or GitHub repo folders. Select that newly created folder
+
+6.  You can now make changes to any of the pages, delete pages, or add pages. Be sure to render or preview the pages you made changes to. This will create the .html file the website needs and store it in the docs folder.
+
+    **Note**: If you make changes to the menu options along the top or side of the website by editing the \_quarto.yml file you will need to render the entire website (since those options are on every page). To do that, type \`quarto render\` in the terminal.
+
+7.  We will no implement the "pull, add, commit push" workflow in RStudio to send our local files to GitHub. To do this, go to the terminal and type the following commands:
+
+    -   git pull
+
+    -   git add .
+
+    -   git commit -m"a message of your choice"
+
+    -   git push
+
+    **Now let's return to GitHub to see the "finished" product!**
+
+8.  It may take a minute, but when you return to the website (see step 4d), any changes you made should be visible.
+
+## Method 1: From scratch, publish from docs
+
+1.  Go to File -\> Open Folder
+
+    -   Create a new folder that does not reside within any other projects or folders associated with GitHub repos. Then select that folder as the one to open
+
+2.  Now that we are inside that new folder in VS Code, in VS Code go to New File -\> Quarto Project. Choose Quarto Website. When prompted, select the folder that you just created.
+
+    -   This will populate the folder with a few new files. These are the beginnings of your website.
+
+3.  You will now have a `_quarto.yml` file show up in the folder. This file is like a yaml header for the entire website. It controls many website level  attributes, like top and side menus, file output type, etc.
+
+    ![](/Images/from_docs_scratch/step3_quarto_yml.png){width="213"}
+
+4.  Open the `_quarto.yml` file. Add `output-dir: docs` on line 3, so that it looks like the image below. The Save the file.
+
+    ![](/Images/step4_output-dir.png)
+
+    **Now we will create a GitHub repository to connect to this folder/project. We will use GitHub to host the website.**
+
+5.  Go to your GitHub home page. Click on the "Repositories" tab, and then click the big, green "new" button.
+
+    ![](/Images/from_docs_scratch/step5_new_repo.png){width="491"}
+
+6.  Choose these settings on the next screen:
+
+    -   Choose your own username as the "owner". This is for your own personal use - even after the class, so don't choose a school/class organization.
+
+    -   Give the repo a name that is professional sounding, since this is what you will ultimately be sharing with future employers.
+
+    -   A good description is nice, but optional
+
+    -   Choose public (it won't matter too much at this point, you can always change it later)
+
+    -   Leave the other options at their defaults and click "Create repository"
+
+7.  On the next page, copy all the code it provides under the heading “…or create a new repository on the command line” so you can paste it into your terminal
+
+    ![](/Images/from_docs_scratch/step7_copy_code.png){width="450"}
+
+    **Return to VS Code**
+
+8.  Paste the lines of code (right click paste) into the terminal and run them all. This will essentially connect your local folder in VSCode to the GitHub repository.
+
+9.  Then run `quarto render` in the terminal. This will run all your files and build the website. You’ll notice that a `docs` folder has been created. That is where all the html files are stored, and it serves as the top level folder for your website.
+
+10. We will now implement the “pull, add, commit, push” workflow in VSCode to sync our local files with the files on GitHub.
+
+    -   Select the source control (aka Git) icon on the left side menu.
+
+        -   ![](/Images/from_docs_scratch/step10a_source_control_icon.png)
+
+    -   Click the 'pull' button. (Though this is technically not necessary at this step, it is important to get into the habit of always pulling before pushing.)
+
+        -   ![](/Images/from_docs_scratch/step10b_pull.png){width="270"}
+
+    -   Type a message in the commit box. This is just for your own benefit
+
+        -   ![](/Images/from_docs_scratch/step10c_commit.png){width="234"}
+
+    -   Click the blue "Commit" button.
+
+    -   The click the "Sync" button to push the commited changes to GitHub
+
+    **Now return to your GitHub repo. You should see on the code page that some files are there, with your message showing. We will now configure GitHub to host the website.**
+
+11. Go to the “Settings” menu/tab along the top
+
+12. After clicking Settings, there are various options along the left. Select “Pages”
+
+13. Change the branch from “None” to “Main”, then change the folder from “(root)” to “/docs”.
+
+14. Don’t forget to click “Save”.
+
+    1.  ![](/Images/from_docs_scratch/step14_pages_main_docs.png){width="211"}
+
+15. You will have to wait a minute or two. Then you can refresh your page and you should see a url and a link to “Visit Site”. That’s where your website is located. Anyone can access that webpage!
+
+    ::: callout-note
+    With the correct folder open in VS Code, you can make changes to existing files and add files. Then follow the pull, add, commit, push process (Steps 10) and your website will update. To see other files (besides index) add the file name or path to the url. (Remember, it starts in the docs folder)
+
+    NOTE: If you make changes to the \_quarto.yml file, you will need to rebuild the website by running \`quarto render\` in the terminal before pushing to GitHub. Quarto render will rebuild every webpage on your site.
+    :::
+
+## Method 3: GitHub actions, gh-pages branch
+
+** Video walk through of the instructions below**
+
+```{=html}
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/41338032/partner_id/1157612?iframeembed=true&playerId=kaltura_player&entry_id=1_m4ka8cia&flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_jv5tibva" width="608" height="402" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="W06 - DS Portfolio"></iframe>
+```
+
+**Git a Data Science Portfolio in GitHub (main page)**
+
+
+a.  **Use the Portfolio Template on your Githhub root directory**
+    -   **Navigate to the [Data Science Portfolio](https://github.com/byuidatascience/datascience_portfolio) repo in GitHub.**
+    -   **Click the Green Button `Use this template` and select `Create a new repository`**\
+        ![](/Images/gh_template.png){width="200"}
+    -   **Click `include all branches` checkbox, this will include the `gh-pages` branch**\
+        ![](/Images/gh_include_all_branches.png){width="500"}
+    -   **Select yourself as the `Owner`**\
+        ![](/Images/gh_owner.png){width="500"}
+    -   **Name the repository as `username.github.io` where the username is your username on GitHub (Note: If the `username` part of the repository doesn’t exactly match your username, it won’t work, so make sure to get it right.)**
+    -   **Click the Green Button `Create repository`**\
+        ![](/Images/gh_public.png){width="500"}
+b.  **Create a new branch `gh-pages` if you forgot to check the `include all branches` box (skip otherwise)**
+    -   **Click the `Branch: main` button then `view all branches`**\
+        ![](/Images/gh_view_all_branches.png){width="300"}
+    -   **Click the `New Branch` button**\
+        ![](/Images/gh_new_branch.png){width="200"}
+    -   **Name the branch `gh-pages` and click the Green Button `Create new branch`**\
+        ![](/Images/gh_create_new_branch.png){width="300"}
+c.  **Modify Pages Settings for Build and deployment from `main` to `gh-pages`:**
+    -   **Click the `Settings` tab**\
+        ![](/Images/gh_settings.png){width="300"}
+    -   **Scroll down to the `Pages` section in the left hand menu**\
+        ![](/Images/gh_pages.png){width="300"}
+    -   **Locate the Build and deployment section and change Branch from `main` to `gh-pages` and leave the right side as `/root`**\
+        ![](/Images/gh_gh-pages_root.png){width="750"}
+d.  **Clone the repository to your computer**
+    -   **Click the `<> Code` menu**
+    -   **Click the Green Button `<> Code` and select `Open with GitHub Desktop`**\
+        ![](/Images/gh_open_in_desktop.png){width="300"}
+    -   **Click the Button `Open in Visual Studio Code`** ![](/Images/gh_open_in_vs_code.png){width="500"}
+e.  **Update the `_quarto.yml` file**
+    -   **Change the `title` to your name**
+    -   **Change the `repo-url` to your code repository url**
+    -   **Change the page-footer `left:` to your name**
+    -   **Change the page footer `href:` to your LinkedIn profile link**
+    -   **Scroll to the bottom and change the theme `light:` and/or `dark:` to another theme (optional)**
+f.  **Push the changes to GitHub via GitHub Desktop**
+    -   **Make sure your current repo in the top left is `username.github.io`**\
+        ![](/Images/gh_current_repo.png){width="750"}
+    -   **Type a commit message and click the Blue Button `Commit to main`**\
+        ![](/Images/gh_commit_main.png){width="200"}
+    -   **Click the Blue Button `Push origin`**\
+        ![](/Images/gh_push_origin.png){width="500"}
+g.  **Confirm the GitHub Actions are working**
+    -   **Navigate to the repo in GitHub and click on the `Actions` tab**\
+        ![](/Images/gh_actions.png){width="500"}
+    -   **Confirm the `Update _quarto.yml` is working by the yellow circle turning to a green check circle (Note: this can take 3-5min)**\
+        ![](/Images/gh_all_workflows.png){width="300"}
+h.  **Fix the main page loading the ReadMe.md file**
+    -   **Run `quarto publish gh-pages` in the terminal of VS Code**
+:::
+
+#### Put your Resume online
+
+-   **Update the `resume.qmd` file** located at the top level folder with information about you. See [P4DS: CH30 Markdown](https://aeturrell.github.io/python4DS/markdown.html)
+-   Push your results to GitHub. Then go online to verify it was successful.
+
+### Deliverables
+
+Submit a URL link to your resume as a webpage hosted on GitHub.
