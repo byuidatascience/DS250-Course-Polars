@@ -46,7 +46,7 @@ website:
             file: /Projects/unit1_task3.qmd
           - text: "Task 4"
             file: /Projects/unit1_task4.qmd
-        file: projects.qmd
+        # file: projects.qmd
       - text: "Materials"
         file: materials.qmd
       - text: "Workbooks"
