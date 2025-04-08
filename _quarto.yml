@@ -21,7 +21,7 @@ website:
 
   page-footer: 
     border: true
-    left: "J. Hathaway, Chaz Clark BYU-I 2024©"
+    left: "J. Hathaway, Chaz Clark, David Palmer BYU-I 2025©"
     right: 
       - icon: github
         href: https://github.com/byuidatascience
@@ -36,7 +36,16 @@ website:
         file: index.qmd
       - text: "Setup"
         file: setup.qmd
-      - text: "Projects"
+      - text: "Unit 1"
+        menu:
+          - text: "Task 1"
+            file: /Projects/unit1_task1.qmd
+          - text: "Task 2"
+            file: Projects/unit1_task2.qmd
+          - text: "Task 3"
+            file: /Projects/unit1_task3.qmd
+          - text: "Task 4"
+            file: /Projects/unit1_task4.qmd
         file: projects.qmd
       - text: "Materials"
         file: materials.qmd
