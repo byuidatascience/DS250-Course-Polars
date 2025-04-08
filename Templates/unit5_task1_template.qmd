@@ -1,0 +1,79 @@
+---
+title: "Client Report - The War with Star Wars"
+subtitle: "Unit 5 Task 1"
+author: "[STUDENT NAME]"
+format:
+  html:
+    self-contained: true
+    page-layout: full
+    title-block-banner: true
+    toc: true
+    toc-depth: 3
+    toc-location: body
+    number-sections: false
+    html-math-method: katex
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-copy: hover
+    code-tools:
+        source: false
+        toggle: true
+        caption: See code
+execute: 
+  warning: false
+    
+---
+
+```{python}
+import pandas as pd 
+import numpy as np
+from lets_plot import *
+# add the additional libraries you need to import for ML here
+
+LetsPlot.setup_html(isolated_frame=True)
+```
+
+
+```{python}
+# import your data here using pandas and the URL
+
+
+```
+
+## QUESTION 1
+
+__Shorten the column names and clean them up for easier use with pandas.__ Provide a table or list that exemplifies how you fixed the names.  
+
+_type your write-up and analysis here_
+
+```{python}
+# Include and execute your code here
+
+
+```
+
+
+## QUESTION 2
+
+__Filter the dataset to 835 respondents that have seen at least one film__ (Hint: Don't use the column `Have you seen any of the 6 films in the Star Wars franchise?`) Not much to show here by way of output. Print the shape (i.e. number of rows and number of columns) of the filtered dataset.
+
+_type your write-up and analysis here_
+
+```{python}
+# Include and execute your code here
+
+
+```
+
+## QUESTION 3
+
+__Validate that the data provided on GitHub lines up with the article by recreating 2 of the visuals from the article.__  These visuals should be similar, but don't have to be exact. They need to be close enough that we can validate that the values in the dataset match the graphs in the chart. Though their charts were built using a different plotting software, the more you push yourself for an exact replica, the more you will learn. Spend at least a couple of hours on this. 
+
+_type your write-up and analysis here_
+
+```{python}
+# Include and execute your code here
+
+
+```
