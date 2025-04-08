@@ -10,7 +10,7 @@ project:
   type: website
 
 website:
-  title: "DS 250"
+  title: "DS 250!"
   favicon: Images/favicon.png
   back-to-top-navigation: true
   issue-url: https://github.com/byuistats/DS250-Course/issues/new
