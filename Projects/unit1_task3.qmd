@@ -41,7 +41,7 @@ No new readings. Review the previous readings as needed
 - [P4DS: Chapter 4.3 Manipulating rows in data frames](https://aeturrell.github.io/python4DS/data-transform.html#manipulating-rows-in-data-frames)
 - [P4DS: Chapter 11 Visualisation](https://aeturrell.github.io/python4DS/visualise.html)
 - [P4DS: Chapter 12.1 - 12.3 Layers: Aesthetic mappings and geometries](https://aeturrell.github.io/python4DS/vis-layers.html#introduction)
-- [P4DS: Chapter 14.2 - 14.3 Labels, titles, contextual info, annotations](https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/01_table_oriented.html)
+- [P4DS: Chapter 14.2 - 14.3 Labels, titles, contextual info, annotations](https://aeturrell.github.io/python4DS/communicate-plots.html#labels-titles-and-other-contextual-information)
 
 __Optional Readings:__
 
