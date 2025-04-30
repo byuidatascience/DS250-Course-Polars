@@ -64,7 +64,7 @@ _include figures in chunks and discuss your findings in the figure._
 
 ## QUESTION|TASK 2
 
-__Recreate the example charts from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html) of the textbook. (Hint: copy the chart code from 2.2.3. Creating a Plot, one for each cell below)__
+__Recreate the example charts from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html) of the textbook. (Hint: copy the chart code from 2.2.3. Creating a plot, one plot for each cell below)__
 
 
 ```{python}
