@@ -36,6 +36,8 @@ website:
       #   file: index.qmd
       - text: "Setup"
         file: setup.qmd
+      - text: "Unit 0 Set-up Check"
+        file: Projects/project_0_dp.qmd
       - text: "Unit 1 Graphing"
         menu:
           - text: "Task 1"
@@ -86,7 +88,7 @@ website:
             file: Projects/unit5_task3.qmd
           - text: "Task 4"
             file: Projects/unit5_task4.qmd
-      - text: "Unit 6 GitHub"
+      - text: "GitHub Task"
         file: Projects/unit6.qmd
       # - text: "Workbooks"
       #   file: workbooks.qmd
