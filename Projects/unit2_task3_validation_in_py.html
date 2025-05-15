@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2025-04-02">
 
-<title>Unit 2 Task 1: Batting Averages – DS 250!</title>
+<title>Unit 2 Task 3: Longevity of Players – DS 250!</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -440,8 +440,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
   <li><a href="#client-request" id="toc-client-request" class="nav-link" data-scroll-target="#client-request">Client Request</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
@@ -457,7 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Unit 2 Task 1: Batting Averages</h1>
+<h1 class="title">Unit 2 Task 3: Longevity of Players</h1>
 </div>
 
 
@@ -480,18 +479,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="setup" class="level3">
-<h3 class="anchored" data-anchor-id="setup">Setup</h3>
-<p><a href="../Setup/sql_setup.html">SQL</a> setup and test</p>
-</section>
 <section id="background" class="level3">
 <h3 class="anchored" data-anchor-id="background">Background</h3>
-<p>When you hear the word “relationship” what is the first thing that comes to mind? Probably not baseball. But a relationship is simply a way to describe how two or more objects are connected. There are many relationships in baseball such as those between teams and managers, players and salaries, even stadiums and concession prices.</p>
-<p>The graphs on <a href="https://web.archive.org/web/20200804101201/http://www.besttickets.com/blog/mlb-players-census/">Data Visualizations from Best Tickets</a> show many other relationships that exist in baseball.</p>
+<p>How do you know if you have correctly programmed a query or an analysis? The process of confirming that your analysis or dataset is “correct” is called validation.</p>
+<p>Imagine you are new on the job and received the assignment to run queries on a baseball dataset. Confirming you did things correctly is a good idea before presenting your data to others and letting them discover your mistake. Or maybe, it isn’t a matter of you doing something wrong as just a realization that the data source is flawed. Making that discovery is very important and makes you look really good; as opposed to someone else discovering it later - which can be a big hit to your credibility.</p>
+<p>Consider all the various ways you might want to validate the query results. One way to validate, though certainly not the only way and not necessarily the best way, is to try to accomplish the same task in a different system or language. That’s the purpose of this assignment.</p>
 </section>
 <section id="client-request" class="level3">
 <h3 class="anchored" data-anchor-id="client-request">Client Request</h3>
-<p>For this project, the Client wants you to use SQL queries called from within Python.</p>
+<p>For this project, you will validate the assignments you have done previously, but this time using Python pandas code. You will still need to connect to the database to pull the data in, but all the filtering, calculating, joining, etc. should be done with Python pandas (or polars).</p>
 </section>
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
@@ -534,8 +530,6 @@ Note
 </div>
 </div>
 </div>
-<p>Review the set-up instructions in preparation for class.</p>
-<p><a href="../Setup/sql_setup.html">SQLite</a></p>
 <p>There are many <a href="https://en.wikipedia.org/wiki/Database#Database_management_system">flavors of SQL</a> but most flavors have the same base commands. SQL queries are typed in the following pattern;</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="co">-- &lt;columns&gt; and &lt;column calculations&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="co">-- &lt;table name&gt;</span></span>
@@ -546,30 +540,20 @@ Note
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="co">-- &lt;filter conditions on groups&gt;</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="co">-- &lt;how the output is returned in sequence&gt;</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="co">-- &lt;number of rows to return&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The reading for this task are from this excellent <a href="https://docs.data.world/documentation/sql/concepts/basic/intro.html">SQL Guide</a>. Read the following for this task:</p>
+<p>Reading you may find useful (depending on how you approach the assignment):</p>
 <ul>
-<li><p>All the categories in the <a href="https://en.wikipedia.org/wiki/Database#Database_management_system">“Basic” group</a> (topics are grouped in the menu on the left side of the page).</p></li>
-<li><p>And, the following sections in the Intermediate group:</p>
-<ul>
-<li><a href="https://docs.data.world/documentation/sql/concepts/intermediate/aggregations.html">Aggregations</a></li>
-<li><a href="https://docs.data.world/documentation/sql/concepts/intermediate/GROUP_BY.html">GROUP BY and FILTER</a></li>
-<li><a href="https://docs.data.world/documentation/sql/concepts/intermediate/HAVING.html">HAVING</a></li>
-</ul></li>
+<li><a href="https://docs.data.world/documentation/sql/concepts/advanced/inline_subqueries.html">Inline subqueries</a></li>
+<li><a href="https://www.sqlite.org/lang_datefunc.html">Dates/Times in SQLite</a></li>
 </ul>
-<section id="optional-references" class="level4">
-<h4 class="anchored" data-anchor-id="optional-references">Optional References</h4>
-<ul>
-<li><a href="https://blog.timescale.com/blog/why-sql-beating-nosql-what-this-means-for-future-of-data-time-series-database-348b777b847a/">Why SQL is beating NoSQL, and what this means for the future of data</a></li>
-</ul>
-</section>
 </section>
 <section id="questions-and-tasks" class="level3">
 <h3 class="anchored" data-anchor-id="questions-and-tasks">Questions and Tasks</h3>
-<p>Download the <a href="../Templates/unit2_task1_template.qmd">Unit 2 Task 1 Template</a>. Note: batting average is number of hits divided by the number of at-bats. It is a number between 0 and 1 that represents what % of the time a player gets a hit (as opposed to getting out, for example).</p>
+<p>Download the <a href="../Templates/unit2_task3_template.qmd">Unit 2 Task 3 Template</a>.</p>
 <ol type="1">
-<li><p><strong>Write an SQL query that provides playerID, yearID, and batting average for players with at least 1 at bat that year. Sort the table from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.</strong></p></li>
-<li><p><strong>Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.</strong></p></li>
-<li><p><strong>Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats over their entire career, and print the top 5 results.</strong></p></li>
+<li><p><strong>Write an SQL query that pulls in the batting average table. Then, with Python Pandas code create a dataframe that contains playerID, yearID, and batting average for players with at least 10 at bat that year. Sort the dataframe from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.</strong></p></li>
+<li><p><strong>Now use Python Pandas to calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats over their entire career, and print the top 5 results.</strong></p></li>
+<li><p><strong>Write an SQL query that pulls in the the salaries table and the schools table (and any other tables you might need) and store them in pandas dataframes. Combine the dataframes to create a list of baseball players who attended BYU-Idaho. The new table should contain five columns: playerID, schoolID, salary, and the yearID/teamID associated with each salary. Order the table by salary (highest to lowest) and print out the table in your report.</strong></p></li>
+<li><p><strong>Pick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Be creative! Write an SQL query to read in the tables you need, then use pandas to manipulate the data. Finally, make a graph using Lets-Plot to visualize the comparison. What do you learn?</strong></p></li>
 </ol>
 </section>
 <section id="submission" class="level3">
@@ -588,7 +572,7 @@ Note
 <div class="callout-body-container callout-body">
 <p>When you have completed the report, you will need to follow this process to submit your work:</p>
 <ol type="1">
-<li>Have the <code>unit2_task1_template</code> open in VS Code and nothing else</li>
+<li>Have this assignment’s template/quarto file open in VS Code and nothing else</li>
 <li>Click <code>Preview Button</code> in VS Code in the top right of the screen
 <ol type="a">
 <li>This will render the project but also entire course work portfolio into <code>HTML</code> files for review</li>
@@ -602,7 +586,7 @@ Note
 </ol></li>
 <li>Type the following in the terminal <code>quarto render</code>
 <ol type="a">
-<li>Then drag and drop <code>unit2_task1_template.qmd</code> into the terminal this will add the file path to the terminal command</li>
+<li>Then drag and drop this assignment into the terminal. This will add the file path to the terminal command</li>
 <li>Press Enter</li>
 </ol></li>
 <li>This will render the project into a <code>HTML</code> file in the same location as the <code>.qmd</code> file</li>
@@ -618,7 +602,7 @@ Note
 </section>
 <section id="deliverables" class="level3">
 <h3 class="anchored" data-anchor-id="deliverables">Deliverables:</h3>
-<p><em>Use this <a href="../Templates/unit2_task1_template.qmd">unit2_task1_template</a> to submit your Client Report.</em></p>
+<p><em>Use this <a href="../Templates/unit2_task3_template.qmd">unit2_task3_template</a> to submit your Client Report.</em></p>
 <p>Answers to the questions | tasks. Each should include a written description of your results, code cells with comments, charts and/or tables.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
