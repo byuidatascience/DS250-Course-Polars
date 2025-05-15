@@ -32,8 +32,8 @@ __Subject Matter:__ [Types of Delay](https://aspm.faa.gov/aspmhelp/index/Types_o
 
 ### Readings
 
-- [P4DS: CH4 Data Transformation](https://byuidatascience.github.io/python4ds/transform.html) 
-- [P4DS: CH13 Exploratory Data Analysis](https://byuidatascience.github.io/python4ds/exploratory-data-analysis.html) 
+- [P4DS: CH4 Data Transformation](https://aeturrell.github.io/python4DS/data-transform.html#) 
+- [P4DS: CH13 Exploratory Data Analysis](https://aeturrell.github.io/python4DS/exploratory-data-analysis.html) 
 
 #### Optional References
 
