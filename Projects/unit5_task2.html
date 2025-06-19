@@ -447,11 +447,11 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="background">Background</h3>
 <p>Survey data is notoriously difficult to munge. Even when the data is recorded cleanly the options for ‘write in questions’, ‘choose from multiple answers’, ‘pick all that are right’, and ‘multiple choice questions’ makes storing the data in a tidy format difficult.</p>
 <p>In 2014, FiveThirtyEight surveyed over 1000 people to write the article titled, <a href="https://fivethirtyeight.com/features/americas-favorite-star-wars-movies-and-least-favorite-characters/">America’s Favorite ‘Star Wars’ Movies (And Least Favorite Characters)</a>. They have provided the data on <a href="https://github.com/fivethirtyeight/data/tree/master/star-wars-survey">GitHub</a>.</p>
-<p>For this project, your client would like to use the Star Wars survey data to figure out if they can predict an interviewing job candidate’s current income based on a few responses about Star Wars movies.</p>
+<p>For this project, your client would like to use the Star Wars survey data.</p>
 </section>
 <section id="client-request" class="level3">
 <h3 class="anchored" data-anchor-id="client-request">Client Request</h3>
-<p>The Client is who performed the survey but outsourced the analitics to a 3rd party. They want you to clean up the data so you can: a. Validate the data provided on GitHub lines up with the article by recreating 2 of the visuals from the article a. Predict if a person from the survey makes at least $50k</p>
+<p>The Client is who performed the survey but outsourced the analitics to a 3rd party. They want you to clean up the data so you can ultimately run a machine learning model.For this task, complete the items in the Questions section below.</p>
 </section>
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
@@ -483,6 +483,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Create your target (also known as “y” or “label”) column based on the new income range column<br>
 </li>
 <li>Encode favorability ratings as a number. Remove the favorability categorical columns.</li>
+<li>One-hot encode all remaining categorical columns</li>
 </ol></li>
 </ol>
 </section>
