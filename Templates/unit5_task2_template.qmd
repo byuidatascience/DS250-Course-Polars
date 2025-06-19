@@ -50,6 +50,7 @@ LetsPlot.setup_html(isolated_frame=True)
     a. Create a new column that converts the income ranges to a single number. Drop the income range categorical column  
     a. Create your target (also known as “y” or “label”) column based on the new income range column  
     a. Encode favorability ratings as a number. Remove the favorability categorical columns.
+    a. One-hot encode all remaining categorical columns
 
 _type your write-up and analysis here_
 
