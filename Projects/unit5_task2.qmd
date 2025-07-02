@@ -45,7 +45,7 @@ No new readings. Review previous readings as needed:
     a. Create a new column that converts the age ranges to a single number. Drop the age range categorical column  
     a. Create a new column that converts the education groupings to a single number. Drop the school categorical column  
     a. Create a new column that converts the income ranges to a single number. Drop the income range categorical column  
-    a. Create your target (also known as “y” or “label”) column based on the new income range column  
+    a. Create your target (also known as “y” or “label”) column to indicate whether a person had a Household Income $50,000 or greater  
     a. Encode favorability ratings as a number. Remove the favorability categorical columns.
     a. One-hot encode all remaining categorical columns
 
