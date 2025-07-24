@@ -3,4 +3,4 @@ title: "Book Time with Us"
 ---
 
 Book an office hour slot with your teacher. <br>
-[Find office hours](https://byuidatascience.github.io/visit/) for all the Data Science Faculty Faculty.
+[Find office hours](https://byuidatascience.github.io/visit/) for all the Data Science Faculty.
