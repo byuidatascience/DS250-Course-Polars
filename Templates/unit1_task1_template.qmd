@@ -26,7 +26,7 @@ execute:
 ---
 
 ```{python}
-import pandas as pd
+import polars as pl
 import numpy as np
 from lets_plot import *
 
@@ -37,7 +37,7 @@ LetsPlot.setup_html(isolated_frame=True)
 # Learn morea about Code Cells: https://quarto.org/docs/reference/cells/cells-jupyter.html
 
 # Include and execute your code here
-df = pd.read_csv("https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv")
+df = pl.read_csv("https://posit.byui.edu/content/0d43d66f-d3b7-4c43-8c36-52e3ed69e7f1/names_year_csv.csv")
 ```
 
 ## QUESTION 1

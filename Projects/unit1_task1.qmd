@@ -27,7 +27,7 @@ This csv file contains the number of times a name was given to a child in a spec
 Every data science project should start with data, and our class projects are no different. Each project will have __'URL'__ and __'Information'__ links like the ones below. Right click the __'URL'__ link and select "Copy Link". You can use that copied URL in your code to read in the data. This is the preferred method to get data into your report as you will be publishing your report to GitHub. If you choose to download the data file to your computer you will need to save it in the same folder as your quarto file for the assignment in order for it to work correclty in GitHub. 
 
 
-__URL:__ [names_year.csv](https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv)   
+__URL:__ [names_year_csv.csv](https://posit.byui.edu/content/0d43d66f-d3b7-4c43-8c36-52e3ed69e7f1/names_year_csv.csv)   
 __Information:__ [data.md](https://github.com/byuidatascience/data4names/blob/master/data.md)
 
 
@@ -39,11 +39,21 @@ Complete these readings before we cover the material in class. This will help yo
 In other words, if an assignment is due on Wednesday, we will cover the material needed to complete the assignment on Tuesday. Therefore, you should complete the readings on Monday (or anytime before class on Tuesday).
 :::
 
-- [Pandas Tutorial 1: What kind of data does pandas handle?](https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/01_table_oriented.html)
-- [Pandas Tutorial 2: How do I read and write tabular data?](https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/02_read_write.html)
-- [Pandas Tutorial  3: How do I select a subset of a DataFrame?](https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/03_subset_data.html)
-- [P4DS: Chapter 4.3 Manipulating rows in data frames](https://aeturrell.github.io/python4DS/data-transform.html#manipulating-rows-in-data-frames)
+Read the Polars Cookbook, Chapter 1: Getting Started with Python Polars to get some fundamental understanding of polars and data structures in python. Specifically, read the following sections of the chapter (you can skip the other sections):
 
+- [Introducing Key Features in Polars](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-23)
+- [The Polars DataFrame](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-29)
+- [The Polars Series](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-36)
+- [Understanding Method Chaining](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-59)
+
+For working with rows and columns of a data frame in polars, read the following sections of Python Polars: The Definitive Guide:
+
+- Chapter 7 - Beginning Expressions: [Selecting Columns with Expressions](https://learning.oreilly.com/library/view/python-polars-the/9781098156077/ch07.html#id287) section
+- [Chapter 11 of Python Polars: The Definitive Guide](https://learning.oreilly.com/library/view/python-polars-the/9781098156077/ch11.html). (You can skip the "Sort Nested Data Types" section if you wish)
+
+Optional:
+
+The [Selecting Columns and Filtering Data](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-47) section of Chapter 1 in the Polars Cookbook.
 
 ### Questions and Tasks (Core)
 
@@ -59,7 +69,7 @@ __Download this [Unit 1 Task 1](../Templates/unit1_task1_template.qmd) template.
 ::: {.callout-note collapse="false"}
 When you have completed the report, you will need to follow this process to submit your work:
 
-1. Have the `Unit1_Task1` template open in VS Code and nothing else
+1. Have this assignment's template/quarto file open in VS Code and nothing else
 1. Click `Preview Button` in VS Code in the top right of the screen
     a. This will render the file but also the entire course work portfolio into `HTML` files for review
     b. Confirm everything displays as you would like it to
