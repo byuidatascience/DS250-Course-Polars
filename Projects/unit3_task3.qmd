@@ -1,7 +1,7 @@
 ---
 title: "Project 3: If not now, when?"
-date: 2020-05-01T11:02:05+06:00
-lastmod: 2020-09-15T10:42:26+06:00
+date: 2022-05-01T11:02:05+06:00
+lastmod: 2022-09-15T10:42:26+06:00
 weight: 3
 draft: false
 # search related keywords
@@ -32,11 +32,7 @@ __Subject Matter:__ [Types of Delay](https://aspm.faa.gov/aspmhelp/index/Types_o
 
 ### Readings
 
-- [BYUI DS Programming CH15. - 15.2 Categorical data](https://byuidatascience.github.io/python4ds/factors.html)
-
-#### Optional References
-
-- [P4DS: CH19 Categories](https://aeturrell.github.io/python4DS/categorical-data.html) 
+Polars Users Guide, [Data Type Enum](https://docs.pola.rs/user-guide/expressions/categorical-data-and-enums/#enum-vs-categorical)
 
 
 ### Questions

@@ -1,7 +1,7 @@
 ---
 title: "Project 3: Comparing Delay Types"
-date: 2020-05-01T11:02:05+06:00
-lastmod: 2020-09-15T10:42:26+06:00
+date: 2025-10-29
+lastmod: 2025-10-29
 weight: 3
 draft: false
 # search related keywords
@@ -32,7 +32,11 @@ __Subject Matter:__ [Types of Delay](https://aspm.faa.gov/aspmhelp/index/Types_o
 
 ### Readings
 
-- [BYUI DS Programming CH12.1-12.3 Tidy Data, Pivoting](https://byuidatascience.github.io/python4ds/tidy-data.html), the rest of chapter 12 is good too
+Python Polars: The Definitive Guide, [Chapter 15, Reshaping (especially the intro, pivot and unpivot)](https://learning.oreilly.com/library/view/python-polars-the/9781098156077/ch15.html)
+
+#### Optional / Alternative Reading
+
+Polars Cookbook, [Chapter 8, Reshaping and Tidying Data](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_08.xhtml#_idParaDest-270)
 
 ### Questions
 

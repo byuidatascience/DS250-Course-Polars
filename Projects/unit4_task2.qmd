@@ -1,7 +1,7 @@
 ---
 title: "Unit 4, Task 2: How good is it, really?"
-date: 2025-04-08T11:02:05+06:00
-lastmod: 2025-04-08T10:42:26+06:00
+date: 2025-10-27
+lastmod: 2025-10-27
 weight: 5
 draft: false
 # search related keywords
@@ -34,7 +34,8 @@ __Information:__ [Data description](https://github.com/byuidatascience/data4dwel
 ### Readings
 
 - [How to choose a good evaluation metric for your Machine learning model](https://web.archive.org/web/20240213170741/https://ranvir.xyz/blog/how-to-evaluate-your-machine-learning-model-like-a-pro-metrics/)
-- [Identify and graph feature importance](https://www.geeksforgeeks.org/how-to-identify-the-most-informative-features-for-scikit-learn-classifiers/) (especially method 1)
+- [Permutation Importance](https://scikit-learn.org/stable/modules/permutation_importance.html)
+- [Permutation Importance Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.inspection.permutation_importance.html#sklearn.inspection.permutation_importance)
 - [Exhaustive list of classifiers in scikit-Learn](https://www.kaggle.com/code/grigol1/all-classification-models-40-sklearn-models) (skim)
 
 
@@ -50,7 +51,7 @@ __Information:__ [Data description](https://github.com/byuidatascience/data4dwel
 
 1. __Describe the quality of your classification model using 2-3 different evaluation metrics.__ You also need to explain how to interpret each of the evaluation metrics you use.  
 
-1. __Justify your classification model by discussing the most important features selected by your model.__ This discussion should include a feature importance chart and a description of the features.  
+1. __Justify your classification model by discussing the most important features selected by your model.__ This discussion should include a permutation importance chart of the most important features, and a description of those features.  
 
 
 

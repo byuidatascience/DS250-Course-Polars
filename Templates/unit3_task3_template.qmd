@@ -26,9 +26,8 @@ execute:
 ---
 
 ```{python}
-import pandas as pd 
+import polars as pl
 import numpy as np
-import sqlite3
 from lets_plot import *
 
 LetsPlot.setup_html(isolated_frame=True)
@@ -39,7 +38,7 @@ LetsPlot.setup_html(isolated_frame=True)
 # Learn morea about Code Cells: https://quarto.org/docs/reference/cells/cells-jupyter.html
 
 # Include and execute your code here
-df = pd.read_json("https://github.com/byuidatascience/data4missing/raw/master/data-raw/flights_missing/flights_missing.json")
+df = pl.read_json("https://github.com/byuidatascience/data4missing/raw/master/data-raw/flights_missing/flights_missing.json")
 ```
 
 ## QUESTION 1

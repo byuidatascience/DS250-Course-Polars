@@ -1,7 +1,7 @@
 ---
 title: "Project 5: Star Wars for Dummies"
-date: 2025-04-08T11:02:05+06:00
-lastmod: 2025-04-08T10:42:26+06:00
+date: 2025-10-29
+lastmod: 2025-10-29
 weight: 5
 draft: false
 # search related keywords
@@ -31,17 +31,13 @@ __Information:__ [Article](https://fivethirtyeight.com/features/americas-favorit
 
 ### Readings
 
-- [P4DS: CH14.4-14.8 Graphics for Communication](https://aeturrell.github.io/python4DS/communicate-plots.html) 
-- [P4DS: CH17 Strings and Text](https://aeturrell.github.io/python4DS/strings.html) (especially 17.4)
+Review pivoting and unpivoting.
 
-Review previous readings as needed:
+-Python Polars: The Definitive Guide, [Chapter 15 Reshaping (especially pivoting and unpivoting)](https://learning.oreilly.com/library/view/python-polars-the/9781098156077/ch15.html)
 
-- [BYUI DS Programming: CH12 Tidy Data](https://byuidatascience.github.io/python4ds/tidy-data.html)
-- [P4DS: CH16 Numbers](https://aeturrell.github.io/python4DS/numbers.html) 
-- [Video on regular expression](https://www.youtube.com/watch?v=nxjwB8up2gI)
-- [P4DS: CH17 Strings and Text](https://aeturrell.github.io/python4DS/strings.html)
-- [P4DS: Ch18 Regular Expressions](https://aeturrell.github.io/python4DS/regex.html)
+#### Optional Alternative Reading
 
+Polars Cookbook, [Chapter 8 Reshaping and Tidying Data](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_08.xhtml#_idParaDest-270)
 
 ### Questions
 
@@ -54,7 +50,7 @@ Review previous readings as needed:
 
 ### Submission / Deliverables:
 
-_Use this [unit5_task3_template](../Templates/unit5_task3_template.qmd) to create your Client Report. Answer the questions. Each answer should include a written description of your results, code cells with comments, charts and/or tables._  
+__Rather than submitting something for each task of this unit, you will submit one client report at the end of the unit that is the culmination of all the tasks.__ Use [this template](../Templates/unit5_task3_template.qmd) to create your Client Report. Answer the questions. Each answer should include a written description of your results, code cells with comments, charts and/or tables.
 
 ::: {.callout-note collapse="true"}
 Your instructor will advise you, or it will be evident in Canvas, whether to submit an rendered .html file, or a link to the rendered file on GitHub on gh-pages. (Do not submit the URL to the GitHub `.qmd` file)  

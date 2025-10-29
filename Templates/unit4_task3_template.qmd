@@ -26,7 +26,7 @@ execute:
 ---
 
 ```{python}
-import pandas as pd 
+import polars as pl
 import numpy as np
 from lets_plot import *
 # add the additional libraries you need to import for ML here
@@ -36,7 +36,7 @@ LetsPlot.setup_html(isolated_frame=True)
 
 
 ```{python}
-# import your data here using pandas and the URL
+# import your data here using polars and the URL
 
 
 ```

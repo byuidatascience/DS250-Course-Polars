@@ -1,7 +1,7 @@
 ---
 title: "Unit 4 Stretch: Regression ML"
-date: 2025-04-08T11:02:05+06:00
-lastmod: 2025-04-08T10:42:26+06:00
+date: 2025-10-29
+lastmod: 2025-10-29
 weight: 5
 draft: false
 # search related keywords
@@ -34,7 +34,7 @@ __Information:__ [Data description](https://github.com/byuidatascience/data4dwel
 ### Readings
 
 
-- [P4DS: CH22 Joins](https://aeturrell.github.io/python4DS/joins.html)
+- REVIEW [Polars User Guide, Joins](https://docs.pola.rs/user-guide/transformations/joins/) (we will only be doing equi joins. So, anything after the summaries of the various join strategies is optional).
 - [All regressor algorithms in scikit-learn](https://www.kaggle.com/code/grigol1/all-regression-models-55-sklearn-models) (skim)
 - [How to choose a good evaluation metric for your Machine learning model](https://web.archive.org/web/20240213170741/https://ranvir.xyz/blog/how-to-evaluate-your-machine-learning-model-like-a-pro-metrics/) (you can start in section 11 - Evaluating for regression problems)
 
@@ -44,11 +44,15 @@ __Information:__ [Data description](https://github.com/byuidatascience/data4dwel
 
 - [Another overview and description of pros and cons for popular classifiers and regression models](https://www.geeksforgeeks.org/supervised-machine-learning/)
 - [Boosted algorithms in scikit-learn](https://scikit-learn.org/stable/modules/ensemble.html#gradient-tree-boosting)
+- Review joins
+    - [Polars Definitive Guide, Chap 14, Joining and Concatenating](https://learning.oreilly.com/library/view/python-polars-the/9781098156077/ch14.html)
+    - [Polars Cookbook, Chap 8 Reshaping and Tidying Data, Joining DataFrames](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_08.xhtml#_idParaDest-282)
+
 
  
 ### Questions
 
-1. __Repeat the classification model using 3 different algorithms.__ Display their Feature Importance, and Classification Report. Explian the differences between the models and which one you would recommend to the Client.  
+1. __Repeat the classification model using 3 different algorithms.__ Display their Permutation Importance, and Classification Report. Explian the differences between the models and which one you would recommend to the Client.  
 
 1. __Join the `dwellings_neighborhoods_ml.csv` data to the `dwelling_ml.csv` on the `parcel` column to create a new dataset. Duplicate the code for the model you recommended in the stretch question above and update it to use this data.__ Explain the differences and if this changes the model you recomend to the Client.  
 

@@ -1,7 +1,7 @@
 ---
 title: "Unit 4, Task 3: Show me"
-date: 2025-04-08T11:02:05+06:00
-lastmod: 2025-04-08T10:42:26+06:00
+date: 2025-10-29
+lastmod: 2025-10-29
 weight: 5
 draft: false
 # search related keywords
@@ -34,15 +34,6 @@ __Information:__ [Data description](https://github.com/byuidatascience/data4dwel
 ### Readings
 
 No new readings. Consider reviewing the past readings as needed:
-
-- [Machine Learning Introduction](/Course%20Materials/ml.qmd)
-- [A visual introduction to machine learning](http://www.r2d3.us/visual-intro-to-machine-learning-part-1/)
-- [Calculate model accuracy in scikit-Learn](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html)
-- [A few popular models to choose from, and a review of Machine Learning workflow](https://www.educative.io/blog/scikit-learn-cheat-sheet-classification-regression-methods)
-- [How to choose a good evaluation metric for your Machine learning model](https://web.archive.org/web/20240213170741/https://ranvir.xyz/blog/how-to-evaluate-your-machine-learning-model-like-a-pro-metrics/)
-- [Identify and graph feature importance](https://www.geeksforgeeks.org/how-to-identify-the-most-informative-features-for-scikit-learn-classifiers/) (especially method 1)
-- [Exhaustive list of classifiers in scikit-Learn](https://www.kaggle.com/code/grigol1/all-classification-models-40-sklearn-models) (skim)
-
 
 #### Optional References
 
