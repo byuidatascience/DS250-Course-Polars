@@ -1,7 +1,7 @@
 ---
-title: "Unit 2 Task 2: BYU-I Players and Comparing Teams"
-date: 2025-04-02T11:02:05+06:00
-lastmod: 2025-04-02T10:42:26+06:00
+title: "Unit 2 Task 2: Basic Aggregation and Wrangling"
+date: 2025-10-27
+lastmod: 2025-10-27
 weight: 4
 draft: false
 # search related keywords
@@ -10,14 +10,18 @@ keywords: [""]
 
 ### Background
 
-When you hear the word “relationship” what is the first thing that comes to mind? Probably not baseball. But a relationship is simply a way to describe how two or more objects are connected. There are many relationships in baseball such as those between teams and managers, players and salaries, even stadiums and concession prices. 
+How do you know if you have correctly programmed a query or an analysis? The process of confirming that your analysis or dataset is “correct” is called validation.
 
-The graphs on [Data Visualizations from Best Tickets](https://web.archive.org/web/20200804101201/http://www.besttickets.com/blog/mlb-players-census/) show many other relationships that exist in baseball.
+Imagine you are new on the job and received the assignment to run queries on a baseball dataset. Confirming you did things correctly is a good idea before presenting your data to others and letting them discover your mistake. Or maybe, it isn’t a matter of you doing something wrong as just a realization that the data source is flawed. Making that discovery is very important and makes you look really good; as opposed to someone else discovering it later - which can be a big hit to your credibility.
+
+Consider all the various ways you might want to validate the query results. One way to validate, though certainly not the only way and not necessarily the best way, is to try to accomplish the same task in a different system or language. That’s the purpose of this assignment.
+
+This assignment may also help you connect how data wrangling is done in Python with a language you are already familiar with (SQL).
 
 
 ### Client Request
 
-For this project, the Client wants you to use SQL queries called from within Python. Then, save the query results and use use Lets-Plot charts to visualize the results.
+For this project, you will validate the assignments you have done previously, but this time using Python pandas code instead of complicated SQL queries. You will still need to connect to the database to pull the data in, but all the filtering, calculating, joining, etc. should be done with Python polars.
 
 
 ### Data
@@ -39,34 +43,34 @@ Complete these readings before we cover the material in class. This will help yo
 In other words, if an assignment is due on Wednesday, we will cover the material needed to complete the assignment on Tuesday. Therefore, you should complete the readings on Monday (or anytime before class on Tuesday).
 :::
 
-There are many [flavors of SQL](https://en.wikipedia.org/wiki/Database#Database_management_system) but most flavors have the same base commands. SQL queries are typed in the following pattern;
+Polars Cookbook
+- Chapter 1 Getting Started with Python Polars
+    - [Creating, modifying, and deleting columns](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-46)
+    - [Understanding method chaining](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-59)
+    - REVIEW [Selecting columns and filtering data](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-47)
+- Chapter 4 Data Transformation Techniques
+    - [Exploring basic aggregation](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_04.xhtml#_idParaDest-151)
+    - [using group by aggregation](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_04.xhtml#_idParaDest-158)
 
-```SQL
-SELECT -- <columns> and <column calculations>
-FROM -- <table name>
-  JOIN -- <table name>
-  ON -- <columns to join>
-WHERE -- <filter condition on rows>
-GROUP BY -- <subsets for column calculations>
-HAVING -- <filter conditions on groups>
-ORDER BY -- <how the output is returned in sequence>
-LIMIT -- <number of rows to return>
-```
+Optional/alternative reading:
 
-The reading for this task come from the Intermediate section of this excellent [SQL Guide](https://docs.data.world/documentation/sql/concepts/basic/intro.html). Read the following for this task:
+::: {.callout-note collapse="true"}
+Polars Definitive Guide
 
-   
-- [Joins](https://docs.data.world/documentation/sql/concepts/intermediate/Joins.html)
-- [CASE](https://docs.data.world/documentation/sql/concepts/intermediate/CASE.html)
-- [IN and NOT IN](https://docs.data.world/documentation/sql/concepts/intermediate/IN_and_NOT_IN.html)
+- [Chapter 10, Selecting and Creating Columns](https://learning.oreilly.com/library/view/python-polars-the/9781098156077/ch10.html) especially the Creating Columns section to the end
+- [Chapter 13, Summarizing and Aggregating](https://learning.oreilly.com/library/view/python-polars-the/9781098156077/ch13.html) (Advanced Methods section is optional)
+- REVIEW [Chapter 11, Filtering and Sorting Rows](https://learning.oreilly.com/library/view/python-polars-the/9781098156077/ch11.html)
+
+Polars User Guide, [Getting Started: Expressions and Context](https://docs.pola.rs/user-guide/getting-started/#expressions-and-contexts)
+:::
 
 ### Questions and Tasks
 
 Download the [Unit 2 Task 2 Template](../Templates/unit2_task2_template.qmd).
 
-1. __Write an SQL query to create a new dataframe about baseball players who attended BYU-Idaho. The new table should contain five columns: playerID, schoolID, salary, and the yearID/teamID associated with each salary. Order the table by salary (highest to lowest) and print out the table in your report.__
+1. __Write an SQL query that pulls in the batting table. Then, with Python Polars code create a dataframe that contains playerID, yearID, and batting average for players with at least 10 at bat that year. Sort the dataframe from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.__
 
-1. __Pick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Be creative! Write an SQL query to get the data you need, then make a graph using Lets-Plot to visualize the comparison. What do you learn?__ 
+1. __Write an SQL query that pulls in the batting table. Then, with Python Polars calculate the batting average for each player over their entire career (all years combined). Only include players with at least 100 at bats over their entire career. Sort the dataframe from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.__ 
 
 
 ### Submission:

@@ -1,7 +1,7 @@
 ---
-title: "Unit 2 Task 3: Longevity of Players"
-date: 2025-04-02T11:02:05+06:00
-lastmod: 2025-04-02T10:42:26+06:00
+title: "Unit 2 Task 3: Joins"
+date: 2025-10-27
+lastmod: 2025-10-27
 weight: 4
 draft: false
 # search related keywords
@@ -17,7 +17,7 @@ The graphs on [Data Visualizations from Best Tickets](https://web.archive.org/we
 
 ### Client Request
 
-For this project, the Client wants SQL queries that they can use to retrieve data for use on their website without needing Python. They would also like to see the results in Lets-Plot charts.
+For this project you will use Python Polars code to join (a.k.a. merge) tables and perform additional manipulations. You will still need to connect to the database to pull the data in, but all the filtering, calculating, joining, etc. should be done with Python Polars.
 
 
 ### Data
@@ -39,37 +39,24 @@ Complete these readings before we cover the material in class. This will help yo
 In other words, if an assignment is due on Wednesday, we will cover the material needed to complete the assignment on Tuesday. Therefore, you should complete the readings on Monday (or anytime before class on Tuesday).
 :::
 
-There are many [flavors of SQL](https://en.wikipedia.org/wiki/Database#Database_management_system) but most flavors have the same base commands. SQL queries are typed in the following pattern;
+[Polars User Guide, Joins](https://docs.pola.rs/user-guide/transformations/joins/) (we will only be doing equi joins. So, anything after the summaries of the various join strategies is optional).
 
-```SQL
-SELECT -- <columns> and <column calculations>
-FROM -- <table name>
-  JOIN -- <table name>
-  ON -- <columns to join>
-WHERE -- <filter condition on rows>
-GROUP BY -- <subsets for column calculations>
-HAVING -- <filter conditions on groups>
-ORDER BY -- <how the output is returned in sequence>
-LIMIT -- <number of rows to return>
-```
+Optional/Alternative Reading
 
-Reading you may find useful (depending on how you approach the assignment):
-   
-- [Inline subqueries](https://docs.data.world/documentation/sql/concepts/advanced/inline_subqueries.html)
-- [Dates/Times in SQLite](https://www.sqlite.org/lang_datefunc.html)
+::: {.callout-note collapse="true"}
+[Polars Definitive Guide, Chap 14, Joining and Concatenating](https://learning.oreilly.com/library/view/python-polars-the/9781098156077/ch14.html)
+
+[Polars Cookbook, Chap 8 Reshaping and Tidying Data, Joining DataFrames](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_08.xhtml#_idParaDest-282)
+
+:::
 
 ### Questions and Tasks
 
 Download the [Unit 2 Task 3 Template](../Templates/unit2_task3_template.qmd).
 
-1. Calculate the average career length for players who have played at least 10 games in their career. Use years as the unit of measure.
+1. Write an SQL query that pulls in the the salaries table and the collegeplaying table (and any other tables you might need) and store them in polars dataframes. Combine the dataframes to create a list of baseball players who attended BYU-Idaho. The new table should contain five columns: playerID, schoolID, salary, and the yearID and teamID associated with each salary.
 
-1. Identify the top 10 players with the longest careers (based on the number of years they played). Include their:
-
-    - playerID
-    - first_name
-    - last_name
-    - career_length
+1. Pick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Be creative! Write an SQL query to read in the table(s) you need, then use pandas to manipulate the data. Finally, make a graph using Lets-Plot to visualize the comparison. What do you learn?
 
 
 ### Submission:

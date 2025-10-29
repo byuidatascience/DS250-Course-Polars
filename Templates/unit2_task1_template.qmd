@@ -1,5 +1,5 @@
 ---
-title: "Client Report - BYU-Idaho Players and Comparing Teams"
+title: "Client Report - Batting Averages"
 subtitle: "Unit 2 Task 2"
 author: "[STUDENT NAME]"
 format:
@@ -25,8 +25,9 @@ execute:
     
 ---
 
+
 ```{python}
-import pandas as pd 
+import polars as pl
 import numpy as np
 import sqlite3
 from lets_plot import *
@@ -52,6 +53,15 @@ __Describe your results and analysis here_
 
 ```{python}
 # Include and execute your code here
+
+# The code below can serve as a template for all the rest of your queries. It is just missing the
+# SQL code. Put your SQL query in between the triple quotation marks to create the query. The records will be stored in 'results', which is a polars data frame
+
+q = """
+
+    """
+results = pl.read_database(q, con)
+results
 
 
 ```

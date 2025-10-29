@@ -1,7 +1,7 @@
 ---
 title: "Unit 2 Task 1: Batting Averages"
-date: 2025-04-02T11:02:05+06:00
-lastmod: 2025-04-02T10:42:26+06:00
+date: 2025-10-27
+lastmod: 2025-10-27
 weight: 4
 draft: false
 # search related keywords
@@ -48,6 +48,7 @@ Review the set-up instructions in preparation for class.
 
 [SQLite](/Setup/sql_setup.qmd) 
 
+Python Polars the Definitive Guide: Cahpter 6, [Querying Databases](https://learning.oreilly.com/library/view/python-polars-the/9781098156077/ch06.html#id70) section (e.g. Reading from an SQLite database).
 
 There are many [flavors of SQL](https://en.wikipedia.org/wiki/Database#Database_management_system) but most flavors have the same base commands. SQL queries are typed in the following pattern;
 
@@ -74,7 +75,9 @@ The reading for this task are from this excellent [SQL Guide](https://docs.data.
 
 #### Optional References
 
-- [Why SQL is beating NoSQL, and what this means for the future of data](https://blog.timescale.com/blog/why-sql-beating-nosql-what-this-means-for-future-of-data-time-series-database-348b777b847a/)  
+- [Why SQL is beating NoSQL, and what this means for the future of data](https://blog.timescale.com/blog/why-sql-beating-nosql-what-this-means-for-future-of-data-time-series-database-348b777b847a/)
+- [Polars Cookbook Chapter 2 Working with Databases](https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_02.xhtml#_idParaDest-110)
+- Polars Users Guide, [Databases](https://docs.pola.rs/user-guide/io/database/)
 
 
 ### Questions and Tasks

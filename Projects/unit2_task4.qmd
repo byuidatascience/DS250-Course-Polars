@@ -1,7 +1,7 @@
 ---
-title: "Unit 2 Task 4: Highest Paid Positions"
-date: 2025-04-02T11:02:05+06:00
-lastmod: 2025-04-02T10:42:26+06:00
+title: "Unit 2 Task 4: Longevity and Highest Paid Positions"
+date: 2025-10-27
+lastmod: 2025-10-27
 weight: 4
 draft: false
 # search related keywords
@@ -17,7 +17,7 @@ The graphs on [Data Visualizations from Best Tickets](https://web.archive.org/we
 
 ### Client Request
 
-For this project, the Client wants SQL queries that they can use to retrieve data for use on their website without needing Python. They would also like to see the results in Lets-Plot charts.
+You will need to connect to the database to pull the data in from the correct tables, but all the filtering, calculating, joining, etc. must be done with Python polars.
 
 
 ### Data
@@ -39,27 +39,18 @@ Complete these readings before we cover the material in class. This will help yo
 In other words, if an assignment is due on Wednesday, we will cover the material needed to complete the assignment on Tuesday. Therefore, you should complete the readings on Monday (or anytime before class on Tuesday).
 :::
 
-There are many [flavors of SQL](https://en.wikipedia.org/wiki/Database#Database_management_system) but most flavors have the same base commands. SQL queries are typed in the following pattern;
-
-```SQL
-SELECT -- <columns> and <column calculations>
-FROM -- <table name>
-  JOIN -- <table name>
-  ON -- <columns to join>
-WHERE -- <filter condition on rows>
-GROUP BY -- <subsets for column calculations>
-HAVING -- <filter conditions on groups>
-ORDER BY -- <how the output is returned in sequence>
-LIMIT -- <number of rows to return>
-```
-
-Reading you may find useful (depending on how you approach the assignment):
-   
-- [Inline subqueries](https://docs.data.world/documentation/sql/concepts/advanced/inline_subqueries.html)
-- [CASE](https://docs.data.world/documentation/sql/concepts/intermediate/CASE.html)
-- [WITH](https://docs.data.world/documentation/sql/concepts/advanced/WITH.html)
+The table(s) you choose to solve the problem with may lead you down different code paths and learning new skills. In order not to bias/lead you down one path or the other, no reading links are provided, but you may need to research and learn new Polars commands.
 
 ### Question 1
+
+Identify the top 10 players with the longest Major League Baseball careers. Include their:
+
+playerID
+first_name
+last_name
+career_length
+
+### Question 2
 
 - Write an SQL query that provides a summary table showing the average salary for each position (e.g., pitcher, catcher, outfielder). Position information can be found in the fielding table in the POS column.
 
@@ -80,7 +71,7 @@ The highest_salary column should display the highest salary ever earned by a pla
 
 - Order the table by average salary in descending order.
 
-__Hint__: Beware, it is common for a player to play multiple positions in a single year. For this analysis, each player’s salary should only be counted toward one position in a given year: the position at which they played the most games that year. This will likely require a (sub-query)
+__Hint__: Beware, it is common for a player to play multiple positions in a single year. For this analysis, each player’s salary should only be counted toward one position in a given year. (You get to determine how to decide which position to count it towards)
 
 ### Submission:
 ::: {.callout-note collapse="true"}

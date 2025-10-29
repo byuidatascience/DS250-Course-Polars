@@ -1,5 +1,5 @@
 ---
-title: "Client Report - Longevity of Baseball Players"
+title: "Client Report - Joins"
 subtitle: "Unit 2 Task 3"
 author: "[STUDENT NAME]"
 format:
@@ -26,7 +26,7 @@ execute:
 ---
 
 ```{python}
-import pandas as pd 
+import polars as pl
 import numpy as np
 import sqlite3
 from lets_plot import *
@@ -46,7 +46,7 @@ con = sqlite3.connect(sqlite_file)
 
 ## QUESTION 1
 
-__Calculate the average career length for players who have played at least 10 games in their career. Use years as the unit of measure.__
+__Write an SQL query that pulls in the the salaries table and the collegeplaying table (and any other tables you might need) and store them in polars dataframes. Combine the dataframes to create a list of baseball players who attended BYU-Idaho. The new table should contain five columns: playerID, schoolID, salary, and the yearID and teamID associated with each salary.__
 
 _type your results and analysis here_
 
@@ -59,12 +59,7 @@ _type your results and analysis here_
 
 ## QUESTION 2
 
-1. Identify the top 10 players with the longest careers (based on the number of years they played). Include their:
-
-    - playerID
-    - first_name
-    - last_name
-    - career_length
+1. Pick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Be creative! Write an SQL query to read in the table(s) you need, then use pandas to manipulate the data. Finally, make a graph using Lets-Plot to visualize the comparison. What do you learn?
 
 _Describe your results and analysis here_
 
