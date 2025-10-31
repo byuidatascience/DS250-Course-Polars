@@ -1,0 +1,170 @@
+
+
+This assignment will cover creating new columns and selecting existing columns.
+
+```{python}
+import polars as pl
+import numpy as pd
+from lets_plot import *
+
+LetsPlot.setup_html(isolated_frame=True)
+```
+
+```{python}
+df = pl.read_csv("https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv", ignore_errors=True)
+
+df
+```
+
+
+## Notes
+
+(one way to improve some of the results is to make them filter for their name + common nicknames or variations of their name so the chart looks more intersting and they get practice using more complicated filters)
+
+Select only the column states that you have lived in, then make a new total column for just those states. Make a graph displaying that total for your name over time.
+
+Random Ideas:
+* Side by side charts using gggrid
+* geom_smooth for prediction? loess seems to be a better fit. (may be a better idea closer to the ML modeling. Insteal of just doing three random scatterplots, try to have them find a linear model that looks like it has a strong correlation)
+* Perhaps we have some of the column names be incorrect and they have to use select/withcolumns/drop/rename to fix them? (it may be too similar to the star wars tho)
+
+## Idea 1
+
+```{python}
+q1 = df.filter(pl.col('name') == "Mitchell").select([
+    'name',
+    'year',
+    'UT',
+    'ID',
+    'OH',
+    (pl.col('UT') + pl.col('ID') + pl.col('OH')).alias('mytotal')
+]
+)
+
+mitchell = df.filter(pl.col('name') == "Mitchell")
+
+q1.head()
+```
+
+
+```{python}
+plot1 = (
+    ggplot(q1, aes(x='year', y='mytotal'))
+    + geom_line()
+    + geom_smooth(method='loess', se=False)
+    + geom_smooth(method='lm', se=False, color='green')
+)
+
+plot1
+```
+
+(maybe an idea?)
+Compare your state total graph to the usa graph. How does it compare?
+
+```{python}
+plot2 = (
+    ggplot(mitchell, aes(x='year', y='Total'))
+    + geom_line()
+    + geom_smooth(method='loess', se=False)
+    + geom_smooth(method='lm', se=False, color='green')
+)
+
+plot2
+```
+
+Wow! So similar in shape
+```{python}
+combined = gggrid([plot1, plot2], ncol=2)
+combined
+```
+
+
+## Idea 2
+
+Have them create a new column that uses Total - multiple columns. Or we could do something like a scenario "Oh no! a software bug in the west coast made Washington, Oregon, and California be counted twice in the total column. Make a new total column that correcrts this mistake. After making a new total column, check difference between the two charts and fill it in using a geom_ribben()."
+
+
+```{python}
+q2 = df.with_columns(
+    (pl.col('Total') - pl.col('OR') - pl.col('WA') -pl.col('CA')).alias('new_Total')
+).filter(pl.col('name') == 'Mitchell')
+
+q2
+```
+
+What years seem to have the largest distance between new_Total and Total (Hint, make a new column and sort the results)
+
+```{python}
+q2 = q2.with_columns(
+    (pl.col('Total') - pl.col('new_Total')).alias('mistake_margin')
+).sort('mistake_margin', descending=True, nulls_last=True)
+
+q2.head()
+```
+
+```{python}
+
+plot = (
+    ggplot(q2, aes(x='year'))
+    + geom_ribbon(aes(ymin='new_Total', ymax='Total'), fill='lightblue', alpha=0.4)
+    + geom_line(aes(y='new_Total'))
+    + geom_line(aes(y='Total'))
+    + geom_vline(xintercept=1994, color ='darkred', linetype='dashed')
+    + geom_text(x=1994, y=1000, label='701 Difference', nudge_x=-2, angle=90)
+)
+plot
+
+
+```
+
+## Idea 3
+
+Choose the 10 states you believe have the highest populations and selct them, the year, name and Total column. Find the proportion of the total babies named that comes from those 10 states.
+
+
+```{python}
+q3 = df.filter(pl.col('name') == "Mitchell").select([
+    'year',
+    'name',
+    'Total',
+    (pl.col('CA') + pl.col('TX')+ pl.col('FL') +pl.col('NY')+ pl.col('PA') +pl.col('IL') +pl.col('OH') +pl.col('GA') +pl.col('NC') +pl.col('MI')).alias('pop_total')]
+).with_columns((pl.col('pop_total') / pl.col('Total')).alias('prop'))
+
+q3.sort('prop', descending=True, nulls_last=True)
+```
+
+
+Dang. The high population states lost their Mitchell Monopoly
+```{python}
+plot = (
+    ggplot(q3, aes(x='year', y='prop'))
+    + geom_line()
+)
+
+plot
+```
+
+
+
+I did your name too
+
+```{python}
+q32 = df.filter(pl.col('name') == "David").select([
+    'year',
+    'name',
+    'Total',
+    (pl.col('CA') + pl.col('TX')+ pl.col('FL') +pl.col('NY')+ pl.col('PA') +pl.col('IL') +pl.col('OH') +pl.col('GA') +pl.col('NC') +pl.col('MI')).alias('pop_total')]
+).with_columns((pl.col('pop_total') / pl.col('Total')).alias('prop'))
+
+q32.sort('prop', descending=True, nulls_last=True)
+```
+
+
+```{python}
+plot = (
+    ggplot(q32, aes(x='year', y='prop'))
+    + geom_line()
+)
+
+plot
+```
