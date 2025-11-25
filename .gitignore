@@ -1,9 +1,0 @@
-/.quarto/
-/_site/
-*.ipynb
-*.html
-*.css
-**/Archive/
-/_Archived Items
-
-**/*.quarto_ipynb

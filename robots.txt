@@ -1,0 +1,1 @@
+Sitemap: https://byuidatascience.github.io/DS250-Course-Polars/sitemap.xml

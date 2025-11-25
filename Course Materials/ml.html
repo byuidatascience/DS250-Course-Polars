@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-05-01">
+
+<title>Machine Learning – DS 250</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Images/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-47a2569239650a328465399e13938bea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-52a40c8f424a6d1e268fe027cedb2c07.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-47a2569239650a328465399e13938bea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">DS 250</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../setup.html"> 
+<span class="menu-text">Setup</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../Projects/project_0_dp.html"> 
+<span class="menu-text">Unit 0 Set-up Check</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-1-graphing" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 1 Graphing</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-1-graphing">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-2-flights" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 2 Flights</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-2-flights">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-3-databaseball" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 3 DataBaseBall</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-3-databaseball">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-4-ml" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 4 ML</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-4-ml">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-5-ml-prep" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 5 ML Prep</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-5-ml-prep">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../Projects/unit6.html"> 
+<span class="menu-text">GitHub Task</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../faq.html"> 
+<span class="menu-text">FAQ</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Course Materials/ml.html">Machine Learning (ML)</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../materials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Materials</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Course Materials/vs_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">VS Code</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Course Materials/lets_plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lets Plot</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Course Materials/python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python for Data Science</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Course Materials/sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SQLite</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Course Materials/ml.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Machine Learning (ML)</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Course Materials/git_pull_merge.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GitHub - Pull and Merge Forks</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#moravecs-paradox" id="toc-moravecs-paradox" class="nav-link" data-scroll-target="#moravecs-paradox">MORAVEC’S PARADOX</a></li>
+  <li><a href="#prediction-vs.-inference" id="toc-prediction-vs.-inference" class="nav-link" data-scroll-target="#prediction-vs.-inference">PREDICTION VS. INFERENCE</a></li>
+  <li><a href="#classification-algorithms" id="toc-classification-algorithms" class="nav-link" data-scroll-target="#classification-algorithms">Classification Algorithms</a></li>
+  <li><a href="#the-iris-dataset" id="toc-the-iris-dataset" class="nav-link" data-scroll-target="#the-iris-dataset">The Iris Dataset</a></li>
+  <li><a href="#classifiers" id="toc-classifiers" class="nav-link" data-scroll-target="#classifiers">Classifiers</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">REFERENCES</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Machine Learning</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 1, 2020</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>Everyone seems to have a slightly different take on the differences between Artificial Intelligence, Machine Learning, and Data Science. The following four articles cover some of the most common definitions.</p>
+<p>As you read them, think about the differences and similarities of the definitions. Given the backgrounds of the various authors, whose opinions might you give more weight to?</p>
+<ul>
+<li><a href="https://blogs.nvidia.com/blog/2016/07/29/whats-difference-artificial-intelligence-machine-learning-deep-learning-ai/">Michael Copeland writing for NVidia</a></li>
+<li><a href="https://www.forbes.com/sites/bernardmarr/2016/12/08/what-is-the-difference-between-deep-learning-machine-learning-and-ai/#78654ee526cf">Bernard Marr writing for Forbes</a></li>
+<li><a href="http://www.datasciencecentral.com/profiles/blogs/difference-between-machine-learning-data-science-ai-deep-learning">Vincent Granville writing for Data Science Central</a></li>
+<li><a href="http://simplystatistics.org/2013/12/12/the-key-word-in-data-science-is-not-data-it-is-science/">Simply Statistics Blog - The key word in “Data Science” is not Data, it is Science</a></li>
+</ul>
+<p>Of particular note is this quote from the Granville article:</p>
+<blockquote class="blockquote">
+<p>Earlier in my career (circa 1990) I worked on image remote sensing technology, among other things to identify patterns (or shapes or features, for instance lakes) in satellite images and to perform image segmentation: at that time my research was labeled as computational statistics, but the people doing the exact same thing in the computer science department next door in my home university, called their research artificial intelligence. Today, it would be called data science or artificial intelligence, the sub-domains being signal processing, computer vision or IoT.</p>
+</blockquote>
+<p>As with most things in the realm of science, there tends to be a wide gap between how the media, government, and business sectors view a particular technology compared to how it’s viewed by the engineers and scientists using that technology.</p>
+<p>For our purposes in this course, we’ll define these terms as follows:</p>
+<blockquote class="blockquote">
+<p><strong>Artificial Intelligence</strong>: The study of man-made “agents” that perceive their environment and take actions that maximize their chances of success at some goal.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p><strong>Machine Learning</strong>: A subfield within Artificial Intelligence that gives “computers the ability to learn without being explicitly programmed.”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><strong>Data Science</strong>: The study and use of the techniques, statistics, algorithms, and tools needed to extract knowledge and insights from data.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+</blockquote>
+</section>
+<section id="moravecs-paradox" class="level3">
+<h3 class="anchored" data-anchor-id="moravecs-paradox">MORAVEC’S PARADOX</h3>
+<p>In the 1980’s, Hans Moravec made the following observation, which came to be known as Moravec’s Paradox:</p>
+<blockquote class="blockquote">
+<p>…as the number of demonstrations has mounted, it has become clear that it is comparatively easy to make computers exhibit adult-level performance in solving problems on intelligence tests or playing checkers, and difficult or impossible to give them the skills of a one-year-old when it comes to perception and mobility.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+</blockquote>
+<p>So, while AI and machine learning algorithms can accomplish many tasks much better than humans can, any toddler can outperform even the most state-of-the-art neural network in picking out photos of their parents or pet cat.</p>
+<p><img src="https://imgs.xkcd.com/comics/tasks.png" class="img-fluid" alt="decorative comic"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p>Even though Moravec wrote about this over thirty years ago, the same sentiment persists in AI research today. In a 2016 interview, Dr.&nbsp;Sean Holden an AI researcher at Cambridge University, discussed the differences between human intelligence and artificial intelligence:</p>
+<blockquote class="blockquote">
+<p>“Most AI researchers don’t try to solve the whole problem because it’s too hard. They take some specific problem and do it better. That’s not to say that the way humans think isn’t useful to AI, but working out how brains do things is hard. And there’s a difference in scale. Brains are doing things that are in some senses quite different from what AI researchers are currently attacking – I’d be ecstatic, for example, if I could build a robot that could put on a duvet cover.”<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+</blockquote>
+<p>Dr.&nbsp;Fumiya Iida, from the Machine Intelligence Lab at Cambridge, adds:</p>
+<blockquote class="blockquote">
+<p>“We have hundreds of thousands of muscles in our body, so how can the brain control this? A computer can’t. Every fraction of a second you have to co-ordinate hundreds of muscles just to grab a cup, for example.”<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+</blockquote>
+</section>
+<section id="prediction-vs.-inference" class="level3">
+<h3 class="anchored" data-anchor-id="prediction-vs.-inference">PREDICTION VS. INFERENCE</h3>
+<p>In machine learning, we are typically interested in doing one of two things: making inferences, or making predictions.</p>
+<blockquote class="blockquote">
+<p><strong>Inference</strong>: Given a set of data you want to infer how the output is generated as a function of the data.</p>
+<p><strong>Prediction</strong>: Given a new measurement, you want to use an existing data set to build a model that reliably chooses the correct identifier from a set of outcomes.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+</blockquote>
+<p>This example explains the differences between those two goals:</p>
+<blockquote class="blockquote">
+<p><strong>Inference</strong>: You want to find out what the effect of Age, Passenger Class and, Gender has on surviving the Titanic Disaster. You can put up a logistic regression and infer the effect each passenger characteristic has on survival rates.</p>
+<p><strong>Prediction</strong>: Given some information on a Titanic passenger, you want to choose from the set <em>{lives,dies}</em> and be correct as often as possible.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+</blockquote>
+</section>
+<section id="classification-algorithms" class="level3">
+<h3 class="anchored" data-anchor-id="classification-algorithms">Classification Algorithms</h3>
+<p>Imagine that you’re a big fan of comic books. Over the years, you’ve read enough Marvel and DC comics that if I asked you to “classify” which universe Superman belonged to, you’d be able to confidently say, “The DC Universe”.</p>
+<p>Or, let’s say you’ve eaten a lot of chocolate in your life. If I were to have you close your eyes and take a bite of chocolate, you might be able to accurately tell me if it was white chocolate, milk chocolate, semi-sweet, or dark.</p>
+<p>These are both classification problems. Based on your prior knowledge or <em>training</em> regarding different groups, you can take an item and sort it into the correct group.</p>
+<p>In machine learning, classification algorithms, (or classifiers), need to be trained before they can classify things on their own. We can train an algorithm by providing it with lots of examples from each group and telling it which attributes of those samples are important. The more examples we use to train our algorithm, the more accurate the classification of new items will be.</p>
+<p>In the example below, we’re telling the algorithm “this is what a <em>blue</em> circle looks like”, or “this is what a <em>green</em> circle looks like”, etc…</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Images/train.png" class="img-fluid figure-img"></p>
+<figcaption>img</figcaption>
+</figure>
+</div>
+<p>Once an algorithm has been trained, we can see how well it performs by providing it with test data consisting of new items it hasn’t seen yet, and checking to see if it can correctly predict which group the new items belong to.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Images/test.png" class="img-fluid figure-img"></p>
+<figcaption>img</figcaption>
+</figure>
+</div>
+</section>
+<section id="the-iris-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="the-iris-dataset">The Iris Dataset</h3>
+<section id="about-the-data" class="level4">
+<h4 class="anchored" data-anchor-id="about-the-data">ABOUT THE DATA</h4>
+<p>For this example, we will use <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Fisher’s Iris Data</a>.</p>
+<p>The Iris dataset contains the length and width of the sepals and petals from 150 iris flowers across three different species of iris: <a href="https://en.wikipedia.org/wiki/Iris_setosa"><em>Iris setosa</em></a>, <a href="https://en.wikipedia.org/wiki/Iris_versicolor"><em>Iris versicolor</em></a>, and <a href="https://en.wikipedia.org/wiki/Iris_virginica"><em>Iris virginica</em></a>.</p>
+<p>Each row in the Iris dataset represents the measurements of a single flower. We refer to each of these as a <code>sample</code>, <code>observation</code>, or <code>instance</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Images/iris.png" class="img-fluid figure-img"></p>
+<figcaption>img</figcaption>
+</figure>
+</div>
+<p>Each column in the Iris dataset represents a particular thing being measured about each flower. From left to right we have (in centimeters) the sepal length, the sepal width, the petal length, and the petal width. Each of these is referred to as a <code>feature</code>, <code>attribute</code>, <code>measurement</code>, or <code>dimension</code>.</p>
+<p>The final column in the dataset is the species of the flower. This final column is often referred to as the <code>target</code> or <code>class</code> of the sample.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Images/iris_description.png" class="img-fluid figure-img"></p>
+<figcaption>img</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="classifiers" class="level3">
+<h3 class="anchored" data-anchor-id="classifiers">Classifiers</h3>
+<p>Classifier algorithms generally follow the same set of steps. Our goal is to create a classifier that can be provided with the measurements of petals and sepals, and then use that information to predict the species of iris flower we’re measuring.</p>
+<section id="load-data" class="level4">
+<h4 class="anchored" data-anchor-id="load-data">Load data</h4>
+<p>The first thing we need to do is load our data. In most cases, there is some pre-processing that has to be done on the data in order to get it to the point where we can start working with it. Often you will need to normalize and encode variables.</p>
+<ul>
+<li><a href="https://sebastianraschka.com/Articles/2014_about_feature_scaling.html">Normalization reading</a></li>
+<li><a href="https://pbpython.com/categorical-encoding.html">Encoding reading</a></li>
+</ul>
+<!-- https://byui-cs.github.io/cs450-course/week03/prepare.html   -->
+<p>In this case however, the data is provided to you in the exact format you need:</p>
+<pre><code>     sepal_length  sepal_width  petal_length  petal_width         species
+0             5.1          3.5           1.4          0.2     Iris-setosa
+1             4.9          3.0           1.4          0.2     Iris-setosa
+2             4.7          3.2           1.3          0.2     Iris-setosa
+3             4.6          3.1           1.5          0.2     Iris-setosa
+4             5.0          3.6           1.4          0.2     Iris-setosa
+..            ...          ...           ...          ...             ...
+145           6.7          3.0           5.2          2.3  Iris-virginica
+146           6.3          2.5           5.0          1.9  Iris-virginica
+147           6.5          3.0           5.2          2.0  Iris-virginica
+148           6.2          3.4           5.4          2.3  Iris-virginica
+149           5.9          3.0           5.1          1.8  Iris-virginica
+ </code></pre>
+<p>The <em>csv</em> file for the iris data <a href="iris.csv">can be found here</a>. There are many ways to load data from a csv file, but one handy way is to use the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html">read_csv function from the Pandas library:</a></p>
+<pre><code>import pandas as pd
+url = "https://byuistats.github.io/DS250-Course/skill_builders/ml_sklearn/machine_learning.csv"
+data = pd.read_csv(url)</code></pre>
+</section>
+<section id="split-data" class="level4">
+<h4 class="anchored" data-anchor-id="split-data">Split data</h4>
+<p>Next, we’ll randomly divide all of the samples into two groups. The first group will consist of our <code>training data</code>, or the samples we’ll use to train our classifier. The second group will consist of our <code>test data</code>, the data we’ll use to test our classifier.</p>
+<p>There are many ways to do this, but if have our features (sepal and petal measurements) and targets (species names) in separate arrays, we can use the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html?highlight=train_test_split#sklearn.model_selection.train_test_split">train_test_split function of the sklearn library</a> to do this for us:</p>
+<p>Note, that if you use pandas to load the csv file, you’ll have the data in a single pandas Data Frame. At some point you’ll need to split that data frame into two numpy arrays, one containing the features, and the other containing the targets.</p>
+<p>Take a look at the <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html">Indexing and Selecting Data</a> page in the Pandas user guide for more details and splitting the data, and the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_numpy.html">to_numpy function</a> for converting to a numpy array.</p>
+<p>Notice the transformation can be completed before the data is divided into test and training sets. Two numpy arrays can be passed to the <code>train_test_split</code> function to get two sets of arrays back. Alternatively, the data frame can be passed to the <code>test_train_split</code>, and then the test and training data is split into their feature and target components.</p>
+<p>The following examples assume you’ve split the data into features and targets before passing it to <code>test_train_split</code>.</p>
+<pre><code>from sklearn.model_selection import train_test_split
+
+# features = ... select the feature columns from the data frame
+# targets = ... select the target column from the data frame
+
+# Randomize and split the samples into two groups. 
+# 30% of the samples will be used for testing.
+# The other 70% will be used for training.
+
+train_data, test_data, train_targets, test_targets = train_test_split(features, targets, test_size=.3)</code></pre>
+<p>You could also use python’s built in libraries to randomly shuffle the data, and then use array slicing to split the data into test and training subsets. However if you do, make sure you do it in such a way that you still know which species goes with each set of measurements.</p>
+</section>
+<section id="train-classifier" class="level4">
+<h4 class="anchored" data-anchor-id="train-classifier">Train classifier</h4>
+<p>By providing the algorithm with training data, we allow it to create relationships between the features of a sample and its class. In the case of the Iris data set, we’re training our algorithm on how a given set of sepal and petal measurements correlate to the flower’s species.</p>
+<p>sklearn has a classifier called <a href="https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html">GaussianNB</a> which we can use to demonstrate this. GaussianNB is a “Naïve Bayes” classifier that assumes two things about our data:</p>
+<blockquote class="blockquote">
+<ul>
+<li>That the underlying features follow a continuous, normal distribution. (The Gaussian part)</li>
+<li>That each feature is statistically independent of every other feature. (The Naïve part)</li>
+</ul>
+</blockquote>
+<p><strong>Do you think both of these assumptions are true for the Iris data?</strong></p>
+<p>To train our classifier, first we create an instance of it, then we use the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB.fit">fit</a> method to teach it about our data:</p>
+<pre><code>from sklearn.naive_bayes import GaussianNB
+classifier = GaussianNB()
+classifier.fit(train_data, train_targets)
+</code></pre>
+</section>
+<section id="test-classifier" class="level4">
+<h4 class="anchored" data-anchor-id="test-classifier">Test classifier</h4>
+<p>Now that our classifier has been trained on how to classify iris flowers, it’s time to test it to see if it can correctly predict the species of flower from a set of measurements.</p>
+<p>Note that it’s very important when testing our algorithm that we only test it on data that was not used to train it. Otherwise, we’re only testing it’s ability to remember training data. This is why we split the data into two groups.</p>
+<p>To test our classifier, we’ll use the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB.predict">predict method</a> and provide it with our test data. This method will return a list of predicted targets, one for each sample in the test data.</p>
+<p>In our case, we’ll give it a list of petal and sepal measurements it has never seen before, and it will return a list of species predictions, on prediction for each sample in our test data:</p>
+<pre><code>targets_predicted = classifier.predict(test_data)</code></pre>
+</section>
+<section id="assess-classifier-performance" class="level4">
+<h4 class="anchored" data-anchor-id="assess-classifier-performance">Assess classifier performance</h4>
+<p>Since we already know which type of iris each sample in the test data corresponds to, we can compare the predictions made by the classifier to the sample’s actual species and calculate how well our algorithm performs.</p>
+<p>If <em>m</em> is the number of correct predictions made, and <em>n</em> is the total number of samples in our test data, then accuracy can be calculated as:</p>
+<p>accuracy = m/n</p>
+<p>So if our test data has 20 samples and the classifier predicts the correct flower species for 15 of them, then we would say our algorithm has an <em>accuracy</em> of 75%.</p>
+<p><strong>(Note that <em>accuracy</em> isn’t the best metric to use for evaluating classification algorithms. We’ll be looking at a few alternatives in the future.)</strong></p>
+</section>
+<section id="summary" class="level4">
+<h4 class="anchored" data-anchor-id="summary">Summary</h4>
+<p>To summarize: we take our dataset and divide it in two parts: training data and test data. We use the training data to train the classifier to make classifications, then we use the test data to test how well our classifier performs.</p>
+<p>If we have a classifier that performs well, we can use it with new data, samples whose groups we don’t know ahead of time, and the accuracy metric will give us some idea of how reliable those predictions are.</p>
+<p>If our classifier performs poorly, we either need to provide it with more training data, modify or replace it, or select a different set of attributes to use as features.</p>
+<p><a href="https://byui-cs.github.io/cs450-course/">CSE 450: Machine Learning &amp; Data Mining</a> is the class were you can build depth in Machine Learning and it’s applications.</p>
+</section>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">REFERENCES</h3>
+
+
+</section>
+
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><a href="http://aima.cs.berkeley.edu/">Artificial Intelligence: A Modern Approach by Russell and Norvig (Prentice Hall, 2009)</a>.<a href="https://byui-cs.github.io/cs450-course/week01/prepare.html#footnote-1-ref">↩︎</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.368.2254&amp;rep=rep1&amp;type=pdf">Some Studies in Machine Learning Using the Game of Checkers, by Arthur L. Samuel (IBM Journal, Vol 3, No 3, 1959)</a>.<a href="https://byui-cs.github.io/cs450-course/week01/prepare.html#footnote-2-ref">↩︎</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://en.wikipedia.org/wiki/Data_science">Wikipedia article on Data Science</a>.<a href="https://byui-cs.github.io/cs450-course/week01/prepare.html#footnote-3-ref">↩︎</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="http://www.hup.harvard.edu/catalog.php?isbn=9780674576186&amp;content=reviews">Mind Children, by Hans Moravec (Harvard University Press, 1988)</a>.<a href="https://byui-cs.github.io/cs450-course/week01/prepare.html#footnote-4-ref">↩︎</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><a href="https://xkcd.com/1425/">XKCD 1425: Tasks</a>.<a href="https://byui-cs.github.io/cs450-course/week01/prepare.html#footnote-5-ref">↩︎</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><a href="https://www.alumni.cam.ac.uk/magazine/cam-79">Cambridge Alumni Magazine, Issue 79, pg 19.</a><a href="https://byui-cs.github.io/cs450-course/week01/prepare.html#footnote-6-ref">↩︎</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><a href="https://www.alumni.cam.ac.uk/magazine/cam-79">Cambridge Alumni Magazine, Issue 79, pg 19.</a><a href="https://byui-cs.github.io/cs450-course/week01/prepare.html#footnote-6-ref">↩︎</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p><a href="https://stats.stackexchange.com/a/244021">Cross Validated: Prediction vs Inference</a>.<a href="https://byui-cs.github.io/cs450-course/week01/prepare.html#footnote-7-ref">↩︎</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p><a href="https://stats.stackexchange.com/a/244021">Cross Validated: Prediction vs Inference</a>.<a href="https://byui-cs.github.io/cs450-course/week01/prepare.html#footnote-7-ref">↩︎</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/byuidatascience\.github\.io\/DS250-Course-Polars\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>BYU-I 2025©</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/byuidatascience">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/groups/13537407/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

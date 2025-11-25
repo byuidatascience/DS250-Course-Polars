@@ -1,0 +1,2828 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>unit2_task1_conditionallogic – DS 250</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Images/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-47a2569239650a328465399e13938bea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-52a40c8f424a6d1e268fe027cedb2c07.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-47a2569239650a328465399e13938bea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">DS 250</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../setup.html"> 
+<span class="menu-text">Setup</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../Projects/project_0_dp.html"> 
+<span class="menu-text">Unit 0 Set-up Check</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-1-graphing" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 1 Graphing</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-1-graphing">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-2-flights" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 2 Flights</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-2-flights">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-3-databaseball" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 3 DataBaseBall</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-3-databaseball">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-4-ml" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 4 ML</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-4-ml">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-5-ml-prep" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 5 ML Prep</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-5-ml-prep">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../Projects/unit6.html"> 
+<span class="menu-text">GitHub Task</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../faq.html"> 
+<span class="menu-text">FAQ</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#idea-1" id="toc-idea-1" class="nav-link active" data-scroll-target="#idea-1">Idea 1</a></li>
+  <li><a href="#idea-2" id="toc-idea-2" class="nav-link" data-scroll-target="#idea-2">Idea 2</a></li>
+  <li><a href="#expression-expansion-idea" id="toc-expression-expansion-idea" class="nav-link" data-scroll-target="#expression-expansion-idea">Expression Expansion Idea</a>
+  <ul class="collapse">
+  <li><a href="#idea-1-1" id="toc-idea-1-1" class="nav-link" data-scroll-target="#idea-1-1">Idea 1</a></li>
+  <li><a href="#idea-2-1" id="toc-idea-2-1" class="nav-link" data-scroll-target="#idea-2-1">Idea 2</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<div id="08189e77" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lets_plot <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html(isolated_frame<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="9f0da21e" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I guess the read_json function is a little picky and it likes having the files be a local path. We can use the io package to essentially do the same thing a tempfile does in 350</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/byuidatascience/data4missing/master/data-raw/flights_missing/flights_missing.json"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_json(io.BytesIO(response.content))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>At this point the students don’t know how to clean the data so we need to avoid anything that would clean it.</p>
+<p>Ideas:</p>
+<div id="369c6b85" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (9, 18)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">statistic</th>
+<th data-quarto-table-cell-role="th">airport_code</th>
+<th data-quarto-table-cell-role="th">airport_name</th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">num_of_flights_total</th>
+<th data-quarto-table-cell-role="th">num_of_delays_carrier</th>
+<th data-quarto-table-cell-role="th">num_of_delays_late_aircraft</th>
+<th data-quarto-table-cell-role="th">num_of_delays_nas</th>
+<th data-quarto-table-cell-role="th">num_of_delays_security</th>
+<th data-quarto-table-cell-role="th">num_of_delays_weather</th>
+<th data-quarto-table-cell-role="th">num_of_delays_total</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_carrier</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_late_aircraft</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_nas</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_security</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_weather</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_total</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"count"</td>
+<td>"924"</td>
+<td>"924"</td>
+<td>"924"</td>
+<td>901.0</td>
+<td>924.0</td>
+<td>"924"</td>
+<td>924.0</td>
+<td>924.0</td>
+<td>924.0</td>
+<td>924.0</td>
+<td>924.0</td>
+<td>872.0</td>
+<td>924.0</td>
+<td>893.0</td>
+<td>924.0</td>
+<td>924.0</td>
+<td>924.0</td>
+</tr>
+<tr class="even">
+<td>"null_count"</td>
+<td>"0"</td>
+<td>"0"</td>
+<td>"0"</td>
+<td>23.0</td>
+<td>0.0</td>
+<td>"0"</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>52.0</td>
+<td>0.0</td>
+<td>31.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td>"mean"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>2010.0</td>
+<td>16607.544372</td>
+<td>null</td>
+<td>1017.844156</td>
+<td>1376.467532</td>
+<td>5.417749</td>
+<td>100.971861</td>
+<td>3437.391775</td>
+<td>51902.25344</td>
+<td>75511.96645</td>
+<td>70057.12318</td>
+<td>216.735931</td>
+<td>8353.722944</td>
+<td>206436.175325</td>
+</tr>
+<tr class="even">
+<td>"std"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>3.170699</td>
+<td>9868.315498</td>
+<td>null</td>
+<td>853.942405</td>
+<td>1348.719957</td>
+<td>5.414833</td>
+<td>103.584998</td>
+<td>2561.922043</td>
+<td>37085.043011</td>
+<td>58110.787045</td>
+<td>85937.281155</td>
+<td>274.848647</td>
+<td>9164.925368</td>
+<td>176132.914461</td>
+</tr>
+<tr class="odd">
+<td>"min"</td>
+<td>"ATL"</td>
+<td>""</td>
+<td>"April"</td>
+<td>2005.0</td>
+<td>2684.0</td>
+<td>"1000"</td>
+<td>-999.0</td>
+<td>61.0</td>
+<td>0.0</td>
+<td>3.0</td>
+<td>320.0</td>
+<td>6065.0</td>
+<td>6199.0</td>
+<td>-999.0</td>
+<td>0.0</td>
+<td>294.0</td>
+<td>18872.0</td>
+</tr>
+<tr class="even">
+<td>"25%"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>2007.0</td>
+<td>8031.0</td>
+<td>null</td>
+<td>489.0</td>
+<td>358.0</td>
+<td>2.0</td>
+<td>35.0</td>
+<td>1390.0</td>
+<td>23839.0</td>
+<td>30428.0</td>
+<td>12422.0</td>
+<td>68.0</td>
+<td>2431.0</td>
+<td>71224.0</td>
+</tr>
+<tr class="odd">
+<td>"50%"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>2010.0</td>
+<td>12557.0</td>
+<td>null</td>
+<td>804.0</td>
+<td>965.0</td>
+<td>4.0</td>
+<td>66.0</td>
+<td>2811.0</td>
+<td>38909.0</td>
+<td>58533.0</td>
+<td>35660.0</td>
+<td>150.0</td>
+<td>4912.0</td>
+<td>151636.0</td>
+</tr>
+<tr class="even">
+<td>"75%"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>2013.0</td>
+<td>25568.0</td>
+<td>null</td>
+<td>1473.0</td>
+<td>1866.0</td>
+<td>7.0</td>
+<td>129.0</td>
+<td>4714.0</td>
+<td>73579.0</td>
+<td>104003.0</td>
+<td>95299.0</td>
+<td>274.0</td>
+<td>10679.0</td>
+<td>287075.0</td>
+</tr>
+<tr class="odd">
+<td>"max"</td>
+<td>"SLC"</td>
+<td>"Washington, DC: Washington Dul…</td>
+<td>"n/a"</td>
+<td>2015.0</td>
+<td>38241.0</td>
+<td>"998"</td>
+<td>3969.0</td>
+<td>8704.0</td>
+<td>64.0</td>
+<td>812.0</td>
+<td>13699.0</td>
+<td>220796.0</td>
+<td>345456.0</td>
+<td>574857.0</td>
+<td>4949.0</td>
+<td>76770.0</td>
+<td>989367.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<section id="idea-1" class="level2">
+<h2 class="anchored" data-anchor-id="idea-1">Idea 1</h2>
+<p>We can try to use the same question about finding the true weather delays, the only issue is that they don’t know how to clean the data yet and num_late_aircraft has missing values in the form of -999. We can either choose a different column or just ignore it for now with a clever use of otherwise.</p>
+<p>The code is in section 2</p>
+</section>
+<section id="idea-2" class="level2">
+<h2 class="anchored" data-anchor-id="idea-2">Idea 2</h2>
+<p>I think it would be a good idea to ahve them make a boxplot for this assignemnt. We can have them do it based off months, or by seasons fairly easily.</p>
+<p>I have two ideas, we can either have them make a new column with the when().then().otherwise() logic and then plot that in their boxplots, or we can make seasons. Or we can do both so they have to use the conditional statements twice in one question.</p>
+<p>We need to include something in the reading about pl.lit and how it means we want to use a string and we are not referring to a column.</p>
+<p>Another idea for this assignment is that instead of having them fill the na values, they have to use filter to avoid them and they realize how annoying inconsistent na values can be &gt;:).</p>
+<div id="74c516b3" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>q2 <span class="op">=</span> df.<span class="bu">filter</span>(pl.col(<span class="st">'month'</span>) <span class="op">!=</span>  <span class="st">'n/a'</span>).with_columns([</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    pl.when(pl.col(<span class="st">'month'</span>).is_in([<span class="st">'January'</span>, <span class="st">'Febuary'</span>, <span class="st">'March'</span>]))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    .then(pl.lit(<span class="st">'Winter'</span>))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    .when(pl.col(<span class="st">'month'</span>).is_in([<span class="st">'April'</span>, <span class="st">'May'</span>, <span class="st">'June'</span>]))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    .then(pl.lit(<span class="st">'Spring'</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    .when(pl.col(<span class="st">'month'</span>).is_in([<span class="st">'July'</span>, <span class="st">'August'</span>, <span class="st">'September'</span>]))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    .then(pl.lit(<span class="st">'Summer'</span>))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    .when(pl.col(<span class="st">'month'</span>).is_in([<span class="st">'October'</span>, <span class="st">'November'</span>, <span class="st">'December'</span>]))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    .then(pl.lit(<span class="st">'Fall'</span>))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    .otherwise(pl.lit(<span class="st">'Unknown'</span>)).alias(<span class="st">'season'</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>q2 <span class="op">=</span> q2.<span class="bu">filter</span>(pl.col(<span class="st">'num_of_delays_late_aircraft'</span>) <span class="op">!=</span> <span class="op">-</span><span class="dv">999</span>).with_columns([</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    ( pl.col(<span class="st">'num_of_delays_late_aircraft'</span>)<span class="op">*</span><span class="fl">.3</span> </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span>pl.col(<span class="st">'num_of_delays_weather'</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span>pl.when(pl.col(<span class="st">'month'</span>).is_in([<span class="st">'April'</span>, <span class="st">'May'</span>, <span class="st">'June'</span>, <span class="st">'July'</span>, <span class="st">'August'</span>])).then(pl.col(<span class="st">'num_of_delays_nas'</span>)<span class="op">*</span><span class="fl">.4</span>).otherwise(pl.col(<span class="st">'num_of_delays_nas'</span>)<span class="op">*</span><span class="fl">.65</span>))</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    .alias(<span class="st">'new_weather'</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="f83c6dee" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>q2.group_by(<span class="st">'month'</span>).count().to_pandas()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># q2.group_by('season').count().to_pandas()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_3183/4254382153.py:1: DeprecationWarning:
+
+`GroupBy.count` was renamed; use `GroupBy.len` instead
+</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>July</td>
+<td>72</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>April</td>
+<td>74</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>June</td>
+<td>71</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>January</td>
+<td>71</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>December</td>
+<td>69</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>March</td>
+<td>68</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>September</td>
+<td>73</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>August</td>
+<td>71</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>October</td>
+<td>75</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>November</td>
+<td>73</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>Febuary</td>
+<td>69</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>May</td>
+<td>72</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="1163ef50" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ggplot(q2, aes(x<span class="op">=</span><span class="st">'month'</span>, y<span class="op">=</span><span class="st">'new_weather'</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span>geom_boxplot()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+
+   
+       <meta charset="UTF-8">
+       <style> html, body { margin: 0; padding: 0; } </style>
+       <script type="text/javascript" data-lets-plot-script="library" src="https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.8.0/js-package/distr/lets-plot.min.js"></script>
+   
+   
+          <div id="10bvGd"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("10bvGd");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"data":{
+},
+"mapping":{
+"x":"month",
+"y":"new_weather"
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"airport_code"
+},{
+"type":"str",
+"column":"airport_name"
+},{
+"type":"str",
+"column":"month"
+},{
+"type":"int",
+"column":"year"
+},{
+"type":"int",
+"column":"num_of_flights_total"
+},{
+"type":"str",
+"column":"num_of_delays_carrier"
+},{
+"type":"int",
+"column":"num_of_delays_late_aircraft"
+},{
+"type":"int",
+"column":"num_of_delays_nas"
+},{
+"type":"int",
+"column":"num_of_delays_security"
+},{
+"type":"int",
+"column":"num_of_delays_weather"
+},{
+"type":"int",
+"column":"num_of_delays_total"
+},{
+"type":"int",
+"column":"minutes_delayed_carrier"
+},{
+"type":"int",
+"column":"minutes_delayed_late_aircraft"
+},{
+"type":"int",
+"column":"minutes_delayed_nas"
+},{
+"type":"int",
+"column":"minutes_delayed_security"
+},{
+"type":"int",
+"column":"minutes_delayed_weather"
+},{
+"type":"int",
+"column":"minutes_delayed_total"
+},{
+"type":"str",
+"column":"season"
+},{
+"type":"float",
+"column":"new_weather"
+}]
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"boxplot",
+"mapping":{
+},
+"data_meta":{
+},
+"data":{
+"..middle..":[1091.8,828.1499999999999,918.8,656.4,717.6999999999999,932.8000000000001,915.25,837.0,778.05,784.0,710.0999999999999,1228.55],
+"..lower..":[479.425,450.95,428.1,326.4,298.59999999999997,426.84999999999997,385.54999999999995,343.2,333.7,375.875,314.3,557.4],
+"..upper..":[1907.8,1542.9,1869.375,1079.75,1359.15,1583.05,1412.5,1400.2,1489.65,1459.275,1296.7,1878.8],
+"..ymin..":[253.25,185.10000000000002,162.75,103.5,137.3,217.0,161.0,146.7,138.7,106.6,89.05,111.55000000000001],
+"..ymax..":[3818.75,2888.6,3940.2000000000003,2188.4,2915.5,2882.6000000000004,2717.9,2734.3,2832.6499999999996,3009.1,2165.2000000000003,3239.2],
+"month":["January","Febuary","March","April","May","June","July","August","September","October","November","December"]
+}
+},{
+"geom":"point",
+"stat":"boxplot_outlier",
+"mapping":{
+},
+"show_legend":false,
+"data_meta":{
+},
+"data":{
+"..middle..":[1091.8,1091.8,1091.8,828.1499999999999,918.8,918.8,656.4,656.4,656.4,656.4,656.4,717.6999999999999,932.8000000000001,915.25,837.0,837.0,778.05,778.05,784.0,784.0,784.0,784.0,710.0999999999999,710.0999999999999,710.0999999999999,710.0999999999999,710.0999999999999,1228.55,1228.55,1228.55],
+"..lower..":[479.425,479.425,479.425,450.95,428.1,428.1,326.4,326.4,326.4,326.4,326.4,298.59999999999997,426.84999999999997,385.54999999999995,343.2,343.2,333.7,333.7,375.875,375.875,375.875,375.875,314.3,314.3,314.3,314.3,314.3,557.4,557.4,557.4],
+"..upper..":[1907.8,1907.8,1907.8,1542.9,1869.375,1869.375,1079.75,1079.75,1079.75,1079.75,1079.75,1359.15,1583.05,1412.5,1400.2,1400.2,1489.65,1489.65,1459.275,1459.275,1459.275,1459.275,1296.7,1296.7,1296.7,1296.7,1296.7,1878.8,1878.8,1878.8],
+"..ymin..":[253.25,253.25,253.25,185.10000000000002,162.75,162.75,103.5,103.5,103.5,103.5,103.5,137.3,217.0,161.0,146.7,146.7,138.7,138.7,106.6,106.6,106.6,106.6,89.05,89.05,89.05,89.05,89.05,111.55000000000001,111.55000000000001,111.55000000000001],
+"..ymax..":[3818.75,3818.75,3818.75,2888.6,3940.2000000000003,3940.2000000000003,2188.4,2188.4,2188.4,2188.4,2188.4,2915.5,2882.6000000000004,2717.9,2734.3,2734.3,2832.6499999999996,2832.6499999999996,3009.1,3009.1,3009.1,3009.1,2165.2000000000003,2165.2000000000003,2165.2000000000003,2165.2000000000003,2165.2000000000003,3239.2,3239.2,3239.2],
+"month":["January","January","January","Febuary","March","March","April","April","April","April","April","May","June","July","August","August","September","September","October","October","October","October","November","November","November","November","November","December","December","December"],
+"new_weather":[4502.25,4768.700000000001,5363.6,NaN,4522.4,4735.25,2423.8,3130.3,2355.4,2873.1000000000004,2330.5,3387.8999999999996,3983.1000000000004,3289.4,3086.4,3207.9,4238.150000000001,3942.1000000000004,3634.6,4832.25,4759.85,4442.8,2968.5,3462.65,3145.65,3595.3500000000004,3130.1000000000004,4131.25,5457.549999999999,4385.7]
+}
+}],
+"metainfo_list":[],
+"spec_id":"1"
+};
+           fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing);
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script>
+   
+
+</div>
+</div>
+<div id="06c5ee10" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ggplot(q2, aes(x<span class="op">=</span><span class="st">'season'</span>, y<span class="op">=</span><span class="st">'num_of_delays_weather'</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span>geom_boxplot()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+
+   
+       <meta charset="UTF-8">
+       <style> html, body { margin: 0; padding: 0; } </style>
+       <script type="text/javascript" data-lets-plot-script="library" src="https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.8.0/js-package/distr/lets-plot.min.js"></script>
+   
+   
+          <div id="3nzLZV"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("3nzLZV");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"data":{
+},
+"mapping":{
+"x":"season",
+"y":"num_of_delays_weather"
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"airport_code"
+},{
+"type":"str",
+"column":"airport_name"
+},{
+"type":"str",
+"column":"month"
+},{
+"type":"int",
+"column":"year"
+},{
+"type":"int",
+"column":"num_of_flights_total"
+},{
+"type":"str",
+"column":"num_of_delays_carrier"
+},{
+"type":"int",
+"column":"num_of_delays_late_aircraft"
+},{
+"type":"int",
+"column":"num_of_delays_nas"
+},{
+"type":"int",
+"column":"num_of_delays_security"
+},{
+"type":"int",
+"column":"num_of_delays_weather"
+},{
+"type":"int",
+"column":"num_of_delays_total"
+},{
+"type":"int",
+"column":"minutes_delayed_carrier"
+},{
+"type":"int",
+"column":"minutes_delayed_late_aircraft"
+},{
+"type":"int",
+"column":"minutes_delayed_nas"
+},{
+"type":"int",
+"column":"minutes_delayed_security"
+},{
+"type":"int",
+"column":"minutes_delayed_weather"
+},{
+"type":"int",
+"column":"minutes_delayed_total"
+},{
+"type":"str",
+"column":"season"
+},{
+"type":"float",
+"column":"new_weather"
+}]
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"boxplot",
+"mapping":{
+},
+"data_meta":{
+},
+"data":{
+"..middle..":[76.5,61.0,69.0,52.0],
+"..lower..":[39.5,33.0,35.0,26.0],
+"..upper..":[130.0,125.0,120.0,93.0],
+"..ymin..":[10.0,11.0,9.0,3.0],
+"..ymax..":[257.0,250.0,238.0,187.0],
+"season":["Winter","Spring","Summer","Fall"]
+}
+},{
+"geom":"point",
+"stat":"boxplot_outlier",
+"mapping":{
+},
+"show_legend":false,
+"data_meta":{
+},
+"data":{
+"..middle..":[76.5,76.5,76.5,76.5,76.5,76.5,76.5,76.5,76.5,61.0,61.0,61.0,61.0,69.0,69.0,69.0,69.0,69.0,52.0,52.0,52.0,52.0,52.0,52.0,52.0,52.0,52.0,52.0,52.0,52.0,52.0,52.0],
+"..lower..":[39.5,39.5,39.5,39.5,39.5,39.5,39.5,39.5,39.5,33.0,33.0,33.0,33.0,35.0,35.0,35.0,35.0,35.0,26.0,26.0,26.0,26.0,26.0,26.0,26.0,26.0,26.0,26.0,26.0,26.0,26.0,26.0],
+"..upper..":[130.0,130.0,130.0,130.0,130.0,130.0,130.0,130.0,130.0,125.0,125.0,125.0,125.0,120.0,120.0,120.0,120.0,120.0,93.0,93.0,93.0,93.0,93.0,93.0,93.0,93.0,93.0,93.0,93.0,93.0,93.0,93.0],
+"..ymin..":[10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,11.0,11.0,11.0,11.0,9.0,9.0,9.0,9.0,9.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0],
+"..ymax..":[257.0,257.0,257.0,257.0,257.0,257.0,257.0,257.0,257.0,250.0,250.0,250.0,250.0,238.0,238.0,238.0,238.0,238.0,187.0,187.0,187.0,187.0,187.0,187.0,187.0,187.0,187.0,187.0,187.0,187.0,187.0,187.0],
+"season":["Winter","Winter","Winter","Winter","Winter","Winter","Winter","Winter","Winter","Spring","Spring","Spring","Spring","Summer","Summer","Summer","Summer","Summer","Fall","Fall","Fall","Fall","Fall","Fall","Fall","Fall","Fall","Fall","Fall","Fall","Fall","Fall"],
+"num_of_delays_weather":[306.0,270.0,401.0,286.0,298.0,286.0,269.0,307.0,273.0,278.0,638.0,299.0,281.0,299.0,258.0,271.0,259.0,254.0,276.0,292.0,262.0,207.0,215.0,279.0,260.0,260.0,199.0,263.0,262.0,202.0,210.0,224.0]
+}
+}],
+"metainfo_list":[],
+"spec_id":"2"
+};
+           fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing);
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script>
+   
+
+</div>
+</div>
+<div id="49dbe92d" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    ggplot(q2, aes(x<span class="op">=</span><span class="st">'season'</span>, y<span class="op">=</span><span class="st">'new_weather'</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span>geom_boxplot()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+   
+       <meta charset="UTF-8">
+       <style> html, body { margin: 0; padding: 0; } </style>
+       <script type="text/javascript" data-lets-plot-script="library" src="https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.8.0/js-package/distr/lets-plot.min.js"></script>
+   
+   
+          <div id="MFDNtM"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("MFDNtM");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"data":{
+},
+"mapping":{
+"x":"season",
+"y":"new_weather"
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"airport_code"
+},{
+"type":"str",
+"column":"airport_name"
+},{
+"type":"str",
+"column":"month"
+},{
+"type":"int",
+"column":"year"
+},{
+"type":"int",
+"column":"num_of_flights_total"
+},{
+"type":"str",
+"column":"num_of_delays_carrier"
+},{
+"type":"int",
+"column":"num_of_delays_late_aircraft"
+},{
+"type":"int",
+"column":"num_of_delays_nas"
+},{
+"type":"int",
+"column":"num_of_delays_security"
+},{
+"type":"int",
+"column":"num_of_delays_weather"
+},{
+"type":"int",
+"column":"num_of_delays_total"
+},{
+"type":"int",
+"column":"minutes_delayed_carrier"
+},{
+"type":"int",
+"column":"minutes_delayed_late_aircraft"
+},{
+"type":"int",
+"column":"minutes_delayed_nas"
+},{
+"type":"int",
+"column":"minutes_delayed_security"
+},{
+"type":"int",
+"column":"minutes_delayed_weather"
+},{
+"type":"int",
+"column":"minutes_delayed_total"
+},{
+"type":"str",
+"column":"season"
+},{
+"type":"float",
+"column":"new_weather"
+}]
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"boxplot",
+"mapping":{
+},
+"data_meta":{
+},
+"data":{
+"..middle..":[962.425,726.5,808.7,865.5],
+"..lower..":[452.29999999999995,338.3,357.45,392.6],
+"..upper..":[1750.625,1342.0,1425.8000000000002,1593.1],
+"..ymin..":[162.75,103.5,138.7,89.05],
+"..ymax..":[3662.5,2579.3,2832.6499999999996,3239.2],
+"season":["Winter","Spring","Summer","Fall"]
+}
+},{
+"geom":"point",
+"stat":"boxplot_outlier",
+"mapping":{
+},
+"show_legend":false,
+"data_meta":{
+},
+"data":{
+"..middle..":[962.425,962.425,962.425,962.425,962.425,962.425,962.425,962.425,726.5,726.5,726.5,726.5,726.5,726.5,726.5,808.7,808.7,808.7,808.7,808.7,865.5,865.5,865.5,865.5,865.5,865.5,865.5,865.5,865.5],
+"..lower..":[452.29999999999995,452.29999999999995,452.29999999999995,452.29999999999995,452.29999999999995,452.29999999999995,452.29999999999995,452.29999999999995,338.3,338.3,338.3,338.3,338.3,338.3,338.3,357.45,357.45,357.45,357.45,357.45,392.6,392.6,392.6,392.6,392.6,392.6,392.6,392.6,392.6],
+"..upper..":[1750.625,1750.625,1750.625,1750.625,1750.625,1750.625,1750.625,1750.625,1342.0,1342.0,1342.0,1342.0,1342.0,1342.0,1342.0,1425.8000000000002,1425.8000000000002,1425.8000000000002,1425.8000000000002,1425.8000000000002,1593.1,1593.1,1593.1,1593.1,1593.1,1593.1,1593.1,1593.1,1593.1],
+"..ymin..":[162.75,162.75,162.75,162.75,162.75,162.75,162.75,162.75,103.5,103.5,103.5,103.5,103.5,103.5,103.5,138.7,138.7,138.7,138.7,138.7,89.05,89.05,89.05,89.05,89.05,89.05,89.05,89.05,89.05],
+"..ymax..":[3662.5,3662.5,3662.5,3662.5,3662.5,3662.5,3662.5,3662.5,2579.3,2579.3,2579.3,2579.3,2579.3,2579.3,2579.3,2832.6499999999996,2832.6499999999996,2832.6499999999996,2832.6499999999996,2832.6499999999996,3239.2,3239.2,3239.2,3239.2,3239.2,3239.2,3239.2,3239.2,3239.2],
+"season":["Winter","Winter","Winter","Winter","Winter","Winter","Winter","Winter","Spring","Spring","Spring","Spring","Spring","Spring","Spring","Summer","Summer","Summer","Summer","Summer","Fall","Fall","Fall","Fall","Fall","Fall","Fall","Fall","Fall"],
+"new_weather":[4502.25,3818.75,4522.4,4768.700000000001,4735.25,5363.6,3940.2000000000003,3805.6000000000004,2915.5,3130.3,2882.6000000000004,3983.1000000000004,2873.1000000000004,3387.8999999999996,2875.1000000000004,4238.150000000001,3086.4,3289.4,3207.9,3942.1000000000004,3634.6,4131.25,4832.25,3462.65,5457.549999999999,3595.3500000000004,4759.85,4385.7,4442.8]
+}
+}],
+"metainfo_list":[],
+"spec_id":"3"
+};
+           fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing);
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script>
+   
+
+</div>
+</div>
+<p>I think this is enough for when.then.otherwise and they should get the idea.</p>
+</section>
+<section id="expression-expansion-idea" class="level2">
+<h2 class="anchored" data-anchor-id="expression-expansion-idea">Expression Expansion Idea</h2>
+<section id="idea-1-1" class="level3">
+<h3 class="anchored" data-anchor-id="idea-1-1">Idea 1</h3>
+<p>Many of the columns contain minutes delayed for a particular reason, or the total minutes delayed. Use expression expansion to convert all the columns from minutes to hours by dividing their values by 60.</p>
+<p>The problem with all these solutions is that the column still says “minutes”.</p>
+<div id="47e50f79" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#long way</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>q3 <span class="op">=</span> q2.with_columns((pl.col(<span class="st">'minutes_delayed_carrier'</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'minutes_delayed_late_aircraft'</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'minutes_delayed_nas'</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'minutes_delayed_security'</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'minutes_delayed_weather'</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'minutes_delayed_total'</span>) <span class="op">/</span> <span class="dv">60</span>).<span class="bu">round</span>(<span class="dv">2</span>) )</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>q3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (858, 19)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">airport_code</th>
+<th data-quarto-table-cell-role="th">airport_name</th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">num_of_flights_total</th>
+<th data-quarto-table-cell-role="th">num_of_delays_carrier</th>
+<th data-quarto-table-cell-role="th">num_of_delays_late_aircraft</th>
+<th data-quarto-table-cell-role="th">num_of_delays_nas</th>
+<th data-quarto-table-cell-role="th">num_of_delays_security</th>
+<th data-quarto-table-cell-role="th">num_of_delays_weather</th>
+<th data-quarto-table-cell-role="th">num_of_delays_total</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_carrier</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_late_aircraft</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_nas</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_security</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_weather</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_total</th>
+<th data-quarto-table-cell-role="th">season</th>
+<th data-quarto-table-cell-role="th">new_weather</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>str</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"DEN"</td>
+<td>"Denver, CO: Denver Internation…</td>
+<td>"January"</td>
+<td>2005</td>
+<td>12687</td>
+<td>"1041"</td>
+<td>928</td>
+<td>935</td>
+<td>11</td>
+<td>233</td>
+<td>3153</td>
+<td>892.28</td>
+<td>1171.68</td>
+<td>613.62</td>
+<td>6.05</td>
+<td>362.98</td>
+<td>3046.62</td>
+<td>"Winter"</td>
+<td>1119.15</td>
+</tr>
+<tr class="even">
+<td>"IAD"</td>
+<td>""</td>
+<td>"January"</td>
+<td>2005</td>
+<td>12381</td>
+<td>"414"</td>
+<td>1058</td>
+<td>895</td>
+<td>4</td>
+<td>61</td>
+<td>2430</td>
+<td>null</td>
+<td>1181.98</td>
+<td>594.33</td>
+<td>3.47</td>
+<td>74.95</td>
+<td>2248.02</td>
+<td>"Winter"</td>
+<td>960.15</td>
+</tr>
+<tr class="odd">
+<td>"ORD"</td>
+<td>"Chicago, IL: Chicago O'Hare In…</td>
+<td>"January"</td>
+<td>2005</td>
+<td>28194</td>
+<td>"1197"</td>
+<td>2255</td>
+<td>5415</td>
+<td>5</td>
+<td>306</td>
+<td>9178</td>
+<td>1478.18</td>
+<td>2680.18</td>
+<td>6073.03</td>
+<td>2.52</td>
+<td>414.32</td>
+<td>10648.23</td>
+<td>"Winter"</td>
+<td>4502.25</td>
+</tr>
+<tr class="even">
+<td>"SAN"</td>
+<td>"San Diego, CA: San Diego Inter…</td>
+<td>"January"</td>
+<td>2005</td>
+<td>7283</td>
+<td>"572"</td>
+<td>680</td>
+<td>638</td>
+<td>7</td>
+<td>56</td>
+<td>1952</td>
+<td>457.27</td>
+<td>640.75</td>
+<td>352.12</td>
+<td>3.63</td>
+<td>72.1</td>
+<td>1525.87</td>
+<td>"Winter"</td>
+<td>674.7</td>
+</tr>
+<tr class="odd">
+<td>"SFO"</td>
+<td>"San Francisco, CA: San Francis…</td>
+<td>"January"</td>
+<td>2005</td>
+<td>10274</td>
+<td>"798"</td>
+<td>733</td>
+<td>1166</td>
+<td>7</td>
+<td>114</td>
+<td>2816</td>
+<td>692.83</td>
+<td>795.08</td>
+<td>1006.33</td>
+<td>4.12</td>
+<td>122.88</td>
+<td>2621.25</td>
+<td>"Winter"</td>
+<td>1091.8</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"DEN"</td>
+<td>"Denver, CO: Denver Internation…</td>
+<td>"December"</td>
+<td>2015</td>
+<td>18001</td>
+<td>"1001"</td>
+<td>1463</td>
+<td>981</td>
+<td>14</td>
+<td>152</td>
+<td>3610</td>
+<td>1079.28</td>
+<td>1860.63</td>
+<td>1009.73</td>
+<td>6.75</td>
+<td>337.85</td>
+<td>4294.25</td>
+<td>"Fall"</td>
+<td>1228.55</td>
+</tr>
+<tr class="even">
+<td>"IAD"</td>
+<td>"Washington, DC: Washington Dul…</td>
+<td>"December"</td>
+<td>2015</td>
+<td>2799</td>
+<td>"182"</td>
+<td>183</td>
+<td>61</td>
+<td>0</td>
+<td>17</td>
+<td>443</td>
+<td>null</td>
+<td>257.3</td>
+<td>47.1</td>
+<td>0.0</td>
+<td>30.42</td>
+<td>519.4</td>
+<td>"Fall"</td>
+<td>111.55</td>
+</tr>
+<tr class="odd">
+<td>"ORD"</td>
+<td>"Chicago, IL: Chicago O'Hare In…</td>
+<td>"December"</td>
+<td>2015</td>
+<td>25568</td>
+<td>"923"</td>
+<td>1755</td>
+<td>1364</td>
+<td>11</td>
+<td>180</td>
+<td>4233</td>
+<td>1349.37</td>
+<td>2200.92</td>
+<td>1200.75</td>
+<td>7.25</td>
+<td>374.32</td>
+<td>5132.6</td>
+<td>"Fall"</td>
+<td>1593.1</td>
+</tr>
+<tr class="even">
+<td>"SFO"</td>
+<td>"San Francisco, CA: San Francis…</td>
+<td>"December"</td>
+<td>2015</td>
+<td>13833</td>
+<td>"757"</td>
+<td>1180</td>
+<td>2372</td>
+<td>9</td>
+<td>147</td>
+<td>4465</td>
+<td>921.38</td>
+<td>1611.72</td>
+<td>3225.42</td>
+<td>4.75</td>
+<td>229.8</td>
+<td>5993.07</td>
+<td>"Fall"</td>
+<td>2042.8</td>
+</tr>
+<tr class="odd">
+<td>"SLC"</td>
+<td>"Salt Lake City, UT: Salt Lake …</td>
+<td>"December"</td>
+<td>2015</td>
+<td>8804</td>
+<td>"483"</td>
+<td>796</td>
+<td>404</td>
+<td>5</td>
+<td>56</td>
+<td>1745</td>
+<td>622.57</td>
+<td>825.82</td>
+<td>225.25</td>
+<td>2.63</td>
+<td>111.55</td>
+<td>1787.82</td>
+<td>"Fall"</td>
+<td>557.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="65d8a2ec" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#short way with regex</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>q2.select(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"^minutes_.*$"</span>) <span class="op">/</span> <span class="dv">60</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (858, 6)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">minutes_delayed_carrier</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_late_aircraft</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_nas</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_security</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_weather</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_total</th>
+</tr>
+<tr class="even">
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>892.28</td>
+<td>1171.68</td>
+<td>613.62</td>
+<td>6.05</td>
+<td>362.98</td>
+<td>3046.62</td>
+</tr>
+<tr class="even">
+<td>null</td>
+<td>1181.98</td>
+<td>594.33</td>
+<td>3.47</td>
+<td>74.95</td>
+<td>2248.02</td>
+</tr>
+<tr class="odd">
+<td>1478.18</td>
+<td>2680.18</td>
+<td>6073.03</td>
+<td>2.52</td>
+<td>414.32</td>
+<td>10648.23</td>
+</tr>
+<tr class="even">
+<td>457.27</td>
+<td>640.75</td>
+<td>352.12</td>
+<td>3.63</td>
+<td>72.1</td>
+<td>1525.87</td>
+</tr>
+<tr class="odd">
+<td>692.83</td>
+<td>795.08</td>
+<td>1006.33</td>
+<td>4.12</td>
+<td>122.88</td>
+<td>2621.25</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>1079.28</td>
+<td>1860.63</td>
+<td>1009.73</td>
+<td>6.75</td>
+<td>337.85</td>
+<td>4294.25</td>
+</tr>
+<tr class="even">
+<td>null</td>
+<td>257.3</td>
+<td>47.1</td>
+<td>0.0</td>
+<td>30.42</td>
+<td>519.4</td>
+</tr>
+<tr class="odd">
+<td>1349.37</td>
+<td>2200.92</td>
+<td>1200.75</td>
+<td>7.25</td>
+<td>374.32</td>
+<td>5132.6</td>
+</tr>
+<tr class="even">
+<td>921.38</td>
+<td>1611.72</td>
+<td>3225.42</td>
+<td>4.75</td>
+<td>229.8</td>
+<td>5993.07</td>
+</tr>
+<tr class="odd">
+<td>622.57</td>
+<td>825.82</td>
+<td>225.25</td>
+<td>2.63</td>
+<td>111.55</td>
+<td>1787.82</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="ec3ce6f4" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#short way with polars selectors</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars.selectors <span class="im">as</span> cs</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>q2.select(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    (cs.starts_with(<span class="st">"minutes"</span>) <span class="op">/</span> <span class="dv">60</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (858, 6)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">minutes_delayed_carrier</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_late_aircraft</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_nas</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_security</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_weather</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_total</th>
+</tr>
+<tr class="even">
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>892.28</td>
+<td>1171.68</td>
+<td>613.62</td>
+<td>6.05</td>
+<td>362.98</td>
+<td>3046.62</td>
+</tr>
+<tr class="even">
+<td>null</td>
+<td>1181.98</td>
+<td>594.33</td>
+<td>3.47</td>
+<td>74.95</td>
+<td>2248.02</td>
+</tr>
+<tr class="odd">
+<td>1478.18</td>
+<td>2680.18</td>
+<td>6073.03</td>
+<td>2.52</td>
+<td>414.32</td>
+<td>10648.23</td>
+</tr>
+<tr class="even">
+<td>457.27</td>
+<td>640.75</td>
+<td>352.12</td>
+<td>3.63</td>
+<td>72.1</td>
+<td>1525.87</td>
+</tr>
+<tr class="odd">
+<td>692.83</td>
+<td>795.08</td>
+<td>1006.33</td>
+<td>4.12</td>
+<td>122.88</td>
+<td>2621.25</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>1079.28</td>
+<td>1860.63</td>
+<td>1009.73</td>
+<td>6.75</td>
+<td>337.85</td>
+<td>4294.25</td>
+</tr>
+<tr class="even">
+<td>null</td>
+<td>257.3</td>
+<td>47.1</td>
+<td>0.0</td>
+<td>30.42</td>
+<td>519.4</td>
+</tr>
+<tr class="odd">
+<td>1349.37</td>
+<td>2200.92</td>
+<td>1200.75</td>
+<td>7.25</td>
+<td>374.32</td>
+<td>5132.6</td>
+</tr>
+<tr class="even">
+<td>921.38</td>
+<td>1611.72</td>
+<td>3225.42</td>
+<td>4.75</td>
+<td>229.8</td>
+<td>5993.07</td>
+</tr>
+<tr class="odd">
+<td>622.57</td>
+<td>825.82</td>
+<td>225.25</td>
+<td>2.63</td>
+<td>111.55</td>
+<td>1787.82</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="7d75f910" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#fix the column name problem of minutes to hours</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this seems a bit too complicated</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars.selectors <span class="im">as</span> cs</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>q2.with_columns([</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    (pl.col(col) <span class="op">/</span> <span class="dv">60</span>).alias(col.replace(<span class="st">"minutes"</span>, <span class="st">"hours"</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> q2.select(cs.starts_with(<span class="st">"minutes"</span>)).columns  </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (858, 25)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">airport_code</th>
+<th data-quarto-table-cell-role="th">airport_name</th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">num_of_flights_total</th>
+<th data-quarto-table-cell-role="th">num_of_delays_carrier</th>
+<th data-quarto-table-cell-role="th">num_of_delays_late_aircraft</th>
+<th data-quarto-table-cell-role="th">num_of_delays_nas</th>
+<th data-quarto-table-cell-role="th">num_of_delays_security</th>
+<th data-quarto-table-cell-role="th">num_of_delays_weather</th>
+<th data-quarto-table-cell-role="th">num_of_delays_total</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_carrier</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_late_aircraft</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_nas</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_security</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_weather</th>
+<th data-quarto-table-cell-role="th">minutes_delayed_total</th>
+<th data-quarto-table-cell-role="th">season</th>
+<th data-quarto-table-cell-role="th">new_weather</th>
+<th data-quarto-table-cell-role="th">hours_delayed_carrier</th>
+<th data-quarto-table-cell-role="th">hours_delayed_late_aircraft</th>
+<th data-quarto-table-cell-role="th">hours_delayed_nas</th>
+<th data-quarto-table-cell-role="th">hours_delayed_security</th>
+<th data-quarto-table-cell-role="th">hours_delayed_weather</th>
+<th data-quarto-table-cell-role="th">hours_delayed_total</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"DEN"</td>
+<td>"Denver, CO: Denver Internation…</td>
+<td>"January"</td>
+<td>2005</td>
+<td>12687</td>
+<td>"1041"</td>
+<td>928</td>
+<td>935</td>
+<td>11</td>
+<td>233</td>
+<td>3153</td>
+<td>53537</td>
+<td>70301</td>
+<td>36817</td>
+<td>363</td>
+<td>21779</td>
+<td>182797</td>
+<td>"Winter"</td>
+<td>1119.15</td>
+<td>892.283333</td>
+<td>1171.683333</td>
+<td>613.616667</td>
+<td>6.05</td>
+<td>362.983333</td>
+<td>3046.616667</td>
+</tr>
+<tr class="even">
+<td>"IAD"</td>
+<td>""</td>
+<td>"January"</td>
+<td>2005</td>
+<td>12381</td>
+<td>"414"</td>
+<td>1058</td>
+<td>895</td>
+<td>4</td>
+<td>61</td>
+<td>2430</td>
+<td>null</td>
+<td>70919</td>
+<td>35660</td>
+<td>208</td>
+<td>4497</td>
+<td>134881</td>
+<td>"Winter"</td>
+<td>960.15</td>
+<td>null</td>
+<td>1181.983333</td>
+<td>594.333333</td>
+<td>3.466667</td>
+<td>74.95</td>
+<td>2248.016667</td>
+</tr>
+<tr class="odd">
+<td>"ORD"</td>
+<td>"Chicago, IL: Chicago O'Hare In…</td>
+<td>"January"</td>
+<td>2005</td>
+<td>28194</td>
+<td>"1197"</td>
+<td>2255</td>
+<td>5415</td>
+<td>5</td>
+<td>306</td>
+<td>9178</td>
+<td>88691</td>
+<td>160811</td>
+<td>364382</td>
+<td>151</td>
+<td>24859</td>
+<td>638894</td>
+<td>"Winter"</td>
+<td>4502.25</td>
+<td>1478.183333</td>
+<td>2680.183333</td>
+<td>6073.033333</td>
+<td>2.516667</td>
+<td>414.316667</td>
+<td>10648.233333</td>
+</tr>
+<tr class="even">
+<td>"SAN"</td>
+<td>"San Diego, CA: San Diego Inter…</td>
+<td>"January"</td>
+<td>2005</td>
+<td>7283</td>
+<td>"572"</td>
+<td>680</td>
+<td>638</td>
+<td>7</td>
+<td>56</td>
+<td>1952</td>
+<td>27436</td>
+<td>38445</td>
+<td>21127</td>
+<td>218</td>
+<td>4326</td>
+<td>91552</td>
+<td>"Winter"</td>
+<td>674.7</td>
+<td>457.266667</td>
+<td>640.75</td>
+<td>352.116667</td>
+<td>3.633333</td>
+<td>72.1</td>
+<td>1525.866667</td>
+</tr>
+<tr class="odd">
+<td>"SFO"</td>
+<td>"San Francisco, CA: San Francis…</td>
+<td>"January"</td>
+<td>2005</td>
+<td>10274</td>
+<td>"798"</td>
+<td>733</td>
+<td>1166</td>
+<td>7</td>
+<td>114</td>
+<td>2816</td>
+<td>41570</td>
+<td>47705</td>
+<td>60380</td>
+<td>247</td>
+<td>7373</td>
+<td>157275</td>
+<td>"Winter"</td>
+<td>1091.8</td>
+<td>692.833333</td>
+<td>795.083333</td>
+<td>1006.333333</td>
+<td>4.116667</td>
+<td>122.883333</td>
+<td>2621.25</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"DEN"</td>
+<td>"Denver, CO: Denver Internation…</td>
+<td>"December"</td>
+<td>2015</td>
+<td>18001</td>
+<td>"1001"</td>
+<td>1463</td>
+<td>981</td>
+<td>14</td>
+<td>152</td>
+<td>3610</td>
+<td>64757</td>
+<td>111638</td>
+<td>60584</td>
+<td>405</td>
+<td>20271</td>
+<td>257655</td>
+<td>"Fall"</td>
+<td>1228.55</td>
+<td>1079.283333</td>
+<td>1860.633333</td>
+<td>1009.733333</td>
+<td>6.75</td>
+<td>337.85</td>
+<td>4294.25</td>
+</tr>
+<tr class="even">
+<td>"IAD"</td>
+<td>"Washington, DC: Washington Dul…</td>
+<td>"December"</td>
+<td>2015</td>
+<td>2799</td>
+<td>"182"</td>
+<td>183</td>
+<td>61</td>
+<td>0</td>
+<td>17</td>
+<td>443</td>
+<td>null</td>
+<td>15438</td>
+<td>2826</td>
+<td>0</td>
+<td>1825</td>
+<td>31164</td>
+<td>"Fall"</td>
+<td>111.55</td>
+<td>null</td>
+<td>257.3</td>
+<td>47.1</td>
+<td>0.0</td>
+<td>30.416667</td>
+<td>519.4</td>
+</tr>
+<tr class="odd">
+<td>"ORD"</td>
+<td>"Chicago, IL: Chicago O'Hare In…</td>
+<td>"December"</td>
+<td>2015</td>
+<td>25568</td>
+<td>"923"</td>
+<td>1755</td>
+<td>1364</td>
+<td>11</td>
+<td>180</td>
+<td>4233</td>
+<td>80962</td>
+<td>132055</td>
+<td>72045</td>
+<td>435</td>
+<td>22459</td>
+<td>307956</td>
+<td>"Fall"</td>
+<td>1593.1</td>
+<td>1349.366667</td>
+<td>2200.916667</td>
+<td>1200.75</td>
+<td>7.25</td>
+<td>374.316667</td>
+<td>5132.6</td>
+</tr>
+<tr class="even">
+<td>"SFO"</td>
+<td>"San Francisco, CA: San Francis…</td>
+<td>"December"</td>
+<td>2015</td>
+<td>13833</td>
+<td>"757"</td>
+<td>1180</td>
+<td>2372</td>
+<td>9</td>
+<td>147</td>
+<td>4465</td>
+<td>55283</td>
+<td>96703</td>
+<td>193525</td>
+<td>285</td>
+<td>13788</td>
+<td>359584</td>
+<td>"Fall"</td>
+<td>2042.8</td>
+<td>921.383333</td>
+<td>1611.716667</td>
+<td>3225.416667</td>
+<td>4.75</td>
+<td>229.8</td>
+<td>5993.066667</td>
+</tr>
+<tr class="odd">
+<td>"SLC"</td>
+<td>"Salt Lake City, UT: Salt Lake …</td>
+<td>"December"</td>
+<td>2015</td>
+<td>8804</td>
+<td>"483"</td>
+<td>796</td>
+<td>404</td>
+<td>5</td>
+<td>56</td>
+<td>1745</td>
+<td>37354</td>
+<td>49549</td>
+<td>13515</td>
+<td>158</td>
+<td>6693</td>
+<td>107269</td>
+<td>"Fall"</td>
+<td>557.4</td>
+<td>622.566667</td>
+<td>825.816667</td>
+<td>225.25</td>
+<td>2.633333</td>
+<td>111.55</td>
+<td>1787.816667</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="idea-2-1" class="level3">
+<h3 class="anchored" data-anchor-id="idea-2-1">Idea 2</h3>
+<p>Maybe just convert all the num_of_delays columns to be in hundreds (i.e.&nbsp;divide them all by 100). <strong>NOTE: If we did this idea, I think we should do this before calculating the new “weather delays” column.</strong></p>
+<p>But the num_of_delays_carrier is a string, so we have to convert it first. Is that too much too soon? (I don’t think so, since they do casting in CSE110 a few times). Maybe we would have to give them a hint, but I think having them figure it out on their own is a good idea, if we cover a similar issue in class. For the online section though a hint may be necessary.</p>
+<p>I guess we could have them just convert the column 3 columns that will be used for future calculations, but that misses the opportunity to show them these other short cuts for selecting multiple columns.</p>
+<p>Any other ideas??!</p>
+<p>#long way q3= q2.filter(pl.col(‘num_of_delays_carrier’) != “1500+”).with_columns(pl.col(‘num_of_delays_carrier’).cast(int))</p>
+<p>q3.with_columns((pl.col(‘num_of_delays_carrier’, ‘minutes_delayed_late_aircraft’, ‘minutes_delayed_nas’, ‘minutes_delayed_security’, ‘minutes_delayed_weather’, ‘minutes_delayed_total’) / 100) )</p>
+<p>#short way with regex df.with_columns(pl.col(‘num_of_delays_carrier’).cast(int)).select( (pl.col(“^num_of_delays_.*$“) / 100) )</p>
+<p>#short way with polars selectors import polars.selectors as cs</p>
+<p>q3.select( (cs.starts_with(“num_of_delays”) / 100) ) # ```</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/byuidatascience\.github\.io\/DS250-Course-Polars\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>BYU-I 2025©</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/byuidatascience">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/groups/13537407/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

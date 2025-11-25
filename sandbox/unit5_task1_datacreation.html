@@ -1,0 +1,2613 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>unit5_task1_datacreation – DS 250</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Images/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-47a2569239650a328465399e13938bea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-52a40c8f424a6d1e268fe027cedb2c07.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-47a2569239650a328465399e13938bea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">DS 250</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../setup.html"> 
+<span class="menu-text">Setup</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../Projects/project_0_dp.html"> 
+<span class="menu-text">Unit 0 Set-up Check</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-1-graphing" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 1 Graphing</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-1-graphing">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-2-flights" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 2 Flights</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-2-flights">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-3-databaseball" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 3 DataBaseBall</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-3-databaseball">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-4-ml" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 4 ML</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-4-ml">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-5-ml-prep" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 5 ML Prep</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-5-ml-prep">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../Projects/unit6.html"> 
+<span class="menu-text">GitHub Task</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../faq.html"> 
+<span class="menu-text">FAQ</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<p>The main idea of this assignment is to have the students read in xlsx data, skip 10 rows, and extract information using regex.</p>
+<div id="e0bdda0a" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lets_plot <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html(isolated_frame<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Load in the original starwars data</p>
+<div id="adae1d14" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pl.read_csv(<span class="st">'StarWarsOriginal.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>['RespondentID',
+ 'Have you seen any of the 6 films in the Star Wars franchise?',
+ 'Do you consider yourself to be a fan of the Star Wars film franchise?',
+ 'Which of the following Star Wars films have you seen? Please select all that apply.',
+ '',
+ '_duplicated_0',
+ '_duplicated_1',
+ '_duplicated_2',
+ '_duplicated_3',
+ 'Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.',
+ '_duplicated_4',
+ '_duplicated_5',
+ '_duplicated_6',
+ '_duplicated_7',
+ '_duplicated_8',
+ 'Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her.',
+ '_duplicated_9',
+ '_duplicated_10',
+ '_duplicated_11',
+ '_duplicated_12',
+ '_duplicated_13',
+ '_duplicated_14',
+ '_duplicated_15',
+ '_duplicated_16',
+ '_duplicated_17',
+ '_duplicated_18',
+ '_duplicated_19',
+ '_duplicated_20',
+ '_duplicated_21',
+ 'Which character shot first?',
+ 'Are you familiar with the Expanded Universe?',
+ 'Do you consider yourself to be a fan of the Expanded Universe?��',
+ 'Do you consider yourself to be a fan of the Star Trek franchise?',
+ 'Gender',
+ 'Age',
+ 'Household Income',
+ 'Education',
+ 'Location (Census Region)']</code></pre>
+</div>
+</div>
+<div id="ee64f881" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rename_dict<span class="op">=</span>{</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Have you seen any of the 6 films in the Star Wars franchise?"</span> : <span class="st">"seen_any"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Star Wars film franchise?"</span> : <span class="st">"star_wars_fan"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Which of the following Star Wars films have you seen? Please select all that apply."</span> : <span class="st">"seen_episode_I"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 4"</span> : <span class="st">"seen_episode_II"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 5"</span> : <span class="st">"seen_episode_III"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 6"</span> : <span class="st">"seen_episode_IV"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 7"</span> : <span class="st">"seen_episode_V"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 8"</span> : <span class="st">"seen_episode_VI"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film."</span> : <span class="st">"rank_episode_I"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 10"</span> : <span class="st">"rank_episode_II"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 11"</span> : <span class="st">"rank_episode_III"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 12"</span> : <span class="st">"rank_episode_IV"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 13"</span> : <span class="st">"rank_episode_V"</span>, </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 14"</span> : <span class="st">"rank_episode_VI"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her."</span> : <span class="st">"han_solo"</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 16"</span> : <span class="st">"luke_skywalker"</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 17"</span> : <span class="st">"princess_leia_organa"</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 18"</span> : <span class="st">"anakin_skywalker"</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 19"</span> : <span class="st">"obi_wan_kenobi"</span>,</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 20"</span> : <span class="st">"emperor_palpatine"</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 21"</span> : <span class="st">"darth_vader"</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 22"</span> : <span class="st">"lando_calrissian"</span>,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 23"</span> : <span class="st">"boba_fett"</span>,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 24"</span> : <span class="st">"C-3P0"</span>,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 25"</span> : <span class="st">"R2_D2"</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 26"</span> : <span class="st">"jar_jar_binks"</span>,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 27"</span> : <span class="st">"padme_amidala"</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 28"</span> : <span class="st">"yoda"</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Which character shot first?"</span> : <span class="st">"who_shot_first"</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Are you familiar with the Expanded Universe?"</span> : <span class="st">"know_expanded_universe"</span>,</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Expanded Universe?æ"</span>: <span class="st">"expanded_universe_fan"</span>,</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Star Trek franchise?"</span> : <span class="st">"star_trek_fan"</span>,</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gender"</span> : <span class="st">"gender"</span>,</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age"</span> : <span class="st">"age"</span>,</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Household Income"</span> : <span class="st">"household_income"</span>,</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education"</span> : <span class="st">"education"</span>,</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Location (Census Region)"</span> : <span class="st">"location"</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>rename_dict <span class="op">=</span> {</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Seen / fan questions</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Have you seen any of the 6 films in the Star Wars franchise?"</span>: <span class="st">"seen_any"</span>,</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Star Wars film franchise?"</span>: <span class="st">"star_wars_fan"</span>,</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Seen episodes (multi-select)</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Which of the following Star Wars films have you seen? Please select all that apply."</span>: <span class="st">"seen_episode_I"</span>,</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">""</span>: <span class="st">"seen_episode_II"</span>,               <span class="co"># actual blank header</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_0"</span>: <span class="st">"seen_episode_III"</span>,</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_1"</span>: <span class="st">"seen_episode_IV"</span>,</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_2"</span>: <span class="st">"seen_episode_V"</span>,</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_3"</span>: <span class="st">"seen_episode_VI"</span>,</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="co"># There should be one more for episode VI</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># but your printed header list DOES NOT include Unnamed: 8 → episode VI</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    <span class="co"># it seems Polars removed an empty column and shifted things</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check the data or confirm manually.</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For now I'll assume the next logical one:</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_4"</span>: <span class="st">"rank_episode_II"</span>,  <span class="co"># but see below</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ranking episodes</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film."</span>: <span class="st">"rank_episode_I"</span>,</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_4"</span>: <span class="st">"rank_episode_II"</span>,</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_5"</span>: <span class="st">"rank_episode_III"</span>,</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_6"</span>: <span class="st">"rank_episode_IV"</span>,</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_7"</span>: <span class="st">"rank_episode_V"</span>,</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_8"</span>: <span class="st">"rank_episode_VI"</span>,</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Character favorability</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her."</span>: <span class="st">"han_solo"</span>,</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_9"</span>: <span class="st">"luke_skywalker"</span>,</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_10"</span>: <span class="st">"princess_leia_organa"</span>,</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_11"</span>: <span class="st">"anakin_skywalker"</span>,</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_12"</span>: <span class="st">"obi_wan_kenobi"</span>,</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_13"</span>: <span class="st">"emperor_palpatine"</span>,</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_14"</span>: <span class="st">"darth_vader"</span>,</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_15"</span>: <span class="st">"lando_calrissian"</span>,</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_16"</span>: <span class="st">"boba_fett"</span>,</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_17"</span>: <span class="st">"C_3PO"</span>,</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_18"</span>: <span class="st">"R2_D2"</span>,</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_19"</span>: <span class="st">"jar_jar_binks"</span>,</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_20"</span>: <span class="st">"padme_amidala"</span>,</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_21"</span>: <span class="st">"yoda"</span>,</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>    <span class="co"># General questions</span></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Which character shot first?"</span>: <span class="st">"who_shot_first"</span>,</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Are you familiar with the Expanded Universe?"</span>: <span class="st">"know_expanded_universe"</span>,</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Expanded Universe?��"</span>: <span class="st">"expanded_universe_fan"</span>,</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Star Trek franchise?"</span>: <span class="st">"star_trek_fan"</span>,</span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Demographics</span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gender"</span>: <span class="st">"gender"</span>,</span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age"</span>: <span class="st">"age"</span>,</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Household Income"</span>: <span class="st">"household_income"</span>,</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education"</span>: <span class="st">"education"</span>,</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Location (Census Region)"</span>: <span class="st">"location"</span></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="09517473" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the file with the real header, then skip the next two junk rows</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pl.read_csv(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"StarWarsOriginal.csv"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    skip_rows_after_header<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Now apply your renaming dictionary</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.rename(rename_dict)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 38)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">RespondentID</th>
+<th data-quarto-table-cell-role="th">seen_any</th>
+<th data-quarto-table-cell-role="th">star_wars_fan</th>
+<th data-quarto-table-cell-role="th">seen_episode_I</th>
+<th data-quarto-table-cell-role="th">seen_episode_II</th>
+<th data-quarto-table-cell-role="th">seen_episode_III</th>
+<th data-quarto-table-cell-role="th">seen_episode_IV</th>
+<th data-quarto-table-cell-role="th">seen_episode_V</th>
+<th data-quarto-table-cell-role="th">seen_episode_VI</th>
+<th data-quarto-table-cell-role="th">rank_episode_I</th>
+<th data-quarto-table-cell-role="th">rank_episode_II</th>
+<th data-quarto-table-cell-role="th">rank_episode_III</th>
+<th data-quarto-table-cell-role="th">rank_episode_IV</th>
+<th data-quarto-table-cell-role="th">rank_episode_V</th>
+<th data-quarto-table-cell-role="th">rank_episode_VI</th>
+<th data-quarto-table-cell-role="th">han_solo</th>
+<th data-quarto-table-cell-role="th">luke_skywalker</th>
+<th data-quarto-table-cell-role="th">princess_leia_organa</th>
+<th data-quarto-table-cell-role="th">anakin_skywalker</th>
+<th data-quarto-table-cell-role="th">obi_wan_kenobi</th>
+<th data-quarto-table-cell-role="th">emperor_palpatine</th>
+<th data-quarto-table-cell-role="th">darth_vader</th>
+<th data-quarto-table-cell-role="th">lando_calrissian</th>
+<th data-quarto-table-cell-role="th">boba_fett</th>
+<th data-quarto-table-cell-role="th">C_3PO</th>
+<th data-quarto-table-cell-role="th">R2_D2</th>
+<th data-quarto-table-cell-role="th">jar_jar_binks</th>
+<th data-quarto-table-cell-role="th">padme_amidala</th>
+<th data-quarto-table-cell-role="th">yoda</th>
+<th data-quarto-table-cell-role="th">who_shot_first</th>
+<th data-quarto-table-cell-role="th">know_expanded_universe</th>
+<th data-quarto-table-cell-role="th">expanded_universe_fan</th>
+<th data-quarto-table-cell-role="th">star_trek_fan</th>
+<th data-quarto-table-cell-role="th">gender</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">household_income</th>
+<th data-quarto-table-cell-role="th">education</th>
+<th data-quarto-table-cell-role="th">location</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3292879998</td>
+<td>"Yes"</td>
+<td>"Yes"</td>
+<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
+<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
+<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
+<td>"Star Wars: Episode IV&nbsp;&nbsp;A New H…</td>
+<td>"Star Wars: Episode V The Empir…</td>
+<td>"Star Wars: Episode VI Return o…</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"I don't understand this questi…</td>
+<td>"Yes"</td>
+<td>"No"</td>
+<td>"No"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>null</td>
+<td>"High school degree"</td>
+<td>"South Atlantic"</td>
+</tr>
+<tr class="even">
+<td>3292879538</td>
+<td>"No"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>"Yes"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>"$0 - $24,999"</td>
+<td>"Bachelor degree"</td>
+<td>"West South Central"</td>
+</tr>
+<tr class="odd">
+<td>3292765271</td>
+<td>"Yes"</td>
+<td>"No"</td>
+<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
+<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
+<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"I don't understand this questi…</td>
+<td>"No"</td>
+<td>null</td>
+<td>"No"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>"$0 - $24,999"</td>
+<td>"High school degree"</td>
+<td>"West North Central"</td>
+</tr>
+<tr class="even">
+<td>3292763116</td>
+<td>"Yes"</td>
+<td>"Yes"</td>
+<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
+<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
+<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
+<td>"Star Wars: Episode IV&nbsp;&nbsp;A New H…</td>
+<td>"Star Wars: Episode V The Empir…</td>
+<td>"Star Wars: Episode VI Return o…</td>
+<td>5</td>
+<td>6</td>
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>3</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Very favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat unfavorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"I don't understand this questi…</td>
+<td>"No"</td>
+<td>null</td>
+<td>"Yes"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>"$100,000 - $149,999"</td>
+<td>"Some college or Associate degr…</td>
+<td>"West North Central"</td>
+</tr>
+<tr class="odd">
+<td>3292731220</td>
+<td>"Yes"</td>
+<td>"Yes"</td>
+<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
+<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
+<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
+<td>"Star Wars: Episode IV&nbsp;&nbsp;A New H…</td>
+<td>"Star Wars: Episode V The Empir…</td>
+<td>"Star Wars: Episode VI Return o…</td>
+<td>5</td>
+<td>4</td>
+<td>6</td>
+<td>2</td>
+<td>1</td>
+<td>3</td>
+<td>"Very favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat unfavorably"</td>
+<td>"Very favorably"</td>
+<td>"Very unfavorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Neither favorably nor unfavora…</td>
+<td>"Very favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Very unfavorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Greedo"</td>
+<td>"Yes"</td>
+<td>"No"</td>
+<td>"No"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>"$100,000 - $149,999"</td>
+<td>"Some college or Associate degr…</td>
+<td>"West North Central"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Now that the columns are fixed in polars, I need to generate emails for them to extract names form</p>
+<div id="debb4ae4" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed so I can get the results again</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">42</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># sample of first names</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>first_names <span class="op">=</span> [</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># modern common</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Liam"</span>, <span class="st">"Noah"</span>, <span class="st">"Oliver"</span>, <span class="st">"Elijah"</span>, <span class="st">"James"</span>, <span class="st">"William"</span>, <span class="st">"Benjamin"</span>, <span class="st">"Lucas"</span>, <span class="st">"Henry"</span>, <span class="st">"Alexander"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Emma"</span>, <span class="st">"Olivia"</span>, <span class="st">"Ava"</span>, <span class="st">"Sophia"</span>, <span class="st">"Isabella"</span>, <span class="st">"Charlotte"</span>, <span class="st">"Amelia"</span>, <span class="st">"Mia"</span>, <span class="st">"Harper"</span>, <span class="st">"Evelyn"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># modern extras</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mason"</span>, <span class="st">"Logan"</span>, <span class="st">"Levi"</span>, <span class="st">"Sebastian"</span>, <span class="st">"Jack"</span>, <span class="st">"Owen"</span>, <span class="st">"Aiden"</span>, <span class="st">"Samuel"</span>, <span class="st">"Daniel"</span>, <span class="st">"Jacob"</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Emily"</span>, <span class="st">"Grace"</span>, <span class="st">"Ella"</span>, <span class="st">"Chloe"</span>, <span class="st">"Aria"</span>, <span class="st">"Lily"</span>, <span class="st">"Nora"</span>, <span class="st">"Audrey"</span>, <span class="st">"Lucy"</span>, <span class="st">"Hannah"</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># FANCY / NOBLE / LATIN-FLAVOR</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Maximus"</span>, <span class="st">"Reginald"</span>, <span class="st">"Octavius"</span>, <span class="st">"Cassius"</span>, <span class="st">"Atticus"</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Evander"</span>, <span class="st">"Lysander"</span>, <span class="st">"Valerius"</span>, <span class="st">"Percival"</span>, <span class="st">"Alistair"</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Seraphina"</span>, <span class="st">"Ophelia"</span>, <span class="st">"Valentina"</span>, <span class="st">"Celestia"</span>, <span class="st">"Arabella"</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Evangeline"</span>, <span class="st">"Octavia"</span>, <span class="st">"Genevieve"</span>, <span class="st">"Isolde"</span>, <span class="st">"Marcella"</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># heroic / fantasy-ish</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gideon"</span>, <span class="st">"Thaddeus"</span>, <span class="st">"Magnus"</span>, <span class="st">"Ronan"</span>, <span class="st">"Dorian"</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Benedict"</span>, <span class="st">"Callum"</span>, <span class="st">"Soren"</span>, <span class="st">"Leander"</span>, <span class="st">"Theron"</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Elowen"</span>, <span class="st">"Rowena"</span>, <span class="st">"Brielle"</span>, <span class="st">"Felicity"</span>, <span class="st">"Rosalind"</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># more contemporary variety</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Caleb"</span>, <span class="st">"Ryan"</span>, <span class="st">"Nathan"</span>, <span class="st">"Christian"</span>, <span class="st">"Isaiah"</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Julian"</span>, <span class="st">"Thomas"</span>, <span class="st">"Wesley"</span>, <span class="st">"Miles"</span>, <span class="st">"Asher"</span>,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Scarlett"</span>, <span class="st">"Madison"</span>, <span class="st">"Elena"</span>, <span class="st">"Maya"</span>, <span class="st">"Violet"</span>,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Stella"</span>, <span class="st">"Caroline"</span>, <span class="st">"Ruby"</span>, <span class="st">"Alice"</span>, <span class="st">"Josephine"</span>,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># a few rare but not too weird</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Marcellus"</span>, <span class="st">"Lucian"</span>, <span class="st">"Cyrus"</span>, <span class="st">"Aurelia"</span>, <span class="st">"Helena"</span>,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tobias"</span>, <span class="st">"Damien"</span>, <span class="st">"Silas"</span>, <span class="st">"Phoebe"</span>, <span class="st">"Lavinia"</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>last_names <span class="op">=</span> [</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># common U.S.</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Smith"</span>, <span class="st">"Johnson"</span>, <span class="st">"Williams"</span>, <span class="st">"Brown"</span>, <span class="st">"Jones"</span>, <span class="st">"Garcia"</span>, <span class="st">"Miller"</span>, <span class="st">"Davis"</span>, <span class="st">"Rodriguez"</span>, <span class="st">"Martinez"</span>,</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Hernandez"</span>, <span class="st">"Lopez"</span>, <span class="st">"Gonzalez"</span>, <span class="st">"Wilson"</span>, <span class="st">"Anderson"</span>, <span class="st">"Thomas"</span>, <span class="st">"Taylor"</span>, <span class="st">"Moore"</span>, <span class="st">"Jackson"</span>, <span class="st">"Martin"</span>,</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Lee"</span>, <span class="st">"Perez"</span>, <span class="st">"Thompson"</span>, <span class="st">"White"</span>, <span class="st">"Harris"</span>, <span class="st">"Sanchez"</span>, <span class="st">"Clark"</span>, <span class="st">"Ramirez"</span>, <span class="st">"Lewis"</span>, <span class="st">"Robinson"</span>,</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># traditional European</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bennett"</span>, <span class="st">"Fletcher"</span>, <span class="st">"Crawford"</span>, <span class="st">"Hawkins"</span>, <span class="st">"Montgomery"</span>, <span class="st">"Barrett"</span>, <span class="st">"Lawrence"</span>, <span class="st">"Hudson"</span>, <span class="st">"Hayes"</span>, <span class="st">"Reynolds"</span>,</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Richards"</span>, <span class="st">"Armstrong"</span>, <span class="st">"Douglas"</span>, <span class="st">"Chambers"</span>, <span class="st">"Preston"</span>, <span class="st">"Wallace"</span>, <span class="st">"Barlow"</span>, <span class="st">"Dalton"</span>, <span class="st">"Sawyer"</span>, <span class="st">"Winston"</span>,</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># noble / aristocratic / fancy</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kingsley"</span>, <span class="st">"Harrington"</span>, <span class="st">"Ashford"</span>, <span class="st">"Wellington"</span>, <span class="st">"Beauregard"</span>,</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kensington"</span>, <span class="st">"Blackwood"</span>, <span class="st">"Ravenscroft"</span>, <span class="st">"Stormwind"</span>, <span class="st">"Winterborne"</span>,</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Holloway"</span>, <span class="st">"Everhart"</span>, <span class="st">"Redmond"</span>, <span class="st">"Langford"</span>, <span class="st">"Haverhill"</span>,</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># mythic / heroic / fantasy-ish</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Stormrider"</span>, <span class="st">"Ironwood"</span>, <span class="st">"Shadowbane"</span>, <span class="st">"Brightshield"</span>, <span class="st">"Wolfhart"</span>,</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Starcrest"</span>, <span class="st">"Frosthelm"</span>, <span class="st">"Silverwind"</span>, <span class="st">"Nightwell"</span>, <span class="st">"Thornfield"</span>,</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    <span class="co"># old-world / classy</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Devereaux"</span>, <span class="st">"Fontaine"</span>, <span class="st">"Lachance"</span>, <span class="st">"Bellerose"</span>, <span class="st">"Dumont"</span>,</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kavanagh"</span>, <span class="st">"OMalley"</span>, <span class="st">"Fitzroy"</span>, <span class="st">"Ludwick"</span>, <span class="st">"Weiss"</span>,</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kovacs"</span>, <span class="st">"Hoffmann"</span>, <span class="st">"Schneider"</span>, <span class="st">"Ricci"</span>, <span class="st">"Moretti"</span>,</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rare but elegant</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Carrington"</span>, <span class="st">"Ashdown"</span>, <span class="st">"Marwood"</span>, <span class="st">"Bramwell"</span>, <span class="st">"Loxley"</span>,</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kingsford"</span>, <span class="st">"Aldridge"</span>, <span class="st">"Pennington"</span>, <span class="st">"Somerfield"</span>, <span class="st">"Hartswell"</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="co"># make unique 1200 pairs</span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>pairs <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">len</span>(pairs) <span class="op">&lt;</span> <span class="dv">1200</span>:</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>    fn <span class="op">=</span> random.choice(first_names)</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>    ln <span class="op">=</span> random.choice(last_names)</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>    pairs.add((fn, ln))</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to polars DataFrame</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> pl.DataFrame(</span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>    <span class="bu">list</span>(pairs),</span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>    schema<span class="op">=</span>[<span class="st">"first_name"</span>, <span class="st">"last_name"</span>]</span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>name_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_3352/3105147940.py:76: DataOrientationWarning:
+
+Row orientation inferred during DataFrame construction. Explicitly specify the orientation by passing `orient="row"` to silence this warning.
+</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (1_200, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">first_name</th>
+<th data-quarto-table-cell-role="th">last_name</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Hannah"</td>
+<td>"Marwood"</td>
+</tr>
+<tr class="even">
+<td>"Ryan"</td>
+<td>"Lawrence"</td>
+</tr>
+<tr class="odd">
+<td>"Lucian"</td>
+<td>"Montgomery"</td>
+</tr>
+<tr class="even">
+<td>"Alistair"</td>
+<td>"Nightwell"</td>
+</tr>
+<tr class="odd">
+<td>"Alice"</td>
+<td>"Lachance"</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"Levi"</td>
+<td>"Barlow"</td>
+</tr>
+<tr class="even">
+<td>"Violet"</td>
+<td>"Moore"</td>
+</tr>
+<tr class="odd">
+<td>"Marcella"</td>
+<td>"Kensington"</td>
+</tr>
+<tr class="even">
+<td>"Ophelia"</td>
+<td>"Montgomery"</td>
+</tr>
+<tr class="odd">
+<td>"Isolde"</td>
+<td>"Martinez"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Make the emails for each name</p>
+<div id="7e216627" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># probabilities</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># gmail: 60%, org: 25%, yahoo: 15%</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> [<span class="fl">0.6</span>, <span class="fl">0.25</span>, <span class="fl">0.15</span>]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>domains <span class="op">=</span> [<span class="st">"gmail"</span>, <span class="st">"myorg"</span>, <span class="st">"yahoo"</span>]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># create a random choice column</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>rand_vals <span class="op">=</span> np.random.rand(name_df.height)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> assign_email(val):</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> val <span class="op">&lt;</span> probs[<span class="dv">0</span>]:</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> <span class="st">"gmail"</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> val <span class="op">&lt;</span> probs[<span class="dv">0</span>] <span class="op">+</span> probs[<span class="dv">1</span>]:</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> <span class="st">"myorg"</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> <span class="st">"yahoo"</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Random capitalization</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    case_type <span class="op">=</span> np.random.choice([<span class="st">"upper"</span>, <span class="st">"lower"</span>, <span class="st">"random"</span>])</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> case_type <span class="op">==</span> <span class="st">"upper"</span>:</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> domain.upper()</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> case_type <span class="op">==</span> <span class="st">"lower"</span>:</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> domain.lower()</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:  <span class="co"># random</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> <span class="st">""</span>.join([c.upper() <span class="cf">if</span> np.random.rand() <span class="op">&gt;</span> <span class="fl">0.5</span> <span class="cf">else</span> c.lower() <span class="cf">for</span> c <span class="kw">in</span> domain])</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Random spaces</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if np.random.rand() &lt; 0.2:</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     domain = " " + domain</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.random.rand() <span class="op">&lt;</span> <span class="fl">0.2</span>:</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> domain <span class="op">+</span> <span class="st">" "</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> domain</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co"># apply to Polars DataFrame</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>email_col <span class="op">=</span> [assign_email(v) <span class="cf">for</span> v <span class="kw">in</span> rand_vals]</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> name_df.with_columns(</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    pl.Series(<span class="st">"email_type"</span>, email_col)</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>name_df.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (10, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">first_name</th>
+<th data-quarto-table-cell-role="th">last_name</th>
+<th data-quarto-table-cell-role="th">email_type</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Hannah"</td>
+<td>"Marwood"</td>
+<td>"GMAIL"</td>
+</tr>
+<tr class="even">
+<td>"Ryan"</td>
+<td>"Lawrence"</td>
+<td>"YAHOO "</td>
+</tr>
+<tr class="odd">
+<td>"Lucian"</td>
+<td>"Montgomery"</td>
+<td>"myorg"</td>
+</tr>
+<tr class="even">
+<td>"Alistair"</td>
+<td>"Nightwell"</td>
+<td>"gmaiL "</td>
+</tr>
+<tr class="odd">
+<td>"Alice"</td>
+<td>"Lachance"</td>
+<td>"GMAIL "</td>
+</tr>
+<tr class="even">
+<td>"Damien"</td>
+<td>"Loxley"</td>
+<td>"GmAIl "</td>
+</tr>
+<tr class="odd">
+<td>"Lavinia"</td>
+<td>"Redmond"</td>
+<td>"GmaIl"</td>
+</tr>
+<tr class="even">
+<td>"Marcellus"</td>
+<td>"Bramwell"</td>
+<td>"yahoo"</td>
+</tr>
+<tr class="odd">
+<td>"Gideon"</td>
+<td>"Starcrest"</td>
+<td>"MYORG"</td>
+</tr>
+<tr class="even">
+<td>"Ella"</td>
+<td>"Stormwind"</td>
+<td>"MYORG"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Now I need to create their actual gmail column</p>
+<div id="788949e2" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>STARTNUM <span class="op">=</span> <span class="dv">54541</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># number of rows</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>n_rows <span class="op">=</span> name_df.height</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># random starting number between 0 and 90000</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>start_num <span class="op">=</span> STARTNUM</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># create sequential numbers starting from start_num, zero-padded 5 digits</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>seq_nums <span class="op">=</span> (pl.arange(<span class="dv">0</span>, n_rows, eager<span class="op">=</span><span class="va">True</span>) <span class="op">+</span> start_num).cast(pl.Utf8).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># add the column to the dataframe</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> name_df.with_columns([</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    seq_nums.alias(<span class="st">"unique_num"</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># now build the email column</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> name_df.with_columns([</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    pl.when(pl.col(<span class="st">"email_type"</span>).<span class="bu">str</span>.to_lowercase().<span class="bu">str</span>.contains(<span class="st">"gmail"</span>))</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>      .then(</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>          pl.concat_str([</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>              pl.col(<span class="st">"first_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>              pl.lit(<span class="st">"."</span>),</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>              pl.col(<span class="st">"last_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>              pl.lit(<span class="st">"@"</span>) <span class="op">+</span> pl.col(<span class="st">"email_type"</span>)  <span class="co"># preserve jank</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>          ])</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    .when(pl.col(<span class="st">"email_type"</span>).<span class="bu">str</span>.to_lowercase().<span class="bu">str</span>.contains(<span class="st">"yahoo"</span>))</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>      .then(</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>          pl.concat_str([</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>              pl.col(<span class="st">"last_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>              pl.lit(<span class="st">"_"</span>),</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>              pl.col(<span class="st">"first_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>              pl.lit(<span class="st">"@"</span>) <span class="op">+</span> pl.col(<span class="st">"email_type"</span>)</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>          ])</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># .otherwise(</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     pl.concat_str([</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">#         pl.col("last_name").str.slice(0,5).str.to_lowercase(),</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">#         pl.col("first_name").str.slice(0,3).str.to_lowercase(),</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    <span class="co">#         pl.col("unique_num"),  # unique per row</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">#         pl.lit("@") + pl.col("email_type")</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     ])</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># )</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    .otherwise(</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>        pl.concat_str([</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"last_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"unique_num"</span>),  <span class="co"># unique per row</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"first_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>            pl.lit(<span class="st">"@"</span>) <span class="op">+</span> pl.col(<span class="st">"email_type"</span>)</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    .alias(<span class="st">"email"</span>)</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>name_df.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (10, 5)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">first_name</th>
+<th data-quarto-table-cell-role="th">last_name</th>
+<th data-quarto-table-cell-role="th">email_type</th>
+<th data-quarto-table-cell-role="th">unique_num</th>
+<th data-quarto-table-cell-role="th">email</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Hannah"</td>
+<td>"Marwood"</td>
+<td>"GMAIL"</td>
+<td>"54541"</td>
+<td>"hannah.marwood@GMAIL"</td>
+</tr>
+<tr class="even">
+<td>"Ryan"</td>
+<td>"Lawrence"</td>
+<td>"YAHOO "</td>
+<td>"54542"</td>
+<td>"lawrence_ryan@YAHOO "</td>
+</tr>
+<tr class="odd">
+<td>"Lucian"</td>
+<td>"Montgomery"</td>
+<td>"myorg"</td>
+<td>"54543"</td>
+<td>"montgomery54543lucian@myorg"</td>
+</tr>
+<tr class="even">
+<td>"Alistair"</td>
+<td>"Nightwell"</td>
+<td>"gmaiL "</td>
+<td>"54544"</td>
+<td>"alistair.nightwell@gmaiL "</td>
+</tr>
+<tr class="odd">
+<td>"Alice"</td>
+<td>"Lachance"</td>
+<td>"GMAIL "</td>
+<td>"54545"</td>
+<td>"alice.lachance@GMAIL "</td>
+</tr>
+<tr class="even">
+<td>"Damien"</td>
+<td>"Loxley"</td>
+<td>"GmAIl "</td>
+<td>"54546"</td>
+<td>"damien.loxley@GmAIl "</td>
+</tr>
+<tr class="odd">
+<td>"Lavinia"</td>
+<td>"Redmond"</td>
+<td>"GmaIl"</td>
+<td>"54547"</td>
+<td>"lavinia.redmond@GmaIl"</td>
+</tr>
+<tr class="even">
+<td>"Marcellus"</td>
+<td>"Bramwell"</td>
+<td>"yahoo"</td>
+<td>"54548"</td>
+<td>"bramwell_marcellus@yahoo"</td>
+</tr>
+<tr class="odd">
+<td>"Gideon"</td>
+<td>"Starcrest"</td>
+<td>"MYORG"</td>
+<td>"54549"</td>
+<td>"starcrest54549gideon@MYORG"</td>
+</tr>
+<tr class="even">
+<td>"Ella"</td>
+<td>"Stormwind"</td>
+<td>"MYORG"</td>
+<td>"54550"</td>
+<td>"stormwind54550ella@MYORG"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Make an email for every respondentID</p>
+<div id="7c01d0d3" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(name_df.shape)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># trim name_df to match the number of rows in data</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>n_rows <span class="op">=</span> data.height  <span class="co"># 1186</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> name_df.head(n_rows)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># add the email column to data</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># assuming name_df has an "email" column</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.with_columns(name_df[<span class="st">"email"</span>].alias(<span class="st">"email"</span>))</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># check</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)  <span class="co"># should now be (1186, original_columns + 1)</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># data.select(["RespondentID", "email"]).head(10)</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1186, 38)
+(1200, 5)
+(1186, 39)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 39)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">RespondentID</th>
+<th data-quarto-table-cell-role="th">seen_any</th>
+<th data-quarto-table-cell-role="th">star_wars_fan</th>
+<th data-quarto-table-cell-role="th">seen_episode_I</th>
+<th data-quarto-table-cell-role="th">seen_episode_II</th>
+<th data-quarto-table-cell-role="th">seen_episode_III</th>
+<th data-quarto-table-cell-role="th">seen_episode_IV</th>
+<th data-quarto-table-cell-role="th">seen_episode_V</th>
+<th data-quarto-table-cell-role="th">seen_episode_VI</th>
+<th data-quarto-table-cell-role="th">rank_episode_I</th>
+<th data-quarto-table-cell-role="th">rank_episode_II</th>
+<th data-quarto-table-cell-role="th">rank_episode_III</th>
+<th data-quarto-table-cell-role="th">rank_episode_IV</th>
+<th data-quarto-table-cell-role="th">rank_episode_V</th>
+<th data-quarto-table-cell-role="th">rank_episode_VI</th>
+<th data-quarto-table-cell-role="th">han_solo</th>
+<th data-quarto-table-cell-role="th">luke_skywalker</th>
+<th data-quarto-table-cell-role="th">princess_leia_organa</th>
+<th data-quarto-table-cell-role="th">anakin_skywalker</th>
+<th data-quarto-table-cell-role="th">obi_wan_kenobi</th>
+<th data-quarto-table-cell-role="th">emperor_palpatine</th>
+<th data-quarto-table-cell-role="th">darth_vader</th>
+<th data-quarto-table-cell-role="th">lando_calrissian</th>
+<th data-quarto-table-cell-role="th">boba_fett</th>
+<th data-quarto-table-cell-role="th">C_3PO</th>
+<th data-quarto-table-cell-role="th">R2_D2</th>
+<th data-quarto-table-cell-role="th">jar_jar_binks</th>
+<th data-quarto-table-cell-role="th">padme_amidala</th>
+<th data-quarto-table-cell-role="th">yoda</th>
+<th data-quarto-table-cell-role="th">who_shot_first</th>
+<th data-quarto-table-cell-role="th">know_expanded_universe</th>
+<th data-quarto-table-cell-role="th">expanded_universe_fan</th>
+<th data-quarto-table-cell-role="th">star_trek_fan</th>
+<th data-quarto-table-cell-role="th">gender</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">household_income</th>
+<th data-quarto-table-cell-role="th">education</th>
+<th data-quarto-table-cell-role="th">location</th>
+<th data-quarto-table-cell-role="th">email</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3292879998</td>
+<td>"Yes"</td>
+<td>"Yes"</td>
+<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
+<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
+<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
+<td>"Star Wars: Episode IV&nbsp;&nbsp;A New H…</td>
+<td>"Star Wars: Episode V The Empir…</td>
+<td>"Star Wars: Episode VI Return o…</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"I don't understand this questi…</td>
+<td>"Yes"</td>
+<td>"No"</td>
+<td>"No"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>null</td>
+<td>"High school degree"</td>
+<td>"South Atlantic"</td>
+<td>"hannah.marwood@GMAIL"</td>
+</tr>
+<tr class="even">
+<td>3292879538</td>
+<td>"No"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>"Yes"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>"$0 - $24,999"</td>
+<td>"Bachelor degree"</td>
+<td>"West South Central"</td>
+<td>"lawrence_ryan@YAHOO "</td>
+</tr>
+<tr class="odd">
+<td>3292765271</td>
+<td>"Yes"</td>
+<td>"No"</td>
+<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
+<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
+<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"I don't understand this questi…</td>
+<td>"No"</td>
+<td>null</td>
+<td>"No"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>"$0 - $24,999"</td>
+<td>"High school degree"</td>
+<td>"West North Central"</td>
+<td>"montgomery54543lucian@myorg"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>then shuffle the name_df before saving it so you can’t just match rows</p>
+<div id="1af88a5e" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shuffle all rows</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>name_df_shuffle <span class="op">=</span> name_df.sort(pl.col(<span class="st">'email'</span>), descending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>name_df_shuffle.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 5)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">first_name</th>
+<th data-quarto-table-cell-role="th">last_name</th>
+<th data-quarto-table-cell-role="th">email_type</th>
+<th data-quarto-table-cell-role="th">unique_num</th>
+<th data-quarto-table-cell-role="th">email</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Samuel"</td>
+<td>"Wolfhart"</td>
+<td>"YAHOO"</td>
+<td>"55354"</td>
+<td>"wolfhart_samuel@YAHOO"</td>
+</tr>
+<tr class="even">
+<td>"Octavia"</td>
+<td>"Wolfhart"</td>
+<td>"YAHOO"</td>
+<td>"54931"</td>
+<td>"wolfhart_octavia@YAHOO"</td>
+</tr>
+<tr class="odd">
+<td>"Magnus"</td>
+<td>"Wolfhart"</td>
+<td>"YAHOO"</td>
+<td>"55308"</td>
+<td>"wolfhart_magnus@YAHOO"</td>
+</tr>
+<tr class="even">
+<td>"Amelia"</td>
+<td>"Wolfhart"</td>
+<td>"MyORg "</td>
+<td>"55548"</td>
+<td>"wolfhart55548amelia@MyORg "</td>
+</tr>
+<tr class="odd">
+<td>"Asher"</td>
+<td>"Wolfhart"</td>
+<td>"MYORG"</td>
+<td>"55418"</td>
+<td>"wolfhart55418asher@MYORG"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="3f5f3e69" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> data.columns</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># move 'email' right after 'RespondentID'</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>cols.remove(<span class="st">"email"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>new_order <span class="op">=</span> [<span class="st">"RespondentID"</span>, <span class="st">"email"</span>] <span class="op">+</span> [c <span class="cf">for</span> c <span class="kw">in</span> cols <span class="cf">if</span> c <span class="op">!=</span> <span class="st">"RespondentID"</span>]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># reorder</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.select(new_order)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 39)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">RespondentID</th>
+<th data-quarto-table-cell-role="th">email</th>
+<th data-quarto-table-cell-role="th">seen_any</th>
+<th data-quarto-table-cell-role="th">star_wars_fan</th>
+<th data-quarto-table-cell-role="th">seen_episode_I</th>
+<th data-quarto-table-cell-role="th">seen_episode_II</th>
+<th data-quarto-table-cell-role="th">seen_episode_III</th>
+<th data-quarto-table-cell-role="th">seen_episode_IV</th>
+<th data-quarto-table-cell-role="th">seen_episode_V</th>
+<th data-quarto-table-cell-role="th">seen_episode_VI</th>
+<th data-quarto-table-cell-role="th">rank_episode_I</th>
+<th data-quarto-table-cell-role="th">rank_episode_II</th>
+<th data-quarto-table-cell-role="th">rank_episode_III</th>
+<th data-quarto-table-cell-role="th">rank_episode_IV</th>
+<th data-quarto-table-cell-role="th">rank_episode_V</th>
+<th data-quarto-table-cell-role="th">rank_episode_VI</th>
+<th data-quarto-table-cell-role="th">han_solo</th>
+<th data-quarto-table-cell-role="th">luke_skywalker</th>
+<th data-quarto-table-cell-role="th">princess_leia_organa</th>
+<th data-quarto-table-cell-role="th">anakin_skywalker</th>
+<th data-quarto-table-cell-role="th">obi_wan_kenobi</th>
+<th data-quarto-table-cell-role="th">emperor_palpatine</th>
+<th data-quarto-table-cell-role="th">darth_vader</th>
+<th data-quarto-table-cell-role="th">lando_calrissian</th>
+<th data-quarto-table-cell-role="th">boba_fett</th>
+<th data-quarto-table-cell-role="th">C_3PO</th>
+<th data-quarto-table-cell-role="th">R2_D2</th>
+<th data-quarto-table-cell-role="th">jar_jar_binks</th>
+<th data-quarto-table-cell-role="th">padme_amidala</th>
+<th data-quarto-table-cell-role="th">yoda</th>
+<th data-quarto-table-cell-role="th">who_shot_first</th>
+<th data-quarto-table-cell-role="th">know_expanded_universe</th>
+<th data-quarto-table-cell-role="th">expanded_universe_fan</th>
+<th data-quarto-table-cell-role="th">star_trek_fan</th>
+<th data-quarto-table-cell-role="th">gender</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">household_income</th>
+<th data-quarto-table-cell-role="th">education</th>
+<th data-quarto-table-cell-role="th">location</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3292879998</td>
+<td>"hannah.marwood@GMAIL"</td>
+<td>"Yes"</td>
+<td>"Yes"</td>
+<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
+<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
+<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
+<td>"Star Wars: Episode IV&nbsp;&nbsp;A New H…</td>
+<td>"Star Wars: Episode V The Empir…</td>
+<td>"Star Wars: Episode VI Return o…</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"I don't understand this questi…</td>
+<td>"Yes"</td>
+<td>"No"</td>
+<td>"No"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>null</td>
+<td>"High school degree"</td>
+<td>"South Atlantic"</td>
+</tr>
+<tr class="even">
+<td>3292879538</td>
+<td>"lawrence_ryan@YAHOO "</td>
+<td>"No"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>"Yes"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>"$0 - $24,999"</td>
+<td>"Bachelor degree"</td>
+<td>"West South Central"</td>
+</tr>
+<tr class="odd">
+<td>3292765271</td>
+<td>"montgomery54543lucian@myorg"</td>
+<td>"Yes"</td>
+<td>"No"</td>
+<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
+<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
+<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"I don't understand this questi…</td>
+<td>"No"</td>
+<td>null</td>
+<td>"No"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>"$0 - $24,999"</td>
+<td>"High school degree"</td>
+<td>"West North Central"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Finally I need to add ten nonsense rows above the header so they have to use skip.</p>
+<div id="eac15dcc" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use current directory or Windows temp</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>temp_path <span class="op">=</span> os.path.join(os.getcwd(), <span class="st">"starwars2.csv"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># or: temp_path = r"C:\Users\mecha\starwars.csv"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># write the normal CSV first (with header)</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>data.write_csv(temp_path)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Now prepend 10 nonsense lines</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(temp_path, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    original <span class="op">=</span> f.read()</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># create 10 nonsense lines</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>nonsense <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join([<span class="st">"This,is,a,nonsense,line"</span>] <span class="op">*</span> <span class="dv">10</span>) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># overwrite the file with nonsense + original CSV</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(temp_path, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    f.write(nonsense <span class="op">+</span> original)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CSV written with nonsense lines at </span><span class="sc">{</span>temp_path<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CSV written with nonsense lines at /home/runner/work/DS250-Course-Polars/DS250-Course-Polars/sandbox/starwars2.csv</code></pre>
+</div>
+</div>
+<div id="162c1f1b" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data_skipped <span class="op">=</span> pl.read_csv(temp_path, skip_rows<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data_skipped.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 39)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">RespondentID</th>
+<th data-quarto-table-cell-role="th">email</th>
+<th data-quarto-table-cell-role="th">seen_any</th>
+<th data-quarto-table-cell-role="th">star_wars_fan</th>
+<th data-quarto-table-cell-role="th">seen_episode_I</th>
+<th data-quarto-table-cell-role="th">seen_episode_II</th>
+<th data-quarto-table-cell-role="th">seen_episode_III</th>
+<th data-quarto-table-cell-role="th">seen_episode_IV</th>
+<th data-quarto-table-cell-role="th">seen_episode_V</th>
+<th data-quarto-table-cell-role="th">seen_episode_VI</th>
+<th data-quarto-table-cell-role="th">rank_episode_I</th>
+<th data-quarto-table-cell-role="th">rank_episode_II</th>
+<th data-quarto-table-cell-role="th">rank_episode_III</th>
+<th data-quarto-table-cell-role="th">rank_episode_IV</th>
+<th data-quarto-table-cell-role="th">rank_episode_V</th>
+<th data-quarto-table-cell-role="th">rank_episode_VI</th>
+<th data-quarto-table-cell-role="th">han_solo</th>
+<th data-quarto-table-cell-role="th">luke_skywalker</th>
+<th data-quarto-table-cell-role="th">princess_leia_organa</th>
+<th data-quarto-table-cell-role="th">anakin_skywalker</th>
+<th data-quarto-table-cell-role="th">obi_wan_kenobi</th>
+<th data-quarto-table-cell-role="th">emperor_palpatine</th>
+<th data-quarto-table-cell-role="th">darth_vader</th>
+<th data-quarto-table-cell-role="th">lando_calrissian</th>
+<th data-quarto-table-cell-role="th">boba_fett</th>
+<th data-quarto-table-cell-role="th">C_3PO</th>
+<th data-quarto-table-cell-role="th">R2_D2</th>
+<th data-quarto-table-cell-role="th">jar_jar_binks</th>
+<th data-quarto-table-cell-role="th">padme_amidala</th>
+<th data-quarto-table-cell-role="th">yoda</th>
+<th data-quarto-table-cell-role="th">who_shot_first</th>
+<th data-quarto-table-cell-role="th">know_expanded_universe</th>
+<th data-quarto-table-cell-role="th">expanded_universe_fan</th>
+<th data-quarto-table-cell-role="th">star_trek_fan</th>
+<th data-quarto-table-cell-role="th">gender</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">household_income</th>
+<th data-quarto-table-cell-role="th">education</th>
+<th data-quarto-table-cell-role="th">location</th>
+</tr>
+<tr class="even">
+<td>i64</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>i64</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+<td>str</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3292879998</td>
+<td>"hannah.marwood@GMAIL"</td>
+<td>"Yes"</td>
+<td>"Yes"</td>
+<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
+<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
+<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
+<td>"Star Wars: Episode IV&nbsp;&nbsp;A New H…</td>
+<td>"Star Wars: Episode V The Empir…</td>
+<td>"Star Wars: Episode VI Return o…</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"Very favorably"</td>
+<td>"I don't understand this questi…</td>
+<td>"Yes"</td>
+<td>"No"</td>
+<td>"No"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>null</td>
+<td>"High school degree"</td>
+<td>"South Atlantic"</td>
+</tr>
+<tr class="even">
+<td>3292879538</td>
+<td>"lawrence_ryan@YAHOO "</td>
+<td>"No"</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>"Yes"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>"$0 - $24,999"</td>
+<td>"Bachelor degree"</td>
+<td>"West South Central"</td>
+</tr>
+<tr class="odd">
+<td>3292765271</td>
+<td>"montgomery54543lucian@myorg"</td>
+<td>"Yes"</td>
+<td>"No"</td>
+<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
+<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
+<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Somewhat favorably"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"Unfamiliar (N/A)"</td>
+<td>"I don't understand this questi…</td>
+<td>"No"</td>
+<td>null</td>
+<td>"No"</td>
+<td>"Male"</td>
+<td>"18-29"</td>
+<td>"$0 - $24,999"</td>
+<td>"High school degree"</td>
+<td>"West North Central"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="cdd1cb99" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># name_df.write_csv("names2.csv")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/byuidatascience\.github\.io\/DS250-Course-Polars\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>BYU-I 2025©</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/byuidatascience">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/groups/13537407/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

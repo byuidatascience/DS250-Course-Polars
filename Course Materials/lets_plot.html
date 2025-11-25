@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-05-01">
+
+<title>Data Visualization with Lets Plot – DS 250</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Images/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-47a2569239650a328465399e13938bea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-52a40c8f424a6d1e268fe027cedb2c07.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-47a2569239650a328465399e13938bea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">DS 250</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../setup.html"> 
+<span class="menu-text">Setup</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../Projects/project_0_dp.html"> 
+<span class="menu-text">Unit 0 Set-up Check</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-1-graphing" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 1 Graphing</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-1-graphing">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit1_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-2-flights" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 2 Flights</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-2-flights">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit2_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-3-databaseball" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 3 DataBaseBall</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-3-databaseball">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit3_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-4-ml" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 4 ML</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-4-ml">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit4_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-unit-5-ml-prep" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Unit 5 ML Prep</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-unit-5-ml-prep">    
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task1.html">
+ <span class="dropdown-text">Task 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task2.html">
+ <span class="dropdown-text">Task 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task3.html">
+ <span class="dropdown-text">Task 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Projects/unit5_task4.html">
+ <span class="dropdown-text">Task 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../Projects/unit6.html"> 
+<span class="menu-text">GitHub Task</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../faq.html"> 
+<span class="menu-text">FAQ</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Course Materials/lets_plot.html">Lets Plot</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../materials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Materials</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Course Materials/vs_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">VS Code</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Course Materials/lets_plot.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lets Plot</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Course Materials/python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python for Data Science</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Course Materials/sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SQLite</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Course Materials/ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine Learning (ML)</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Course Materials/git_pull_merge.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GitHub - Pull and Merge Forks</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#making-lets-plot-more-presentable" id="toc-making-lets-plot-more-presentable" class="nav-link" data-scroll-target="#making-lets-plot-more-presentable">Making Lets-Plot More Presentable</a></li>
+  <li><a href="#other-geom_itions" id="toc-other-geom_itions" class="nav-link" data-scroll-target="#other-geom_itions">Other <code>geom_*</code>itions</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Visualization with Lets Plot</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 1, 2020</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<blockquote class="blockquote">
+<p>“The simple graph has brought more information to the data analyst’s mind than any other device.” — John Tukey</p>
+</blockquote>
+<p>This chapter introudces data visualization with the Lets Plot library. We briefly discus the <strong>grammar of graphics</strong> which is a useful paradigm for understanding the fundamentals of building graphs. Then we introudce the basics of Lets Plot and provide resources for further development.</p>
+</section>
+<section id="prerequisites" class="level3">
+<h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
+<p><a href="../Setup/python_lib.qmd.qmd">Lets Plot Install</a></p>
+<p>For a slightly more interesting introduction, let’s look at the penguins dataset built into the lets_plot data library. This dataset contains measurements on species of penguins.</p>
+<p>::: {.callout-caution, collapse=“false”} #### Caution R has a package that uses <code>ggplot</code> and there is also another Python library <code>plotnine</code> that uses the same <code>ggplot</code> syntax. If you don’t specify <code>lets_plot</code> when using ChatGPT, you may be led down the wrong code path. It is recommended you only use the ChatGPT that was designed for this course. :::</p>
+<p>First, load the data by calling <code>load_penguins</code> from the <code>palmerpenguins</code> library as follows:</p>
+<div id="2480b9ed" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lets_plot <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_penguins()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+
+            <div id="OzoHGR"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.8.0/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("OzoHGR").appendChild(div);
+                    };
+                    var e = document.getElementById("OzoHGR");
+                    e.appendChild(script);
+                })()
+            </script>
+            
+</div>
+</div>
+<p>To explore the relationship between bill length and bill depth, we can start with a basic scatterplot.</p>
+<div id="cc3a75e2" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sometime you have to run this cell twice to get the plot to show</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    ggplot(data) </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(aes(x<span class="op">=</span><span class="st">'bill_length_mm'</span>, y<span class="op">=</span><span class="st">'bill_depth_mm'</span>), color<span class="op">=</span><span class="st">'blue'</span>) </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> ggtitle(<span class="st">"The relationship between bill length and bill depth"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+   <div id="E7jz4w"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("E7jz4w");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"data":{
+"bill_length_mm":[39.1,39.5,40.3,null,36.7,39.3,38.9,39.2,34.1,42.0,37.8,37.8,41.1,38.6,34.6,36.6,38.7,42.5,34.4,46.0,37.8,37.7,35.9,38.2,38.8,35.3,40.6,40.5,37.9,40.5,39.5,37.2,39.5,40.9,36.4,39.2,38.8,42.2,37.6,39.8,36.5,40.8,36.0,44.1,37.0,39.6,41.1,37.5,36.0,42.3,39.6,40.1,35.0,42.0,34.5,41.4,39.0,40.6,36.5,37.6,35.7,41.3,37.6,41.1,36.4,41.6,35.5,41.1,35.9,41.8,33.5,39.7,39.6,45.8,35.5,42.8,40.9,37.2,36.2,42.1,34.6,42.9,36.7,35.1,37.3,41.3,36.3,36.9,38.3,38.9,35.7,41.1,34.0,39.6,36.2,40.8,38.1,40.3,33.1,43.2,35.0,41.0,37.7,37.8,37.9,39.7,38.6,38.2,38.1,43.2,38.1,45.6,39.7,42.2,39.6,42.7,38.6,37.3,35.7,41.1,36.2,37.7,40.2,41.4,35.2,40.6,38.8,41.5,39.0,44.1,38.5,43.1,36.8,37.5,38.1,41.1,35.6,40.2,37.0,39.7,40.2,40.6,32.1,40.7,37.3,39.0,39.2,36.6,36.0,37.8,36.0,41.5,46.1,50.0,48.7,50.0,47.6,46.5,45.4,46.7,43.3,46.8,40.9,49.0,45.5,48.4,45.8,49.3,42.0,49.2,46.2,48.7,50.2,45.1,46.5,46.3,42.9,46.1,44.5,47.8,48.2,50.0,47.3,42.8,45.1,59.6,49.1,48.4,42.6,44.4,44.0,48.7,42.7,49.6,45.3,49.6,50.5,43.6,45.5,50.5,44.9,45.2,46.6,48.5,45.1,50.1,46.5,45.0,43.8,45.5,43.2,50.4,45.3,46.2,45.7,54.3,45.8,49.8,46.2,49.5,43.5,50.7,47.7,46.4,48.2,46.5,46.4,48.6,47.5,51.1,45.2,45.2,49.1,52.5,47.4,50.0,44.9,50.8,43.4,51.3,47.5,52.1,47.5,52.2,45.5,49.5,44.5,50.8,49.4,46.9,48.4,51.1,48.5,55.9,47.2,49.1,47.3,46.8,41.7,53.4,43.3,48.1,50.5,49.8,43.5,51.5,46.2,55.1,44.5,48.8,47.2,null,46.8,50.4,45.2,49.9,46.5,50.0,51.3,45.4,52.7,45.2,46.1,51.3,46.0,51.3,46.6,51.7,47.0,52.0,45.9,50.5,50.3,58.0,46.4,49.2,42.4,48.5,43.2,50.6,46.7,52.0,50.5,49.5,46.4,52.8,40.9,54.2,42.5,51.0,49.7,47.5,47.6,52.0,46.9,53.5,49.0,46.2,50.9,45.5,50.9,50.8,50.1,49.0,51.5,49.8,48.1,51.4,45.7,50.7,42.5,52.2,45.2,49.3,50.2,45.6,51.9,46.8,45.7,55.8,43.5,49.6,50.8,50.2],
+"bill_depth_mm":[18.7,17.4,18.0,null,19.3,20.6,17.8,19.6,18.1,20.2,17.1,17.3,17.6,21.2,21.1,17.8,19.0,20.7,18.4,21.5,18.3,18.7,19.2,18.1,17.2,18.9,18.6,17.9,18.6,18.9,16.7,18.1,17.8,18.9,17.0,21.1,20.0,18.5,19.3,19.1,18.0,18.4,18.5,19.7,16.9,18.8,19.0,18.9,17.9,21.2,17.7,18.9,17.9,19.5,18.1,18.6,17.5,18.8,16.6,19.1,16.9,21.1,17.0,18.2,17.1,18.0,16.2,19.1,16.6,19.4,19.0,18.4,17.2,18.9,17.5,18.5,16.8,19.4,16.1,19.1,17.2,17.6,18.8,19.4,17.8,20.3,19.5,18.6,19.2,18.8,18.0,18.1,17.1,18.1,17.3,18.9,18.6,18.5,16.1,18.5,17.9,20.0,16.0,20.0,18.6,18.9,17.2,20.0,17.0,19.0,16.5,20.3,17.7,19.5,20.7,18.3,17.0,20.5,17.0,18.6,17.2,19.8,17.0,18.5,15.9,19.0,17.6,18.3,17.1,18.0,17.9,19.2,18.5,18.5,17.6,17.5,17.5,20.1,16.5,17.9,17.1,17.2,15.5,17.0,16.8,18.7,18.6,18.4,17.8,18.1,17.1,18.5,13.2,16.3,14.1,15.2,14.5,13.5,14.6,15.3,13.4,15.4,13.7,16.1,13.7,14.6,14.6,15.7,13.5,15.2,14.5,15.1,14.3,14.5,14.5,15.8,13.1,15.1,14.3,15.0,14.3,15.3,15.3,14.2,14.5,17.0,14.8,16.3,13.7,17.3,13.6,15.7,13.7,16.0,13.7,15.0,15.9,13.9,13.9,15.9,13.3,15.8,14.2,14.1,14.4,15.0,14.4,15.4,13.9,15.0,14.5,15.3,13.8,14.9,13.9,15.7,14.2,16.8,14.4,16.2,14.2,15.0,15.0,15.6,15.6,14.8,15.0,16.0,14.2,16.3,13.8,16.4,14.5,15.6,14.6,15.9,13.8,17.3,14.4,14.2,14.0,17.0,15.0,17.1,14.5,16.1,14.7,15.7,15.8,14.6,14.4,16.5,15.0,17.0,15.5,15.0,13.8,16.1,14.7,15.8,14.0,15.1,15.2,15.9,15.2,16.3,14.1,16.0,15.7,16.2,13.7,null,14.3,15.7,14.8,16.1,17.9,19.5,19.2,18.7,19.8,17.8,18.2,18.2,18.9,19.9,17.8,20.3,17.3,18.1,17.1,19.6,20.0,17.8,18.6,18.2,17.3,17.5,16.6,19.4,17.9,19.0,18.4,19.0,17.8,20.0,16.6,20.8,16.7,18.8,18.6,16.8,18.3,20.7,16.6,19.9,19.5,17.5,19.1,17.0,17.9,18.5,17.9,19.6,18.7,17.3,16.4,19.0,17.3,19.7,17.3,18.8,16.6,19.9,18.8,19.4,19.5,16.5,17.0,19.8,18.1,18.2,19.0,18.7]
+},
+"mapping":{
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"species"
+},{
+"type":"str",
+"column":"island"
+},{
+"type":"float",
+"column":"bill_length_mm"
+},{
+"type":"float",
+"column":"bill_depth_mm"
+},{
+"type":"float",
+"column":"flipper_length_mm"
+},{
+"type":"float",
+"column":"body_mass_g"
+},{
+"type":"str",
+"column":"sex"
+},{
+"type":"int",
+"column":"year"
+}]
+},
+"ggtitle":{
+"text":"The relationship between bill length and bill depth"
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"point",
+"mapping":{
+"x":"bill_length_mm",
+"y":"bill_depth_mm"
+},
+"data_meta":{
+},
+"color":"blue",
+"data":{
+}
+}],
+"metainfo_list":[],
+"spec_id":"1"
+};
+           window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script>
+</div>
+</div>
+<p>When all species are lumped together in this scatterplot it doesn’t look like there is much of a relationship between the bill length and bill depth. We can improve our visualization by coloring the points based on species.</p>
+<div id="9f156f94" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ggplot(data) </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(aes(x<span class="op">=</span><span class="st">'bill_length_mm'</span>, y<span class="op">=</span><span class="st">'bill_depth_mm'</span>, color<span class="op">=</span><span class="st">'species'</span>)) </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> ggtitle(<span class="st">"The relationship between bill length and bill depth by species"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+   <div id="95eyIb"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("95eyIb");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"data":{
+"species":["Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap"],
+"bill_length_mm":[39.1,39.5,40.3,null,36.7,39.3,38.9,39.2,34.1,42.0,37.8,37.8,41.1,38.6,34.6,36.6,38.7,42.5,34.4,46.0,37.8,37.7,35.9,38.2,38.8,35.3,40.6,40.5,37.9,40.5,39.5,37.2,39.5,40.9,36.4,39.2,38.8,42.2,37.6,39.8,36.5,40.8,36.0,44.1,37.0,39.6,41.1,37.5,36.0,42.3,39.6,40.1,35.0,42.0,34.5,41.4,39.0,40.6,36.5,37.6,35.7,41.3,37.6,41.1,36.4,41.6,35.5,41.1,35.9,41.8,33.5,39.7,39.6,45.8,35.5,42.8,40.9,37.2,36.2,42.1,34.6,42.9,36.7,35.1,37.3,41.3,36.3,36.9,38.3,38.9,35.7,41.1,34.0,39.6,36.2,40.8,38.1,40.3,33.1,43.2,35.0,41.0,37.7,37.8,37.9,39.7,38.6,38.2,38.1,43.2,38.1,45.6,39.7,42.2,39.6,42.7,38.6,37.3,35.7,41.1,36.2,37.7,40.2,41.4,35.2,40.6,38.8,41.5,39.0,44.1,38.5,43.1,36.8,37.5,38.1,41.1,35.6,40.2,37.0,39.7,40.2,40.6,32.1,40.7,37.3,39.0,39.2,36.6,36.0,37.8,36.0,41.5,46.1,50.0,48.7,50.0,47.6,46.5,45.4,46.7,43.3,46.8,40.9,49.0,45.5,48.4,45.8,49.3,42.0,49.2,46.2,48.7,50.2,45.1,46.5,46.3,42.9,46.1,44.5,47.8,48.2,50.0,47.3,42.8,45.1,59.6,49.1,48.4,42.6,44.4,44.0,48.7,42.7,49.6,45.3,49.6,50.5,43.6,45.5,50.5,44.9,45.2,46.6,48.5,45.1,50.1,46.5,45.0,43.8,45.5,43.2,50.4,45.3,46.2,45.7,54.3,45.8,49.8,46.2,49.5,43.5,50.7,47.7,46.4,48.2,46.5,46.4,48.6,47.5,51.1,45.2,45.2,49.1,52.5,47.4,50.0,44.9,50.8,43.4,51.3,47.5,52.1,47.5,52.2,45.5,49.5,44.5,50.8,49.4,46.9,48.4,51.1,48.5,55.9,47.2,49.1,47.3,46.8,41.7,53.4,43.3,48.1,50.5,49.8,43.5,51.5,46.2,55.1,44.5,48.8,47.2,null,46.8,50.4,45.2,49.9,46.5,50.0,51.3,45.4,52.7,45.2,46.1,51.3,46.0,51.3,46.6,51.7,47.0,52.0,45.9,50.5,50.3,58.0,46.4,49.2,42.4,48.5,43.2,50.6,46.7,52.0,50.5,49.5,46.4,52.8,40.9,54.2,42.5,51.0,49.7,47.5,47.6,52.0,46.9,53.5,49.0,46.2,50.9,45.5,50.9,50.8,50.1,49.0,51.5,49.8,48.1,51.4,45.7,50.7,42.5,52.2,45.2,49.3,50.2,45.6,51.9,46.8,45.7,55.8,43.5,49.6,50.8,50.2],
+"bill_depth_mm":[18.7,17.4,18.0,null,19.3,20.6,17.8,19.6,18.1,20.2,17.1,17.3,17.6,21.2,21.1,17.8,19.0,20.7,18.4,21.5,18.3,18.7,19.2,18.1,17.2,18.9,18.6,17.9,18.6,18.9,16.7,18.1,17.8,18.9,17.0,21.1,20.0,18.5,19.3,19.1,18.0,18.4,18.5,19.7,16.9,18.8,19.0,18.9,17.9,21.2,17.7,18.9,17.9,19.5,18.1,18.6,17.5,18.8,16.6,19.1,16.9,21.1,17.0,18.2,17.1,18.0,16.2,19.1,16.6,19.4,19.0,18.4,17.2,18.9,17.5,18.5,16.8,19.4,16.1,19.1,17.2,17.6,18.8,19.4,17.8,20.3,19.5,18.6,19.2,18.8,18.0,18.1,17.1,18.1,17.3,18.9,18.6,18.5,16.1,18.5,17.9,20.0,16.0,20.0,18.6,18.9,17.2,20.0,17.0,19.0,16.5,20.3,17.7,19.5,20.7,18.3,17.0,20.5,17.0,18.6,17.2,19.8,17.0,18.5,15.9,19.0,17.6,18.3,17.1,18.0,17.9,19.2,18.5,18.5,17.6,17.5,17.5,20.1,16.5,17.9,17.1,17.2,15.5,17.0,16.8,18.7,18.6,18.4,17.8,18.1,17.1,18.5,13.2,16.3,14.1,15.2,14.5,13.5,14.6,15.3,13.4,15.4,13.7,16.1,13.7,14.6,14.6,15.7,13.5,15.2,14.5,15.1,14.3,14.5,14.5,15.8,13.1,15.1,14.3,15.0,14.3,15.3,15.3,14.2,14.5,17.0,14.8,16.3,13.7,17.3,13.6,15.7,13.7,16.0,13.7,15.0,15.9,13.9,13.9,15.9,13.3,15.8,14.2,14.1,14.4,15.0,14.4,15.4,13.9,15.0,14.5,15.3,13.8,14.9,13.9,15.7,14.2,16.8,14.4,16.2,14.2,15.0,15.0,15.6,15.6,14.8,15.0,16.0,14.2,16.3,13.8,16.4,14.5,15.6,14.6,15.9,13.8,17.3,14.4,14.2,14.0,17.0,15.0,17.1,14.5,16.1,14.7,15.7,15.8,14.6,14.4,16.5,15.0,17.0,15.5,15.0,13.8,16.1,14.7,15.8,14.0,15.1,15.2,15.9,15.2,16.3,14.1,16.0,15.7,16.2,13.7,null,14.3,15.7,14.8,16.1,17.9,19.5,19.2,18.7,19.8,17.8,18.2,18.2,18.9,19.9,17.8,20.3,17.3,18.1,17.1,19.6,20.0,17.8,18.6,18.2,17.3,17.5,16.6,19.4,17.9,19.0,18.4,19.0,17.8,20.0,16.6,20.8,16.7,18.8,18.6,16.8,18.3,20.7,16.6,19.9,19.5,17.5,19.1,17.0,17.9,18.5,17.9,19.6,18.7,17.3,16.4,19.0,17.3,19.7,17.3,18.8,16.6,19.9,18.8,19.4,19.5,16.5,17.0,19.8,18.1,18.2,19.0,18.7]
+},
+"mapping":{
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"species"
+},{
+"type":"str",
+"column":"island"
+},{
+"type":"float",
+"column":"bill_length_mm"
+},{
+"type":"float",
+"column":"bill_depth_mm"
+},{
+"type":"float",
+"column":"flipper_length_mm"
+},{
+"type":"float",
+"column":"body_mass_g"
+},{
+"type":"str",
+"column":"sex"
+},{
+"type":"int",
+"column":"year"
+}]
+},
+"ggtitle":{
+"text":"The relationship between bill length and bill depth by species"
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"point",
+"mapping":{
+"x":"bill_length_mm",
+"y":"bill_depth_mm",
+"color":"species"
+},
+"data_meta":{
+},
+"data":{
+}
+}],
+"metainfo_list":[],
+"spec_id":"2"
+};
+           window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script>
+</div>
+</div>
+<p>We can also easily change the shape and size of the points in a scatterplot.</p>
+<div id="1a6ef2b9" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ggplot(data) </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(aes(x<span class="op">=</span><span class="st">'bill_length_mm'</span>, y<span class="op">=</span><span class="st">'bill_depth_mm'</span>, color<span class="op">=</span><span class="st">'species'</span>, shape<span class="op">=</span><span class="st">'species'</span>, size<span class="op">=</span><span class="st">'flipper_length_mm'</span>)) </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> ggtitle(<span class="st">"The relationship between bill length and bill depth by species with flipper length as size"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+   <div id="ipPOXh"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("ipPOXh");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"data":{
+"species":["Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap"],
+"bill_length_mm":[39.1,39.5,40.3,null,36.7,39.3,38.9,39.2,34.1,42.0,37.8,37.8,41.1,38.6,34.6,36.6,38.7,42.5,34.4,46.0,37.8,37.7,35.9,38.2,38.8,35.3,40.6,40.5,37.9,40.5,39.5,37.2,39.5,40.9,36.4,39.2,38.8,42.2,37.6,39.8,36.5,40.8,36.0,44.1,37.0,39.6,41.1,37.5,36.0,42.3,39.6,40.1,35.0,42.0,34.5,41.4,39.0,40.6,36.5,37.6,35.7,41.3,37.6,41.1,36.4,41.6,35.5,41.1,35.9,41.8,33.5,39.7,39.6,45.8,35.5,42.8,40.9,37.2,36.2,42.1,34.6,42.9,36.7,35.1,37.3,41.3,36.3,36.9,38.3,38.9,35.7,41.1,34.0,39.6,36.2,40.8,38.1,40.3,33.1,43.2,35.0,41.0,37.7,37.8,37.9,39.7,38.6,38.2,38.1,43.2,38.1,45.6,39.7,42.2,39.6,42.7,38.6,37.3,35.7,41.1,36.2,37.7,40.2,41.4,35.2,40.6,38.8,41.5,39.0,44.1,38.5,43.1,36.8,37.5,38.1,41.1,35.6,40.2,37.0,39.7,40.2,40.6,32.1,40.7,37.3,39.0,39.2,36.6,36.0,37.8,36.0,41.5,46.1,50.0,48.7,50.0,47.6,46.5,45.4,46.7,43.3,46.8,40.9,49.0,45.5,48.4,45.8,49.3,42.0,49.2,46.2,48.7,50.2,45.1,46.5,46.3,42.9,46.1,44.5,47.8,48.2,50.0,47.3,42.8,45.1,59.6,49.1,48.4,42.6,44.4,44.0,48.7,42.7,49.6,45.3,49.6,50.5,43.6,45.5,50.5,44.9,45.2,46.6,48.5,45.1,50.1,46.5,45.0,43.8,45.5,43.2,50.4,45.3,46.2,45.7,54.3,45.8,49.8,46.2,49.5,43.5,50.7,47.7,46.4,48.2,46.5,46.4,48.6,47.5,51.1,45.2,45.2,49.1,52.5,47.4,50.0,44.9,50.8,43.4,51.3,47.5,52.1,47.5,52.2,45.5,49.5,44.5,50.8,49.4,46.9,48.4,51.1,48.5,55.9,47.2,49.1,47.3,46.8,41.7,53.4,43.3,48.1,50.5,49.8,43.5,51.5,46.2,55.1,44.5,48.8,47.2,null,46.8,50.4,45.2,49.9,46.5,50.0,51.3,45.4,52.7,45.2,46.1,51.3,46.0,51.3,46.6,51.7,47.0,52.0,45.9,50.5,50.3,58.0,46.4,49.2,42.4,48.5,43.2,50.6,46.7,52.0,50.5,49.5,46.4,52.8,40.9,54.2,42.5,51.0,49.7,47.5,47.6,52.0,46.9,53.5,49.0,46.2,50.9,45.5,50.9,50.8,50.1,49.0,51.5,49.8,48.1,51.4,45.7,50.7,42.5,52.2,45.2,49.3,50.2,45.6,51.9,46.8,45.7,55.8,43.5,49.6,50.8,50.2],
+"bill_depth_mm":[18.7,17.4,18.0,null,19.3,20.6,17.8,19.6,18.1,20.2,17.1,17.3,17.6,21.2,21.1,17.8,19.0,20.7,18.4,21.5,18.3,18.7,19.2,18.1,17.2,18.9,18.6,17.9,18.6,18.9,16.7,18.1,17.8,18.9,17.0,21.1,20.0,18.5,19.3,19.1,18.0,18.4,18.5,19.7,16.9,18.8,19.0,18.9,17.9,21.2,17.7,18.9,17.9,19.5,18.1,18.6,17.5,18.8,16.6,19.1,16.9,21.1,17.0,18.2,17.1,18.0,16.2,19.1,16.6,19.4,19.0,18.4,17.2,18.9,17.5,18.5,16.8,19.4,16.1,19.1,17.2,17.6,18.8,19.4,17.8,20.3,19.5,18.6,19.2,18.8,18.0,18.1,17.1,18.1,17.3,18.9,18.6,18.5,16.1,18.5,17.9,20.0,16.0,20.0,18.6,18.9,17.2,20.0,17.0,19.0,16.5,20.3,17.7,19.5,20.7,18.3,17.0,20.5,17.0,18.6,17.2,19.8,17.0,18.5,15.9,19.0,17.6,18.3,17.1,18.0,17.9,19.2,18.5,18.5,17.6,17.5,17.5,20.1,16.5,17.9,17.1,17.2,15.5,17.0,16.8,18.7,18.6,18.4,17.8,18.1,17.1,18.5,13.2,16.3,14.1,15.2,14.5,13.5,14.6,15.3,13.4,15.4,13.7,16.1,13.7,14.6,14.6,15.7,13.5,15.2,14.5,15.1,14.3,14.5,14.5,15.8,13.1,15.1,14.3,15.0,14.3,15.3,15.3,14.2,14.5,17.0,14.8,16.3,13.7,17.3,13.6,15.7,13.7,16.0,13.7,15.0,15.9,13.9,13.9,15.9,13.3,15.8,14.2,14.1,14.4,15.0,14.4,15.4,13.9,15.0,14.5,15.3,13.8,14.9,13.9,15.7,14.2,16.8,14.4,16.2,14.2,15.0,15.0,15.6,15.6,14.8,15.0,16.0,14.2,16.3,13.8,16.4,14.5,15.6,14.6,15.9,13.8,17.3,14.4,14.2,14.0,17.0,15.0,17.1,14.5,16.1,14.7,15.7,15.8,14.6,14.4,16.5,15.0,17.0,15.5,15.0,13.8,16.1,14.7,15.8,14.0,15.1,15.2,15.9,15.2,16.3,14.1,16.0,15.7,16.2,13.7,null,14.3,15.7,14.8,16.1,17.9,19.5,19.2,18.7,19.8,17.8,18.2,18.2,18.9,19.9,17.8,20.3,17.3,18.1,17.1,19.6,20.0,17.8,18.6,18.2,17.3,17.5,16.6,19.4,17.9,19.0,18.4,19.0,17.8,20.0,16.6,20.8,16.7,18.8,18.6,16.8,18.3,20.7,16.6,19.9,19.5,17.5,19.1,17.0,17.9,18.5,17.9,19.6,18.7,17.3,16.4,19.0,17.3,19.7,17.3,18.8,16.6,19.9,18.8,19.4,19.5,16.5,17.0,19.8,18.1,18.2,19.0,18.7],
+"flipper_length_mm":[181.0,186.0,195.0,null,193.0,190.0,181.0,195.0,193.0,190.0,186.0,180.0,182.0,191.0,198.0,185.0,195.0,197.0,184.0,194.0,174.0,180.0,189.0,185.0,180.0,187.0,183.0,187.0,172.0,180.0,178.0,178.0,188.0,184.0,195.0,196.0,190.0,180.0,181.0,184.0,182.0,195.0,186.0,196.0,185.0,190.0,182.0,179.0,190.0,191.0,186.0,188.0,190.0,200.0,187.0,191.0,186.0,193.0,181.0,194.0,185.0,195.0,185.0,192.0,184.0,192.0,195.0,188.0,190.0,198.0,190.0,190.0,196.0,197.0,190.0,195.0,191.0,184.0,187.0,195.0,189.0,196.0,187.0,193.0,191.0,194.0,190.0,189.0,189.0,190.0,202.0,205.0,185.0,186.0,187.0,208.0,190.0,196.0,178.0,192.0,192.0,203.0,183.0,190.0,193.0,184.0,199.0,190.0,181.0,197.0,198.0,191.0,193.0,197.0,191.0,196.0,188.0,199.0,189.0,189.0,187.0,198.0,176.0,202.0,186.0,199.0,191.0,195.0,191.0,210.0,190.0,197.0,193.0,199.0,187.0,190.0,191.0,200.0,185.0,193.0,193.0,187.0,188.0,190.0,192.0,185.0,190.0,184.0,195.0,193.0,187.0,201.0,211.0,230.0,210.0,218.0,215.0,210.0,211.0,219.0,209.0,215.0,214.0,216.0,214.0,213.0,210.0,217.0,210.0,221.0,209.0,222.0,218.0,215.0,213.0,215.0,215.0,215.0,216.0,215.0,210.0,220.0,222.0,209.0,207.0,230.0,220.0,220.0,213.0,219.0,208.0,208.0,208.0,225.0,210.0,216.0,222.0,217.0,210.0,225.0,213.0,215.0,210.0,220.0,210.0,225.0,217.0,220.0,208.0,220.0,208.0,224.0,208.0,221.0,214.0,231.0,219.0,230.0,214.0,229.0,220.0,223.0,216.0,221.0,221.0,217.0,216.0,230.0,209.0,220.0,215.0,223.0,212.0,221.0,212.0,224.0,212.0,228.0,218.0,218.0,212.0,230.0,218.0,228.0,212.0,224.0,214.0,226.0,216.0,222.0,203.0,225.0,219.0,228.0,215.0,228.0,216.0,215.0,210.0,219.0,208.0,209.0,216.0,229.0,213.0,230.0,217.0,230.0,217.0,222.0,214.0,null,215.0,222.0,212.0,213.0,192.0,196.0,193.0,188.0,197.0,198.0,178.0,197.0,195.0,198.0,193.0,194.0,185.0,201.0,190.0,201.0,197.0,181.0,190.0,195.0,181.0,191.0,187.0,193.0,195.0,197.0,200.0,200.0,191.0,205.0,187.0,201.0,187.0,203.0,195.0,199.0,195.0,210.0,192.0,205.0,210.0,187.0,196.0,196.0,196.0,201.0,190.0,212.0,187.0,198.0,199.0,201.0,193.0,203.0,187.0,197.0,191.0,203.0,202.0,194.0,206.0,189.0,195.0,207.0,202.0,193.0,210.0,198.0]
+},
+"mapping":{
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"species"
+},{
+"type":"str",
+"column":"island"
+},{
+"type":"float",
+"column":"bill_length_mm"
+},{
+"type":"float",
+"column":"bill_depth_mm"
+},{
+"type":"float",
+"column":"flipper_length_mm"
+},{
+"type":"float",
+"column":"body_mass_g"
+},{
+"type":"str",
+"column":"sex"
+},{
+"type":"int",
+"column":"year"
+}]
+},
+"ggtitle":{
+"text":"The relationship between bill length and bill depth by species with flipper length as size"
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"point",
+"mapping":{
+"x":"bill_length_mm",
+"y":"bill_depth_mm",
+"color":"species",
+"shape":"species",
+"size":"flipper_length_mm"
+},
+"data_meta":{
+},
+"data":{
+}
+}],
+"metainfo_list":[],
+"spec_id":"3"
+};
+           window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script>
+</div>
+</div>
+<p>Now that’s going overboard! But hopefully the basic syntax for using <code>lets_plot</code> makes sense.</p>
+</section>
+<section id="making-lets-plot-more-presentable" class="level3">
+<h3 class="anchored" data-anchor-id="making-lets-plot-more-presentable">Making Lets-Plot More Presentable</h3>
+<p>In this section, we look at how to customize charts to be more informative and presentable. For example, column names in a dataset are rarely a good idea to present to someone not as intimately familiar with the data as you. We may also wish to highlight certain points, or draw attention to areas on a graph.</p>
+<p>To begin, let’s return to a reasonable visualization of the penguins data. We will start by naming our <code>ggplot</code> chart object “plot” and changing the X and Y axis labels.</p>
+<p>The way is to include the <code>labs</code> function in the plot inputs. The arguments in this function are the axis names and their desired labels.</p>
+<div id="8394397b" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ggplot(data)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(aes(x<span class="op">=</span><span class="st">'bill_length_mm'</span>, y<span class="op">=</span><span class="st">'bill_depth_mm'</span>, color<span class="op">=</span><span class="st">'species'</span>, shape<span class="op">=</span><span class="st">'species'</span>, size<span class="op">=</span><span class="st">'flipper_length_mm'</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> ggtitle(<span class="st">"The relationship between bill length and bill depth by species with flipper length as size"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(x<span class="op">=</span><span class="st">'Bill Length (mm)'</span>, y<span class="op">=</span><span class="st">'Bill Depth (mm)'</span>, color<span class="op">=</span><span class="st">'Species'</span>, shape<span class="op">=</span><span class="st">'Species'</span>, size<span class="op">=</span><span class="st">'Flipper Length (mm)'</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+   <div id="pp4Vc9"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("pp4Vc9");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"data":{
+"species":["Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap"],
+"bill_length_mm":[39.1,39.5,40.3,null,36.7,39.3,38.9,39.2,34.1,42.0,37.8,37.8,41.1,38.6,34.6,36.6,38.7,42.5,34.4,46.0,37.8,37.7,35.9,38.2,38.8,35.3,40.6,40.5,37.9,40.5,39.5,37.2,39.5,40.9,36.4,39.2,38.8,42.2,37.6,39.8,36.5,40.8,36.0,44.1,37.0,39.6,41.1,37.5,36.0,42.3,39.6,40.1,35.0,42.0,34.5,41.4,39.0,40.6,36.5,37.6,35.7,41.3,37.6,41.1,36.4,41.6,35.5,41.1,35.9,41.8,33.5,39.7,39.6,45.8,35.5,42.8,40.9,37.2,36.2,42.1,34.6,42.9,36.7,35.1,37.3,41.3,36.3,36.9,38.3,38.9,35.7,41.1,34.0,39.6,36.2,40.8,38.1,40.3,33.1,43.2,35.0,41.0,37.7,37.8,37.9,39.7,38.6,38.2,38.1,43.2,38.1,45.6,39.7,42.2,39.6,42.7,38.6,37.3,35.7,41.1,36.2,37.7,40.2,41.4,35.2,40.6,38.8,41.5,39.0,44.1,38.5,43.1,36.8,37.5,38.1,41.1,35.6,40.2,37.0,39.7,40.2,40.6,32.1,40.7,37.3,39.0,39.2,36.6,36.0,37.8,36.0,41.5,46.1,50.0,48.7,50.0,47.6,46.5,45.4,46.7,43.3,46.8,40.9,49.0,45.5,48.4,45.8,49.3,42.0,49.2,46.2,48.7,50.2,45.1,46.5,46.3,42.9,46.1,44.5,47.8,48.2,50.0,47.3,42.8,45.1,59.6,49.1,48.4,42.6,44.4,44.0,48.7,42.7,49.6,45.3,49.6,50.5,43.6,45.5,50.5,44.9,45.2,46.6,48.5,45.1,50.1,46.5,45.0,43.8,45.5,43.2,50.4,45.3,46.2,45.7,54.3,45.8,49.8,46.2,49.5,43.5,50.7,47.7,46.4,48.2,46.5,46.4,48.6,47.5,51.1,45.2,45.2,49.1,52.5,47.4,50.0,44.9,50.8,43.4,51.3,47.5,52.1,47.5,52.2,45.5,49.5,44.5,50.8,49.4,46.9,48.4,51.1,48.5,55.9,47.2,49.1,47.3,46.8,41.7,53.4,43.3,48.1,50.5,49.8,43.5,51.5,46.2,55.1,44.5,48.8,47.2,null,46.8,50.4,45.2,49.9,46.5,50.0,51.3,45.4,52.7,45.2,46.1,51.3,46.0,51.3,46.6,51.7,47.0,52.0,45.9,50.5,50.3,58.0,46.4,49.2,42.4,48.5,43.2,50.6,46.7,52.0,50.5,49.5,46.4,52.8,40.9,54.2,42.5,51.0,49.7,47.5,47.6,52.0,46.9,53.5,49.0,46.2,50.9,45.5,50.9,50.8,50.1,49.0,51.5,49.8,48.1,51.4,45.7,50.7,42.5,52.2,45.2,49.3,50.2,45.6,51.9,46.8,45.7,55.8,43.5,49.6,50.8,50.2],
+"bill_depth_mm":[18.7,17.4,18.0,null,19.3,20.6,17.8,19.6,18.1,20.2,17.1,17.3,17.6,21.2,21.1,17.8,19.0,20.7,18.4,21.5,18.3,18.7,19.2,18.1,17.2,18.9,18.6,17.9,18.6,18.9,16.7,18.1,17.8,18.9,17.0,21.1,20.0,18.5,19.3,19.1,18.0,18.4,18.5,19.7,16.9,18.8,19.0,18.9,17.9,21.2,17.7,18.9,17.9,19.5,18.1,18.6,17.5,18.8,16.6,19.1,16.9,21.1,17.0,18.2,17.1,18.0,16.2,19.1,16.6,19.4,19.0,18.4,17.2,18.9,17.5,18.5,16.8,19.4,16.1,19.1,17.2,17.6,18.8,19.4,17.8,20.3,19.5,18.6,19.2,18.8,18.0,18.1,17.1,18.1,17.3,18.9,18.6,18.5,16.1,18.5,17.9,20.0,16.0,20.0,18.6,18.9,17.2,20.0,17.0,19.0,16.5,20.3,17.7,19.5,20.7,18.3,17.0,20.5,17.0,18.6,17.2,19.8,17.0,18.5,15.9,19.0,17.6,18.3,17.1,18.0,17.9,19.2,18.5,18.5,17.6,17.5,17.5,20.1,16.5,17.9,17.1,17.2,15.5,17.0,16.8,18.7,18.6,18.4,17.8,18.1,17.1,18.5,13.2,16.3,14.1,15.2,14.5,13.5,14.6,15.3,13.4,15.4,13.7,16.1,13.7,14.6,14.6,15.7,13.5,15.2,14.5,15.1,14.3,14.5,14.5,15.8,13.1,15.1,14.3,15.0,14.3,15.3,15.3,14.2,14.5,17.0,14.8,16.3,13.7,17.3,13.6,15.7,13.7,16.0,13.7,15.0,15.9,13.9,13.9,15.9,13.3,15.8,14.2,14.1,14.4,15.0,14.4,15.4,13.9,15.0,14.5,15.3,13.8,14.9,13.9,15.7,14.2,16.8,14.4,16.2,14.2,15.0,15.0,15.6,15.6,14.8,15.0,16.0,14.2,16.3,13.8,16.4,14.5,15.6,14.6,15.9,13.8,17.3,14.4,14.2,14.0,17.0,15.0,17.1,14.5,16.1,14.7,15.7,15.8,14.6,14.4,16.5,15.0,17.0,15.5,15.0,13.8,16.1,14.7,15.8,14.0,15.1,15.2,15.9,15.2,16.3,14.1,16.0,15.7,16.2,13.7,null,14.3,15.7,14.8,16.1,17.9,19.5,19.2,18.7,19.8,17.8,18.2,18.2,18.9,19.9,17.8,20.3,17.3,18.1,17.1,19.6,20.0,17.8,18.6,18.2,17.3,17.5,16.6,19.4,17.9,19.0,18.4,19.0,17.8,20.0,16.6,20.8,16.7,18.8,18.6,16.8,18.3,20.7,16.6,19.9,19.5,17.5,19.1,17.0,17.9,18.5,17.9,19.6,18.7,17.3,16.4,19.0,17.3,19.7,17.3,18.8,16.6,19.9,18.8,19.4,19.5,16.5,17.0,19.8,18.1,18.2,19.0,18.7],
+"flipper_length_mm":[181.0,186.0,195.0,null,193.0,190.0,181.0,195.0,193.0,190.0,186.0,180.0,182.0,191.0,198.0,185.0,195.0,197.0,184.0,194.0,174.0,180.0,189.0,185.0,180.0,187.0,183.0,187.0,172.0,180.0,178.0,178.0,188.0,184.0,195.0,196.0,190.0,180.0,181.0,184.0,182.0,195.0,186.0,196.0,185.0,190.0,182.0,179.0,190.0,191.0,186.0,188.0,190.0,200.0,187.0,191.0,186.0,193.0,181.0,194.0,185.0,195.0,185.0,192.0,184.0,192.0,195.0,188.0,190.0,198.0,190.0,190.0,196.0,197.0,190.0,195.0,191.0,184.0,187.0,195.0,189.0,196.0,187.0,193.0,191.0,194.0,190.0,189.0,189.0,190.0,202.0,205.0,185.0,186.0,187.0,208.0,190.0,196.0,178.0,192.0,192.0,203.0,183.0,190.0,193.0,184.0,199.0,190.0,181.0,197.0,198.0,191.0,193.0,197.0,191.0,196.0,188.0,199.0,189.0,189.0,187.0,198.0,176.0,202.0,186.0,199.0,191.0,195.0,191.0,210.0,190.0,197.0,193.0,199.0,187.0,190.0,191.0,200.0,185.0,193.0,193.0,187.0,188.0,190.0,192.0,185.0,190.0,184.0,195.0,193.0,187.0,201.0,211.0,230.0,210.0,218.0,215.0,210.0,211.0,219.0,209.0,215.0,214.0,216.0,214.0,213.0,210.0,217.0,210.0,221.0,209.0,222.0,218.0,215.0,213.0,215.0,215.0,215.0,216.0,215.0,210.0,220.0,222.0,209.0,207.0,230.0,220.0,220.0,213.0,219.0,208.0,208.0,208.0,225.0,210.0,216.0,222.0,217.0,210.0,225.0,213.0,215.0,210.0,220.0,210.0,225.0,217.0,220.0,208.0,220.0,208.0,224.0,208.0,221.0,214.0,231.0,219.0,230.0,214.0,229.0,220.0,223.0,216.0,221.0,221.0,217.0,216.0,230.0,209.0,220.0,215.0,223.0,212.0,221.0,212.0,224.0,212.0,228.0,218.0,218.0,212.0,230.0,218.0,228.0,212.0,224.0,214.0,226.0,216.0,222.0,203.0,225.0,219.0,228.0,215.0,228.0,216.0,215.0,210.0,219.0,208.0,209.0,216.0,229.0,213.0,230.0,217.0,230.0,217.0,222.0,214.0,null,215.0,222.0,212.0,213.0,192.0,196.0,193.0,188.0,197.0,198.0,178.0,197.0,195.0,198.0,193.0,194.0,185.0,201.0,190.0,201.0,197.0,181.0,190.0,195.0,181.0,191.0,187.0,193.0,195.0,197.0,200.0,200.0,191.0,205.0,187.0,201.0,187.0,203.0,195.0,199.0,195.0,210.0,192.0,205.0,210.0,187.0,196.0,196.0,196.0,201.0,190.0,212.0,187.0,198.0,199.0,201.0,193.0,203.0,187.0,197.0,191.0,203.0,202.0,194.0,206.0,189.0,195.0,207.0,202.0,193.0,210.0,198.0]
+},
+"mapping":{
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"species"
+},{
+"type":"str",
+"column":"island"
+},{
+"type":"float",
+"column":"bill_length_mm"
+},{
+"type":"float",
+"column":"bill_depth_mm"
+},{
+"type":"float",
+"column":"flipper_length_mm"
+},{
+"type":"float",
+"column":"body_mass_g"
+},{
+"type":"str",
+"column":"sex"
+},{
+"type":"int",
+"column":"year"
+}]
+},
+"ggtitle":{
+"text":"The relationship between bill length and bill depth by species with flipper length as size"
+},
+"guides":{
+"x":{
+"title":"Bill Length (mm)"
+},
+"y":{
+"title":"Bill Depth (mm)"
+},
+"color":{
+"title":"Species"
+},
+"shape":{
+"title":"Species"
+},
+"size":{
+"title":"Flipper Length (mm)"
+}
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"point",
+"mapping":{
+"x":"bill_length_mm",
+"y":"bill_depth_mm",
+"color":"species",
+"shape":"species",
+"size":"flipper_length_mm"
+},
+"data_meta":{
+},
+"data":{
+}
+}],
+"metainfo_list":[],
+"spec_id":"4"
+};
+           window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script>
+</div>
+</div>
+<p>The next method makes the same adjustments but modifies the chart “post hoc”. Start with a very basic chart, “plot” and use the <code>+</code> operator to add layers and modify titles.</p>
+<div id="f76b1357" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    ggplot(data)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(aes(x<span class="op">=</span><span class="st">'bill_length_mm'</span>, y<span class="op">=</span><span class="st">'bill_depth_mm'</span>, color<span class="op">=</span><span class="st">'species'</span>, shape<span class="op">=</span><span class="st">'species'</span>, size<span class="op">=</span><span class="st">'flipper_length_mm'</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> ggtitle(<span class="st">"The relationship between bill length and bill depth by species with flipper length as size"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> plot <span class="op">+</span> labs(x<span class="op">=</span><span class="st">'Bill Length (mm)'</span>, y<span class="op">=</span><span class="st">'Bill Depth (mm)'</span>, color<span class="op">=</span><span class="st">'Species'</span>, shape<span class="op">=</span><span class="st">'Species'</span>, size<span class="op">=</span><span class="st">'Flipper Length (mm)'</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+   <div id="x5StVN"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("x5StVN");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"data":{
+"species":["Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap"],
+"bill_length_mm":[39.1,39.5,40.3,null,36.7,39.3,38.9,39.2,34.1,42.0,37.8,37.8,41.1,38.6,34.6,36.6,38.7,42.5,34.4,46.0,37.8,37.7,35.9,38.2,38.8,35.3,40.6,40.5,37.9,40.5,39.5,37.2,39.5,40.9,36.4,39.2,38.8,42.2,37.6,39.8,36.5,40.8,36.0,44.1,37.0,39.6,41.1,37.5,36.0,42.3,39.6,40.1,35.0,42.0,34.5,41.4,39.0,40.6,36.5,37.6,35.7,41.3,37.6,41.1,36.4,41.6,35.5,41.1,35.9,41.8,33.5,39.7,39.6,45.8,35.5,42.8,40.9,37.2,36.2,42.1,34.6,42.9,36.7,35.1,37.3,41.3,36.3,36.9,38.3,38.9,35.7,41.1,34.0,39.6,36.2,40.8,38.1,40.3,33.1,43.2,35.0,41.0,37.7,37.8,37.9,39.7,38.6,38.2,38.1,43.2,38.1,45.6,39.7,42.2,39.6,42.7,38.6,37.3,35.7,41.1,36.2,37.7,40.2,41.4,35.2,40.6,38.8,41.5,39.0,44.1,38.5,43.1,36.8,37.5,38.1,41.1,35.6,40.2,37.0,39.7,40.2,40.6,32.1,40.7,37.3,39.0,39.2,36.6,36.0,37.8,36.0,41.5,46.1,50.0,48.7,50.0,47.6,46.5,45.4,46.7,43.3,46.8,40.9,49.0,45.5,48.4,45.8,49.3,42.0,49.2,46.2,48.7,50.2,45.1,46.5,46.3,42.9,46.1,44.5,47.8,48.2,50.0,47.3,42.8,45.1,59.6,49.1,48.4,42.6,44.4,44.0,48.7,42.7,49.6,45.3,49.6,50.5,43.6,45.5,50.5,44.9,45.2,46.6,48.5,45.1,50.1,46.5,45.0,43.8,45.5,43.2,50.4,45.3,46.2,45.7,54.3,45.8,49.8,46.2,49.5,43.5,50.7,47.7,46.4,48.2,46.5,46.4,48.6,47.5,51.1,45.2,45.2,49.1,52.5,47.4,50.0,44.9,50.8,43.4,51.3,47.5,52.1,47.5,52.2,45.5,49.5,44.5,50.8,49.4,46.9,48.4,51.1,48.5,55.9,47.2,49.1,47.3,46.8,41.7,53.4,43.3,48.1,50.5,49.8,43.5,51.5,46.2,55.1,44.5,48.8,47.2,null,46.8,50.4,45.2,49.9,46.5,50.0,51.3,45.4,52.7,45.2,46.1,51.3,46.0,51.3,46.6,51.7,47.0,52.0,45.9,50.5,50.3,58.0,46.4,49.2,42.4,48.5,43.2,50.6,46.7,52.0,50.5,49.5,46.4,52.8,40.9,54.2,42.5,51.0,49.7,47.5,47.6,52.0,46.9,53.5,49.0,46.2,50.9,45.5,50.9,50.8,50.1,49.0,51.5,49.8,48.1,51.4,45.7,50.7,42.5,52.2,45.2,49.3,50.2,45.6,51.9,46.8,45.7,55.8,43.5,49.6,50.8,50.2],
+"bill_depth_mm":[18.7,17.4,18.0,null,19.3,20.6,17.8,19.6,18.1,20.2,17.1,17.3,17.6,21.2,21.1,17.8,19.0,20.7,18.4,21.5,18.3,18.7,19.2,18.1,17.2,18.9,18.6,17.9,18.6,18.9,16.7,18.1,17.8,18.9,17.0,21.1,20.0,18.5,19.3,19.1,18.0,18.4,18.5,19.7,16.9,18.8,19.0,18.9,17.9,21.2,17.7,18.9,17.9,19.5,18.1,18.6,17.5,18.8,16.6,19.1,16.9,21.1,17.0,18.2,17.1,18.0,16.2,19.1,16.6,19.4,19.0,18.4,17.2,18.9,17.5,18.5,16.8,19.4,16.1,19.1,17.2,17.6,18.8,19.4,17.8,20.3,19.5,18.6,19.2,18.8,18.0,18.1,17.1,18.1,17.3,18.9,18.6,18.5,16.1,18.5,17.9,20.0,16.0,20.0,18.6,18.9,17.2,20.0,17.0,19.0,16.5,20.3,17.7,19.5,20.7,18.3,17.0,20.5,17.0,18.6,17.2,19.8,17.0,18.5,15.9,19.0,17.6,18.3,17.1,18.0,17.9,19.2,18.5,18.5,17.6,17.5,17.5,20.1,16.5,17.9,17.1,17.2,15.5,17.0,16.8,18.7,18.6,18.4,17.8,18.1,17.1,18.5,13.2,16.3,14.1,15.2,14.5,13.5,14.6,15.3,13.4,15.4,13.7,16.1,13.7,14.6,14.6,15.7,13.5,15.2,14.5,15.1,14.3,14.5,14.5,15.8,13.1,15.1,14.3,15.0,14.3,15.3,15.3,14.2,14.5,17.0,14.8,16.3,13.7,17.3,13.6,15.7,13.7,16.0,13.7,15.0,15.9,13.9,13.9,15.9,13.3,15.8,14.2,14.1,14.4,15.0,14.4,15.4,13.9,15.0,14.5,15.3,13.8,14.9,13.9,15.7,14.2,16.8,14.4,16.2,14.2,15.0,15.0,15.6,15.6,14.8,15.0,16.0,14.2,16.3,13.8,16.4,14.5,15.6,14.6,15.9,13.8,17.3,14.4,14.2,14.0,17.0,15.0,17.1,14.5,16.1,14.7,15.7,15.8,14.6,14.4,16.5,15.0,17.0,15.5,15.0,13.8,16.1,14.7,15.8,14.0,15.1,15.2,15.9,15.2,16.3,14.1,16.0,15.7,16.2,13.7,null,14.3,15.7,14.8,16.1,17.9,19.5,19.2,18.7,19.8,17.8,18.2,18.2,18.9,19.9,17.8,20.3,17.3,18.1,17.1,19.6,20.0,17.8,18.6,18.2,17.3,17.5,16.6,19.4,17.9,19.0,18.4,19.0,17.8,20.0,16.6,20.8,16.7,18.8,18.6,16.8,18.3,20.7,16.6,19.9,19.5,17.5,19.1,17.0,17.9,18.5,17.9,19.6,18.7,17.3,16.4,19.0,17.3,19.7,17.3,18.8,16.6,19.9,18.8,19.4,19.5,16.5,17.0,19.8,18.1,18.2,19.0,18.7],
+"flipper_length_mm":[181.0,186.0,195.0,null,193.0,190.0,181.0,195.0,193.0,190.0,186.0,180.0,182.0,191.0,198.0,185.0,195.0,197.0,184.0,194.0,174.0,180.0,189.0,185.0,180.0,187.0,183.0,187.0,172.0,180.0,178.0,178.0,188.0,184.0,195.0,196.0,190.0,180.0,181.0,184.0,182.0,195.0,186.0,196.0,185.0,190.0,182.0,179.0,190.0,191.0,186.0,188.0,190.0,200.0,187.0,191.0,186.0,193.0,181.0,194.0,185.0,195.0,185.0,192.0,184.0,192.0,195.0,188.0,190.0,198.0,190.0,190.0,196.0,197.0,190.0,195.0,191.0,184.0,187.0,195.0,189.0,196.0,187.0,193.0,191.0,194.0,190.0,189.0,189.0,190.0,202.0,205.0,185.0,186.0,187.0,208.0,190.0,196.0,178.0,192.0,192.0,203.0,183.0,190.0,193.0,184.0,199.0,190.0,181.0,197.0,198.0,191.0,193.0,197.0,191.0,196.0,188.0,199.0,189.0,189.0,187.0,198.0,176.0,202.0,186.0,199.0,191.0,195.0,191.0,210.0,190.0,197.0,193.0,199.0,187.0,190.0,191.0,200.0,185.0,193.0,193.0,187.0,188.0,190.0,192.0,185.0,190.0,184.0,195.0,193.0,187.0,201.0,211.0,230.0,210.0,218.0,215.0,210.0,211.0,219.0,209.0,215.0,214.0,216.0,214.0,213.0,210.0,217.0,210.0,221.0,209.0,222.0,218.0,215.0,213.0,215.0,215.0,215.0,216.0,215.0,210.0,220.0,222.0,209.0,207.0,230.0,220.0,220.0,213.0,219.0,208.0,208.0,208.0,225.0,210.0,216.0,222.0,217.0,210.0,225.0,213.0,215.0,210.0,220.0,210.0,225.0,217.0,220.0,208.0,220.0,208.0,224.0,208.0,221.0,214.0,231.0,219.0,230.0,214.0,229.0,220.0,223.0,216.0,221.0,221.0,217.0,216.0,230.0,209.0,220.0,215.0,223.0,212.0,221.0,212.0,224.0,212.0,228.0,218.0,218.0,212.0,230.0,218.0,228.0,212.0,224.0,214.0,226.0,216.0,222.0,203.0,225.0,219.0,228.0,215.0,228.0,216.0,215.0,210.0,219.0,208.0,209.0,216.0,229.0,213.0,230.0,217.0,230.0,217.0,222.0,214.0,null,215.0,222.0,212.0,213.0,192.0,196.0,193.0,188.0,197.0,198.0,178.0,197.0,195.0,198.0,193.0,194.0,185.0,201.0,190.0,201.0,197.0,181.0,190.0,195.0,181.0,191.0,187.0,193.0,195.0,197.0,200.0,200.0,191.0,205.0,187.0,201.0,187.0,203.0,195.0,199.0,195.0,210.0,192.0,205.0,210.0,187.0,196.0,196.0,196.0,201.0,190.0,212.0,187.0,198.0,199.0,201.0,193.0,203.0,187.0,197.0,191.0,203.0,202.0,194.0,206.0,189.0,195.0,207.0,202.0,193.0,210.0,198.0]
+},
+"mapping":{
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"species"
+},{
+"type":"str",
+"column":"island"
+},{
+"type":"float",
+"column":"bill_length_mm"
+},{
+"type":"float",
+"column":"bill_depth_mm"
+},{
+"type":"float",
+"column":"flipper_length_mm"
+},{
+"type":"float",
+"column":"body_mass_g"
+},{
+"type":"str",
+"column":"sex"
+},{
+"type":"int",
+"column":"year"
+}]
+},
+"ggtitle":{
+"text":"The relationship between bill length and bill depth by species with flipper length as size"
+},
+"guides":{
+"x":{
+"title":"Bill Length (mm)"
+},
+"y":{
+"title":"Bill Depth (mm)"
+},
+"color":{
+"title":"Species"
+},
+"shape":{
+"title":"Species"
+},
+"size":{
+"title":"Flipper Length (mm)"
+}
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"point",
+"mapping":{
+"x":"bill_length_mm",
+"y":"bill_depth_mm",
+"color":"species",
+"shape":"species",
+"size":"flipper_length_mm"
+},
+"data_meta":{
+},
+"data":{
+}
+}],
+"metainfo_list":[],
+"spec_id":"5"
+};
+           window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script>
+</div>
+</div>
+<p><br> The 2 approaches above have the same outcome, but the latter example introduces a flexible <code>lets_plot</code> paradigm that can be extended to other chart additions and modifications. For example, if we want to add a reference line to “plot”, we can use the <code>geom_hline()</code> function. <br></p>
+<div id="4ce2e291" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> plot <span class="op">+</span> geom_hline(yintercept<span class="op">=</span><span class="dv">7</span>, linetype<span class="op">=</span><span class="st">'dotted'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+   <div id="8AUbIL"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("8AUbIL");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"data":{
+"species":["Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap"],
+"bill_length_mm":[39.1,39.5,40.3,null,36.7,39.3,38.9,39.2,34.1,42.0,37.8,37.8,41.1,38.6,34.6,36.6,38.7,42.5,34.4,46.0,37.8,37.7,35.9,38.2,38.8,35.3,40.6,40.5,37.9,40.5,39.5,37.2,39.5,40.9,36.4,39.2,38.8,42.2,37.6,39.8,36.5,40.8,36.0,44.1,37.0,39.6,41.1,37.5,36.0,42.3,39.6,40.1,35.0,42.0,34.5,41.4,39.0,40.6,36.5,37.6,35.7,41.3,37.6,41.1,36.4,41.6,35.5,41.1,35.9,41.8,33.5,39.7,39.6,45.8,35.5,42.8,40.9,37.2,36.2,42.1,34.6,42.9,36.7,35.1,37.3,41.3,36.3,36.9,38.3,38.9,35.7,41.1,34.0,39.6,36.2,40.8,38.1,40.3,33.1,43.2,35.0,41.0,37.7,37.8,37.9,39.7,38.6,38.2,38.1,43.2,38.1,45.6,39.7,42.2,39.6,42.7,38.6,37.3,35.7,41.1,36.2,37.7,40.2,41.4,35.2,40.6,38.8,41.5,39.0,44.1,38.5,43.1,36.8,37.5,38.1,41.1,35.6,40.2,37.0,39.7,40.2,40.6,32.1,40.7,37.3,39.0,39.2,36.6,36.0,37.8,36.0,41.5,46.1,50.0,48.7,50.0,47.6,46.5,45.4,46.7,43.3,46.8,40.9,49.0,45.5,48.4,45.8,49.3,42.0,49.2,46.2,48.7,50.2,45.1,46.5,46.3,42.9,46.1,44.5,47.8,48.2,50.0,47.3,42.8,45.1,59.6,49.1,48.4,42.6,44.4,44.0,48.7,42.7,49.6,45.3,49.6,50.5,43.6,45.5,50.5,44.9,45.2,46.6,48.5,45.1,50.1,46.5,45.0,43.8,45.5,43.2,50.4,45.3,46.2,45.7,54.3,45.8,49.8,46.2,49.5,43.5,50.7,47.7,46.4,48.2,46.5,46.4,48.6,47.5,51.1,45.2,45.2,49.1,52.5,47.4,50.0,44.9,50.8,43.4,51.3,47.5,52.1,47.5,52.2,45.5,49.5,44.5,50.8,49.4,46.9,48.4,51.1,48.5,55.9,47.2,49.1,47.3,46.8,41.7,53.4,43.3,48.1,50.5,49.8,43.5,51.5,46.2,55.1,44.5,48.8,47.2,null,46.8,50.4,45.2,49.9,46.5,50.0,51.3,45.4,52.7,45.2,46.1,51.3,46.0,51.3,46.6,51.7,47.0,52.0,45.9,50.5,50.3,58.0,46.4,49.2,42.4,48.5,43.2,50.6,46.7,52.0,50.5,49.5,46.4,52.8,40.9,54.2,42.5,51.0,49.7,47.5,47.6,52.0,46.9,53.5,49.0,46.2,50.9,45.5,50.9,50.8,50.1,49.0,51.5,49.8,48.1,51.4,45.7,50.7,42.5,52.2,45.2,49.3,50.2,45.6,51.9,46.8,45.7,55.8,43.5,49.6,50.8,50.2],
+"bill_depth_mm":[18.7,17.4,18.0,null,19.3,20.6,17.8,19.6,18.1,20.2,17.1,17.3,17.6,21.2,21.1,17.8,19.0,20.7,18.4,21.5,18.3,18.7,19.2,18.1,17.2,18.9,18.6,17.9,18.6,18.9,16.7,18.1,17.8,18.9,17.0,21.1,20.0,18.5,19.3,19.1,18.0,18.4,18.5,19.7,16.9,18.8,19.0,18.9,17.9,21.2,17.7,18.9,17.9,19.5,18.1,18.6,17.5,18.8,16.6,19.1,16.9,21.1,17.0,18.2,17.1,18.0,16.2,19.1,16.6,19.4,19.0,18.4,17.2,18.9,17.5,18.5,16.8,19.4,16.1,19.1,17.2,17.6,18.8,19.4,17.8,20.3,19.5,18.6,19.2,18.8,18.0,18.1,17.1,18.1,17.3,18.9,18.6,18.5,16.1,18.5,17.9,20.0,16.0,20.0,18.6,18.9,17.2,20.0,17.0,19.0,16.5,20.3,17.7,19.5,20.7,18.3,17.0,20.5,17.0,18.6,17.2,19.8,17.0,18.5,15.9,19.0,17.6,18.3,17.1,18.0,17.9,19.2,18.5,18.5,17.6,17.5,17.5,20.1,16.5,17.9,17.1,17.2,15.5,17.0,16.8,18.7,18.6,18.4,17.8,18.1,17.1,18.5,13.2,16.3,14.1,15.2,14.5,13.5,14.6,15.3,13.4,15.4,13.7,16.1,13.7,14.6,14.6,15.7,13.5,15.2,14.5,15.1,14.3,14.5,14.5,15.8,13.1,15.1,14.3,15.0,14.3,15.3,15.3,14.2,14.5,17.0,14.8,16.3,13.7,17.3,13.6,15.7,13.7,16.0,13.7,15.0,15.9,13.9,13.9,15.9,13.3,15.8,14.2,14.1,14.4,15.0,14.4,15.4,13.9,15.0,14.5,15.3,13.8,14.9,13.9,15.7,14.2,16.8,14.4,16.2,14.2,15.0,15.0,15.6,15.6,14.8,15.0,16.0,14.2,16.3,13.8,16.4,14.5,15.6,14.6,15.9,13.8,17.3,14.4,14.2,14.0,17.0,15.0,17.1,14.5,16.1,14.7,15.7,15.8,14.6,14.4,16.5,15.0,17.0,15.5,15.0,13.8,16.1,14.7,15.8,14.0,15.1,15.2,15.9,15.2,16.3,14.1,16.0,15.7,16.2,13.7,null,14.3,15.7,14.8,16.1,17.9,19.5,19.2,18.7,19.8,17.8,18.2,18.2,18.9,19.9,17.8,20.3,17.3,18.1,17.1,19.6,20.0,17.8,18.6,18.2,17.3,17.5,16.6,19.4,17.9,19.0,18.4,19.0,17.8,20.0,16.6,20.8,16.7,18.8,18.6,16.8,18.3,20.7,16.6,19.9,19.5,17.5,19.1,17.0,17.9,18.5,17.9,19.6,18.7,17.3,16.4,19.0,17.3,19.7,17.3,18.8,16.6,19.9,18.8,19.4,19.5,16.5,17.0,19.8,18.1,18.2,19.0,18.7],
+"flipper_length_mm":[181.0,186.0,195.0,null,193.0,190.0,181.0,195.0,193.0,190.0,186.0,180.0,182.0,191.0,198.0,185.0,195.0,197.0,184.0,194.0,174.0,180.0,189.0,185.0,180.0,187.0,183.0,187.0,172.0,180.0,178.0,178.0,188.0,184.0,195.0,196.0,190.0,180.0,181.0,184.0,182.0,195.0,186.0,196.0,185.0,190.0,182.0,179.0,190.0,191.0,186.0,188.0,190.0,200.0,187.0,191.0,186.0,193.0,181.0,194.0,185.0,195.0,185.0,192.0,184.0,192.0,195.0,188.0,190.0,198.0,190.0,190.0,196.0,197.0,190.0,195.0,191.0,184.0,187.0,195.0,189.0,196.0,187.0,193.0,191.0,194.0,190.0,189.0,189.0,190.0,202.0,205.0,185.0,186.0,187.0,208.0,190.0,196.0,178.0,192.0,192.0,203.0,183.0,190.0,193.0,184.0,199.0,190.0,181.0,197.0,198.0,191.0,193.0,197.0,191.0,196.0,188.0,199.0,189.0,189.0,187.0,198.0,176.0,202.0,186.0,199.0,191.0,195.0,191.0,210.0,190.0,197.0,193.0,199.0,187.0,190.0,191.0,200.0,185.0,193.0,193.0,187.0,188.0,190.0,192.0,185.0,190.0,184.0,195.0,193.0,187.0,201.0,211.0,230.0,210.0,218.0,215.0,210.0,211.0,219.0,209.0,215.0,214.0,216.0,214.0,213.0,210.0,217.0,210.0,221.0,209.0,222.0,218.0,215.0,213.0,215.0,215.0,215.0,216.0,215.0,210.0,220.0,222.0,209.0,207.0,230.0,220.0,220.0,213.0,219.0,208.0,208.0,208.0,225.0,210.0,216.0,222.0,217.0,210.0,225.0,213.0,215.0,210.0,220.0,210.0,225.0,217.0,220.0,208.0,220.0,208.0,224.0,208.0,221.0,214.0,231.0,219.0,230.0,214.0,229.0,220.0,223.0,216.0,221.0,221.0,217.0,216.0,230.0,209.0,220.0,215.0,223.0,212.0,221.0,212.0,224.0,212.0,228.0,218.0,218.0,212.0,230.0,218.0,228.0,212.0,224.0,214.0,226.0,216.0,222.0,203.0,225.0,219.0,228.0,215.0,228.0,216.0,215.0,210.0,219.0,208.0,209.0,216.0,229.0,213.0,230.0,217.0,230.0,217.0,222.0,214.0,null,215.0,222.0,212.0,213.0,192.0,196.0,193.0,188.0,197.0,198.0,178.0,197.0,195.0,198.0,193.0,194.0,185.0,201.0,190.0,201.0,197.0,181.0,190.0,195.0,181.0,191.0,187.0,193.0,195.0,197.0,200.0,200.0,191.0,205.0,187.0,201.0,187.0,203.0,195.0,199.0,195.0,210.0,192.0,205.0,210.0,187.0,196.0,196.0,196.0,201.0,190.0,212.0,187.0,198.0,199.0,201.0,193.0,203.0,187.0,197.0,191.0,203.0,202.0,194.0,206.0,189.0,195.0,207.0,202.0,193.0,210.0,198.0]
+},
+"mapping":{
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"species"
+},{
+"type":"str",
+"column":"island"
+},{
+"type":"float",
+"column":"bill_length_mm"
+},{
+"type":"float",
+"column":"bill_depth_mm"
+},{
+"type":"float",
+"column":"flipper_length_mm"
+},{
+"type":"float",
+"column":"body_mass_g"
+},{
+"type":"str",
+"column":"sex"
+},{
+"type":"int",
+"column":"year"
+}]
+},
+"ggtitle":{
+"text":"The relationship between bill length and bill depth by species with flipper length as size"
+},
+"guides":{
+"x":{
+"title":"Bill Length (mm)"
+},
+"y":{
+"title":"Bill Depth (mm)"
+},
+"color":{
+"title":"Species"
+},
+"shape":{
+"title":"Species"
+},
+"size":{
+"title":"Flipper Length (mm)"
+}
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"point",
+"mapping":{
+"x":"bill_length_mm",
+"y":"bill_depth_mm",
+"color":"species",
+"shape":"species",
+"size":"flipper_length_mm"
+},
+"data_meta":{
+},
+"data":{
+}
+},{
+"geom":"hline",
+"mapping":{
+},
+"data_meta":{
+},
+"yintercept":7.0,
+"linetype":"dotted",
+"color":"black",
+"data":{
+}
+}],
+"metainfo_list":[],
+"spec_id":"6"
+};
+           window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script>
+</div>
+</div>
+<p>We can add several different shapes, including circles, lines or rectanges using the <code>.add_shape()</code> method. This method specifies what type of shape to add to the graph given a set of coordinates (x0, x1, y0, y1). “.add_shape()” can be used to draw reference lines as well, but still requires a all 4 coordinates.</p>
+<p>Here is a simple example first:</p>
+<div id="82119368" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adds a horizontal line</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lets_plot <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html()</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample data with correct data types</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'x'</span>: [<span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>, <span class="fl">5.0</span>], <span class="st">'y'</span>: [<span class="fl">5.0</span>, <span class="fl">4.0</span>, <span class="fl">3.0</span>, <span class="fl">2.0</span>, <span class="fl">1.0</span>]}</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure data types are correct</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'x'</span>] <span class="op">=</span> df[<span class="st">'x'</span>].astype(<span class="bu">float</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'y'</span>] <span class="op">=</span> df[<span class="st">'y'</span>].astype(<span class="bu">float</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create scatter plot</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> ggplot(df, aes(<span class="st">'x'</span>, <span class="st">'y'</span>)) <span class="op">+</span> geom_point()</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a rectangle shape using direct numeric values</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>plot <span class="op">+=</span> geom_rect(xmin<span class="op">=</span><span class="fl">2.0</span>, xmax<span class="op">=</span><span class="fl">4.0</span>, ymin<span class="op">=</span><span class="fl">1.0</span>, ymax<span class="op">=</span><span class="fl">3.0</span>, fill<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>plot.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+
+            <div id="FJZ4gm"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.8.0/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("FJZ4gm").appendChild(div);
+                    };
+                    var e = document.getElementById("FJZ4gm");
+                    e.appendChild(script);
+                })()
+            </script>
+            
+</div>
+<div class="cell-output cell-output-display">
+   <div id="Nv9NbN"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("Nv9NbN");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"data":{
+"x":[1.0,2.0,3.0,4.0,5.0],
+"y":[5.0,4.0,3.0,2.0,1.0]
+},
+"mapping":{
+"x":"x",
+"y":"y"
+},
+"data_meta":{
+"series_annotations":[{
+"type":"float",
+"column":"x"
+},{
+"type":"float",
+"column":"y"
+}]
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"point",
+"mapping":{
+},
+"data_meta":{
+},
+"data":{
+}
+},{
+"geom":"rect",
+"mapping":{
+},
+"data_meta":{
+},
+"xmin":2.0,
+"xmax":4.0,
+"ymin":1.0,
+"ymax":3.0,
+"fill":"red",
+"alpha":0.3,
+"data":{
+}
+}],
+"metainfo_list":[],
+"spec_id":"7"
+};
+           window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script>
+</div>
+</div>
+<p>Now here is it applied to our penguin data:</p>
+<div id="4af59de3" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the penguins dataset</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create scatter plot</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    ggplot(penguins)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(aes(x<span class="op">=</span><span class="st">'bill_length_mm'</span>, y<span class="op">=</span><span class="st">'bill_depth_mm'</span>, color<span class="op">=</span><span class="st">'species'</span>, shape<span class="op">=</span><span class="st">'species'</span>, size<span class="op">=</span><span class="st">'flipper_length_mm'</span>))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> ggtitle(<span class="st">"The relationship between bill length and bill depth by species with flipper length as size"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> plot <span class="op">+</span> labs(x<span class="op">=</span><span class="st">'Bill Length (mm)'</span>, y<span class="op">=</span><span class="st">'Bill Depth (mm)'</span>, color<span class="op">=</span><span class="st">'Species'</span>, shape<span class="op">=</span><span class="st">'Species'</span>, size<span class="op">=</span><span class="st">'Flipper Length (mm)'</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a rectangle shape using direct numeric values</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>plot <span class="op">+=</span> geom_rect(xmin<span class="op">=</span><span class="fl">33.0</span>, xmax<span class="op">=</span><span class="fl">45.0</span>, ymin<span class="op">=</span><span class="fl">16.0</span>, ymax<span class="op">=</span><span class="fl">22.0</span>, fill<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+   <div id="VA7IGF"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("VA7IGF");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"data":{
+"species":["Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Adelie","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Gentoo","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap","Chinstrap"],
+"bill_length_mm":[39.1,39.5,40.3,null,36.7,39.3,38.9,39.2,34.1,42.0,37.8,37.8,41.1,38.6,34.6,36.6,38.7,42.5,34.4,46.0,37.8,37.7,35.9,38.2,38.8,35.3,40.6,40.5,37.9,40.5,39.5,37.2,39.5,40.9,36.4,39.2,38.8,42.2,37.6,39.8,36.5,40.8,36.0,44.1,37.0,39.6,41.1,37.5,36.0,42.3,39.6,40.1,35.0,42.0,34.5,41.4,39.0,40.6,36.5,37.6,35.7,41.3,37.6,41.1,36.4,41.6,35.5,41.1,35.9,41.8,33.5,39.7,39.6,45.8,35.5,42.8,40.9,37.2,36.2,42.1,34.6,42.9,36.7,35.1,37.3,41.3,36.3,36.9,38.3,38.9,35.7,41.1,34.0,39.6,36.2,40.8,38.1,40.3,33.1,43.2,35.0,41.0,37.7,37.8,37.9,39.7,38.6,38.2,38.1,43.2,38.1,45.6,39.7,42.2,39.6,42.7,38.6,37.3,35.7,41.1,36.2,37.7,40.2,41.4,35.2,40.6,38.8,41.5,39.0,44.1,38.5,43.1,36.8,37.5,38.1,41.1,35.6,40.2,37.0,39.7,40.2,40.6,32.1,40.7,37.3,39.0,39.2,36.6,36.0,37.8,36.0,41.5,46.1,50.0,48.7,50.0,47.6,46.5,45.4,46.7,43.3,46.8,40.9,49.0,45.5,48.4,45.8,49.3,42.0,49.2,46.2,48.7,50.2,45.1,46.5,46.3,42.9,46.1,44.5,47.8,48.2,50.0,47.3,42.8,45.1,59.6,49.1,48.4,42.6,44.4,44.0,48.7,42.7,49.6,45.3,49.6,50.5,43.6,45.5,50.5,44.9,45.2,46.6,48.5,45.1,50.1,46.5,45.0,43.8,45.5,43.2,50.4,45.3,46.2,45.7,54.3,45.8,49.8,46.2,49.5,43.5,50.7,47.7,46.4,48.2,46.5,46.4,48.6,47.5,51.1,45.2,45.2,49.1,52.5,47.4,50.0,44.9,50.8,43.4,51.3,47.5,52.1,47.5,52.2,45.5,49.5,44.5,50.8,49.4,46.9,48.4,51.1,48.5,55.9,47.2,49.1,47.3,46.8,41.7,53.4,43.3,48.1,50.5,49.8,43.5,51.5,46.2,55.1,44.5,48.8,47.2,null,46.8,50.4,45.2,49.9,46.5,50.0,51.3,45.4,52.7,45.2,46.1,51.3,46.0,51.3,46.6,51.7,47.0,52.0,45.9,50.5,50.3,58.0,46.4,49.2,42.4,48.5,43.2,50.6,46.7,52.0,50.5,49.5,46.4,52.8,40.9,54.2,42.5,51.0,49.7,47.5,47.6,52.0,46.9,53.5,49.0,46.2,50.9,45.5,50.9,50.8,50.1,49.0,51.5,49.8,48.1,51.4,45.7,50.7,42.5,52.2,45.2,49.3,50.2,45.6,51.9,46.8,45.7,55.8,43.5,49.6,50.8,50.2],
+"bill_depth_mm":[18.7,17.4,18.0,null,19.3,20.6,17.8,19.6,18.1,20.2,17.1,17.3,17.6,21.2,21.1,17.8,19.0,20.7,18.4,21.5,18.3,18.7,19.2,18.1,17.2,18.9,18.6,17.9,18.6,18.9,16.7,18.1,17.8,18.9,17.0,21.1,20.0,18.5,19.3,19.1,18.0,18.4,18.5,19.7,16.9,18.8,19.0,18.9,17.9,21.2,17.7,18.9,17.9,19.5,18.1,18.6,17.5,18.8,16.6,19.1,16.9,21.1,17.0,18.2,17.1,18.0,16.2,19.1,16.6,19.4,19.0,18.4,17.2,18.9,17.5,18.5,16.8,19.4,16.1,19.1,17.2,17.6,18.8,19.4,17.8,20.3,19.5,18.6,19.2,18.8,18.0,18.1,17.1,18.1,17.3,18.9,18.6,18.5,16.1,18.5,17.9,20.0,16.0,20.0,18.6,18.9,17.2,20.0,17.0,19.0,16.5,20.3,17.7,19.5,20.7,18.3,17.0,20.5,17.0,18.6,17.2,19.8,17.0,18.5,15.9,19.0,17.6,18.3,17.1,18.0,17.9,19.2,18.5,18.5,17.6,17.5,17.5,20.1,16.5,17.9,17.1,17.2,15.5,17.0,16.8,18.7,18.6,18.4,17.8,18.1,17.1,18.5,13.2,16.3,14.1,15.2,14.5,13.5,14.6,15.3,13.4,15.4,13.7,16.1,13.7,14.6,14.6,15.7,13.5,15.2,14.5,15.1,14.3,14.5,14.5,15.8,13.1,15.1,14.3,15.0,14.3,15.3,15.3,14.2,14.5,17.0,14.8,16.3,13.7,17.3,13.6,15.7,13.7,16.0,13.7,15.0,15.9,13.9,13.9,15.9,13.3,15.8,14.2,14.1,14.4,15.0,14.4,15.4,13.9,15.0,14.5,15.3,13.8,14.9,13.9,15.7,14.2,16.8,14.4,16.2,14.2,15.0,15.0,15.6,15.6,14.8,15.0,16.0,14.2,16.3,13.8,16.4,14.5,15.6,14.6,15.9,13.8,17.3,14.4,14.2,14.0,17.0,15.0,17.1,14.5,16.1,14.7,15.7,15.8,14.6,14.4,16.5,15.0,17.0,15.5,15.0,13.8,16.1,14.7,15.8,14.0,15.1,15.2,15.9,15.2,16.3,14.1,16.0,15.7,16.2,13.7,null,14.3,15.7,14.8,16.1,17.9,19.5,19.2,18.7,19.8,17.8,18.2,18.2,18.9,19.9,17.8,20.3,17.3,18.1,17.1,19.6,20.0,17.8,18.6,18.2,17.3,17.5,16.6,19.4,17.9,19.0,18.4,19.0,17.8,20.0,16.6,20.8,16.7,18.8,18.6,16.8,18.3,20.7,16.6,19.9,19.5,17.5,19.1,17.0,17.9,18.5,17.9,19.6,18.7,17.3,16.4,19.0,17.3,19.7,17.3,18.8,16.6,19.9,18.8,19.4,19.5,16.5,17.0,19.8,18.1,18.2,19.0,18.7],
+"flipper_length_mm":[181.0,186.0,195.0,null,193.0,190.0,181.0,195.0,193.0,190.0,186.0,180.0,182.0,191.0,198.0,185.0,195.0,197.0,184.0,194.0,174.0,180.0,189.0,185.0,180.0,187.0,183.0,187.0,172.0,180.0,178.0,178.0,188.0,184.0,195.0,196.0,190.0,180.0,181.0,184.0,182.0,195.0,186.0,196.0,185.0,190.0,182.0,179.0,190.0,191.0,186.0,188.0,190.0,200.0,187.0,191.0,186.0,193.0,181.0,194.0,185.0,195.0,185.0,192.0,184.0,192.0,195.0,188.0,190.0,198.0,190.0,190.0,196.0,197.0,190.0,195.0,191.0,184.0,187.0,195.0,189.0,196.0,187.0,193.0,191.0,194.0,190.0,189.0,189.0,190.0,202.0,205.0,185.0,186.0,187.0,208.0,190.0,196.0,178.0,192.0,192.0,203.0,183.0,190.0,193.0,184.0,199.0,190.0,181.0,197.0,198.0,191.0,193.0,197.0,191.0,196.0,188.0,199.0,189.0,189.0,187.0,198.0,176.0,202.0,186.0,199.0,191.0,195.0,191.0,210.0,190.0,197.0,193.0,199.0,187.0,190.0,191.0,200.0,185.0,193.0,193.0,187.0,188.0,190.0,192.0,185.0,190.0,184.0,195.0,193.0,187.0,201.0,211.0,230.0,210.0,218.0,215.0,210.0,211.0,219.0,209.0,215.0,214.0,216.0,214.0,213.0,210.0,217.0,210.0,221.0,209.0,222.0,218.0,215.0,213.0,215.0,215.0,215.0,216.0,215.0,210.0,220.0,222.0,209.0,207.0,230.0,220.0,220.0,213.0,219.0,208.0,208.0,208.0,225.0,210.0,216.0,222.0,217.0,210.0,225.0,213.0,215.0,210.0,220.0,210.0,225.0,217.0,220.0,208.0,220.0,208.0,224.0,208.0,221.0,214.0,231.0,219.0,230.0,214.0,229.0,220.0,223.0,216.0,221.0,221.0,217.0,216.0,230.0,209.0,220.0,215.0,223.0,212.0,221.0,212.0,224.0,212.0,228.0,218.0,218.0,212.0,230.0,218.0,228.0,212.0,224.0,214.0,226.0,216.0,222.0,203.0,225.0,219.0,228.0,215.0,228.0,216.0,215.0,210.0,219.0,208.0,209.0,216.0,229.0,213.0,230.0,217.0,230.0,217.0,222.0,214.0,null,215.0,222.0,212.0,213.0,192.0,196.0,193.0,188.0,197.0,198.0,178.0,197.0,195.0,198.0,193.0,194.0,185.0,201.0,190.0,201.0,197.0,181.0,190.0,195.0,181.0,191.0,187.0,193.0,195.0,197.0,200.0,200.0,191.0,205.0,187.0,201.0,187.0,203.0,195.0,199.0,195.0,210.0,192.0,205.0,210.0,187.0,196.0,196.0,196.0,201.0,190.0,212.0,187.0,198.0,199.0,201.0,193.0,203.0,187.0,197.0,191.0,203.0,202.0,194.0,206.0,189.0,195.0,207.0,202.0,193.0,210.0,198.0]
+},
+"mapping":{
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"species"
+},{
+"type":"str",
+"column":"island"
+},{
+"type":"float",
+"column":"bill_length_mm"
+},{
+"type":"float",
+"column":"bill_depth_mm"
+},{
+"type":"float",
+"column":"flipper_length_mm"
+},{
+"type":"float",
+"column":"body_mass_g"
+},{
+"type":"str",
+"column":"sex"
+},{
+"type":"int",
+"column":"year"
+}]
+},
+"ggtitle":{
+"text":"The relationship between bill length and bill depth by species with flipper length as size"
+},
+"guides":{
+"x":{
+"title":"Bill Length (mm)"
+},
+"y":{
+"title":"Bill Depth (mm)"
+},
+"color":{
+"title":"Species"
+},
+"shape":{
+"title":"Species"
+},
+"size":{
+"title":"Flipper Length (mm)"
+}
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"point",
+"mapping":{
+"x":"bill_length_mm",
+"y":"bill_depth_mm",
+"color":"species",
+"shape":"species",
+"size":"flipper_length_mm"
+},
+"data_meta":{
+},
+"data":{
+}
+},{
+"geom":"rect",
+"mapping":{
+},
+"data_meta":{
+},
+"xmin":33.0,
+"xmax":45.0,
+"ymin":16.0,
+"ymax":22.0,
+"fill":"red",
+"alpha":0.3,
+"data":{
+}
+}],
+"metainfo_list":[],
+"spec_id":"8"
+};
+           window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script>
+</div>
+</div>
+<p>The code above introduces the <code>geom_rect</code> features, it is not always necessary for every situation. But hopefully this gives a flavor of what can be done.</p>
+<p>Notice also, that the <code>geom_</code> methods actually update <code>plot</code>. No need to overwrite the original object or create a new chart object for each modification.</p>
+</section>
+<section id="other-geom_itions" class="level3">
+<h3 class="anchored" data-anchor-id="other-geom_itions">Other <code>geom_*</code>itions</h3>
+<p>There are several other useful “post hoc” graph modifications that we only mention in this chapter. For further exploration, see <a href="https://lets-plot.org/">Lets-Plot Documentation</a>.</p>
+<p>Use <code>geom_text()</code> to add text annotations at specific locations. Update axes by using <code>scale_x_continuous()</code> or <code>scale_y_continuous()</code> which allows you to modify gridlines and add units of measure like “%” or “$”. <code>geom_vline()</code> and <code>geom_hline()</code> allow you to add vertical or horizontal reference lines. The possibilities are almost endless!</p>
+</section>
+<section id="resources" class="level3">
+<h3 class="anchored" data-anchor-id="resources">Resources</h3>
+<p>This page has introduced the basics of <code>lets_plot</code>, but we have only looked at a scatterplot. For links to further documentation and a whole gallery of <code>lets_plot</code> possibilities, see <a href="https://lets-plot.org/">Lets-Plot Documentation</a>.</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/byuidatascience\.github\.io\/DS250-Course-Polars\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>BYU-I 2025©</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/byuidatascience">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/groups/13537407/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
