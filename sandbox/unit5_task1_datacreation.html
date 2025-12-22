@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -108,9 +108,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -449,7 +446,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>The main idea of this assignment is to have the students read in xlsx data, skip 10 rows, and extract information using regex.</p>
-<div id="e0bdda0a" class="cell" data-execution_count="1">
+<div id="d10adfcd" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -458,1709 +455,379 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html(isolated_frame<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Load in the original starwars data</p>
-<div id="adae1d14" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pl.read_csv(<span class="st">'StarWarsOriginal.csv'</span>)</span>
+<div id="f0e1d602" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pl.read_csv(<span class="st">'https://github.com/fivethirtyeight/data/raw/master/star-wars-survey/StarWars.csv'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>['RespondentID',
- 'Have you seen any of the 6 films in the Star Wars franchise?',
- 'Do you consider yourself to be a fan of the Star Wars film franchise?',
- 'Which of the following Star Wars films have you seen? Please select all that apply.',
- '',
- '_duplicated_0',
- '_duplicated_1',
- '_duplicated_2',
- '_duplicated_3',
- 'Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.',
- '_duplicated_4',
- '_duplicated_5',
- '_duplicated_6',
- '_duplicated_7',
- '_duplicated_8',
- 'Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her.',
- '_duplicated_9',
- '_duplicated_10',
- '_duplicated_11',
- '_duplicated_12',
- '_duplicated_13',
- '_duplicated_14',
- '_duplicated_15',
- '_duplicated_16',
- '_duplicated_17',
- '_duplicated_18',
- '_duplicated_19',
- '_duplicated_20',
- '_duplicated_21',
- 'Which character shot first?',
- 'Are you familiar with the Expanded Universe?',
- 'Do you consider yourself to be a fan of the Expanded Universe?��',
- 'Do you consider yourself to be a fan of the Star Trek franchise?',
- 'Gender',
- 'Age',
- 'Household Income',
- 'Education',
- 'Location (Census Region)']</code></pre>
 </div>
+<div id="fd700a9c" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rename_dict<span class="op">=</span>{</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Have you seen any of the 6 films in the Star Wars franchise?"</span> : <span class="st">"seen_any"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Star Wars film franchise?"</span> : <span class="st">"star_wars_fan"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Which of the following Star Wars films have you seen? Please select all that apply."</span> : <span class="st">"seen_episode_I"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 4"</span> : <span class="st">"seen_episode_II"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 5"</span> : <span class="st">"seen_episode_III"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 6"</span> : <span class="st">"seen_episode_IV"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 7"</span> : <span class="st">"seen_episode_V"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 8"</span> : <span class="st">"seen_episode_VI"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film."</span> : <span class="st">"rank_episode_I"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 10"</span> : <span class="st">"rank_episode_II"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 11"</span> : <span class="st">"rank_episode_III"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 12"</span> : <span class="st">"rank_episode_IV"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 13"</span> : <span class="st">"rank_episode_V"</span>, </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 14"</span> : <span class="st">"rank_episode_VI"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her."</span> : <span class="st">"han_solo"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 16"</span> : <span class="st">"luke_skywalker"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 17"</span> : <span class="st">"princess_leia_organa"</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 18"</span> : <span class="st">"anakin_skywalker"</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 19"</span> : <span class="st">"obi_wan_kenobi"</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 20"</span> : <span class="st">"emperor_palpatine"</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 21"</span> : <span class="st">"darth_vader"</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 22"</span> : <span class="st">"lando_calrissian"</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 23"</span> : <span class="st">"boba_fett"</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 24"</span> : <span class="st">"C-3P0"</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 25"</span> : <span class="st">"R2_D2"</span>,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 26"</span> : <span class="st">"jar_jar_binks"</span>,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 27"</span> : <span class="st">"padme_amidala"</span>,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 28"</span> : <span class="st">"yoda"</span>,</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Which character shot first?"</span> : <span class="st">"who_shot_first"</span>,</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Are you familiar with the Expanded Universe?"</span> : <span class="st">"know_expanded_universe"</span>,</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Expanded Universe?æ"</span>: <span class="st">"expanded_universe_fan"</span>,</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Star Trek franchise?"</span> : <span class="st">"star_trek_fan"</span>,</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gender"</span> : <span class="st">"gender"</span>,</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age"</span> : <span class="st">"age"</span>,</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Household Income"</span> : <span class="st">"household_income"</span>,</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education"</span> : <span class="st">"education"</span>,</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Location (Census Region)"</span> : <span class="st">"location"</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>rename_dict <span class="op">=</span> {</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Seen / fan questions</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Have you seen any of the 6 films in the Star Wars franchise?"</span>: <span class="st">"seen_any"</span>,</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Star Wars film franchise?"</span>: <span class="st">"star_wars_fan"</span>,</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Seen episodes (multi-select)</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Which of the following Star Wars films have you seen? Please select all that apply."</span>: <span class="st">"seen_episode_I"</span>,</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">""</span>: <span class="st">"seen_episode_II"</span>,               <span class="co"># actual blank header</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_0"</span>: <span class="st">"seen_episode_III"</span>,</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_1"</span>: <span class="st">"seen_episode_IV"</span>,</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_2"</span>: <span class="st">"seen_episode_V"</span>,</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_3"</span>: <span class="st">"seen_episode_VI"</span>,</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>    <span class="co"># There should be one more for episode VI</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># but your printed header list DOES NOT include Unnamed: 8 → episode VI</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>    <span class="co"># it seems Polars removed an empty column and shifted things</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check the data or confirm manually.</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For now I'll assume the next logical one:</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_4"</span>: <span class="st">"rank_episode_II"</span>,  <span class="co"># but see below</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ranking episodes</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film."</span>: <span class="st">"rank_episode_I"</span>,</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_4"</span>: <span class="st">"rank_episode_II"</span>,</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_5"</span>: <span class="st">"rank_episode_III"</span>,</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_6"</span>: <span class="st">"rank_episode_IV"</span>,</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_7"</span>: <span class="st">"rank_episode_V"</span>,</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_8"</span>: <span class="st">"rank_episode_VI"</span>,</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Character favorability</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her."</span>: <span class="st">"han_solo"</span>,</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_9"</span>: <span class="st">"luke_skywalker"</span>,</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_10"</span>: <span class="st">"princess_leia_organa"</span>,</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_11"</span>: <span class="st">"anakin_skywalker"</span>,</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_12"</span>: <span class="st">"obi_wan_kenobi"</span>,</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_13"</span>: <span class="st">"emperor_palpatine"</span>,</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_14"</span>: <span class="st">"darth_vader"</span>,</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_15"</span>: <span class="st">"lando_calrissian"</span>,</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_16"</span>: <span class="st">"boba_fett"</span>,</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_17"</span>: <span class="st">"C_3PO"</span>,</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_18"</span>: <span class="st">"R2_D2"</span>,</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_19"</span>: <span class="st">"jar_jar_binks"</span>,</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_20"</span>: <span class="st">"padme_amidala"</span>,</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_21"</span>: <span class="st">"yoda"</span>,</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    <span class="co"># General questions</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Which character shot first?"</span>: <span class="st">"who_shot_first"</span>,</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Are you familiar with the Expanded Universe?"</span>: <span class="st">"know_expanded_universe"</span>,</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Expanded Universe?��"</span>: <span class="st">"expanded_universe_fan"</span>,</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Star Trek franchise?"</span>: <span class="st">"star_trek_fan"</span>,</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Demographics</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gender"</span>: <span class="st">"gender"</span>,</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age"</span>: <span class="st">"age"</span>,</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Household Income"</span>: <span class="st">"household_income"</span>,</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education"</span>: <span class="st">"education"</span>,</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Location (Census Region)"</span>: <span class="st">"location"</span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="ee64f881" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rename_dict<span class="op">=</span>{</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Have you seen any of the 6 films in the Star Wars franchise?"</span> : <span class="st">"seen_any"</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Star Wars film franchise?"</span> : <span class="st">"star_wars_fan"</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Which of the following Star Wars films have you seen? Please select all that apply."</span> : <span class="st">"seen_episode_I"</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 4"</span> : <span class="st">"seen_episode_II"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 5"</span> : <span class="st">"seen_episode_III"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 6"</span> : <span class="st">"seen_episode_IV"</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 7"</span> : <span class="st">"seen_episode_V"</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 8"</span> : <span class="st">"seen_episode_VI"</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film."</span> : <span class="st">"rank_episode_I"</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 10"</span> : <span class="st">"rank_episode_II"</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 11"</span> : <span class="st">"rank_episode_III"</span>,</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 12"</span> : <span class="st">"rank_episode_IV"</span>,</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 13"</span> : <span class="st">"rank_episode_V"</span>, </span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 14"</span> : <span class="st">"rank_episode_VI"</span>,</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her."</span> : <span class="st">"han_solo"</span>,</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 16"</span> : <span class="st">"luke_skywalker"</span>,</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 17"</span> : <span class="st">"princess_leia_organa"</span>,</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 18"</span> : <span class="st">"anakin_skywalker"</span>,</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 19"</span> : <span class="st">"obi_wan_kenobi"</span>,</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 20"</span> : <span class="st">"emperor_palpatine"</span>,</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 21"</span> : <span class="st">"darth_vader"</span>,</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 22"</span> : <span class="st">"lando_calrissian"</span>,</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 23"</span> : <span class="st">"boba_fett"</span>,</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 24"</span> : <span class="st">"C-3P0"</span>,</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 25"</span> : <span class="st">"R2_D2"</span>,</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 26"</span> : <span class="st">"jar_jar_binks"</span>,</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 27"</span> : <span class="st">"padme_amidala"</span>,</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unnamed: 28"</span> : <span class="st">"yoda"</span>,</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Which character shot first?"</span> : <span class="st">"who_shot_first"</span>,</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Are you familiar with the Expanded Universe?"</span> : <span class="st">"know_expanded_universe"</span>,</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Expanded Universe?æ"</span>: <span class="st">"expanded_universe_fan"</span>,</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Star Trek franchise?"</span> : <span class="st">"star_trek_fan"</span>,</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gender"</span> : <span class="st">"gender"</span>,</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age"</span> : <span class="st">"age"</span>,</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Household Income"</span> : <span class="st">"household_income"</span>,</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education"</span> : <span class="st">"education"</span>,</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Location (Census Region)"</span> : <span class="st">"location"</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>rename_dict <span class="op">=</span> {</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Seen / fan questions</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Have you seen any of the 6 films in the Star Wars franchise?"</span>: <span class="st">"seen_any"</span>,</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Star Wars film franchise?"</span>: <span class="st">"star_wars_fan"</span>,</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Seen episodes (multi-select)</span></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Which of the following Star Wars films have you seen? Please select all that apply."</span>: <span class="st">"seen_episode_I"</span>,</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">""</span>: <span class="st">"seen_episode_II"</span>,               <span class="co"># actual blank header</span></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_0"</span>: <span class="st">"seen_episode_III"</span>,</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_1"</span>: <span class="st">"seen_episode_IV"</span>,</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_2"</span>: <span class="st">"seen_episode_V"</span>,</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_3"</span>: <span class="st">"seen_episode_VI"</span>,</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="co"># There should be one more for episode VI</span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># but your printed header list DOES NOT include Unnamed: 8 → episode VI</span></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    <span class="co"># it seems Polars removed an empty column and shifted things</span></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check the data or confirm manually.</span></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For now I'll assume the next logical one:</span></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_4"</span>: <span class="st">"rank_episode_II"</span>,  <span class="co"># but see below</span></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ranking episodes</span></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film."</span>: <span class="st">"rank_episode_I"</span>,</span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_4"</span>: <span class="st">"rank_episode_II"</span>,</span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_5"</span>: <span class="st">"rank_episode_III"</span>,</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_6"</span>: <span class="st">"rank_episode_IV"</span>,</span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_7"</span>: <span class="st">"rank_episode_V"</span>,</span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_8"</span>: <span class="st">"rank_episode_VI"</span>,</span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Character favorability</span></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her."</span>: <span class="st">"han_solo"</span>,</span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_9"</span>: <span class="st">"luke_skywalker"</span>,</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_10"</span>: <span class="st">"princess_leia_organa"</span>,</span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_11"</span>: <span class="st">"anakin_skywalker"</span>,</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_12"</span>: <span class="st">"obi_wan_kenobi"</span>,</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_13"</span>: <span class="st">"emperor_palpatine"</span>,</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_14"</span>: <span class="st">"darth_vader"</span>,</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_15"</span>: <span class="st">"lando_calrissian"</span>,</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_16"</span>: <span class="st">"boba_fett"</span>,</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_17"</span>: <span class="st">"C_3PO"</span>,</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_18"</span>: <span class="st">"R2_D2"</span>,</span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_19"</span>: <span class="st">"jar_jar_binks"</span>,</span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_20"</span>: <span class="st">"padme_amidala"</span>,</span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_duplicated_21"</span>: <span class="st">"yoda"</span>,</span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>    <span class="co"># General questions</span></span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Which character shot first?"</span>: <span class="st">"who_shot_first"</span>,</span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Are you familiar with the Expanded Universe?"</span>: <span class="st">"know_expanded_universe"</span>,</span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Expanded Universe?��"</span>: <span class="st">"expanded_universe_fan"</span>,</span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do you consider yourself to be a fan of the Star Trek franchise?"</span>: <span class="st">"star_trek_fan"</span>,</span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Demographics</span></span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gender"</span>: <span class="st">"gender"</span>,</span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age"</span>: <span class="st">"age"</span>,</span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Household Income"</span>: <span class="st">"household_income"</span>,</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education"</span>: <span class="st">"education"</span>,</span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Location (Census Region)"</span>: <span class="st">"location"</span></span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="09517473" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the file with the real header, then skip the next two junk rows</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pl.read_csv(</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"StarWarsOriginal.csv"</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    skip_rows_after_header<span class="op">=</span><span class="dv">1</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Now apply your renaming dictionary</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.rename(rename_dict)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (5, 38)</small>
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">RespondentID</th>
-<th data-quarto-table-cell-role="th">seen_any</th>
-<th data-quarto-table-cell-role="th">star_wars_fan</th>
-<th data-quarto-table-cell-role="th">seen_episode_I</th>
-<th data-quarto-table-cell-role="th">seen_episode_II</th>
-<th data-quarto-table-cell-role="th">seen_episode_III</th>
-<th data-quarto-table-cell-role="th">seen_episode_IV</th>
-<th data-quarto-table-cell-role="th">seen_episode_V</th>
-<th data-quarto-table-cell-role="th">seen_episode_VI</th>
-<th data-quarto-table-cell-role="th">rank_episode_I</th>
-<th data-quarto-table-cell-role="th">rank_episode_II</th>
-<th data-quarto-table-cell-role="th">rank_episode_III</th>
-<th data-quarto-table-cell-role="th">rank_episode_IV</th>
-<th data-quarto-table-cell-role="th">rank_episode_V</th>
-<th data-quarto-table-cell-role="th">rank_episode_VI</th>
-<th data-quarto-table-cell-role="th">han_solo</th>
-<th data-quarto-table-cell-role="th">luke_skywalker</th>
-<th data-quarto-table-cell-role="th">princess_leia_organa</th>
-<th data-quarto-table-cell-role="th">anakin_skywalker</th>
-<th data-quarto-table-cell-role="th">obi_wan_kenobi</th>
-<th data-quarto-table-cell-role="th">emperor_palpatine</th>
-<th data-quarto-table-cell-role="th">darth_vader</th>
-<th data-quarto-table-cell-role="th">lando_calrissian</th>
-<th data-quarto-table-cell-role="th">boba_fett</th>
-<th data-quarto-table-cell-role="th">C_3PO</th>
-<th data-quarto-table-cell-role="th">R2_D2</th>
-<th data-quarto-table-cell-role="th">jar_jar_binks</th>
-<th data-quarto-table-cell-role="th">padme_amidala</th>
-<th data-quarto-table-cell-role="th">yoda</th>
-<th data-quarto-table-cell-role="th">who_shot_first</th>
-<th data-quarto-table-cell-role="th">know_expanded_universe</th>
-<th data-quarto-table-cell-role="th">expanded_universe_fan</th>
-<th data-quarto-table-cell-role="th">star_trek_fan</th>
-<th data-quarto-table-cell-role="th">gender</th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">household_income</th>
-<th data-quarto-table-cell-role="th">education</th>
-<th data-quarto-table-cell-role="th">location</th>
-</tr>
-<tr class="even">
-<td>i64</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>3292879998</td>
-<td>"Yes"</td>
-<td>"Yes"</td>
-<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
-<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
-<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
-<td>"Star Wars: Episode IV&nbsp;&nbsp;A New H…</td>
-<td>"Star Wars: Episode V The Empir…</td>
-<td>"Star Wars: Episode VI Return o…</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-<td>4</td>
-<td>5</td>
-<td>6</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"I don't understand this questi…</td>
-<td>"Yes"</td>
-<td>"No"</td>
-<td>"No"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>null</td>
-<td>"High school degree"</td>
-<td>"South Atlantic"</td>
-</tr>
-<tr class="even">
-<td>3292879538</td>
-<td>"No"</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>"Yes"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>"$0 - $24,999"</td>
-<td>"Bachelor degree"</td>
-<td>"West South Central"</td>
-</tr>
-<tr class="odd">
-<td>3292765271</td>
-<td>"Yes"</td>
-<td>"No"</td>
-<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
-<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
-<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>5</td>
-<td>6</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"I don't understand this questi…</td>
-<td>"No"</td>
-<td>null</td>
-<td>"No"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>"$0 - $24,999"</td>
-<td>"High school degree"</td>
-<td>"West North Central"</td>
-</tr>
-<tr class="even">
-<td>3292763116</td>
-<td>"Yes"</td>
-<td>"Yes"</td>
-<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
-<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
-<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
-<td>"Star Wars: Episode IV&nbsp;&nbsp;A New H…</td>
-<td>"Star Wars: Episode V The Empir…</td>
-<td>"Star Wars: Episode VI Return o…</td>
-<td>5</td>
-<td>6</td>
-<td>1</td>
-<td>2</td>
-<td>4</td>
-<td>3</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Very favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat unfavorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"I don't understand this questi…</td>
-<td>"No"</td>
-<td>null</td>
-<td>"Yes"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>"$100,000 - $149,999"</td>
-<td>"Some college or Associate degr…</td>
-<td>"West North Central"</td>
-</tr>
-<tr class="odd">
-<td>3292731220</td>
-<td>"Yes"</td>
-<td>"Yes"</td>
-<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
-<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
-<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
-<td>"Star Wars: Episode IV&nbsp;&nbsp;A New H…</td>
-<td>"Star Wars: Episode V The Empir…</td>
-<td>"Star Wars: Episode VI Return o…</td>
-<td>5</td>
-<td>4</td>
-<td>6</td>
-<td>2</td>
-<td>1</td>
-<td>3</td>
-<td>"Very favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat unfavorably"</td>
-<td>"Very favorably"</td>
-<td>"Very unfavorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Neither favorably nor unfavora…</td>
-<td>"Very favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Very unfavorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Greedo"</td>
-<td>"Yes"</td>
-<td>"No"</td>
-<td>"No"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>"$100,000 - $149,999"</td>
-<td>"Some college or Associate degr…</td>
-<td>"West North Central"</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<div id="230ccd13" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the file with the real header, then skip the next two junk rows</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pl.read_csv(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"StarWarsOriginal.csv"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    skip_rows_after_header<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Now apply your renaming dictionary</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.rename(rename_dict)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now that the columns are fixed in polars, I need to generate emails for them to extract names form</p>
-<div id="debb4ae4" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed so I can get the results again</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">42</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># sample of first names</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>first_names <span class="op">=</span> [</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># modern common</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Liam"</span>, <span class="st">"Noah"</span>, <span class="st">"Oliver"</span>, <span class="st">"Elijah"</span>, <span class="st">"James"</span>, <span class="st">"William"</span>, <span class="st">"Benjamin"</span>, <span class="st">"Lucas"</span>, <span class="st">"Henry"</span>, <span class="st">"Alexander"</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Emma"</span>, <span class="st">"Olivia"</span>, <span class="st">"Ava"</span>, <span class="st">"Sophia"</span>, <span class="st">"Isabella"</span>, <span class="st">"Charlotte"</span>, <span class="st">"Amelia"</span>, <span class="st">"Mia"</span>, <span class="st">"Harper"</span>, <span class="st">"Evelyn"</span>,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># modern extras</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mason"</span>, <span class="st">"Logan"</span>, <span class="st">"Levi"</span>, <span class="st">"Sebastian"</span>, <span class="st">"Jack"</span>, <span class="st">"Owen"</span>, <span class="st">"Aiden"</span>, <span class="st">"Samuel"</span>, <span class="st">"Daniel"</span>, <span class="st">"Jacob"</span>,</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Emily"</span>, <span class="st">"Grace"</span>, <span class="st">"Ella"</span>, <span class="st">"Chloe"</span>, <span class="st">"Aria"</span>, <span class="st">"Lily"</span>, <span class="st">"Nora"</span>, <span class="st">"Audrey"</span>, <span class="st">"Lucy"</span>, <span class="st">"Hannah"</span>,</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># FANCY / NOBLE / LATIN-FLAVOR</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Maximus"</span>, <span class="st">"Reginald"</span>, <span class="st">"Octavius"</span>, <span class="st">"Cassius"</span>, <span class="st">"Atticus"</span>,</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Evander"</span>, <span class="st">"Lysander"</span>, <span class="st">"Valerius"</span>, <span class="st">"Percival"</span>, <span class="st">"Alistair"</span>,</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Seraphina"</span>, <span class="st">"Ophelia"</span>, <span class="st">"Valentina"</span>, <span class="st">"Celestia"</span>, <span class="st">"Arabella"</span>,</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Evangeline"</span>, <span class="st">"Octavia"</span>, <span class="st">"Genevieve"</span>, <span class="st">"Isolde"</span>, <span class="st">"Marcella"</span>,</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># heroic / fantasy-ish</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gideon"</span>, <span class="st">"Thaddeus"</span>, <span class="st">"Magnus"</span>, <span class="st">"Ronan"</span>, <span class="st">"Dorian"</span>,</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Benedict"</span>, <span class="st">"Callum"</span>, <span class="st">"Soren"</span>, <span class="st">"Leander"</span>, <span class="st">"Theron"</span>,</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Elowen"</span>, <span class="st">"Rowena"</span>, <span class="st">"Brielle"</span>, <span class="st">"Felicity"</span>, <span class="st">"Rosalind"</span>,</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># more contemporary variety</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Caleb"</span>, <span class="st">"Ryan"</span>, <span class="st">"Nathan"</span>, <span class="st">"Christian"</span>, <span class="st">"Isaiah"</span>,</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Julian"</span>, <span class="st">"Thomas"</span>, <span class="st">"Wesley"</span>, <span class="st">"Miles"</span>, <span class="st">"Asher"</span>,</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Scarlett"</span>, <span class="st">"Madison"</span>, <span class="st">"Elena"</span>, <span class="st">"Maya"</span>, <span class="st">"Violet"</span>,</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Stella"</span>, <span class="st">"Caroline"</span>, <span class="st">"Ruby"</span>, <span class="st">"Alice"</span>, <span class="st">"Josephine"</span>,</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># a few rare but not too weird</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Marcellus"</span>, <span class="st">"Lucian"</span>, <span class="st">"Cyrus"</span>, <span class="st">"Aurelia"</span>, <span class="st">"Helena"</span>,</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tobias"</span>, <span class="st">"Damien"</span>, <span class="st">"Silas"</span>, <span class="st">"Phoebe"</span>, <span class="st">"Lavinia"</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>last_names <span class="op">=</span> [</span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># common U.S.</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Smith"</span>, <span class="st">"Johnson"</span>, <span class="st">"Williams"</span>, <span class="st">"Brown"</span>, <span class="st">"Jones"</span>, <span class="st">"Garcia"</span>, <span class="st">"Miller"</span>, <span class="st">"Davis"</span>, <span class="st">"Rodriguez"</span>, <span class="st">"Martinez"</span>,</span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Hernandez"</span>, <span class="st">"Lopez"</span>, <span class="st">"Gonzalez"</span>, <span class="st">"Wilson"</span>, <span class="st">"Anderson"</span>, <span class="st">"Thomas"</span>, <span class="st">"Taylor"</span>, <span class="st">"Moore"</span>, <span class="st">"Jackson"</span>, <span class="st">"Martin"</span>,</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Lee"</span>, <span class="st">"Perez"</span>, <span class="st">"Thompson"</span>, <span class="st">"White"</span>, <span class="st">"Harris"</span>, <span class="st">"Sanchez"</span>, <span class="st">"Clark"</span>, <span class="st">"Ramirez"</span>, <span class="st">"Lewis"</span>, <span class="st">"Robinson"</span>,</span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># traditional European</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bennett"</span>, <span class="st">"Fletcher"</span>, <span class="st">"Crawford"</span>, <span class="st">"Hawkins"</span>, <span class="st">"Montgomery"</span>, <span class="st">"Barrett"</span>, <span class="st">"Lawrence"</span>, <span class="st">"Hudson"</span>, <span class="st">"Hayes"</span>, <span class="st">"Reynolds"</span>,</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Richards"</span>, <span class="st">"Armstrong"</span>, <span class="st">"Douglas"</span>, <span class="st">"Chambers"</span>, <span class="st">"Preston"</span>, <span class="st">"Wallace"</span>, <span class="st">"Barlow"</span>, <span class="st">"Dalton"</span>, <span class="st">"Sawyer"</span>, <span class="st">"Winston"</span>,</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># noble / aristocratic / fancy</span></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kingsley"</span>, <span class="st">"Harrington"</span>, <span class="st">"Ashford"</span>, <span class="st">"Wellington"</span>, <span class="st">"Beauregard"</span>,</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kensington"</span>, <span class="st">"Blackwood"</span>, <span class="st">"Ravenscroft"</span>, <span class="st">"Stormwind"</span>, <span class="st">"Winterborne"</span>,</span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Holloway"</span>, <span class="st">"Everhart"</span>, <span class="st">"Redmond"</span>, <span class="st">"Langford"</span>, <span class="st">"Haverhill"</span>,</span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># mythic / heroic / fantasy-ish</span></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Stormrider"</span>, <span class="st">"Ironwood"</span>, <span class="st">"Shadowbane"</span>, <span class="st">"Brightshield"</span>, <span class="st">"Wolfhart"</span>,</span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Starcrest"</span>, <span class="st">"Frosthelm"</span>, <span class="st">"Silverwind"</span>, <span class="st">"Nightwell"</span>, <span class="st">"Thornfield"</span>,</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    <span class="co"># old-world / classy</span></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Devereaux"</span>, <span class="st">"Fontaine"</span>, <span class="st">"Lachance"</span>, <span class="st">"Bellerose"</span>, <span class="st">"Dumont"</span>,</span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kavanagh"</span>, <span class="st">"OMalley"</span>, <span class="st">"Fitzroy"</span>, <span class="st">"Ludwick"</span>, <span class="st">"Weiss"</span>,</span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kovacs"</span>, <span class="st">"Hoffmann"</span>, <span class="st">"Schneider"</span>, <span class="st">"Ricci"</span>, <span class="st">"Moretti"</span>,</span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rare but elegant</span></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Carrington"</span>, <span class="st">"Ashdown"</span>, <span class="st">"Marwood"</span>, <span class="st">"Bramwell"</span>, <span class="st">"Loxley"</span>,</span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kingsford"</span>, <span class="st">"Aldridge"</span>, <span class="st">"Pennington"</span>, <span class="st">"Somerfield"</span>, <span class="st">"Hartswell"</span></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="co"># make unique 1200 pairs</span></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>pairs <span class="op">=</span> <span class="bu">set</span>()</span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">len</span>(pairs) <span class="op">&lt;</span> <span class="dv">1200</span>:</span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>    fn <span class="op">=</span> random.choice(first_names)</span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>    ln <span class="op">=</span> random.choice(last_names)</span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>    pairs.add((fn, ln))</span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to polars DataFrame</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> pl.DataFrame(</span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>    <span class="bu">list</span>(pairs),</span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>    schema<span class="op">=</span>[<span class="st">"first_name"</span>, <span class="st">"last_name"</span>]</span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>name_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_3352/3105147940.py:76: DataOrientationWarning:
-
-Row orientation inferred during DataFrame construction. Explicitly specify the orientation by passing `orient="row"` to silence this warning.
-</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (1_200, 2)</small>
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">first_name</th>
-<th data-quarto-table-cell-role="th">last_name</th>
-</tr>
-<tr class="even">
-<td>str</td>
-<td>str</td>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>"Hannah"</td>
-<td>"Marwood"</td>
-</tr>
-<tr class="even">
-<td>"Ryan"</td>
-<td>"Lawrence"</td>
-</tr>
-<tr class="odd">
-<td>"Lucian"</td>
-<td>"Montgomery"</td>
-</tr>
-<tr class="even">
-<td>"Alistair"</td>
-<td>"Nightwell"</td>
-</tr>
-<tr class="odd">
-<td>"Alice"</td>
-<td>"Lachance"</td>
-</tr>
-<tr class="even">
-<td>…</td>
-<td>…</td>
-</tr>
-<tr class="odd">
-<td>"Levi"</td>
-<td>"Barlow"</td>
-</tr>
-<tr class="even">
-<td>"Violet"</td>
-<td>"Moore"</td>
-</tr>
-<tr class="odd">
-<td>"Marcella"</td>
-<td>"Kensington"</td>
-</tr>
-<tr class="even">
-<td>"Ophelia"</td>
-<td>"Montgomery"</td>
-</tr>
-<tr class="odd">
-<td>"Isolde"</td>
-<td>"Martinez"</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<div id="2ba25dde" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed so I can get the results again</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">42</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># sample of first names</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>first_names <span class="op">=</span> [</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># modern common</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Liam"</span>, <span class="st">"Noah"</span>, <span class="st">"Oliver"</span>, <span class="st">"Elijah"</span>, <span class="st">"James"</span>, <span class="st">"William"</span>, <span class="st">"Benjamin"</span>, <span class="st">"Lucas"</span>, <span class="st">"Henry"</span>, <span class="st">"Alexander"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Emma"</span>, <span class="st">"Olivia"</span>, <span class="st">"Ava"</span>, <span class="st">"Sophia"</span>, <span class="st">"Isabella"</span>, <span class="st">"Charlotte"</span>, <span class="st">"Amelia"</span>, <span class="st">"Mia"</span>, <span class="st">"Harper"</span>, <span class="st">"Evelyn"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># modern extras</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mason"</span>, <span class="st">"Logan"</span>, <span class="st">"Levi"</span>, <span class="st">"Sebastian"</span>, <span class="st">"Jack"</span>, <span class="st">"Owen"</span>, <span class="st">"Aiden"</span>, <span class="st">"Samuel"</span>, <span class="st">"Daniel"</span>, <span class="st">"Jacob"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Emily"</span>, <span class="st">"Grace"</span>, <span class="st">"Ella"</span>, <span class="st">"Chloe"</span>, <span class="st">"Aria"</span>, <span class="st">"Lily"</span>, <span class="st">"Nora"</span>, <span class="st">"Audrey"</span>, <span class="st">"Lucy"</span>, <span class="st">"Hannah"</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># FANCY / NOBLE / LATIN-FLAVOR</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Maximus"</span>, <span class="st">"Reginald"</span>, <span class="st">"Octavius"</span>, <span class="st">"Cassius"</span>, <span class="st">"Atticus"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Evander"</span>, <span class="st">"Lysander"</span>, <span class="st">"Valerius"</span>, <span class="st">"Percival"</span>, <span class="st">"Alistair"</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Seraphina"</span>, <span class="st">"Ophelia"</span>, <span class="st">"Valentina"</span>, <span class="st">"Celestia"</span>, <span class="st">"Arabella"</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Evangeline"</span>, <span class="st">"Octavia"</span>, <span class="st">"Genevieve"</span>, <span class="st">"Isolde"</span>, <span class="st">"Marcella"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># heroic / fantasy-ish</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gideon"</span>, <span class="st">"Thaddeus"</span>, <span class="st">"Magnus"</span>, <span class="st">"Ronan"</span>, <span class="st">"Dorian"</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Benedict"</span>, <span class="st">"Callum"</span>, <span class="st">"Soren"</span>, <span class="st">"Leander"</span>, <span class="st">"Theron"</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Elowen"</span>, <span class="st">"Rowena"</span>, <span class="st">"Brielle"</span>, <span class="st">"Felicity"</span>, <span class="st">"Rosalind"</span>,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># more contemporary variety</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Caleb"</span>, <span class="st">"Ryan"</span>, <span class="st">"Nathan"</span>, <span class="st">"Christian"</span>, <span class="st">"Isaiah"</span>,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Julian"</span>, <span class="st">"Thomas"</span>, <span class="st">"Wesley"</span>, <span class="st">"Miles"</span>, <span class="st">"Asher"</span>,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Scarlett"</span>, <span class="st">"Madison"</span>, <span class="st">"Elena"</span>, <span class="st">"Maya"</span>, <span class="st">"Violet"</span>,</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Stella"</span>, <span class="st">"Caroline"</span>, <span class="st">"Ruby"</span>, <span class="st">"Alice"</span>, <span class="st">"Josephine"</span>,</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># a few rare but not too weird</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Marcellus"</span>, <span class="st">"Lucian"</span>, <span class="st">"Cyrus"</span>, <span class="st">"Aurelia"</span>, <span class="st">"Helena"</span>,</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tobias"</span>, <span class="st">"Damien"</span>, <span class="st">"Silas"</span>, <span class="st">"Phoebe"</span>, <span class="st">"Lavinia"</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>last_names <span class="op">=</span> [</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># common U.S.</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Smith"</span>, <span class="st">"Johnson"</span>, <span class="st">"Williams"</span>, <span class="st">"Brown"</span>, <span class="st">"Jones"</span>, <span class="st">"Garcia"</span>, <span class="st">"Miller"</span>, <span class="st">"Davis"</span>, <span class="st">"Rodriguez"</span>, <span class="st">"Martinez"</span>,</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Hernandez"</span>, <span class="st">"Lopez"</span>, <span class="st">"Gonzalez"</span>, <span class="st">"Wilson"</span>, <span class="st">"Anderson"</span>, <span class="st">"Thomas"</span>, <span class="st">"Taylor"</span>, <span class="st">"Moore"</span>, <span class="st">"Jackson"</span>, <span class="st">"Martin"</span>,</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Lee"</span>, <span class="st">"Perez"</span>, <span class="st">"Thompson"</span>, <span class="st">"White"</span>, <span class="st">"Harris"</span>, <span class="st">"Sanchez"</span>, <span class="st">"Clark"</span>, <span class="st">"Ramirez"</span>, <span class="st">"Lewis"</span>, <span class="st">"Robinson"</span>,</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># traditional European</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bennett"</span>, <span class="st">"Fletcher"</span>, <span class="st">"Crawford"</span>, <span class="st">"Hawkins"</span>, <span class="st">"Montgomery"</span>, <span class="st">"Barrett"</span>, <span class="st">"Lawrence"</span>, <span class="st">"Hudson"</span>, <span class="st">"Hayes"</span>, <span class="st">"Reynolds"</span>,</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Richards"</span>, <span class="st">"Armstrong"</span>, <span class="st">"Douglas"</span>, <span class="st">"Chambers"</span>, <span class="st">"Preston"</span>, <span class="st">"Wallace"</span>, <span class="st">"Barlow"</span>, <span class="st">"Dalton"</span>, <span class="st">"Sawyer"</span>, <span class="st">"Winston"</span>,</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># noble / aristocratic / fancy</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kingsley"</span>, <span class="st">"Harrington"</span>, <span class="st">"Ashford"</span>, <span class="st">"Wellington"</span>, <span class="st">"Beauregard"</span>,</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kensington"</span>, <span class="st">"Blackwood"</span>, <span class="st">"Ravenscroft"</span>, <span class="st">"Stormwind"</span>, <span class="st">"Winterborne"</span>,</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Holloway"</span>, <span class="st">"Everhart"</span>, <span class="st">"Redmond"</span>, <span class="st">"Langford"</span>, <span class="st">"Haverhill"</span>,</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># mythic / heroic / fantasy-ish</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Stormrider"</span>, <span class="st">"Ironwood"</span>, <span class="st">"Shadowbane"</span>, <span class="st">"Brightshield"</span>, <span class="st">"Wolfhart"</span>,</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Starcrest"</span>, <span class="st">"Frosthelm"</span>, <span class="st">"Silverwind"</span>, <span class="st">"Nightwell"</span>, <span class="st">"Thornfield"</span>,</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>    <span class="co"># old-world / classy</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Devereaux"</span>, <span class="st">"Fontaine"</span>, <span class="st">"Lachance"</span>, <span class="st">"Bellerose"</span>, <span class="st">"Dumont"</span>,</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kavanagh"</span>, <span class="st">"OMalley"</span>, <span class="st">"Fitzroy"</span>, <span class="st">"Ludwick"</span>, <span class="st">"Weiss"</span>,</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kovacs"</span>, <span class="st">"Hoffmann"</span>, <span class="st">"Schneider"</span>, <span class="st">"Ricci"</span>, <span class="st">"Moretti"</span>,</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rare but elegant</span></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Carrington"</span>, <span class="st">"Ashdown"</span>, <span class="st">"Marwood"</span>, <span class="st">"Bramwell"</span>, <span class="st">"Loxley"</span>,</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kingsford"</span>, <span class="st">"Aldridge"</span>, <span class="st">"Pennington"</span>, <span class="st">"Somerfield"</span>, <span class="st">"Hartswell"</span></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="co"># make unique 1200 pairs</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>pairs <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">len</span>(pairs) <span class="op">&lt;</span> <span class="dv">1200</span>:</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>    fn <span class="op">=</span> random.choice(first_names)</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>    ln <span class="op">=</span> random.choice(last_names)</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>    pairs.add((fn, ln))</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to polars DataFrame</span></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> pl.DataFrame(</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    <span class="bu">list</span>(pairs),</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>    schema<span class="op">=</span>[<span class="st">"first_name"</span>, <span class="st">"last_name"</span>]</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>name_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Make the emails for each name</p>
-<div id="7e216627" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># probabilities</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># gmail: 60%, org: 25%, yahoo: 15%</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> [<span class="fl">0.6</span>, <span class="fl">0.25</span>, <span class="fl">0.15</span>]</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>domains <span class="op">=</span> [<span class="st">"gmail"</span>, <span class="st">"myorg"</span>, <span class="st">"yahoo"</span>]</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># create a random choice column</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>rand_vals <span class="op">=</span> np.random.rand(name_df.height)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> assign_email(val):</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> val <span class="op">&lt;</span> probs[<span class="dv">0</span>]:</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> <span class="st">"gmail"</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> val <span class="op">&lt;</span> probs[<span class="dv">0</span>] <span class="op">+</span> probs[<span class="dv">1</span>]:</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> <span class="st">"myorg"</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> <span class="st">"yahoo"</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Random capitalization</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    case_type <span class="op">=</span> np.random.choice([<span class="st">"upper"</span>, <span class="st">"lower"</span>, <span class="st">"random"</span>])</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> case_type <span class="op">==</span> <span class="st">"upper"</span>:</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> domain.upper()</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> case_type <span class="op">==</span> <span class="st">"lower"</span>:</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> domain.lower()</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:  <span class="co"># random</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> <span class="st">""</span>.join([c.upper() <span class="cf">if</span> np.random.rand() <span class="op">&gt;</span> <span class="fl">0.5</span> <span class="cf">else</span> c.lower() <span class="cf">for</span> c <span class="kw">in</span> domain])</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Random spaces</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if np.random.rand() &lt; 0.2:</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     domain = " " + domain</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.random.rand() <span class="op">&lt;</span> <span class="fl">0.2</span>:</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> domain <span class="op">+</span> <span class="st">" "</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> domain</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co"># apply to Polars DataFrame</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>email_col <span class="op">=</span> [assign_email(v) <span class="cf">for</span> v <span class="kw">in</span> rand_vals]</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> name_df.with_columns(</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    pl.Series(<span class="st">"email_type"</span>, email_col)</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>name_df.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (10, 3)</small>
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">first_name</th>
-<th data-quarto-table-cell-role="th">last_name</th>
-<th data-quarto-table-cell-role="th">email_type</th>
-</tr>
-<tr class="even">
-<td>str</td>
-<td>str</td>
-<td>str</td>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>"Hannah"</td>
-<td>"Marwood"</td>
-<td>"GMAIL"</td>
-</tr>
-<tr class="even">
-<td>"Ryan"</td>
-<td>"Lawrence"</td>
-<td>"YAHOO "</td>
-</tr>
-<tr class="odd">
-<td>"Lucian"</td>
-<td>"Montgomery"</td>
-<td>"myorg"</td>
-</tr>
-<tr class="even">
-<td>"Alistair"</td>
-<td>"Nightwell"</td>
-<td>"gmaiL "</td>
-</tr>
-<tr class="odd">
-<td>"Alice"</td>
-<td>"Lachance"</td>
-<td>"GMAIL "</td>
-</tr>
-<tr class="even">
-<td>"Damien"</td>
-<td>"Loxley"</td>
-<td>"GmAIl "</td>
-</tr>
-<tr class="odd">
-<td>"Lavinia"</td>
-<td>"Redmond"</td>
-<td>"GmaIl"</td>
-</tr>
-<tr class="even">
-<td>"Marcellus"</td>
-<td>"Bramwell"</td>
-<td>"yahoo"</td>
-</tr>
-<tr class="odd">
-<td>"Gideon"</td>
-<td>"Starcrest"</td>
-<td>"MYORG"</td>
-</tr>
-<tr class="even">
-<td>"Ella"</td>
-<td>"Stormwind"</td>
-<td>"MYORG"</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<div id="56a7cf52" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># probabilities</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># gmail: 60%, org: 25%, yahoo: 15%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> [<span class="fl">0.6</span>, <span class="fl">0.25</span>, <span class="fl">0.15</span>]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>domains <span class="op">=</span> [<span class="st">"gmail"</span>, <span class="st">"myorg"</span>, <span class="st">"yahoo"</span>]</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># create a random choice column</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>rand_vals <span class="op">=</span> np.random.rand(name_df.height)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> assign_email(val):</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> val <span class="op">&lt;</span> probs[<span class="dv">0</span>]:</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> <span class="st">"gmail"</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> val <span class="op">&lt;</span> probs[<span class="dv">0</span>] <span class="op">+</span> probs[<span class="dv">1</span>]:</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> <span class="st">"myorg"</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> <span class="st">"yahoo"</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Random capitalization</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    case_type <span class="op">=</span> np.random.choice([<span class="st">"upper"</span>, <span class="st">"lower"</span>, <span class="st">"random"</span>])</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> case_type <span class="op">==</span> <span class="st">"upper"</span>:</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> domain.upper()</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> case_type <span class="op">==</span> <span class="st">"lower"</span>:</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> domain.lower()</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:  <span class="co"># random</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> <span class="st">""</span>.join([c.upper() <span class="cf">if</span> np.random.rand() <span class="op">&gt;</span> <span class="fl">0.5</span> <span class="cf">else</span> c.lower() <span class="cf">for</span> c <span class="kw">in</span> domain])</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Random spaces</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if np.random.rand() &lt; 0.2:</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     domain = " " + domain</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.random.rand() <span class="op">&lt;</span> <span class="fl">0.2</span>:</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        domain <span class="op">=</span> domain <span class="op">+</span> <span class="st">" "</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> domain</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co"># apply to Polars DataFrame</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>email_col <span class="op">=</span> [assign_email(v) <span class="cf">for</span> v <span class="kw">in</span> rand_vals]</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> name_df.with_columns(</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    pl.Series(<span class="st">"email_type"</span>, email_col)</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>name_df.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now I need to create their actual gmail column</p>
-<div id="788949e2" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>STARTNUM <span class="op">=</span> <span class="dv">54541</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># number of rows</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>n_rows <span class="op">=</span> name_df.height</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># random starting number between 0 and 90000</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>start_num <span class="op">=</span> STARTNUM</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># create sequential numbers starting from start_num, zero-padded 5 digits</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>seq_nums <span class="op">=</span> (pl.arange(<span class="dv">0</span>, n_rows, eager<span class="op">=</span><span class="va">True</span>) <span class="op">+</span> start_num).cast(pl.Utf8).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># add the column to the dataframe</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> name_df.with_columns([</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    seq_nums.alias(<span class="st">"unique_num"</span>)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># now build the email column</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> name_df.with_columns([</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    pl.when(pl.col(<span class="st">"email_type"</span>).<span class="bu">str</span>.to_lowercase().<span class="bu">str</span>.contains(<span class="st">"gmail"</span>))</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>      .then(</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>          pl.concat_str([</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>              pl.col(<span class="st">"first_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>              pl.lit(<span class="st">"."</span>),</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>              pl.col(<span class="st">"last_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>              pl.lit(<span class="st">"@"</span>) <span class="op">+</span> pl.col(<span class="st">"email_type"</span>)  <span class="co"># preserve jank</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>          ])</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    .when(pl.col(<span class="st">"email_type"</span>).<span class="bu">str</span>.to_lowercase().<span class="bu">str</span>.contains(<span class="st">"yahoo"</span>))</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>      .then(</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>          pl.concat_str([</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>              pl.col(<span class="st">"last_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>              pl.lit(<span class="st">"_"</span>),</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>              pl.col(<span class="st">"first_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>              pl.lit(<span class="st">"@"</span>) <span class="op">+</span> pl.col(<span class="st">"email_type"</span>)</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>          ])</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># .otherwise(</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     pl.concat_str([</span></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">#         pl.col("last_name").str.slice(0,5).str.to_lowercase(),</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">#         pl.col("first_name").str.slice(0,3).str.to_lowercase(),</span></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    <span class="co">#         pl.col("unique_num"),  # unique per row</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">#         pl.lit("@") + pl.col("email_type")</span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     ])</span></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># )</span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    .otherwise(</span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>        pl.concat_str([</span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"last_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"unique_num"</span>),  <span class="co"># unique per row</span></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"first_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>            pl.lit(<span class="st">"@"</span>) <span class="op">+</span> pl.col(<span class="st">"email_type"</span>)</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>        ])</span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    .alias(<span class="st">"email"</span>)</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>name_df.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (10, 5)</small>
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">first_name</th>
-<th data-quarto-table-cell-role="th">last_name</th>
-<th data-quarto-table-cell-role="th">email_type</th>
-<th data-quarto-table-cell-role="th">unique_num</th>
-<th data-quarto-table-cell-role="th">email</th>
-</tr>
-<tr class="even">
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>"Hannah"</td>
-<td>"Marwood"</td>
-<td>"GMAIL"</td>
-<td>"54541"</td>
-<td>"hannah.marwood@GMAIL"</td>
-</tr>
-<tr class="even">
-<td>"Ryan"</td>
-<td>"Lawrence"</td>
-<td>"YAHOO "</td>
-<td>"54542"</td>
-<td>"lawrence_ryan@YAHOO "</td>
-</tr>
-<tr class="odd">
-<td>"Lucian"</td>
-<td>"Montgomery"</td>
-<td>"myorg"</td>
-<td>"54543"</td>
-<td>"montgomery54543lucian@myorg"</td>
-</tr>
-<tr class="even">
-<td>"Alistair"</td>
-<td>"Nightwell"</td>
-<td>"gmaiL "</td>
-<td>"54544"</td>
-<td>"alistair.nightwell@gmaiL "</td>
-</tr>
-<tr class="odd">
-<td>"Alice"</td>
-<td>"Lachance"</td>
-<td>"GMAIL "</td>
-<td>"54545"</td>
-<td>"alice.lachance@GMAIL "</td>
-</tr>
-<tr class="even">
-<td>"Damien"</td>
-<td>"Loxley"</td>
-<td>"GmAIl "</td>
-<td>"54546"</td>
-<td>"damien.loxley@GmAIl "</td>
-</tr>
-<tr class="odd">
-<td>"Lavinia"</td>
-<td>"Redmond"</td>
-<td>"GmaIl"</td>
-<td>"54547"</td>
-<td>"lavinia.redmond@GmaIl"</td>
-</tr>
-<tr class="even">
-<td>"Marcellus"</td>
-<td>"Bramwell"</td>
-<td>"yahoo"</td>
-<td>"54548"</td>
-<td>"bramwell_marcellus@yahoo"</td>
-</tr>
-<tr class="odd">
-<td>"Gideon"</td>
-<td>"Starcrest"</td>
-<td>"MYORG"</td>
-<td>"54549"</td>
-<td>"starcrest54549gideon@MYORG"</td>
-</tr>
-<tr class="even">
-<td>"Ella"</td>
-<td>"Stormwind"</td>
-<td>"MYORG"</td>
-<td>"54550"</td>
-<td>"stormwind54550ella@MYORG"</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<div id="cedbb753" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>STARTNUM <span class="op">=</span> <span class="dv">54541</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># number of rows</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>n_rows <span class="op">=</span> name_df.height</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># random starting number between 0 and 90000</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>start_num <span class="op">=</span> STARTNUM</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># create sequential numbers starting from start_num, zero-padded 5 digits</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>seq_nums <span class="op">=</span> (pl.arange(<span class="dv">0</span>, n_rows, eager<span class="op">=</span><span class="va">True</span>) <span class="op">+</span> start_num).cast(pl.Utf8).<span class="bu">str</span>.zfill(<span class="dv">5</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># add the column to the dataframe</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> name_df.with_columns([</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    seq_nums.alias(<span class="st">"unique_num"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># now build the email column</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> name_df.with_columns([</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    pl.when(pl.col(<span class="st">"email_type"</span>).<span class="bu">str</span>.to_lowercase().<span class="bu">str</span>.contains(<span class="st">"gmail"</span>))</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>      .then(</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>          pl.concat_str([</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>              pl.col(<span class="st">"first_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>              pl.lit(<span class="st">"."</span>),</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>              pl.col(<span class="st">"last_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>              pl.lit(<span class="st">"@"</span>) <span class="op">+</span> pl.col(<span class="st">"email_type"</span>)  <span class="co"># preserve jank</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>          ])</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    .when(pl.col(<span class="st">"email_type"</span>).<span class="bu">str</span>.to_lowercase().<span class="bu">str</span>.contains(<span class="st">"yahoo"</span>))</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>      .then(</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>          pl.concat_str([</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>              pl.col(<span class="st">"last_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>              pl.lit(<span class="st">"_"</span>),</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>              pl.col(<span class="st">"first_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>              pl.lit(<span class="st">"@"</span>) <span class="op">+</span> pl.col(<span class="st">"email_type"</span>)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>          ])</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># .otherwise(</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     pl.concat_str([</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">#         pl.col("last_name").str.slice(0,5).str.to_lowercase(),</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">#         pl.col("first_name").str.slice(0,3).str.to_lowercase(),</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    <span class="co">#         pl.col("unique_num"),  # unique per row</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">#         pl.lit("@") + pl.col("email_type")</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     ])</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># )</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    .otherwise(</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>        pl.concat_str([</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"last_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"unique_num"</span>),  <span class="co"># unique per row</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>            pl.col(<span class="st">"first_name"</span>).<span class="bu">str</span>.to_lowercase(),</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>            pl.lit(<span class="st">"@"</span>) <span class="op">+</span> pl.col(<span class="st">"email_type"</span>)</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    .alias(<span class="st">"email"</span>)</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>name_df.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Make an email for every respondentID</p>
-<div id="7c01d0d3" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(name_df.shape)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># trim name_df to match the number of rows in data</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>n_rows <span class="op">=</span> data.height  <span class="co"># 1186</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> name_df.head(n_rows)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># add the email column to data</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># assuming name_df has an "email" column</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.with_columns(name_df[<span class="st">"email"</span>].alias(<span class="st">"email"</span>))</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># check</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)  <span class="co"># should now be (1186, original_columns + 1)</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># data.select(["RespondentID", "email"]).head(10)</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(1186, 38)
-(1200, 5)
-(1186, 39)</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (3, 39)</small>
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">RespondentID</th>
-<th data-quarto-table-cell-role="th">seen_any</th>
-<th data-quarto-table-cell-role="th">star_wars_fan</th>
-<th data-quarto-table-cell-role="th">seen_episode_I</th>
-<th data-quarto-table-cell-role="th">seen_episode_II</th>
-<th data-quarto-table-cell-role="th">seen_episode_III</th>
-<th data-quarto-table-cell-role="th">seen_episode_IV</th>
-<th data-quarto-table-cell-role="th">seen_episode_V</th>
-<th data-quarto-table-cell-role="th">seen_episode_VI</th>
-<th data-quarto-table-cell-role="th">rank_episode_I</th>
-<th data-quarto-table-cell-role="th">rank_episode_II</th>
-<th data-quarto-table-cell-role="th">rank_episode_III</th>
-<th data-quarto-table-cell-role="th">rank_episode_IV</th>
-<th data-quarto-table-cell-role="th">rank_episode_V</th>
-<th data-quarto-table-cell-role="th">rank_episode_VI</th>
-<th data-quarto-table-cell-role="th">han_solo</th>
-<th data-quarto-table-cell-role="th">luke_skywalker</th>
-<th data-quarto-table-cell-role="th">princess_leia_organa</th>
-<th data-quarto-table-cell-role="th">anakin_skywalker</th>
-<th data-quarto-table-cell-role="th">obi_wan_kenobi</th>
-<th data-quarto-table-cell-role="th">emperor_palpatine</th>
-<th data-quarto-table-cell-role="th">darth_vader</th>
-<th data-quarto-table-cell-role="th">lando_calrissian</th>
-<th data-quarto-table-cell-role="th">boba_fett</th>
-<th data-quarto-table-cell-role="th">C_3PO</th>
-<th data-quarto-table-cell-role="th">R2_D2</th>
-<th data-quarto-table-cell-role="th">jar_jar_binks</th>
-<th data-quarto-table-cell-role="th">padme_amidala</th>
-<th data-quarto-table-cell-role="th">yoda</th>
-<th data-quarto-table-cell-role="th">who_shot_first</th>
-<th data-quarto-table-cell-role="th">know_expanded_universe</th>
-<th data-quarto-table-cell-role="th">expanded_universe_fan</th>
-<th data-quarto-table-cell-role="th">star_trek_fan</th>
-<th data-quarto-table-cell-role="th">gender</th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">household_income</th>
-<th data-quarto-table-cell-role="th">education</th>
-<th data-quarto-table-cell-role="th">location</th>
-<th data-quarto-table-cell-role="th">email</th>
-</tr>
-<tr class="even">
-<td>i64</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>3292879998</td>
-<td>"Yes"</td>
-<td>"Yes"</td>
-<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
-<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
-<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
-<td>"Star Wars: Episode IV&nbsp;&nbsp;A New H…</td>
-<td>"Star Wars: Episode V The Empir…</td>
-<td>"Star Wars: Episode VI Return o…</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-<td>4</td>
-<td>5</td>
-<td>6</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"I don't understand this questi…</td>
-<td>"Yes"</td>
-<td>"No"</td>
-<td>"No"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>null</td>
-<td>"High school degree"</td>
-<td>"South Atlantic"</td>
-<td>"hannah.marwood@GMAIL"</td>
-</tr>
-<tr class="even">
-<td>3292879538</td>
-<td>"No"</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>"Yes"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>"$0 - $24,999"</td>
-<td>"Bachelor degree"</td>
-<td>"West South Central"</td>
-<td>"lawrence_ryan@YAHOO "</td>
-</tr>
-<tr class="odd">
-<td>3292765271</td>
-<td>"Yes"</td>
-<td>"No"</td>
-<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
-<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
-<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>5</td>
-<td>6</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"I don't understand this questi…</td>
-<td>"No"</td>
-<td>null</td>
-<td>"No"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>"$0 - $24,999"</td>
-<td>"High school degree"</td>
-<td>"West North Central"</td>
-<td>"montgomery54543lucian@myorg"</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<div id="d66f2b81" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(name_df.shape)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># trim name_df to match the number of rows in data</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>n_rows <span class="op">=</span> data.height  <span class="co"># 1186</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>name_df <span class="op">=</span> name_df.head(n_rows)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># add the email column to data</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># assuming name_df has an "email" column</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.with_columns(name_df[<span class="st">"email"</span>].alias(<span class="st">"email"</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># check</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)  <span class="co"># should now be (1186, original_columns + 1)</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># data.select(["RespondentID", "email"]).head(10)</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>then shuffle the name_df before saving it so you can’t just match rows</p>
-<div id="1af88a5e" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shuffle all rows</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>name_df_shuffle <span class="op">=</span> name_df.sort(pl.col(<span class="st">'email'</span>), descending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>name_df_shuffle.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (5, 5)</small>
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">first_name</th>
-<th data-quarto-table-cell-role="th">last_name</th>
-<th data-quarto-table-cell-role="th">email_type</th>
-<th data-quarto-table-cell-role="th">unique_num</th>
-<th data-quarto-table-cell-role="th">email</th>
-</tr>
-<tr class="even">
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>"Samuel"</td>
-<td>"Wolfhart"</td>
-<td>"YAHOO"</td>
-<td>"55354"</td>
-<td>"wolfhart_samuel@YAHOO"</td>
-</tr>
-<tr class="even">
-<td>"Octavia"</td>
-<td>"Wolfhart"</td>
-<td>"YAHOO"</td>
-<td>"54931"</td>
-<td>"wolfhart_octavia@YAHOO"</td>
-</tr>
-<tr class="odd">
-<td>"Magnus"</td>
-<td>"Wolfhart"</td>
-<td>"YAHOO"</td>
-<td>"55308"</td>
-<td>"wolfhart_magnus@YAHOO"</td>
-</tr>
-<tr class="even">
-<td>"Amelia"</td>
-<td>"Wolfhart"</td>
-<td>"MyORg "</td>
-<td>"55548"</td>
-<td>"wolfhart55548amelia@MyORg "</td>
-</tr>
-<tr class="odd">
-<td>"Asher"</td>
-<td>"Wolfhart"</td>
-<td>"MYORG"</td>
-<td>"55418"</td>
-<td>"wolfhart55418asher@MYORG"</td>
-</tr>
-</tbody>
-</table>
+<div id="d5980e28" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shuffle all rows</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>name_df_shuffle <span class="op">=</span> name_df.sort(pl.col(<span class="st">'email'</span>), descending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>name_df_shuffle.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div id="3f5f3e69" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> data.columns</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># move 'email' right after 'RespondentID'</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>cols.remove(<span class="st">"email"</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>new_order <span class="op">=</span> [<span class="st">"RespondentID"</span>, <span class="st">"email"</span>] <span class="op">+</span> [c <span class="cf">for</span> c <span class="kw">in</span> cols <span class="cf">if</span> c <span class="op">!=</span> <span class="st">"RespondentID"</span>]</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># reorder</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.select(new_order)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (3, 39)</small>
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">RespondentID</th>
-<th data-quarto-table-cell-role="th">email</th>
-<th data-quarto-table-cell-role="th">seen_any</th>
-<th data-quarto-table-cell-role="th">star_wars_fan</th>
-<th data-quarto-table-cell-role="th">seen_episode_I</th>
-<th data-quarto-table-cell-role="th">seen_episode_II</th>
-<th data-quarto-table-cell-role="th">seen_episode_III</th>
-<th data-quarto-table-cell-role="th">seen_episode_IV</th>
-<th data-quarto-table-cell-role="th">seen_episode_V</th>
-<th data-quarto-table-cell-role="th">seen_episode_VI</th>
-<th data-quarto-table-cell-role="th">rank_episode_I</th>
-<th data-quarto-table-cell-role="th">rank_episode_II</th>
-<th data-quarto-table-cell-role="th">rank_episode_III</th>
-<th data-quarto-table-cell-role="th">rank_episode_IV</th>
-<th data-quarto-table-cell-role="th">rank_episode_V</th>
-<th data-quarto-table-cell-role="th">rank_episode_VI</th>
-<th data-quarto-table-cell-role="th">han_solo</th>
-<th data-quarto-table-cell-role="th">luke_skywalker</th>
-<th data-quarto-table-cell-role="th">princess_leia_organa</th>
-<th data-quarto-table-cell-role="th">anakin_skywalker</th>
-<th data-quarto-table-cell-role="th">obi_wan_kenobi</th>
-<th data-quarto-table-cell-role="th">emperor_palpatine</th>
-<th data-quarto-table-cell-role="th">darth_vader</th>
-<th data-quarto-table-cell-role="th">lando_calrissian</th>
-<th data-quarto-table-cell-role="th">boba_fett</th>
-<th data-quarto-table-cell-role="th">C_3PO</th>
-<th data-quarto-table-cell-role="th">R2_D2</th>
-<th data-quarto-table-cell-role="th">jar_jar_binks</th>
-<th data-quarto-table-cell-role="th">padme_amidala</th>
-<th data-quarto-table-cell-role="th">yoda</th>
-<th data-quarto-table-cell-role="th">who_shot_first</th>
-<th data-quarto-table-cell-role="th">know_expanded_universe</th>
-<th data-quarto-table-cell-role="th">expanded_universe_fan</th>
-<th data-quarto-table-cell-role="th">star_trek_fan</th>
-<th data-quarto-table-cell-role="th">gender</th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">household_income</th>
-<th data-quarto-table-cell-role="th">education</th>
-<th data-quarto-table-cell-role="th">location</th>
-</tr>
-<tr class="even">
-<td>i64</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>3292879998</td>
-<td>"hannah.marwood@GMAIL"</td>
-<td>"Yes"</td>
-<td>"Yes"</td>
-<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
-<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
-<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
-<td>"Star Wars: Episode IV&nbsp;&nbsp;A New H…</td>
-<td>"Star Wars: Episode V The Empir…</td>
-<td>"Star Wars: Episode VI Return o…</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-<td>4</td>
-<td>5</td>
-<td>6</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"I don't understand this questi…</td>
-<td>"Yes"</td>
-<td>"No"</td>
-<td>"No"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>null</td>
-<td>"High school degree"</td>
-<td>"South Atlantic"</td>
-</tr>
-<tr class="even">
-<td>3292879538</td>
-<td>"lawrence_ryan@YAHOO "</td>
-<td>"No"</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>"Yes"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>"$0 - $24,999"</td>
-<td>"Bachelor degree"</td>
-<td>"West South Central"</td>
-</tr>
-<tr class="odd">
-<td>3292765271</td>
-<td>"montgomery54543lucian@myorg"</td>
-<td>"Yes"</td>
-<td>"No"</td>
-<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
-<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
-<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>5</td>
-<td>6</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"I don't understand this questi…</td>
-<td>"No"</td>
-<td>null</td>
-<td>"No"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>"$0 - $24,999"</td>
-<td>"High school degree"</td>
-<td>"West North Central"</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<div id="e118a12d" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> data.columns</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># move 'email' right after 'RespondentID'</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>cols.remove(<span class="st">"email"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>new_order <span class="op">=</span> [<span class="st">"RespondentID"</span>, <span class="st">"email"</span>] <span class="op">+</span> [c <span class="cf">for</span> c <span class="kw">in</span> cols <span class="cf">if</span> c <span class="op">!=</span> <span class="st">"RespondentID"</span>]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># reorder</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.select(new_order)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Finally I need to add ten nonsense rows above the header so they have to use skip.</p>
-<div id="eac15dcc" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use current directory or Windows temp</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>temp_path <span class="op">=</span> os.path.join(os.getcwd(), <span class="st">"starwars2.csv"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># or: temp_path = r"C:\Users\mecha\starwars.csv"</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># write the normal CSV first (with header)</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>data.write_csv(temp_path)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Now prepend 10 nonsense lines</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(temp_path, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    original <span class="op">=</span> f.read()</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># create 10 nonsense lines</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>nonsense <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join([<span class="st">"This,is,a,nonsense,line"</span>] <span class="op">*</span> <span class="dv">10</span>) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># overwrite the file with nonsense + original CSV</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(temp_path, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    f.write(nonsense <span class="op">+</span> original)</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CSV written with nonsense lines at </span><span class="sc">{</span>temp_path<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>CSV written with nonsense lines at /home/runner/work/DS250-Course-Polars/DS250-Course-Polars/sandbox/starwars2.csv</code></pre>
+<div id="d398ac15" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use current directory or Windows temp</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>temp_path <span class="op">=</span> os.path.join(os.getcwd(), <span class="st">"starwars2.csv"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># or: temp_path = r"C:\Users\mecha\starwars.csv"</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># write the normal CSV first (with header)</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>data.write_csv(temp_path)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Now prepend 10 nonsense lines</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(temp_path, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    original <span class="op">=</span> f.read()</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># create 10 nonsense lines</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>nonsense <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join([<span class="st">"This,is,a,nonsense,line"</span>] <span class="op">*</span> <span class="dv">10</span>) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># overwrite the file with nonsense + original CSV</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(temp_path, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    f.write(nonsense <span class="op">+</span> original)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CSV written with nonsense lines at </span><span class="sc">{</span>temp_path<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<div id="9cab2e7f" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data_skipped <span class="op">=</span> pl.read_csv(temp_path, skip_rows<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>data_skipped.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="162c1f1b" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data_skipped <span class="op">=</span> pl.read_csv(temp_path, skip_rows<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data_skipped.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (3, 39)</small>
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">RespondentID</th>
-<th data-quarto-table-cell-role="th">email</th>
-<th data-quarto-table-cell-role="th">seen_any</th>
-<th data-quarto-table-cell-role="th">star_wars_fan</th>
-<th data-quarto-table-cell-role="th">seen_episode_I</th>
-<th data-quarto-table-cell-role="th">seen_episode_II</th>
-<th data-quarto-table-cell-role="th">seen_episode_III</th>
-<th data-quarto-table-cell-role="th">seen_episode_IV</th>
-<th data-quarto-table-cell-role="th">seen_episode_V</th>
-<th data-quarto-table-cell-role="th">seen_episode_VI</th>
-<th data-quarto-table-cell-role="th">rank_episode_I</th>
-<th data-quarto-table-cell-role="th">rank_episode_II</th>
-<th data-quarto-table-cell-role="th">rank_episode_III</th>
-<th data-quarto-table-cell-role="th">rank_episode_IV</th>
-<th data-quarto-table-cell-role="th">rank_episode_V</th>
-<th data-quarto-table-cell-role="th">rank_episode_VI</th>
-<th data-quarto-table-cell-role="th">han_solo</th>
-<th data-quarto-table-cell-role="th">luke_skywalker</th>
-<th data-quarto-table-cell-role="th">princess_leia_organa</th>
-<th data-quarto-table-cell-role="th">anakin_skywalker</th>
-<th data-quarto-table-cell-role="th">obi_wan_kenobi</th>
-<th data-quarto-table-cell-role="th">emperor_palpatine</th>
-<th data-quarto-table-cell-role="th">darth_vader</th>
-<th data-quarto-table-cell-role="th">lando_calrissian</th>
-<th data-quarto-table-cell-role="th">boba_fett</th>
-<th data-quarto-table-cell-role="th">C_3PO</th>
-<th data-quarto-table-cell-role="th">R2_D2</th>
-<th data-quarto-table-cell-role="th">jar_jar_binks</th>
-<th data-quarto-table-cell-role="th">padme_amidala</th>
-<th data-quarto-table-cell-role="th">yoda</th>
-<th data-quarto-table-cell-role="th">who_shot_first</th>
-<th data-quarto-table-cell-role="th">know_expanded_universe</th>
-<th data-quarto-table-cell-role="th">expanded_universe_fan</th>
-<th data-quarto-table-cell-role="th">star_trek_fan</th>
-<th data-quarto-table-cell-role="th">gender</th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">household_income</th>
-<th data-quarto-table-cell-role="th">education</th>
-<th data-quarto-table-cell-role="th">location</th>
-</tr>
-<tr class="even">
-<td>i64</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>i64</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-<td>str</td>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>3292879998</td>
-<td>"hannah.marwood@GMAIL"</td>
-<td>"Yes"</td>
-<td>"Yes"</td>
-<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
-<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
-<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
-<td>"Star Wars: Episode IV&nbsp;&nbsp;A New H…</td>
-<td>"Star Wars: Episode V The Empir…</td>
-<td>"Star Wars: Episode VI Return o…</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-<td>4</td>
-<td>5</td>
-<td>6</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"Very favorably"</td>
-<td>"I don't understand this questi…</td>
-<td>"Yes"</td>
-<td>"No"</td>
-<td>"No"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>null</td>
-<td>"High school degree"</td>
-<td>"South Atlantic"</td>
-</tr>
-<tr class="even">
-<td>3292879538</td>
-<td>"lawrence_ryan@YAHOO "</td>
-<td>"No"</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>"Yes"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>"$0 - $24,999"</td>
-<td>"Bachelor degree"</td>
-<td>"West South Central"</td>
-</tr>
-<tr class="odd">
-<td>3292765271</td>
-<td>"montgomery54543lucian@myorg"</td>
-<td>"Yes"</td>
-<td>"No"</td>
-<td>"Star Wars: Episode I&nbsp;&nbsp;The Phan…</td>
-<td>"Star Wars: Episode II&nbsp;&nbsp;Attack …</td>
-<td>"Star Wars: Episode III&nbsp;&nbsp;Reveng…</td>
-<td>null</td>
-<td>null</td>
-<td>null</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>5</td>
-<td>6</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Somewhat favorably"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"Unfamiliar (N/A)"</td>
-<td>"I don't understand this questi…</td>
-<td>"No"</td>
-<td>null</td>
-<td>"No"</td>
-<td>"Male"</td>
-<td>"18-29"</td>
-<td>"$0 - $24,999"</td>
-<td>"High school degree"</td>
-<td>"West North Central"</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div id="cdd1cb99" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># name_df.write_csv("names2.csv")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="43804afa" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># name_df.write_csv("names2.csv")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 

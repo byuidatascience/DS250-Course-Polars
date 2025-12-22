@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-10-29">
+<meta name="dcterms.date" content="2025-12-22">
 
 <title>Project 5: The war with Star Wars – DS 250</title>
 <style>
@@ -432,7 +432,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 29, 2025</p>
+      <p class="date">December 22, 2025</p>
     </div>
   </div>
   
@@ -447,12 +447,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="background" class="level3">
 <h3 class="anchored" data-anchor-id="background">Background</h3>
 <p>Survey data is notoriously difficult to munge. Even when the data is recorded cleanly the options for ‘write in questions’, ‘choose from multiple answers’, ‘pick all that are right’, and ‘multiple choice questions’ makes storing the data in a tidy format difficult.</p>
-<p>In 2014, FiveThirtyEight surveyed over 1000 people to write the article titled, <a href="https://fivethirtyeight.com/features/americas-favorite-star-wars-movies-and-least-favorite-characters/">America’s Favorite ‘Star Wars’ Movies (And Least Favorite Characters)</a>. They have provided the data on <a href="https://github.com/fivethirtyeight/data/tree/master/star-wars-survey">GitHub</a>.</p>
-<p>For this project, your client would like to use the Star Wars survey data to figure out if they can predict an interviewing job candidate’s current income based on a few responses about Star Wars movies.</p>
+<p>In 2014, FiveThirtyEight surveyed over 1000 people to write the article titled, <a href="https://fivethirtyeight.com/features/americas-favorite-star-wars-movies-and-least-favorite-characters/">America’s Favorite ‘Star Wars’ Movies (And Least Favorite Characters)</a>. They have provided the data on <a href="https://github.com/fivethirtyeight/data/tree/master/star-wars-survey">GitHub</a>. We have added ficitious email addresses to the dataset.</p>
+<p>For this project, your client would like to use the Star Wars survey data in a new marketing initiative. They would like to email survey participants with product offers, but also use the responses to build a machine learning model to predict a person’s outcome based on a few responses about Star Wars movies.</p>
+<p>Most of the data cleaning has been done for you, but there is still some data preparation that needs to take place.</p>
 </section>
 <section id="client-request" class="level3">
 <h3 class="anchored" data-anchor-id="client-request">Client Request</h3>
-<p>The Client is who performed the survey but outsourced the analitics to a 3rd party. They want you to clean up the data so you can: a. Validate the data provided on GitHub lines up with the article by recreating 2 of the visuals from the article a. Predict if a person from the survey makes at least $50k</p>
+<p>The Client is who performed the survey but outsourced the analitics to a 3rd party (you). They want you to clean up the data so you can: a. Extract the names of respondents and their email info a. Validate the data provided on GitHub lines up with the article by recreating 2 of the visuals from the article a. Predict if a person from the survey makes at least $50k</p>
 </section>
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
@@ -464,6 +465,8 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><a href="http://2017.compciv.org/guide/topics/regular-expressions/regex-early-overview.html">Intro to the concept of regular expression (a.k.a. regex)</a></li>
 <li>Polars Cookbook, <a href="https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_06.xhtml">Chapter 6, Strings</a></li>
+<li><a href="http://docs.pola.rs/api/python/stable/reference/api/polars.read_csv.html">read_csv documentation</a></li>
+<li><a href="https://docs.pola.rs/api/python/stable/reference/expressions/api/polars.Expr.replace_strict.html#polars.Expr.replace_strict">replace() documentation</a></li>
 </ul>
 <section id="optional-alternative-readings" class="level4">
 <h4 class="anchored" data-anchor-id="optional-alternative-readings">Optional Alternative Readings</h4>
@@ -477,10 +480,15 @@ ul.task-list li input[type="checkbox"] {
 <section id="questions" class="level3">
 <h3 class="anchored" data-anchor-id="questions">Questions</h3>
 <ol type="1">
-<li><p><strong>Shorten the column names and clean them up for easier use with pandas.</strong> Provide a table or list that exemplifies how you fixed the names.</p></li>
-<li><p><strong>Filter the dataset to 835 respondents that have seen at least one film</strong> (Hint: Don’t use the column <code>Have you seen any of the 6 films in the Star Wars franchise?</code>)</p></li>
-<li><p><strong>Validate that the data provided on GitHub lines up with the article by recreating 2 of the visuals from the article.</strong> These visuals should be similar, including titles, subtitles, gridlines, order of categories, colors, etc. But, they don’t have to be exact. They need to be close enough that we can validate that the values in the dataset match the graphs in the chart. Though their charts were built using a different plotting software, the more you push yourself for an exact replica, the more you will learn. Spend <em>at least</em> a couple of hours on this.</p></li>
+<li><p><strong>Load in the Star Wars Data.</strong> Sometimes data doesn’t come in a clean format and has metadata listed before the column headers. Use the arguments in the read_csv function to avoid the rows that prevent a successful reading of the data.</p></li>
+<li><p><strong>Remake the respondent names from the email column. Show the first 5 rows of the result.</strong> Each respondentID has a unique email they used to submit their survey. We can see that each of the emails have a different format for their names.</p></li>
 </ol>
+<p>Use regex to create a first name column, a last name column, and a email_domain column to your data set for each row. Show the first 5 rows of the result (you don’t have to show all the columns, just the email, first_name, last_name, and email_domain).</p>
+<p>This table should be placed either in the the Methods section or an Appendix of the report submitted for this unit (see below).</p>
+<ol start="3" type="1">
+<li><strong>Make a table that counts the number of times each domain is used.</strong> Note that sometimes the email domain is not lowercase. Make them uniform for clean counting.</li>
+</ol>
+<p>This table should be placed either in the the Methods section or an Appendix of the report submitted for this unit (see below).</p>
 </section>
 <section id="submission-deliverables" class="level3">
 <h3 class="anchored" data-anchor-id="submission-deliverables">Submission / Deliverables:</h3>
