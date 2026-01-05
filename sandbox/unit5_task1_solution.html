@@ -4251,7 +4251,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
   <li><a href="#question-2" id="toc-question-2">QUESTION 2</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
-<div id="e8f57db4" class="cell" data-execution_count="1">
+<div id="953a1c97" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -4267,7 +4267,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <h2 class="anchored" data-anchor-id="question-1">QUESTION 1</h2>
 <p><strong>Load in the Star Wars Data.</strong> Sometimes data doesn’t come in a clean form and metadata listed before the header. Use the parameters in the read_csv function to avoid the rows that prevent a successful read.</p>
 <p><a href="http://docs.pola.rs/api/python/stable/reference/api/polars.read_csv.html">link to read_csv docs</a></p>
-<div id="1869f712" class="cell" data-execution_count="2">
+<div id="4c3dceab" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Students should manually look at the data to see that there are ten rows above the data that are nonesense. If they don&#39;t use skip rows, the read_csv function fails because polars wants to infer the schema based on the first rows. Because on row 11 the data gains additional rows, the function throws the error. Simply skip 10 rows to start the schema on actual data and the error is avoided.</span></span>
@@ -4286,7 +4286,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <h2 class="anchored" data-anchor-id="question-2">QUESTION 2</h2>
 <p><strong>Remake the respondent names from the email column.</strong> Each respondentID has a unique email they used to submit their survey. We can see that each of the emails have a different format for their names.</p>
 <p>Use regex to create a first and last name column for each email. - Make a table that counts the number of times each domain is used. (take note that sometimes the email domain is not lowercase. Make them uniform for clean counting) - Make a table that has a first and last name columns instead of an email column. Show the first 5 results.</p>
-<div id="a4e0bd26" class="cell" data-execution_count="3">
+<div id="68bbbcd2" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.with_columns([</span>
@@ -4368,7 +4368,7 @@ white-space: pre-wrap;
 </div>
 </div>
 </div>
-<div id="06c3bff8" class="cell" data-execution_count="4">
+<div id="d0f7017e" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data.group_by(<span class="st">&#39;email_type&#39;</span>).agg(</span>
@@ -4413,7 +4413,7 @@ white-space: pre-wrap;
 </div>
 </div>
 </div>
-<div id="0cbf5cb8" class="cell" data-execution_count="5">
+<div id="de82a58f" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.with_columns([</span>
@@ -4754,7 +4754,7 @@ white-space: pre-wrap;
 </div>
 </div>
 </div>
-<div id="8a722a2d" class="cell" data-execution_count="6">
+<div id="0e25f2cd" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.with_columns([</span>
