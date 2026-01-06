@@ -78,22 +78,7 @@ _type your results and analysis here_
 ```
 
 
-
 ## QUESTION 4
-
-__How many babies are named ‘Oliver’ in the state of Utah for all years?__  
-
-_type your results and analysis here_
-
-```{python}
-# Q4
-
-
-```
-
----
-
-## QUESTION 5
 
 __In the most recent year, what was the most common female name in Utah?__ 
 
