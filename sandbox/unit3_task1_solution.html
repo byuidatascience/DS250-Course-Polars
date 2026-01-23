@@ -4258,7 +4258,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
   <li><a href="#question-4" id="toc-question-4">QUESTION 4</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
-<div id="751ba9c0" class="cell" data-execution_count="1">
+<div id="bb87cad7" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -4270,7 +4270,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html(isolated_frame<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="58cf255f" class="cell" data-execution_count="2">
+<div id="ce9a790c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Learn morea about Code Cells: https://quarto.org/docs/reference/cells/cells-jupyter.html</span></span>
@@ -4296,7 +4296,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 </ol></li>
 </ol>
 <p><em>Describe your results and analysis here</em></p>
-<div id="43fe930b" class="cell" data-execution_count="3">
+<div id="59f29cb7" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Include and execute your code here</span></span>
@@ -4320,7 +4320,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <li><strong>Divide all the columns by 1000 whose name starts with num_of.</strong> Be sure to first filter out rows that contain problematic values for the columns like -999 or 1500+.</li>
 </ol>
 <p><em>Describe your results and analysis here</em></p>
-<div id="48cad908" class="cell" data-execution_count="4">
+<div id="edf1f463" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the -999 and 1500+, and convert num_of_delays_carrier to integer.</span></span>
@@ -4335,7 +4335,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <p>There are 3 ways to do the division. It would be fun for them to learn about expression expansion.</p>
 <section id="way-1-brute-force-list-each-column-separately" class="level3">
 <h3 class="anchored" data-anchor-id="way-1-brute-force-list-each-column-separately">way 1 Brute force, list each column separately</h3>
-<div id="88431e24" class="cell" data-execution_count="5">
+<div id="d9a33dad" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>q3 <span class="op">=</span> q2.with_columns((pl.col(<span class="st">&#39;num_of_flights_total&#39;</span>,</span>
@@ -4351,7 +4351,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <section id="way-2-short-way-with-regex" class="level3">
 <h3 class="anchored" data-anchor-id="way-2-short-way-with-regex">way 2 short way with regex</h3>
 <p>Students haven’t learned regex, but they might know it from a different class or will have seen a little bit in the reading.</p>
-<div id="1dab564b" class="cell" data-execution_count="6">
+<div id="95f042ad" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>q3<span class="op">=</span> q2.with_columns(</span>
@@ -4363,7 +4363,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <section id="way-3-short-way-with-polars-selectors" class="level3">
 <h3 class="anchored" data-anchor-id="way-3-short-way-with-polars-selectors">way 3 short way with polars selectors</h3>
 <p>Students haven’t learned column selectors yet, but they will have seen a them in the reading.</p>
-<div id="706cb5e2" class="cell" data-execution_count="7">
+<div id="b3d8fa97" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars.selectors <span class="im">as</span> cs</span>
@@ -4388,7 +4388,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 </ol></li>
 </ol>
 <p><em>No discussion needed for this question</em></p>
-<div id="93efcb6e" class="cell" data-execution_count="8">
+<div id="b09f1efa" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Include and execute your code here</span></span>
@@ -4410,7 +4410,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <li><strong>Using the new weather variable calculated above, create a boxplot showing the distribution of flights delayed by weather for each season. Describe what you learn from this graph.</strong></li>
 </ol>
 <p><em>Describe your results and analysis here</em></p>
-<div id="d4075a37" class="cell" data-execution_count="9">
+<div id="e4edb629" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Include and execute your code here</span></span>
@@ -4426,7 +4426,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 //# sourceMappingURL=lets-plot.js.map</script>
    
    
-          <div id="i1p3HF"></div>
+          <div id="RCmhmE"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -4451,7 +4451,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
        };
    }
    
-   const containerDiv = document.getElementById("i1p3HF");
+   const containerDiv = document.getElementById("RCmhmE");
    let fig = null;
    
    function renderPlot() {
