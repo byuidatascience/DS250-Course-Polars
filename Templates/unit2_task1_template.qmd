@@ -55,7 +55,7 @@ df = pl.read_json(io.BytesIO(response.content))
     1. Fall for October, November, December
     1. All other rows can be assigned a value of 'Unknown' 
 
-_Describe your results and analysis here_
+_No discussion needed for this question_
 
 ```{python}
 # Include and execute your code here
