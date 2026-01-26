@@ -77,11 +77,11 @@ _No discussion needed for this question_
 
 ## QUESTION 3
 
-1. According to the BTS website, the “Weather” category only accounts for severe weather delays. Mild weather delays are not counted in the “Weather” category, but are actually included in both the “NAS” and “Late-Arriving Aircraft” categories. __Using the columns you modified in the bullet above, your job is to create a new column that calculates the total number of flights (in 1,000's) delayed by weather (both severe and mild).__ Show your work by printing the first 5 rows of the dataset. Use these three rules for your calculations:  
+1. According to the BTS website, the “Weather” category only accounts for severe weather delays. Mild weather delays are not counted in the “Weather” category, but are actually included in both the “nas” and “late_aircraft” categories. __Using the columns you modified in the bullet above, your job is to create a new column that calculates the total number of flights (in 1,000's) delayed by weather (both severe and mild).__ Show your work by printing the first 5 rows of the dataset. Use these three rules for your calculations:  
 
     a. 100% of delayed flights in the Weather category are due to weather  
-    a. 30% of all delayed flights in the Late-Arriving category are due to weather  
-    a. From April to August, 40% of delayed flights in the NAS category are due to weather. The rest of the months, the proportion rises to 65%  
+    a. 30% of all delayed flights in the "late_aircraft" category are due to weather  
+    a. From April through August, 40% of delayed flights in the NAS category are due to weather. The rest of the months, the proportion rises to 65%  
 
 _No discussion needed for this question_
 
