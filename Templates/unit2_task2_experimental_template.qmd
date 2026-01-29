@@ -1,0 +1,94 @@
+---
+title: "Client Report - Flights: Column Aggregation"
+subtitle: "Unit 2 Task 2"
+author: "[STUDENT NAME]"
+format:
+  html:
+    self-contained: true
+    page-layout: full
+    title-block-banner: true
+    toc: true
+    toc-depth: 3
+    toc-location: body
+    number-sections: false
+    html-math-method: katex
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-copy: hover
+    code-tools:
+        source: false
+        toggle: true
+        caption: See code
+execute: 
+  warning: false
+    
+---
+
+```{python}
+import polars as pl
+import requests #new for reading in JSON
+import io       #new for reading in JSON
+import numpy as np
+from lets_plot import *
+
+LetsPlot.setup_html(isolated_frame=True)
+```
+
+
+```{python}
+# Learn morea about Code Cells: https://quarto.org/docs/reference/cells/cells-jupyter.html
+
+# Include and execute your code here
+url = "https://raw.githubusercontent.com/byuidatascience/data4missing/master/data-raw/flights_missing/flights_missing.json"
+response = requests.get(url)
+df = pl.read_json(io.BytesIO(response.content))
+```
+
+## QUESTION 1
+
+__Calculate the sample size (i.e. number of observations) for each airport in each year__. What do you notice?
+
+_Describe your results and analysis here_
+
+```{python}
+# Include and execute your code here
+
+
+```
+
+## QUESTION 2
+
+1. __Which airport has the worst delays?__ Describe the metric you chose, and why you chose it to determine the “worst” airport. Your answer should include a summary table that lists (for each airport) the total number of flights, total number of delayed flights, proportion of delayed flights, and average delay time in hours. 
+
+_Describe your results and analysis here_
+
+```{python}
+# Include and execute your code here
+
+
+```
+
+## QUESTION 3
+
+__Create a barplot showing the proportion of all flights that are delayed at each airport. Describe what you learn from this graph.__  
+
+_Describe your results and analysis here_
+
+```{python}
+# Include and execute your code here
+
+
+```
+
+## QUESTION 4
+
+__When controlling for airport and month, what is the trend in delayed flights over the years?__ For each row, calculate a ratio: number of delayed flights to the average number of delayed flights at that airport in that month. Then create a polished boxplot of the results, with year along the x axis. What does a point above 1 represent and what does a point below 1 represent? What insights do you gain from this plot?  What trend do you see, if any? Is it a good trend or bad trend?
+
+_Describe your results and analysis here_
+
+```{python}
+# Include and execute your code here
+
+
+```
