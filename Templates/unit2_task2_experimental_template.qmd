@@ -83,7 +83,7 @@ _Describe your results and analysis here_
 
 ## QUESTION 4
 
-__When controlling for airport and month, what is the trend in delayed flights over the years?__ For each row, calculate a ratio: number of delayed flights to the average number of delayed flights at that airport in that month. Then create a polished boxplot of the results, with year along the x axis. What does a point above 1 represent and what does a point below 1 represent? What insights do you gain from this plot?  What trend do you see, if any? Is it a good trend or bad trend?
+__When controlling for airport and month, what is the trend in delayed flights over the years?__ For each row, calculate a ratio: number of delayed flights over the average number of delayed flights at that airport in that month. Then create a polished boxplot of the results, with year along the x axis. What does a point above 1 represent and what does a point below 1 represent? What insights do you gain from this plot?  What trend do you see, if any? Is it a good trend or bad trend?
 
 _Describe your results and analysis here_
 

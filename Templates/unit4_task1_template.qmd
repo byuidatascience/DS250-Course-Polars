@@ -43,7 +43,19 @@ LetsPlot.setup_html(isolated_frame=True)
 
 ## QUESTION
 
-__Build a classification model labeling houses as being built “before 1980” or “during or after 1980”.__ Your goal is to reach or exceed 90% accuracy. Report your final model choice and any other model parameters you may have tweaked (train-test split ratio, tuning parameters, etc).  
+1. __Take time to get to know your data.__ Based on some initial exploration, identify 3 variables in the dataset you think will have the best predictive ability for determining if a house was built before 1980. Explain/justify the reasoning behind your guess.
+
+Also, identify 3 variables you think will ultimately be very unimportant to the task at hand. Also explain why
+
+_type your write-up and analysis here_
+
+```{python}
+# Optional: code you used to get to know your data
+
+
+```
+
+1. __Build a classification model labeling houses as being built “before 1980” or “during or after 1980”.__ Your goal is to reach or exceed 90% accuracy. Report your final model choice and any other model parameters you may have tweaked (train-test split ratio, tuning parameters, etc).  
 
 _type your write-up and analysis here_
 

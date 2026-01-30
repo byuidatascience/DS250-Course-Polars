@@ -27,6 +27,8 @@ execute:
 
 ```{python}
 import polars as pl
+import requests #new for reading in JSON
+import io       #new for reading in JSON
 import numpy as np
 from lets_plot import *
 
