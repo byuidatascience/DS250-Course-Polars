@@ -44,9 +44,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-47a2569239650a328465399e13938bea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-52a40c8f424a6d1e268fe027cedb2c07.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-47a2569239650a328465399e13938bea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-6fbb0ac35ee6a77f62747f8c87c7436a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-bcfd0050d3ced2fb27bfc655edf3eab9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-6fbb0ac35ee6a77f62747f8c87c7436a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -501,20 +501,7 @@ Note
 <p><a href="../Setup/sql_setup.html">SQLite</a></p>
 <p>Python Polars the Definitive Guide: Cahpter 6, <a href="https://learning.oreilly.com/library/view/python-polars-the/9781098156077/ch06.html#id70">Querying Databases</a> section (e.g.&nbsp;Reading from an SQLite database).</p>
 <p><a href="https://docs.data.world/documentation/sql/concepts/basic/SELECT_and_FROM.html">The SELECT and FROM Clauses</a></p>
-<p>Review Polars Cookbook as Needed</p>
-<ul>
-<li><p>Chapter 1 Getting Started with Python Polars</p>
-<ul>
-<li><a href="https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-46">Creating, modifying, and deleting columns</a></li>
-<li><a href="https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-59">Understanding method chaining</a></li>
-<li>REVIEW <a href="https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-47">Selecting columns and filtering data</a></li>
-</ul></li>
-<li><p>Chapter 4 Data Transformation Techniques</p>
-<ul>
-<li><a href="https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_04.xhtml#_idParaDest-151">Exploring basic aggregation</a></li>
-<li><a href="https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_04.xhtml#_idParaDest-158">using group by aggregation</a></li>
-</ul></li>
-</ul>
+<p>Review Polars Cookbook as Needed - Chapter 1 Getting Started with Python Polars - <a href="https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-46">Creating, modifying, and deleting columns</a> - <a href="https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-59">Understanding method chaining</a> - REVIEW <a href="https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_01.xhtml#_idParaDest-47">Selecting columns and filtering data</a> - Chapter 4 Data Transformation Techniques - <a href="https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_04.xhtml#_idParaDest-151">Exploring basic aggregation</a> - <a href="https://learning.oreilly.com/library/view/polars-cookbook/9781805121152/B21621_04.xhtml#_idParaDest-158">using group by aggregation</a></p>
 <p>Optional/alternative reading:</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -543,11 +530,9 @@ Note
 <h3 class="anchored" data-anchor-id="questions-and-tasks">Questions and Tasks</h3>
 <p>Download the <a href="../Templates/unit3_task1_template.qmd">Unit 3 Task 1 Template</a>.</p>
 <ol type="1">
-<li><strong>Use an SQL query to pull in the batting table. Then, with Python Polars calculate the total number of at bats and the batting average for each year a player played. Then, filter the data frame to only include rows in which the player had at least 10 at bats that year. Sort the dataframe from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.</strong></li>
-</ol>
-<p>Note: A batting average is meant to measure how often a player puts the ball in play and gets to base safely. For this task, use a simplified version of batting average defined as the sum of hits (labeled ‘H’) divided by number of at bats (labeled ‘AB’).</p>
-<ol type="1">
-<li><strong>Use an SQL query to pull in the batting table. Then, with Python Polars calculate the batting average for each player over their entire career (all years combined). Only include players with at least 100 at bats over their entire career. Sort the dataframe from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.</strong></li>
+<li><p><strong>Write an SQL query that pull in the batting table. Then, with Python Polars code create a dataframe that contains playerID, yearID, and batting average. Sort the dataframe from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.</strong></p></li>
+<li><p><strong>Do the same analysis as above, but now only include players with at least 10 at bats that year. Print the top 5 results.</strong></p></li>
+<li><p><strong>Write an SQL query that pulls in the batting table. Then, with Python Polars calculate the batting average for each player over their entire career (all years combined). Only include players with at least 100 at bats over their entire career. Sort the dataframe from highest batting average to lowest, and then by playerid alphabetically. Show the top 5 results in your report.</strong></p></li>
 </ol>
 </section>
 <section id="submission" class="level3">
