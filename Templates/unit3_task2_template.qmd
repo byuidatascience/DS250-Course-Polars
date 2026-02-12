@@ -82,7 +82,7 @@ _Describe your results and analysis here_
 
 ## QUESTION 3
 
-__Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats over their entire career, and print the top 5 results.__
+__Now modify the SQL query to calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats over their entire career, and print the top 5 results.__
 
 _Describe your results and analysis here_
 
