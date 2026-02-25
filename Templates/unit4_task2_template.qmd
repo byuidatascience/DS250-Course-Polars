@@ -29,6 +29,8 @@ execute:
 import polars as pl
 import numpy as np
 from lets_plot import *
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
 # add the additional libraries you need to import for ML here
 
 LetsPlot.setup_html(isolated_frame=True)
@@ -43,7 +45,20 @@ LetsPlot.setup_html(isolated_frame=True)
 
 ## QUESTION 1
 
-__Describe the quality of your classification model using 2-3 different evaluation metrics.__ You also need to explain how to interpret each of the evaluation metrics you use.  
+1. __Describe the quality of your classification model using 2-3 different evaluation metrics.__ You also need to explain how to define/interpret each of the evaluation metrics you use.  
+
+_type your write-up and analysis here_
+
+```{python}
+# Include and execute your code here
+# Don't forget, you need another import statement to import the desired ML model from sklearn
+
+```
+
+
+## QUESTION 2
+
+1. __Justify your classification model by discussing the most important features selected by your model.__ This discussion should include a plot of permutation importance values for the most important features. Were there any features you thought would be importance but weren't?
 
 _type your write-up and analysis here_
 
@@ -53,10 +68,9 @@ _type your write-up and analysis here_
 
 ```
 
+## QUESTION 3
 
-## QUESTION 2
-
-__Justify your classification model by discussing the most important features selected by your model.__ This discussion should include a feature importance chart and a description of the features.
+1. __For the 3 most important features, explain their relationship to the target variable. Use a plot to illustrate the relationship.__ (3 plots minimum)
 
 _type your write-up and analysis here_
 

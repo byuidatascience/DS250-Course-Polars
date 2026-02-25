@@ -29,6 +29,8 @@ execute:
 import polars as pl
 import numpy as np
 from lets_plot import *
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
 # add the additional libraries you need to import for ML here
 
 LetsPlot.setup_html(isolated_frame=True)
@@ -43,7 +45,7 @@ LetsPlot.setup_html(isolated_frame=True)
 
 ## QUESTION 1
 
-__Create 2-3 charts that evaluate the relationships between each of the top 2 or 3 most important variables (as found in Unit 4 Task 2) and the year the home was built.__ Describe what you learn from the charts about how that variable is related to year built.   
+1. Repeat the classification exercise using 2 different algorithms/models. Explain the differences between the models. 
 
 _type your write-up and analysis here_
 
@@ -56,7 +58,7 @@ _type your write-up and analysis here_
 
 ## QUESTION 2
 
-__Create at least one other chart to examine a variable(s) you thought might be important but apparently was not. The chart should show its relationship to the year built.__ Describe what you learn from the chart about how that variable is related to year built. Explain why you think it was not (very) important in the model.
+1. For each model (your original one, and the 2 new ones for this task), display the classification report and the permutation importances for the most important features.  Discuss which model you would recommend to the Client and why.
 
 _type your write-up and analysis here_
 

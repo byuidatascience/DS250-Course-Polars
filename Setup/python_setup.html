@@ -495,7 +495,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#download-and-install-python" id="toc-download-and-install-python" class="nav-link active" data-scroll-target="#download-and-install-python">Download and Install Python</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://byuidatascience.github.io/DS250-Course-Polars/issues/new" class="toc-action"><i class="bi bi-git"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -529,8 +529,20 @@ ul.task-list li input[type="checkbox"] {
 <section id="download-and-install-python" class="level3">
 <h3 class="anchored" data-anchor-id="download-and-install-python">Download and Install Python</h3>
 <iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/41338032/partner_id/1157612?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_8ncm34c3&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_5ngi2evj" width="608" height="402" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="W01 - Install Python"></iframe>
+<section id="do-you-already-have-python-installed" class="level4">
+<h4 class="anchored" data-anchor-id="do-you-already-have-python-installed">Do you already have Python installed?</h4>
 <p>First we need to confirm you dont already have python installed. Open a command prompt (win) or terminal (mac) and type <code>python --version</code> or <code>python3 --version</code>. If you see a version number, you already have python installed. If you see an error message, you need to install python. If the version you have is not the same as the one listed below you will still want to uninstall and install the correct version.</p>
-<p>How to uninstall python on windows:</p>
+</section>
+<section id="install-this-specific-version-of-python-3.13" class="level4">
+<h4 class="anchored" data-anchor-id="install-this-specific-version-of-python-3.13">Install this specific version of Python 3.13</h4>
+<p>We need to download and install <code>this specific version</code> of python approved for this course. (<strong>Python 3.13</strong>) We do not reccomend installing Python 3.14 at this time as the libraries have not had enought time to update to the changes from 3.13 –&gt; 3.14.</p>
+<p><strong>Note:</strong> <strong><em>do not</em></strong> install python from <code>VS Code</code> or the <code>Microsoft Store</code> or <code>Anaconda</code> Python.org is the <em>only</em> place you should install VS Code from (link below) <strong>Note:</strong> If you are using <strong>Windows</strong>, make sure to check the box that says <code>Add Python to PATH</code> before clicking <code>Install Now</code>. Sometimes it is phrased as <code>Add Python to environment variables</code>. Failture to do so will cause issues with the <code>quarto</code> install process.</p>
+<ul>
+<li><a href="https://python.org/downloads">Python</a></li>
+</ul>
+</section>
+<section id="how-to-uninstall-python-on-windows" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-uninstall-python-on-windows">How to uninstall python on windows:</h4>
 <ul>
 <li>Open the <code>Control Panel</code></li>
 <li>Click on <code>Programs</code></li>
@@ -538,7 +550,9 @@ ul.task-list li input[type="checkbox"] {
 <li>Find <code>Python</code> in the list of programs</li>
 <li>Right click on <code>Python</code> or click on the … and select <code>Uninstall</code></li>
 </ul>
-<p>How to uninstall python on mac:</p>
+</section>
+<section id="how-to-uninstall-python-on-mac" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-uninstall-python-on-mac">How to uninstall python on mac:</h4>
 <ul>
 <li>If it is python 3.10 or higher you should be fine to uninstall it.</li>
 <li>Make sure it has a folder in your applications folder before uninstalling.</li>
@@ -546,11 +560,7 @@ ul.task-list li input[type="checkbox"] {
 <li>If it does not have a folder in the applciations folder it will be much more difficult to uninstall.</li>
 <li>Do not uninstall python 2.7 if you have it. We will not be using it but it is required for some system functions.</li>
 </ul>
-<p>We need to download and install the latest version of python approved for this course. (<strong>Python 3.13</strong>) We do not reccomend installing Python 3.14 at this time as the libraries have not had enought time to update to the changes from 3.13 –&gt; 3.14.</p>
-<p><strong>Note:</strong> <strong><em>do not</em></strong> install python from <code>VS Code</code> or the <code>Microsoft Store</code> or <code>Anaconda</code> Python.org is the <em>only</em> place you should install VS Code from (link below) <strong>Note:</strong> If you are using <strong>Windows</strong>, make sure to check the box that says <code>Add Python to PATH</code> before clicking <code>Install Now</code>. Sometimes it is phrased as <code>Add Python to environment variables</code>. Failture to do so will cause issues with the <code>quarto</code> install process.</p>
-<ul>
-<li><a href="https://python.org/downloads">Python</a></li>
-</ul>
+</section>
 <section id="continue-to-install-python-libraries" class="level4">
 <h4 class="anchored" data-anchor-id="continue-to-install-python-libraries">Continue to Install Python Libraries</h4>
 <p><a href="../Setup/python_lib.html">Install Python Libraries</a></p>
@@ -981,7 +991,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://byuidatascience.github.io/DS250-Course-Polars/issues/new" class="toc-action"><i class="bi bi-git"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

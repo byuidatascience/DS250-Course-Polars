@@ -29,9 +29,12 @@ execute:
 import polars as pl
 import numpy as np
 from lets_plot import *
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
 # add the additional libraries you need to import for ML here
 
 LetsPlot.setup_html(isolated_frame=True)
+
 ```
 
 
@@ -43,9 +46,7 @@ LetsPlot.setup_html(isolated_frame=True)
 
 ## QUESTION
 
-1. __Take time to get to know your data.__ Based on some initial exploration, identify 3 variables in the dataset you think will have the best predictive ability for determining if a house was built before 1980. Explain/justify the reasoning behind your guess.
-
-Also, identify 3 variables you think will ultimately be very unimportant to the task at hand. Also explain why
+1. __Take time to get to know your data.__ Based on some initial exploration, identify 3 variables in the dataset you think will have strong predictive ability for determining if a house was built before 1980. Explain/justify the reasoning behind your guesses (for example with plots).
 
 _type your write-up and analysis here_
 
@@ -61,6 +62,7 @@ _type your write-up and analysis here_
 
 ```{python}
 # Include and execute your code here
+# Don't forget, you need another import statement to import the desired ML model from sklearn
 
 
 ```

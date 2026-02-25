@@ -415,7 +415,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission:</a></li>
   <li><a href="#deliverables" id="toc-deliverables" class="nav-link" data-scroll-target="#deliverables">Deliverables:</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://byuidatascience.github.io/DS250-Course-Polars/issues/new" class="toc-action"><i class="bi bi-git"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -501,7 +501,12 @@ Note
 <section id="question-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
 <p>Identify the top 10 players with the longest Major League Baseball careers. Include their:</p>
-<p>playerID first_name last_name career_length</p>
+<ul>
+<li>playerID</li>
+<li>first_name</li>
+<li>last_name</li>
+<li>career_length</li>
+</ul>
 </section>
 <section id="question-2" class="level3">
 <h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
@@ -509,13 +514,15 @@ Note
 <li>Write an SQL query that pulls the tables you need into a polars dataframe. Then, use python polars to create a summary table showing the average salary for each position (e.g., pitcher, catcher, outfielder). Position information can be found in the fielding table in the POS column.</li>
 </ul>
 <p>Include the following columns:</p>
-<pre><code>- position
-- average_salary
-- total_players
-- highest_salary</code></pre>
+<ul>
+<li>position</li>
+<li>average_salary</li>
+<li>total_players</li>
+<li>highest_salary</li>
+</ul>
 <p>The highest_salary column should display the highest salary ever earned by a player in that position.</p>
 <ul>
-<li><p>Additionally, create a new column called salary_category using a case statement:</p>
+<li><p>Additionally, add a new column to the summary table you just created to label the average salary:</p>
 <ul>
 <li>If the average salary is above $3 million, categorize it as “High Salary.”</li>
 <li>If the average salary is between $2 million and $3 million, categorize it as “Medium Salary.”</li>
@@ -1014,7 +1021,7 @@ Note
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/byuistats/DS250-Course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://byuidatascience.github.io/DS250-Course-Polars/issues/new" class="toc-action"><i class="bi bi-git"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

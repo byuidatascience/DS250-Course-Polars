@@ -45,9 +45,10 @@ response = requests.get(url)
 df = pl.read_json(io.BytesIO(response.content))
 ```
 
+
 ## QUESTION 1
 
-1. __Which airport has the worst delays?__ Describe the metric you chose, and why you chose it to determine the “worst” airport. Your answer should include a summary table that lists (for each airport) the total number of flights, total number of delayed flights, proportion of delayed flights, and average delay time in hours. 
+__Calculate the sample size (i.e. number of rows in the dataset) for each airport in each year__. What do you notice?
 
 _Describe your results and analysis here_
 
@@ -58,6 +59,18 @@ _Describe your results and analysis here_
 ```
 
 ## QUESTION 2
+
+__Which airport has the worst delays?__ Describe the metric you chose, and why you chose it to determine the “worst” airport. Your answer should include a summary table that lists (for each airport) the total number of flights, total number of delayed flights, proportion of delayed flights, and average delay time in hours. 
+
+_Describe your results and analysis here_
+
+```{python}
+# Include and execute your code here
+
+
+```
+
+## QUESTION 3
 
 __Create a barplot showing the proportion of all flights that are delayed at each airport. Describe what you learn from this graph.__  
 
