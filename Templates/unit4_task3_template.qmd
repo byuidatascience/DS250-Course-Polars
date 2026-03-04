@@ -45,7 +45,7 @@ LetsPlot.setup_html(isolated_frame=True)
 
 ## QUESTION 1
 
-1. Repeat the classification exercise using 2 different algorithms/models. Explain the differences between the models. 
+1. __Repeat the classification exercise using 2 different algorithms/models. Explain the differences between the 3 models__ (your original one, and the 2 new ones for this task).
 
 _type your write-up and analysis here_
 
