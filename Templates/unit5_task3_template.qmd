@@ -29,17 +29,75 @@ execute:
 import polars as pl 
 import numpy as np
 from lets_plot import *
+import polars.selectors as cs
 # add the additional libraries you need to import for ML here
 
 LetsPlot.setup_html(isolated_frame=True)
+
+data_url = "https://byuidatascience.github.io/DS250-Course-Polars/Data/StarWars_with_emails.csv"
 ```
 
+<!-- The first 10 rows are not part of the datset we need.
+
+The columns headers are split across two rows. We need to clean and simplify the column headers-->
 
 ```{python}
-# import your data here using polars and the URL
+# Read in and tidy up the first row
+a = pl.Series(pl.read_csv(data_url, skip_rows = 10, n_rows=1, has_header=False, encoding = 'utf8-lossy').row(0))
+# Note the non-aschii character in the column "Do you consider yourself to be a fan of the Expanded Universe". (column AF if you open it in Excel). 
 
+# BTW: Detecting what it is and where can be difficult
+
+# Lossy means that invalid utf8 values are replaced with � characters. When using other encodings than utf8 or utf8-lossy, the input is first decoded in memory with python. Defaults to utf8...ignore_errors = True does not replace the non-utf8 character with a blank space like you would hope
+
+a[2] = "seen_any" #simply overwrite the value at index 2
+
+# Rather than changing each column header manually,
+# here we use regex to apply changes more efficiently
+a = (
+  a.str.replace(r".+seen.+", "seen_")
+   .str.replace(r".+rank.+", "rank_")
+   .str.replace(r"(.+favorably.+)", "fav_")
+   .fill_null(strategy = "forward")
+
+   .str.replace("\uFFFD+", "") #this gets rid of the question marks in a diamond characters 
+   .str.strip_chars()
+   .str.to_lowercase()
+   .str.replace_all(" ", "_")
+   .str.replace(r"location(.+)", "location")
+
+)
+a[3] = "star_wars_fan"
+a[30] = "who_shot_first"
+a[31] = "know_expanded_universe"
+a[32] = "expanded_universe_fan"
+a[33] = "star_trek_fan"
+```
+
+<!-- Combine series q and a into one series to be used as column names-->
+
+```{python}
+b = pl.Series(pl.read_csv(data_url, skip_rows = 11, n_rows=1, has_header=False, encoding = 'utf8-lossy').row(0))
+
+b = (
+  b.str.replace(r"Star Wars: (Episode \w+) .+", "${1}")
+   .str.replace("Response", "")
+   .str.replace_all(" ", "_")
+   .fill_null("")
+   .str.strip_chars()
+)
 
 ```
+
+```{python}
+#Now combine the two series, each of which contains part of the desired column header
+new_names = (a + b).to_list()
+
+# Read in the data, skipping over the column header rows
+# and use 'new_names' as the column headers
+df = pl.read_csv(data_url, skip_rows=12, has_header=False, new_columns = new_names )
+```
+
 
 <!-- Rather than a simple write up like we have been doing so far, this project requires a more structured approach. You will need to show you have completed the tasks, but will structure the report in a way that is more like a client report. The report will be structured as follows:
 
@@ -47,6 +105,7 @@ LetsPlot.setup_html(isolated_frame=True)
  - Methods: this is a high level overview of the methods used in the analysis. This should include an explanation of data preparation steps, especially how you dealt with each categorical variable and why. Showing the resulting or original distribution of variables may be helpful. Describe how you handled missing values and outliers. How did/might your decisions impact results?Explain any feature engineering steps you took. This is also where you will put the graphs you recreated to show you validated the dataset and that it matches the article.
  - Results: this is a more in-depth explanation of results. A classification report and feature importance graphs belong here.
  - Conclusion: this is where you will discuss the implication of the results, including any limitations of the analysis, and recommendations for actions/future work. It may feel repetitive to the executive summary, but it should be more detailed and include any additional insights you gained from the analysis. -->
+
 
 ## Executive Summary
 
