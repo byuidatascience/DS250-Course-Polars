@@ -81,9 +81,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-51a9885dfcbcc389be584bcb5e1a5234.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-9e8295696721055c13f79443dac2a15a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-51a9885dfcbcc389be584bcb5e1a5234.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2ddc67618a5c7bd920a5d99dfa7ef637.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-7efb4aa23be0618f90657eaca8ff6255.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-2ddc67618a5c7bd920a5d99dfa7ef637.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -591,7 +591,7 @@ Note
 </div>
 </div>
 </div>
-<div id="eb6f8153" class="cell" data-execution_count="1">
+<div id="4fb3fdac" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -600,11 +600,11 @@ Note
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html(isolated_frame<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Try reading in the starwars data. Explain why it doesn’t work. HINT: Look at the csv in a spreadsheet software like Excel.</p>
-<div id="09ff4209" class="cell" data-execution_count="2">
+<div id="c9eab0d7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data = pl.read_csv('starwars_skip_rows10.csv')</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now read it in correctly</p>
-<div id="5468a533" class="cell" data-execution_count="3">
+<div id="1af898e1" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data = pl.read_csv('starwars_skip_rows10.csv',</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># skip_rows=10)</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pl.read_csv(<span class="st">'StarWars_with_emails.csv'</span>,</span>
@@ -614,7 +614,7 @@ Note
 </div>
 <p>Each respondentID has a unique email they used to submit their survey. We can see that each of the emails have a different format for their names.</p>
 <p>Use regex to create a first and last name column for each email. - Make a table that</p>
-<div id="39dad964" class="cell" data-execution_count="4">
+<div id="7ae8c618" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.with_columns([</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    pl.when(pl.col(<span class="st">"email"</span>).<span class="bu">str</span>.to_lowercase().<span class="bu">str</span>.contains(<span class="st">"gmail"</span>))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>      .then(pl.lit(<span class="dv">1</span>))</span>
@@ -631,7 +631,7 @@ Note
 <ul>
 <li>Make a table that counts the number of times each domain is used</li>
 </ul>
-<div id="bff59a84" class="cell" data-execution_count="5">
+<div id="1e7a0dff" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data.group_by(<span class="st">'email_type'</span>).agg(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">'email_type'</span>).count().alias(<span class="st">'domail_count'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -639,7 +639,7 @@ Note
 <ul>
 <li>grab the first and last names from gmail and yahoo</li>
 </ul>
-<div id="a54dce6e" class="cell" data-execution_count="6">
+<div id="0e107928" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.with_columns([</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># everything before the first @</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"email"</span>).<span class="bu">str</span>.replace(<span class="vs">r"@</span><span class="dv">.</span><span class="op">*</span><span class="dv">$</span><span class="vs">"</span>, <span class="st">""</span>, literal<span class="op">=</span><span class="va">False</span>).alias(<span class="st">"name"</span>),</span>
@@ -653,7 +653,7 @@ Note
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>you have to str.to_lower and str.strip &gt;:)</p>
-<div id="1865fc91" class="cell" data-execution_count="7">
+<div id="d157b377" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.with_columns([</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">'domain'</span>).<span class="bu">str</span>.strip_chars_end().<span class="bu">str</span>.to_lowercase().alias(<span class="st">'domain'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>])</span>
@@ -692,7 +692,7 @@ Note
 <span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>data.select(<span class="st">'name'</span>,<span class="st">'first_name'</span>, <span class="st">'last_name'</span>, <span class="st">'domain'</span>).head(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>try to join the names.csv onto our table using first and last name columns</p>
-<div id="1cb61da6" class="cell" data-execution_count="8">
+<div id="60273331" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># names = pl.read_csv('names.csv')</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># names.head()</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>

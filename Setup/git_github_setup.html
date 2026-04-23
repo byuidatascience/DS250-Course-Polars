@@ -46,9 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-51a9885dfcbcc389be584bcb5e1a5234.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-9e8295696721055c13f79443dac2a15a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-51a9885dfcbcc389be584bcb5e1a5234.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2ddc67618a5c7bd920a5d99dfa7ef637.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-7efb4aa23be0618f90657eaca8ff6255.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-2ddc67618a5c7bd920a5d99dfa7ef637.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -530,9 +530,6 @@ ul.task-list li input[type="checkbox"] {
 
 <p>Note: Changes have been made to this course since the video was recorded. The video is still relevant and will be updated in the future to reflect the changes. For conflicts of the video and the text, the text is the most current.</p>
 <iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/41338032/partner_id/1157612?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_oqjilp7j&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_vsr13bv6" width="608" height="402" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="W0 - Setup Git and GitHub"></iframe>
-<!-- 
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1157612/sp/115761200/embedIframeJs/uiconf_id/41338032/partner_id/1157612?iframeembed=true&playerId=kaltura_player&entry_id=1_m518zgqz&flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ejww8qsl" width="608" height="402" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="W0 - Course Work Portfolio"></iframe>
-``` -->
 <section id="setup-git-and-github" class="level3">
 <h3 class="anchored" data-anchor-id="setup-git-and-github">Setup Git and GitHub</h3>
 <section id="github-will-be-used-for-publishing-all-projects" class="level4">
@@ -551,71 +548,6 @@ Note: Mac users can install git using <a href="https://brew.sh/">homebrew</a> by
 </ul></li>
 <li><a href="https://desktop.github.com/">Install</a> GitHub Desktop</li>
 </ol>
-<!-- 1. __Git a Course Work Portfolio in GitHub__
-    a.  __Use the Portfolio Template in Data Science GitHub repo__
-        * __Navigate to the [Course Work Portfolio](https://github.com/byuidatascience/course_work_portfolio) in GitHub__  
-        * __Click the Green Button `Use this template` and select `Create a new repository`__  
-        * __Check the box to `Include all branches`__  
-        ![](/Images/gh_template.png){width=200}  
-        * __Select `byui-math-dept` as the `Owner` You should have been added to `byui-math-dept` by your teacher if you dont see it ask them to add you. This Org uses SSO with BYUI, if you dont have your BYUI email in your GitHub account you need to add it (account -> settings -> emails -> add email address) If you have performed all these steps and still dont see it look for a badge above `Repository template` that states `Single sign-on to see results in the byui-math-dept organization.` Follow that link to sign in with SSO then you will be able to choose  `byui-math-dept` as the `Owner`__  
-        ![](/Images/gh_math_owner.png){width=400}  
-        * __Name the repository as your GitHub `username` + `_` + `the current semester and year`all lowercase (see example in image above)__  
-        * __Select `Private` as the type of Repo, then click `Create Repository`__  
-        ![](/Images/gh_private.png){width=500}  
-
-    a.  __Clone the repository to your computer__
-        * __Click the `<> Code` menu__
-        * __Click the Green Button `<> Code` and select `Open with GitHub Desktop`__  
-        ![](/Images/gh_open_in_desktop.png){width=400}  
-        * __Click the Button `Open in Visual Studio Code`__
-        ![](/Images/gh_open_in_vs_code.png){width=500}  
-        * __If it asks for a username and password, this is because your GitHub Desktop is not logged in to your GitHub account via SSO. Log out of your account in GitHub Desktop, be logged in in your browser to GitHub and make sure you can access the byui-math-dept org where you cloned your new portfolio. Then repete these instructions. It will log you back in to GitHub Desktop but this with with the SSO credentials__  
-
-1. __If you forgot to `Check the box to Include all branches` in the previous step (otherwise skip to the next step): Create a new branch `gh-pages`__
-    a. __Create a new branch `gh-pages`__
-        * __Click the `Branch: main` button then `view all branches`__  
-        ![](/Images/gh_view_all_branches.png){width=300}
-        * __Click the `New Branch` button__  
-        ![](/Images/gh_new_branch.png){width=200}
-        * __Name the branch `gh-pages` and click the Green Button `Create new branch`__  
-        ![](/Images/gh_create_new_branch.png){width=300} 
-
-    a.  __Modify Pages Settings for Build and deployment from `main` to `gh-pages`:__
-        * __Click the `Settings` tab__  
-        ![](/Images/gh_settings.png){width=300}
-        * __Scroll down to the `Pages` section in the left hand menu__  
-        ![](/Images/gh_pages.png){width=300}
-        * __Locate the Build and deployment section and change Branch from `main` to `gh-pages` and leave the right side as `/root`__    
-        ![](/Images/gh_gh-pages_root.png){width=750}  
-
-1. __Update the `_quarto.yml` file in course work portfolio:__
-    a. __update the `title` to includ your name__
-    b. __update the `site url` to your published site url (this will be in the deployment section in GitHub)__
-    c. __update the `repo-url` to your GitHub repository url__
-    d. __update the `issue-url` to your GitHub issue url (its the same as the repo url but with `/issues/new` at the end)__
-    e. __update the `page-footer` `left` to include your name (line 15)__
-    f. __update the `page-footer` `right` `href` to include your LinkedIn url (line 18 - optional)__
-    g. __Scroll to the bottom and change the theme `light:` and/or `dark:` to another theme (optional)__  
-
-1. __Commit and Push the changes made to GitHub__
-    a.  __Push the changes to GitHub via GitHub Desktop__
-        * __Make sure you have the correct repo selected in the top left__  
-        ![](/Images/gh_current_repo2.png){width=300}  
-        * __Type a commit message and click the Blue Button `Commit to main`__  
-        ![](/Images/gh_commit_main.png){width=300}  
-        * __Click the Blue Button `Push origin`__  
-        ![](/Images/gh_push_origin.png){width=500}  
-        * __If it gives you a big long error when you push, this is because your GitHub Desktop is not logged in to your GitHub account via SSO. Log out of your account in GitHub Desktop, and log right back in__  
-
-    a.  __Confirm the GitHub Actions are working__
-        * __Navigate to the repo in GitHub and click on the  `Actions` tab__  
-        ![](/Images/gh_actions.png){width=500}
-        * __Confirm the `Update _quarto.yml` is working by the yellow circle turning to a green check circle (Note: this can take 3-5min)__  
-        ![](/Images/gh_all_workflows.png){width=300}
-
-1. __Fix for a common bug__
-    a. __Fix for the main page loading the ReadMe.md file instead of the portfolio website__
-        * __Run `quarto publish gh-pages` in the terminal of VS Code__ -->
 
 
 </section>
