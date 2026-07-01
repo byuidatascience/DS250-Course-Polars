@@ -1,0 +1,30 @@
+var _____WB$wombat$assign$function_____=function(name){return (globalThis._wb_wombat && globalThis._wb_wombat.local_init && globalThis._wb_wombat.local_init(name))||globalThis[name];};if(!globalThis.__WB_pmw){globalThis.__WB_pmw=function(obj){this.__WB_source=obj;return this;}}{
+let window = _____WB$wombat$assign$function_____("window");
+let self = _____WB$wombat$assign$function_____("self");
+let document = _____WB$wombat$assign$function_____("document");
+let location = _____WB$wombat$assign$function_____("location");
+let top = _____WB$wombat$assign$function_____("top");
+let parent = _____WB$wombat$assign$function_____("parent");
+let frames = _____WB$wombat$assign$function_____("frames");
+let opener = _____WB$wombat$assign$function_____("opener");
+Bootstrapper.bindDependencyImmediate(function(){var Bootstrapper=window["Bootstrapper"];var ensightenOptions=Bootstrapper.ensightenOptions;var _dl=__dataLayer,site=_dl.site||{},siteSite=site.site||"",page=_dl.page||{},pageName=page.page_name||"",storyTitle=page.story_title||"",realPath=window.location.pathname||"",pageSection=page.section_1||realPath.split("/")[1]||"",configId,nielsenMetadata;switch(true){case /fivethirtyeight|538/i.test(siteSite):configId=nielsenConfig.fivethirtyeight.static;break;
+case /andscape/i.test(siteSite):configId=nielsenConfig.andscape.static;break;case /(the)?undefeated/i.test(siteSite):configId=nielsenConfig.theundefeated.static;break;case /abcn(ews)?/i.test(siteSite):configId=nielsenConfig.abcn.static;break;case /goodmorningamerica|gma/i.test(siteSite):configId=nielsenConfig.gma.static;break;case /6abc/i.test(siteSite):configId=nielsenConfig.WPVI.static;break;case /abc11/i.test(siteSite):configId=nielsenConfig.WTVD.static;break;case /abc13/i.test(siteSite):configId=
+nielsenConfig.KTRK.static;break;case /abc30/i.test(siteSite):configId=nielsenConfig.KFSN.static;break;case /abc7chicago/i.test(siteSite):configId=nielsenConfig.WLS.static;break;case /abc7ny/i.test(siteSite):configId=nielsenConfig.WABC.static;break;case /abc7news/i.test(siteSite):configId=nielsenConfig.KGO.static;break;case /abc7/i.test(siteSite):configId=nielsenConfig.KABC.static;break;default:configId=null;break}nielsenMetadata={type:"static",assetid:storyTitle||pageName||realPath,section:pageSection||
+pageName||realPath};for(var key in nielsenMetadata){var val=nielsenMetadata[key];if(typeof val==="string")nielsenMetadata[key]=val.replace(/\s+/ig,"-").replace(/[^a-z-]/ig,"")}configId&&Bootstrapper.initNielsen(configId,nielsenMetadata)},3969251,[4176295],694696,[645962],24);
+}
+
+/*
+     FILE ARCHIVED ON 03:02:04 Feb 23, 2026 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 22:10:12 Jul 01, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  capture_cache.get: 1.791
+  load_resource: 100.183
+  PetaboxLoader3.resolve: 56.333
+  PetaboxLoader3.datanode: 4.699
+*/

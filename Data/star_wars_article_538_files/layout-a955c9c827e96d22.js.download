@@ -1,0 +1,26 @@
+var _____WB$wombat$assign$function_____=function(name){return (globalThis._wb_wombat && globalThis._wb_wombat.local_init && globalThis._wb_wombat.local_init(name))||globalThis[name];};if(!globalThis.__WB_pmw){globalThis.__WB_pmw=function(obj){this.__WB_source=obj;return this;}}{
+let window = _____WB$wombat$assign$function_____("window");
+let self = _____WB$wombat$assign$function_____("self");
+let document = _____WB$wombat$assign$function_____("document");
+let location = _____WB$wombat$assign$function_____("location");
+let top = _____WB$wombat$assign$function_____("top");
+let parent = _____WB$wombat$assign$function_____("parent");
+let frames = _____WB$wombat$assign$function_____("frames");
+let opener = _____WB$wombat$assign$function_____("opener");
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[9649],{77828:function(n,e,t){Promise.resolve().then(t.t.bind(t,45373,23)),Promise.resolve().then(t.bind(t,41802)),Promise.resolve().then(t.bind(t,44746))},44746:function(n,e,t){"use strict";t.d(e,{default:function(){return u}});var r=t(12174);function u(){return(0,r.Z)(),null}},12174:function(n,e,t){"use strict";t.d(e,{Z:function(){return l}});var r=t(2265),u=t(54570),i=t(70764),o=t.n(i),c=t(98324),f=t(7695);function l(){let[n]=(0,u.Z)(c.t3,{defaultValue:void 0,listenStorageChange:!0});return(0,r.useEffect)(()=>{if(o()(n))return;let{deviceId:e="",deviceGrantAssertion:t="",conversationId:r=""}=n;(0,f.CE)({deviceId:e,deviceGrantAssertion:t}),(0,f.QK)(r)},[n]),n}},36870:function(n,e,t){"use strict";t.d(e,{jV:function(){return u},mV:function(){return i},q7:function(){return r}});let r={revalidateIfStale:!1,revalidateOnFocus:!1,revalidateOnReconnect:!1},u={revalidateOnMount:!1},i={shouldRetryOnError:!1}}},function(n){n.O(0,[3629,8810,5502,2749,2972,9272,914,3847,5619,6750,958,4728,2971,2117,1744],function(){return n(n.s=77828)}),_N_E=n.O()}]);
+}
+
+/*
+     FILE ARCHIVED ON 23:00:51 Feb 25, 2026 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 22:10:11 Jul 01, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  capture_cache.get: 0.817
+  load_resource: 29.903
+  PetaboxLoader3.datanode: 28.855
+*/

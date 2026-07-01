@@ -1,0 +1,48 @@
+var _____WB$wombat$assign$function_____=function(name){return (globalThis._wb_wombat && globalThis._wb_wombat.local_init && globalThis._wb_wombat.local_init(name))||globalThis[name];};if(!globalThis.__WB_pmw){globalThis.__WB_pmw=function(obj){this.__WB_source=obj;return this;}}{
+let window = _____WB$wombat$assign$function_____("window");
+let self = _____WB$wombat$assign$function_____("self");
+let document = _____WB$wombat$assign$function_____("document");
+let location = _____WB$wombat$assign$function_____("location");
+let top = _____WB$wombat$assign$function_____("top");
+let parent = _____WB$wombat$assign$function_____("parent");
+let frames = _____WB$wombat$assign$function_____("frames");
+let opener = _____WB$wombat$assign$function_____("opener");
+/*1772055626,,JIT Construction: v1034053876,en_US*/
+
+/**
+ * Copyright (c) 2017-present, Facebook, Inc. All rights reserved.
+ *
+ * You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
+ * copy, modify, and distribute this software in source code or binary form for use
+ * in connection with the web services and APIs provided by Facebook.
+ *
+ * As with any software that integrates with the Facebook platform, your use of
+ * this software is subject to the Facebook Platform Policy
+ * [http://developers.facebook.com/policy/]. This copyright notice shall be
+ * included in all copies or substantial portions of the software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+(function _(e,t,n,r,o){var a=window.console;if(a&&Math.floor(new Date().getTime()/1e3)-t>10080*60&&a.warn("The Facebook JSSDK is more than 7 days old."),!window[n]&&window.JSON){for(var i=window[n]={__buffer:{replay:function(){for(var e=this,t=function(){var t=window[n];e.calls[r][0].split(".").forEach(function(e){return t=t[e]}),t.apply(null,e.calls[r][1])},r=0;r<this.calls.length;r++)t();this.calls=[]},calls:[],opts:null},getUserID:function(){return""},getAuthResponse:function(){return null},getAccessToken:function(){return null},init:function(e){i.__buffer.opts=e}},l=0;l<r.length;l++){var s=r[l];if(!(s in i)){for(var u=s.split("."),c=u.pop(),d=i,m=0;m<u.length;m++)d=d[u[m]]||(d[u[m]]={});d[c]=(function(e){if(e!=="init")return function(){i.__buffer.calls.push([e,Array.prototype.slice.call(arguments)])}})(s)}}var p=document.createElement("script");p.src=e,p.async=!0,o&&(p.crossOrigin="anonymous");var f=document.getElementsByTagName("script")[0];f.parentNode&&f.parentNode.insertBefore(p,f)}})("https:\/\/web.archive.org\/web\/20260225215825\/https:\/\/connect.facebook.net\/en_US\/sdk.js?hash=231b338b4294ed942975068be94e8210", 1772055626, "FB", ["AppEvents.EventNames","AppEvents.ParameterNames","AppEvents.activateApp","AppEvents.clearAppVersion","AppEvents.clearUserID","AppEvents.getAppVersion","AppEvents.getUserID","AppEvents.logEvent","AppEvents.logPageView","AppEvents.logPurchase","AppEvents.setAppVersion","AppEvents.setUserID","AppEvents.updateUserProperties","Canvas.Plugin.showPluginElement","Canvas.Plugin.hidePluginElement","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.startTimer","Canvas.stopTimer","Event.subscribe","Event.unsubscribe","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui"], true);
+}
+
+/*
+     FILE ARCHIVED ON 21:58:25 Feb 25, 2026 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 22:09:44 Jul 01, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  capture_cache.get: 0.901
+  load_resource: 76.218
+  PetaboxLoader3.resolve: 33.729
+  PetaboxLoader3.datanode: 31.418
+*/

@@ -1,0 +1,26 @@
+var _____WB$wombat$assign$function_____=function(name){return (globalThis._wb_wombat && globalThis._wb_wombat.local_init && globalThis._wb_wombat.local_init(name))||globalThis[name];};if(!globalThis.__WB_pmw){globalThis.__WB_pmw=function(obj){this.__WB_source=obj;return this;}}{
+let window = _____WB$wombat$assign$function_____("window");
+let self = _____WB$wombat$assign$function_____("self");
+let document = _____WB$wombat$assign$function_____("document");
+let location = _____WB$wombat$assign$function_____("location");
+let top = _____WB$wombat$assign$function_____("top");
+let parent = _____WB$wombat$assign$function_____("parent");
+let frames = _____WB$wombat$assign$function_____("frames");
+let opener = _____WB$wombat$assign$function_____("opener");
+(function p(){if(!window.UI_BUILD_STAMP||parseInt(window.UI_BUILD_STAMP,36)>=parseInt("mlbifonl",36)||window.location.search.includes("_rsc"))return;window.UI_BUILD_MISMATCH=!0;let e="?"===window.location.search[0]?"&":"?",r=`${e}_rsc=mlbifonl`;window.location.search+=r})()
+}
+
+/*
+     FILE ARCHIVED ON 23:00:51 Feb 25, 2026 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 22:10:11 Jul 01, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  capture_cache.get: 3.803
+  load_resource: 10.605
+  PetaboxLoader3.datanode: 7.647
+*/

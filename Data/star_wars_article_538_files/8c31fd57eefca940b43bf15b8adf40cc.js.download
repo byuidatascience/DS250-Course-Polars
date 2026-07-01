@@ -1,0 +1,30 @@
+var _____WB$wombat$assign$function_____=function(name){return (globalThis._wb_wombat && globalThis._wb_wombat.local_init && globalThis._wb_wombat.local_init(name))||globalThis[name];};if(!globalThis.__WB_pmw){globalThis.__WB_pmw=function(obj){this.__WB_source=obj;return this;}}{
+let window = _____WB$wombat$assign$function_____("window");
+let self = _____WB$wombat$assign$function_____("self");
+let document = _____WB$wombat$assign$function_____("document");
+let location = _____WB$wombat$assign$function_____("location");
+let top = _____WB$wombat$assign$function_____("top");
+let parent = _____WB$wombat$assign$function_____("parent");
+let frames = _____WB$wombat$assign$function_____("frames");
+let opener = _____WB$wombat$assign$function_____("opener");
+Bootstrapper.bindDependencyImmediate(function(){var Bootstrapper=window["Bootstrapper"];var ensightenOptions=Bootstrapper.ensightenOptions;var _dl=__dataLayer,_cb=_dl.chartBeatConfig||{},site=_dl.site,page=_dl.page,defaultConfig={"uid":12240,"domain":"abcnews.go.com","title":document.title.replace(/ - ABC News$/,""),"sections":page.section1,"authors":page.author,"useCanonical":true,"useCanonicalDomain":true,"flickerControl":false,"autoDetect":false,"mabSections":["homepage"]};_cb=Object.assign(defaultConfig,
+_cb);Bootstrapper.initChartbeat(_cb)},4243496,[4099256],693530,[693526],24);
+Bootstrapper.bindDependencyImmediate(function(){var Bootstrapper=window["Bootstrapper"];var ensightenOptions=Bootstrapper.ensightenOptions;Bootstrapper.Conviva=Bootstrapper.Conviva||{};Bootstrapper.Conviva.initOptions={debug:location.search.indexOf("qoePulseDebug\x3dtrue")>-1?true:false,appBrand:window.__dataLayer.site.site==="abcn"?"abc_news":"abc_otv",metaAccount:"dmed"};if(Bootstrapper.Conviva&&typeof Bootstrapper.Conviva.init==="function")Bootstrapper.Conviva.init(Bootstrapper.Conviva.initOptions)},
+4006461,[4196338],-1,[709338],-1);
+}
+
+/*
+     FILE ARCHIVED ON 03:02:04 Feb 23, 2026 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 22:10:12 Jul 01, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  capture_cache.get: 1.093
+  load_resource: 331.282
+  PetaboxLoader3.resolve: 194.853
+  PetaboxLoader3.datanode: 134.641
+*/
