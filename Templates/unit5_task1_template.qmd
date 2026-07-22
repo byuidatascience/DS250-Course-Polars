@@ -47,6 +47,11 @@ __Shorten the column names and clean them up for easier use with pandas.__ Provi
 
 _type your write-up and analysis here_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Include and execute your code here
 
@@ -60,6 +65,11 @@ __Filter the dataset to 835 respondents that have seen at least one film__ (Hint
 
 _type your write-up and analysis here_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Include and execute your code here
 
@@ -71,6 +81,11 @@ _type your write-up and analysis here_
 __Validate that the data provided on GitHub lines up with the article by recreating 2 of the visuals from the article.__  These visuals should be similar, but don't have to be exact. They need to be close enough that we can validate that the values in the dataset match the graphs in the chart. Though their charts were built using a different plotting software, the more you push yourself for an exact replica, the more you will learn. Spend at least a couple of hours on this. 
 
 _type your write-up and analysis here_
+
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
 
 ```{python}
 # Include and execute your code here

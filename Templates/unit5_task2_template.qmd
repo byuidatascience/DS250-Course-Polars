@@ -53,6 +53,11 @@ LetsPlot.setup_html(isolated_frame=True)
 
 _type your write-up and analysis here_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Include and execute your code here
 

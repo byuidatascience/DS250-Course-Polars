@@ -11,7 +11,7 @@ keywords: [""]
 ::: {.callout-note}
 **Canvas:** U5: Stretch Task — Can You Validate Me?  
 **Type:** Stretch Task (1 pt, complete/incomplete)  
-**Copilot:** Allowed for syntax lookup; disallow for answer generation.
+**AI Use: 🟢
 :::
 
 ### Background

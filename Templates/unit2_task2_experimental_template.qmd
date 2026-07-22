@@ -51,6 +51,11 @@ __Calculate the sample size (i.e. number of observations) for each airport in ea
 
 _Describe your results and analysis here_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Include and execute your code here
 
@@ -62,6 +67,11 @@ _Describe your results and analysis here_
 1. __Which airport has the worst delays?__ Describe the metric you chose, and why you chose it to determine the “worst” airport. Your answer should include a summary table that lists (for each airport) the total number of flights, total number of delayed flights, proportion of delayed flights, and average delay time in hours. 
 
 _Describe your results and analysis here_
+
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
 
 ```{python}
 # Include and execute your code here
@@ -75,6 +85,11 @@ __Create a barplot showing the proportion of all flights that are delayed at eac
 
 _Describe your results and analysis here_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Include and execute your code here
 
@@ -86,6 +101,11 @@ _Describe your results and analysis here_
 __When controlling for airport and month, what is the trend in delayed flights over the years?__ For each row, calculate a ratio: number of delayed flights over the average number of delayed flights at that airport in that month. Then create a polished boxplot of the results, with year along the x axis. What does a point above 1 represent and what does a point below 1 represent? What insights do you gain from this plot?  What trend do you see, if any? Is it a good trend or bad trend?
 
 _Describe your results and analysis here_
+
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
 
 ```{python}
 # Include and execute your code here

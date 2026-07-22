@@ -11,7 +11,7 @@ keywords: [""]
 ::: {.callout-note}
 **Canvas:** U3: Stretch Task — Longevity and Highest Paid Positions  
 **Type:** Stretch Task (1 pt, complete/incomplete)  
-**Copilot:** Allowed for syntax lookup; disallow for answer generation.
+**AI Use: 🟢
 :::
 
 ### Background
@@ -47,11 +47,11 @@ In other words, if an assignment is due on Wednesday, we will cover the material
 
 The table(s) you choose to solve the problem with may lead you down different code paths and learning new skills. In order not to bias/lead you down one path or the other, no reading links are provided, but you may need to research and learn new Polars commands.
 
-**Skills:** aggregates over joined tables, ranking positions
+**Skills:** validation, aggregates over joined tables, ranking positions
 
 ### Question 1
 
-Identify the top 10 players with the longest Major League Baseball careers. Include their:
+Write an SQL query that pulls the tables you need into a polars dataframe using nothing more than SELECT and FROM statements. Then, use python polars to identify the top 10 players with the longest Major League Baseball careers. Include their:
 
 - playerID
 - first_name

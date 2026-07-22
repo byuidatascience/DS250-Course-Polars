@@ -11,7 +11,7 @@ keywords: [""]
 ::: {.callout-note}
 **Canvas:** U2: Core Task 2 — Flights: Aggregation  
 **Type:** Core Task (1 pt, complete/incomplete)  
-**Copilot:** Allowed for syntax lookup; disallow for answer generation.
+**AI Use:** 🟡 [Class chat bot](https://gemini.google.com/gem/1yrmrFfd6yuQGpQbo6w97mj9jXFXAjx_U?usp=sharing) only allowed for code explanations and small, syntax lookup.
 :::
 
 ### Background
@@ -70,3 +70,4 @@ Polars User Guide, [Getting Started: Expressions and Context](https://docs.pola.
 _Use this [unit2_task2_template](../Templates/unit2_task2_template.qmd) to create your Client Report. Answer the questions. Each answer should include a written description of your results, code cells with comments, charts and/or tables._  
 
 {{< include ../_submission_github.qmd >}}
+

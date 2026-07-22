@@ -49,6 +49,11 @@ LetsPlot.setup_html(isolated_frame=True)
 
 _type your write-up and analysis here_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Include and execute your code here
 
@@ -61,6 +66,11 @@ _type your write-up and analysis here_
 1. For each model (your original one, and the 2 new ones for this task), display the classification report and the permutation importances for the most important features.  Discuss which model you would recommend to the Client and why.
 
 _type your write-up and analysis here_
+
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
 
 ```{python}
 # Include and execute your code here

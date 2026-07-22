@@ -11,7 +11,7 @@ keywords: [""]
 ::: {.callout-note}
 **Canvas:** U1: Stretch Task — Elliot  
 **Type:** Stretch Task (1 pt, complete/incomplete)  
-**Copilot:** Allowed for syntax lookup; disallow for answer generation.
+**AI Use: 🟢
 :::
 
 ### Background
@@ -74,3 +74,4 @@ No template is provided. Create a new quarto file for this assignment. It is par
 ::: {.callout-note collapse="false"}
 _Your report should be written in quarto markdown files and rendered to an HTML File. Upload the HTML file in Canvas. (Do not submit the `.qmd` file)_  
 :::
+

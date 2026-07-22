@@ -11,7 +11,7 @@ keywords: [""]
 ::: {.callout-note}
 **Canvas:** U4: Core Task 2 — How Good Is It, Really?  
 **Type:** Core Task (1 pt, complete/incomplete)  
-**Copilot:** Allowed for syntax lookup; disallow for answer generation.
+**AI Use:** 🟡 [Class chat bot](https://gemini.google.com/gem/1yrmrFfd6yuQGpQbo6w97mj9jXFXAjx_U?usp=sharing) only allowed for code explanations and small, syntax lookup.
 :::
 
 

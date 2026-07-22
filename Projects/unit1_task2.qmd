@@ -11,7 +11,7 @@ keywords: [""]
 ::: {.callout-note}
 **Canvas:** U1: Core Task 2 — Famous Names and You  
 **Type:** Core Task (1 pt, complete/incomplete)  
-**Copilot:** Allowed for syntax lookup; disallow for answer generation.
+**AI Use:** 🟡 [Class chat bot](https://gemini.google.com/gem/1yrmrFfd6yuQGpQbo6w97mj9jXFXAjx_U?usp=sharing) only allowed for code explanations and small, syntax lookup.
 :::
 
 ### Background
@@ -86,3 +86,4 @@ _Use this [Unit1_Task2 template](../Templates/unit1_task2_template.qmd) to submi
 ::: {.callout-note collapse="false"}
 _Your report should be written in quarto markdown files and rendered to an HTML File. Upload the HTML file in Canvas. (Do not submit the `.qmd` file)_  
 :::
+

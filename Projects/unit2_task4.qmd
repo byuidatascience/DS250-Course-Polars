@@ -11,7 +11,7 @@ keywords: [""]
 ::: {.callout-note}
 **Canvas:** U2: Stretch Task — Comparing Delay Types: Pivot  
 **Type:** Stretch Task (1 pt, complete/incomplete)  
-**Copilot:** Allowed for syntax lookup; disallow for answer generation.
+**AI Use: 🟢
 :::
 
 ### Background
@@ -58,3 +58,4 @@ Polars Cookbook, [Chapter 8, Reshaping and Tidying Data](https://learning.oreill
 No template is provided. You must create your own file. Answer the questions. Each answer should include a written description of your results, code cells with comments, charts and/or tables._  
 
 {{< include ../_submission_github.qmd >}}
+

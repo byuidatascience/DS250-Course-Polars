@@ -1,5 +1,5 @@
 ---
-title: "Unit 0 Core Task 2: Testing, Testing, 1,2,3"
+title: "Unit 0: Testing, Testing, 1,2,3"
 date: 2020-05-01T11:02:05+06:00
 lastmod: 2020-09-15T10:42:26+06:00
 weight: 1
@@ -8,10 +8,11 @@ draft: false
 keywords: [""]
 ---
 
+
 ::: {.callout-note}
 **Canvas:** U0: Core Task 2 — Testing, Testing, 1,2,3
 **Type:** Core Task (1 pt, complete/incomplete)  
-**Copilot:** Allowed for syntax lookup; disallow for answer generation.
+**AI Use:** 🟢
 :::
 
 
@@ -56,11 +57,11 @@ Many people have different levels of experience with Python, VS Code, and progra
 **Skills:** Quarto + VS Code setup, HTML rendering, Polars basics
 
 1. Download this [Project0 Template](../Templates/P0_template.qmd). The template has working code for the Penguin data set. You need to finish the project by adding code to recreate charts from the book. More specifically, copy and paste code from the book into this template quarto file to:
-    1. Include the tables created from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html)
-    2. Recreate the example charts from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html) of the textbook.
+    1. Recreate the first table displayed at [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html)
+    2. Recreate an example chart from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html) of the textbook. Specifically, the chart in from the subsection labelled "Ultimate Goal".
     3. Follow the instructions in the submission section below to submit your work
 
-__The main purpose of this project is to ensure your set-up and installations are done correctly (not necessarily to get all the charts/tables from the book recreated). You will know this is the case if you can create an html file with those graphs and table in it.__
+__The main purpose of this project is to ensure your set-up and installations are done correctly. You will know this is the case if you can create an html file with those graph and table in it.__
 
 ### Submission:
 
@@ -72,7 +73,7 @@ __The main purpose of this project is to ensure your set-up and installations ar
 
 _Use this [P0_template](../Templates/P0_template.qmd) to submit your Client Report._
  
-1. _The template should include answers to the tasks. Each should include a written description of your results, code cells with comments, charts and/or tables._  
+1. _The template should include answers to the tasks. Response to each question should include a written description of your results, code cells with comments, charts and/or tables._  
 
 ::: {.callout-note collapse="false"}
 _Your report should be written in quarto markdown files and rendered to an HTML File. Upload the HTML file in Canvas. (Do not submit the `.qmd` file)_  

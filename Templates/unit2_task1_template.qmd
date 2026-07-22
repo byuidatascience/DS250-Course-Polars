@@ -57,6 +57,11 @@ df = pl.read_json(io.BytesIO(response.content))
 
 _No discussion needed for this question_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Include and execute your code here
 
@@ -68,6 +73,11 @@ _No discussion needed for this question_
 1. __Divide all the columns by 1000 whose name starts with num_of.__ Be sure to first filter out rows that contain problematic values for the columns like -999 or 1500+.
 
 _No discussion needed for this question_
+
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
 
 ```{python}
 # Include and execute your code here
@@ -85,6 +95,11 @@ _No discussion needed for this question_
 
 _No discussion needed for this question_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Include and execute your code here
 
@@ -96,6 +111,11 @@ _No discussion needed for this question_
 1. __Using the new weather variable calculated above, create a boxplot showing the distribution of flights delayed by weather for each season. Describe what you learn from this graph.__    
 
 _Describe your results and analysis here_
+
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
 
 ```{python}
 # Include and execute your code here

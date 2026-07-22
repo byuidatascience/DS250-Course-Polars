@@ -11,7 +11,7 @@ keywords: [""]
 ::: {.callout-note}
 **Canvas:** U6: Core Task 1 — Git Your DS Portfolio Online  
 **Type:** Core Task (1 pt, complete/incomplete)  
-**Copilot:** Allowed for syntax lookup; disallow for answer generation.
+**AI Use:** 🟢
 :::
 
 ### Background
@@ -275,3 +275,4 @@ h.  **Fix the main page loading the ReadMe.md file**
 ### Deliverables
 
 Submit a URL link to your resume as a webpage hosted on GitHub.
+

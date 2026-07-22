@@ -51,6 +51,11 @@ __Write an SQL query that provides playerID, yearID, and batting average for pla
 
 __Describe your results and analysis here_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Include and execute your code here
 
@@ -73,6 +78,11 @@ __Use the same query as above, but only include players with at least 10 at bats
 
 _Describe your results and analysis here_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Include and execute your code here
 
@@ -85,6 +95,11 @@ _Describe your results and analysis here_
 __Now modify the SQL query to calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats over their entire career, and print the top 5 results.__
 
 _Describe your results and analysis here_
+
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
 
 ```{python}
 # Include and execute your code here

@@ -11,7 +11,7 @@ keywords: [""]
 ::: {.callout-note}
 **Canvas:** U5: Core Task 1 — Regex  
 **Type:** Core Task (1 pt, complete/incomplete)  
-**Copilot:** Allowed for syntax lookup; disallow for answer generation.
+**AI Use:** 🟡 [Class chat bot](https://gemini.google.com/gem/1yrmrFfd6yuQGpQbo6w97mj9jXFXAjx_U?usp=sharing) only allowed for code explanations and small, syntax lookup.
 :::
 
 ### Background
@@ -76,3 +76,4 @@ __Information:__ [Article](https://byuistats.github.io/M335/star_wars_article_53
 __Rather than submitting something for each task of this unit, you will submit one client report at the end of the unit that is the culmination of all the tasks.__ Use [this template](../Templates/unit5_task3_template.qmd) to create your Client Report. Answer the questions. Each answer should include a written description of your results, code cells with comments, charts and/or tables.
 
 {{< include ../_submission_github.qmd >}}
+
