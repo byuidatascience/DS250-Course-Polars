@@ -46,6 +46,11 @@ __What was the earliest year that the name ‘Felisha’ was used?__
 
 _type your results and analysis here_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Q1
 
@@ -58,6 +63,11 @@ _type your results and analysis here_
 __What year had the most babies named 'David'? How many babies were named 'David' that year?__
 
 _type your results and analysis here_
+
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
 
 ```{python}
 # Q2
@@ -72,6 +82,11 @@ __What year did your name hit its peak? How many babies were named your name in 
 
 _type your results and analysis here_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Q3
 
@@ -83,6 +98,11 @@ _type your results and analysis here_
 __In the most recent year, what was the most common female name in Utah?__ 
 
 _type your results and analysis here_
+
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
 
 ```{python}
 # Q5

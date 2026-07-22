@@ -48,6 +48,11 @@ __How does your name at your birth year compare to its use historically? Your mu
 
 _type your results and analysis here_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Q1
 
@@ -61,6 +66,11 @@ __Think of a unique name from a famous movie. Plot the usage of that name and se
 
 _type your results and analysis here_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Q2
 
@@ -72,6 +82,11 @@ _type your results and analysis here_
 __Mary, Martha, Peter, and Paul are all Christian names. From 1920 - 2000, compare the name usage of each of the four names in a single chart. What trends do you notice?__  
 
 _type your results and analysis here_
+
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
 
 ```{python}
 # Q3

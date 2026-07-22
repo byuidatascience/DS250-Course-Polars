@@ -117,6 +117,11 @@ _type your write-up and analysis here_
 
 _type your report here, you will likely want multiple code chunks and text intermingled_
 
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
+
 ```{python}
 # Include and execute your code here
 
@@ -126,6 +131,11 @@ _type your report here, you will likely want multiple code chunks and text inter
 ## Results
 
 _type your report here, you will likely want multiple code chunks and text intermingled_
+
+_AI use reflection_
+**Link** to the original chat:
+**The Process** How exactly did you use the tool?
+**The Impact**  How did using AI impact your learning?
 
 ```{python}
 # Include and execute your code here
