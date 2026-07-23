@@ -11,7 +11,7 @@ keywords: [""]
 ::: {.callout-note}
 **Canvas:** U3: Stretch Task — Longevity and Highest Paid Positions  
 **Type:** Stretch Task (1 pt, complete/incomplete)  
-**AI Use: 🟢
+**AI Use**: 🟢 Full collaborative partner, but you must be the architect who understands ALL the code and conclusions.
 :::
 
 ### Background

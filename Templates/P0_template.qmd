@@ -56,7 +56,7 @@ penguins
 
 ## QUESTION|TASK 2
 
-__Recreate an example chart from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html), in the First Steps section. Specifically, recreate the chart in the subsection labelled "Ultimate Goal", by copying the code above the chart and pasting it in the cell below__
+__Recreate an example chart from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html), in the First Steps section. Specifically, recreate the chart in the subsection labelled "Ultimate Goal" by copying the code above the chart and pasting it in the cell below__
 
 
 ```{python}

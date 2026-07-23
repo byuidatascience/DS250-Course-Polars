@@ -58,7 +58,7 @@ Many people have different levels of experience with Python, VS Code, and progra
 
 1. Download this [Project0 Template](../Templates/P0_template.qmd). The template has working code for the Penguin data set. You need to finish the project by adding code to recreate charts from the book. More specifically, copy and paste code from the book into this template quarto file to:
     1. Recreate the first table displayed at [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html)
-    2. Recreate an example chart from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html) of the textbook. Specifically, the chart in from the subsection labelled "Ultimate Goal".
+    2. Recreate an example chart from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html) of the textbook. Specifically, the chart in  the subsection labelled "Ultimate Goal".
     3. Follow the instructions in the submission section below to submit your work
 
 __The main purpose of this project is to ensure your set-up and installations are done correctly. You will know this is the case if you can create an html file with those graph and table in it.__
