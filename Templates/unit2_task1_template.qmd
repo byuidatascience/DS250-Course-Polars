@@ -70,7 +70,9 @@ _AI use reflection_
 
 ## QUESTION 2
 
-1. __Divide all the columns by 1000 whose name starts with num_of.__ Be sure to first filter out rows that contain problematic values for the columns like -999 or 1500+.
+1. __Filter any column that needs it__: Filter out rows that contain problematic values for the columns like -999 or 1500+.
+
+1. __Divide columns whose name start with 'num_of' by 1000.__ 
 
 _No discussion needed for this question_
 
