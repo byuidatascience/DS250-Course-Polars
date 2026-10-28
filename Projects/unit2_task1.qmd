@@ -64,7 +64,10 @@ __Subject Matter:__ [Types of Delay](https://aspm.faa.gov/aspmhelp/index/Types_o
     1. Fall for October, November, December
     1. All other rows can be assigned a value of 'Unknown'
 
-1. __Divide all the columns by 1000 whose name starts with num_of.__ Be sure to first filter out rows that contain problematic values for the columns like -999 or "1500+".(No discussion needed for this question)
+1. 
+    1. __Filter any column that needs it__: Filter out rows that contain problematic values for the columns like -999 or 1500+.
+
+    1. __Divide columns whose name start with 'num_of' by 1000.__ 
 
 1. According to the BTS website, the “Weather” category only accounts for severe weather delays. Mild weather delays are not counted in the “Weather” category, but are actually included in both the “NAS” and “Late-Arriving Aircraft” categories. __Using the columns you modified in the bullet above, your job is to create a new column that calculates the total number of flights (in 1,000's) delayed by weather (both severe and mild).__ Show your work by printing the first 5 rows of the dataset. Use these three rules for your calculations:  
 
